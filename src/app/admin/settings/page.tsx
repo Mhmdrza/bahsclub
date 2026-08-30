@@ -15,30 +15,30 @@ export default async function SettingsPage() {
       <PageHeader title="تنظیمات" />
 
       <div className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-surface rounded-xl border border-border p-6">
           <SectionHeading title="مخزن گیت‌هاب" />
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
-              <span className="text-gray-500 font-medium">صاحب مخزن:</span>
-              <span className="text-gray-900">{owner}</span>
+              <span className="text-muted font-medium">صاحب مخزن:</span>
+              <span className="text-foreground">{owner}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-500 font-medium">مخزن:</span>
-              <span className="text-gray-900">{repo}</span>
+              <span className="text-muted font-medium">مخزن:</span>
+              <span className="text-foreground">{repo}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-500 font-medium">شاخه:</span>
-              <span className="text-gray-900">{branch}</span>
+              <span className="text-muted font-medium">شاخه:</span>
+              <span className="text-foreground">{branch}</span>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="text-xs text-muted mt-3">
             این تنظیمات از طریق متغیرهای محیطی پیکربندی می‌شوند.
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-surface rounded-xl border border-border p-6">
           <SectionHeading title="راهنما" />
-          <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
+          <div className="space-y-3 text-sm text-foreground leading-relaxed">
             <p>
               هر تغییری که در پنل مدیریت ایجاد کنید، مستقیم روی مخزن گیت‌هاب commit می‌شود.
               پس از commit، اگر مخزن شما به Vercel متصل باشد، Vercel به‌طور خودکار تغییرات
@@ -47,7 +47,7 @@ export default async function SettingsPage() {
             <p>
               برای راه‌اندازی اولیه، مطمئن شوید که متغیرهای محیطی زیر تنظیم شده‌اند:
             </p>
-            <pre className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs font-mono text-gray-800" dir="ltr">
+            <pre className="bg-background border border-border rounded-lg p-3 text-xs font-mono text-foreground" dir="ltr">
               GITHUB_TOKEN=ghp_...{'\n'}
               GITHUB_OWNER=your-username{'\n'}
               GITHUB_REPO=bahsclub{'\n'}
@@ -58,12 +58,12 @@ export default async function SettingsPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-surface rounded-xl border border-border p-6">
           <SectionHeading title="محاسبه هش رمز عبور" />
-          <p className="text-sm text-gray-700 mb-3">
+          <p className="text-sm text-foreground mb-3">
             برای تولید هش رمز عبور، می‌توانید از دستور زیر استفاده کنید:
           </p>
-          <pre className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs font-mono text-gray-800" dir="ltr">
+          <pre className="bg-background border border-border rounded-lg p-3 text-xs font-mono text-foreground" dir="ltr">
             echo -n &quot;your-password&quot; | shasum -a 256 | cut -d&apos; &apos; -f1
           </pre>
         </div>

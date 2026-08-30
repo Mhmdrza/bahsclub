@@ -97,7 +97,7 @@ export function SiteConfigForm({
           className={`px-4 py-1.5 text-sm rounded-lg transition-colors ${
             mode === "form"
               ? "bg-blue-100 text-blue-800"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              : "bg-background text-muted hover:bg-surface"
           }`}
         >
           فرم
@@ -108,7 +108,7 @@ export function SiteConfigForm({
           className={`px-4 py-1.5 text-sm rounded-lg transition-colors ${
             mode === "raw"
               ? "bg-blue-100 text-blue-800"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              : "bg-background text-muted hover:bg-surface"
           }`}
         >
           ویرایش مستقیم YAML
@@ -116,17 +116,17 @@ export function SiteConfigForm({
       </div>
 
       {mode === "raw" ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-surface rounded-xl border border-border p-6">
           <SectionHeading title="تنظیمات سایت (YAML)" />
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-foreground">
               محتوای site.yaml
             </label>
             <textarea
               value={yamlSource}
               onChange={(e) => setYamlSource(e.target.value)}
               rows={30}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y"
+              className="w-full px-3 py-2 border border-border rounded-lg text-sm font-mono bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent resize-y"
               dir="ltr"
             />
           </div>
@@ -134,7 +134,7 @@ export function SiteConfigForm({
       ) : (
         <div className="space-y-6">
           {/* Basic Info */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
             <SectionHeading title="اطلاعات پایه" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
@@ -182,7 +182,7 @@ export function SiteConfigForm({
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors"
         >
           انصراف
         </button>

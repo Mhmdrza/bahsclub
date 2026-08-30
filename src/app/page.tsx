@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/learn"
-            className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-medium text-white hover:bg-accent/90"
+            className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-fg hover:bg-accent/90"
           >
             از کجا شروع کنم؟
           </Link>

@@ -85,7 +85,7 @@ export default function EditLessonPage() {
   }
 
   if (fetching) {
-    return <div className="text-center py-12 text-gray-500">در حال بارگذاری...</div>;
+    return <div className="text-center py-12 text-muted">در حال بارگذاری...</div>;
   }
 
   if (error) {
@@ -101,7 +101,7 @@ export default function EditLessonPage() {
     <div>
       <PageHeader title={`ویرایش: ${form.title || slug}`} backHref="/admin/lessons" />
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات اصلی" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField label="عنوان" name="title" value={form.title} onChange={(e) => updateField("title", e.target.value)} required />
@@ -110,7 +110,7 @@ export default function EditLessonPage() {
           <FormField label="توضیحات" name="description" value={form.description} onChange={(e) => updateField("description", e.target.value)} as="textarea" rows={3} />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="تنظیمات" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FormField label="وضعیت" name="status" value={form.status} onChange={(e) => updateField("status", e.target.value)} as="select"
@@ -124,24 +124,24 @@ export default function EditLessonPage() {
             <FormField label="دستاورد (milestone)" name="milestone" value={form.milestone} onChange={(e) => updateField("milestone", e.target.value)} />
           </div>
           <div className="flex items-center gap-6">
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-foreground">
               <input type="checkbox" checked={form.featured === "true"} onChange={(e) => updateField("featured", e.target.checked ? "true" : "false")} />
               ویژه
             </label>
-            <label className="flex items-center gap-2 text-sm text-gray-700">
+            <label className="flex items-center gap-2 text-sm text-foreground">
               <input type="checkbox" checked={form.sequential === "true"} onChange={(e) => updateField("sequential", e.target.checked ? "true" : "false")} />
               ترتیبی
             </label>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="گام‌های درس" />
           <FormField label="اسلاگ مقاله‌ها (با کاما جدا کنید)" name="steps" value={form.steps} onChange={(e) => updateField("steps", e.target.value)} as="textarea" rows={4} />
         </div>
 
         <div className="flex items-center gap-3 justify-end">
-          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors">انصراف</button>
+          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors">انصراف</button>
           <SubmitButton loading={loading} label="ذخیره تغییرات" />
         </div>
       </form>

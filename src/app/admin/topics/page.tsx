@@ -60,7 +60,7 @@ export default async function TopicsPage() {
         actions={
           <Link
             href="/admin/topics/new"
-            className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-1 px-4 py-2 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90 transition-colors"
           >
             <Plus size={16} />
             موضوع جدید
@@ -77,46 +77,46 @@ export default async function TopicsPage() {
           title="هنوز موضوعی وجود ندارد"
           description="اولین موضوع را ایجاد کنید."
           action={
-            <Link href="/admin/topics/new" className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700">
+            <Link href="/admin/topics/new" className="inline-flex items-center gap-1 px-4 py-2 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90">
               <Plus size={16} />
               موضوع جدید
             </Link>
           }
         />
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="text-right px-4 py-3 font-medium text-gray-600">عنوان</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600 hidden md:table-cell">نامک</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600 hidden md:table-cell">وضعیت</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">ترتیب</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">عملیات</th>
+              <tr className="border-b border-border bg-background">
+                <th className="text-right px-4 py-3 font-medium text-muted">عنوان</th>
+                <th className="text-right px-4 py-3 font-medium text-muted hidden md:table-cell">نامک</th>
+                <th className="text-right px-4 py-3 font-medium text-muted hidden md:table-cell">وضعیت</th>
+                <th className="text-left px-4 py-3 font-medium text-muted">ترتیب</th>
+                <th className="text-left px-4 py-3 font-medium text-muted">عملیات</th>
               </tr>
             </thead>
             <tbody>
               {topics.map((topic) => (
-                <tr key={topic.slug} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                <tr key={topic.slug} className="border-b border-border hover:bg-background transition-colors">
                   <td className="px-4 py-3">
-                    <Link href={`/admin/topics/${topic.slug}/edit`} className="text-blue-600 hover:text-blue-800 font-medium">
+                    <Link href={`/admin/topics/${topic.slug}/edit`} className="text-accent hover:text-blue-800 font-medium">
                       {topic.title}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-gray-600 hidden md:table-cell">{topic.slug}</td>
+                  <td className="px-4 py-3 text-muted hidden md:table-cell">{topic.slug}</td>
                   <td className="px-4 py-3 hidden md:table-cell">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                       topic.status === "published" ? "bg-green-100 text-green-800" :
                       topic.status === "draft" ? "bg-yellow-100 text-yellow-800" :
-                      "bg-gray-100 text-gray-600"
+                      "bg-background text-muted"
                     }`}>
                       {topic.status === "published" ? "منتشر شده" : topic.status === "draft" ? "پیش‌نویس" : topic.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-500 text-left">{topic.order}</td>
+                  <td className="px-4 py-3 text-muted text-left">{topic.order}</td>
                   <td className="px-4 py-3 text-left">
                     <div className="flex items-center gap-2 justify-end">
-                      <Link href={`/admin/topics/${topic.slug}/edit`} className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors" title="ویرایش">
+                      <Link href={`/admin/topics/${topic.slug}/edit`} className="p-1.5 text-muted hover:text-accent hover:bg-accent-light rounded-md transition-colors" title="ویرایش">
                         <Pencil size={16} />
                       </Link>
                       <DeleteTopicButton slug={topic.slug} sha={topic.sha} />

@@ -31,7 +31,7 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">داشبورد</h1>
+        <h1 className="text-2xl font-bold text-foreground">داشبورد</h1>
       </div>
 
       {error && (
@@ -69,8 +69,8 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">اقدامات سریع</h2>
+      <div className="bg-surface rounded-xl border border-border p-6">
+        <h2 className="text-lg font-semibold text-foreground mb-4">اقدامات سریع</h2>
         <div className="flex flex-wrap gap-3">
           <QuickAction href="/admin/articles/new" label="مقاله جدید" />
           <QuickAction href="/admin/lessons/new" label="درس جدید" />
@@ -81,8 +81,8 @@ export default async function AdminDashboard() {
 
       {/* Recent Commits */}
       {commits.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-surface rounded-xl border border-border p-6">
+          <h2 className="text-lg font-semibold text-foreground mb-4">
             آخرین تغییرات
           </h2>
           <div className="space-y-3">
@@ -91,10 +91,10 @@ export default async function AdminDashboard() {
                 key={commit.sha}
                 className="flex items-start gap-3 text-sm"
               >
-                <div className="w-2 h-2 rounded-full bg-gray-400 mt-1.5 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-muted mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-gray-900">{commit.commit.message}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">
+                  <p className="text-foreground">{commit.commit.message}</p>
+                  <p className="text-muted text-xs mt-0.5">
                     {commit.commit.author?.name} —{" "}
                     {new Date(commit.commit.author?.date).toLocaleDateString("fa-IR", {
                       hour: "2-digit",
@@ -150,7 +150,7 @@ function QuickAction({
   return (
     <Link
       href={href}
-      className="px-4 py-2 bg-white border border-gray-300 text-sm text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors"
+      className="px-4 py-2 bg-surface border border-border text-sm text-foreground rounded-lg hover:bg-background hover:border-border transition-colors"
     >
       {label}
     </Link>

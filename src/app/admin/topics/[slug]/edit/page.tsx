@@ -60,14 +60,14 @@ export default function EditTopicPage() {
     }
   }
 
-  if (fetching) return <div className="text-center py-12 text-gray-500">در حال بارگذاری...</div>;
+  if (fetching) return <div className="text-center py-12 text-muted">در حال بارگذاری...</div>;
   if (error) return <div><PageHeader title="خطا" backHref="/admin/topics" /><div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-800">{error}</div></div>;
 
   return (
     <div>
       <PageHeader title={`ویرایش: ${form.title || slug}`} backHref="/admin/topics" />
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات موضوع" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField label="عنوان" name="title" value={form.title} onChange={(e) => updateField("title", e.target.value)} required />
@@ -81,7 +81,7 @@ export default function EditTopicPage() {
           </div>
         </div>
         <div className="flex items-center gap-3 justify-end">
-          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors">انصراف</button>
+          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors">انصراف</button>
           <SubmitButton loading={loading} label="ذخیره تغییرات" />
         </div>
       </form>

@@ -80,7 +80,7 @@ export default async function ArticlesPage() {
         actions={
           <Link
             href="/admin/articles/new"
-            className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-1 px-4 py-2 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90 transition-colors"
           >
             <Plus size={16} />
             مقاله جدید
@@ -101,7 +101,7 @@ export default async function ArticlesPage() {
           action={
             <Link
               href="/admin/articles/new"
-              className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700"
+              className="inline-flex items-center gap-1 px-4 py-2 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90"
             >
               <Plus size={16} />
               مقاله جدید
@@ -109,28 +109,28 @@ export default async function ArticlesPage() {
           }
         />
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="text-right px-4 py-3 font-medium text-gray-600">عنوان</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600 hidden md:table-cell">وضعیت</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600 hidden md:table-cell">نوع</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600 hidden lg:table-cell">دسته</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">ترتیب</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">عملیات</th>
+              <tr className="border-b border-border bg-background">
+                <th className="text-right px-4 py-3 font-medium text-muted">عنوان</th>
+                <th className="text-right px-4 py-3 font-medium text-muted hidden md:table-cell">وضعیت</th>
+                <th className="text-right px-4 py-3 font-medium text-muted hidden md:table-cell">نوع</th>
+                <th className="text-right px-4 py-3 font-medium text-muted hidden lg:table-cell">دسته</th>
+                <th className="text-left px-4 py-3 font-medium text-muted">ترتیب</th>
+                <th className="text-left px-4 py-3 font-medium text-muted">عملیات</th>
               </tr>
             </thead>
             <tbody>
               {articles.map((article) => (
                 <tr
                   key={article.slug}
-                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                  className="border-b border-border hover:bg-background transition-colors"
                 >
                   <td className="px-4 py-3">
                     <Link
                       href={`/admin/articles/${article.slug}/edit`}
-                      className="text-blue-600 hover:text-blue-800 font-medium"
+                      className="text-accent hover:text-accent/80 font-medium"
                     >
                       {article.title}
                     </Link>
@@ -141,17 +141,17 @@ export default async function ArticlesPage() {
                   <td className="px-4 py-3 hidden md:table-cell">
                     <TypeBadge type={article.type} />
                   </td>
-                  <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">
+                  <td className="px-4 py-3 text-muted hidden lg:table-cell">
                     {article.category}
                   </td>
-                  <td className="px-4 py-3 text-gray-500 text-left">
+                  <td className="px-4 py-3 text-muted text-left">
                     {article.order}
                   </td>
                   <td className="px-4 py-3 text-left">
                     <div className="flex items-center gap-2 justify-end">
                       <Link
                         href={`/admin/articles/${article.slug}/edit`}
-                        className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                        className="p-1.5 text-muted hover:text-accent hover:bg-accent-light rounded-md transition-colors"
                         title="ویرایش"
                       >
                         <Pencil size={16} />
@@ -176,7 +176,7 @@ function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
     published: "bg-green-100 text-green-800",
     draft: "bg-yellow-100 text-yellow-800",
-    archived: "bg-gray-100 text-gray-600",
+    archived: "bg-background text-muted",
   };
 
   const labels: Record<string, string> = {
@@ -188,7 +188,7 @@ function StatusBadge({ status }: { status: string }) {
   return (
     <span
       className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
-        colors[status] || "bg-gray-100 text-gray-600"
+        colors[status] || "bg-background text-muted"
       }`}
     >
       {labels[status] || status}
@@ -212,7 +212,7 @@ function TypeBadge({ type }: { type: string }) {
   return (
     <span
       className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
-        colors[type] || "bg-gray-100 text-gray-600"
+        colors[type] || "bg-background text-muted"
       }`}
     >
       {labels[type] || type}

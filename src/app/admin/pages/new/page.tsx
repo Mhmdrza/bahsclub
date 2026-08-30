@@ -41,7 +41,7 @@ export default function NewPagePage() {
     <div>
       <PageHeader title="برگه جدید" backHref="/admin/pages" />
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات برگه" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField label="عنوان" name="title" value={form.title} onChange={(e) => updateField("title", e.target.value)} required />
@@ -54,12 +54,12 @@ export default function NewPagePage() {
             <FormField label="ترتیب" name="order" type="number" value={form.order} onChange={(e) => updateField("order", e.target.value)} />
           </div>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="محتوا" />
           <FormField label="متن (Markdown)" name="body" value={form.body} onChange={(e) => updateField("body", e.target.value)} as="textarea" rows={15} placeholder="محتوای برگه را با فرمت Markdown وارد کنید..." />
         </div>
         <div className="flex items-center gap-3 justify-end">
-          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors">انصراف</button>
+          <button type="button" onClick={() => router.back()} className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors">انصراف</button>
           <SubmitButton loading={loading} label="ایجاد برگه" />
         </div>
       </form>

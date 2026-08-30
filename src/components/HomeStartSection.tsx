@@ -44,7 +44,7 @@ export function HomeStartSection({ lesson }: HomeStartSectionProps) {
       {targetSlug && (
         <Link
           href={`/articles/${targetSlug}?lesson=${lesson.slug}`}
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent/90"
+          className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent/90"
         >
           {hasProgress ? "ادامه مسیر یادگیری" : "شروع مسیر یادگیری"}
           <ArrowLeft className="h-4 w-4" aria-hidden />

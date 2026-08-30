@@ -67,7 +67,7 @@ export default function NewArticlePage() {
       />
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات اصلی" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -101,7 +101,7 @@ export default function NewArticlePage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="دسته‌بندی و وضعیت" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -192,7 +192,7 @@ export default function NewArticlePage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="محتوا" />
           <FormField
             label="متن مقاله (Markdown)"
@@ -209,7 +209,7 @@ export default function NewArticlePage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors"
           >
             انصراف
           </button>

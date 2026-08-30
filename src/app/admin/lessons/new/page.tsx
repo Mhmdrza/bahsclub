@@ -61,7 +61,7 @@ export default function NewLessonPage() {
       <PageHeader title="درس جدید" backHref="/admin/lessons" />
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات اصلی" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
@@ -92,7 +92,7 @@ export default function NewLessonPage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="تنظیمات" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
@@ -137,7 +137,7 @@ export default function NewLessonPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-center gap-3">
-              <label className="text-sm font-medium text-gray-700">ویژه</label>
+              <label className="text-sm font-medium text-foreground">ویژه</label>
               <input
                 type="checkbox"
                 checked={form.featured === "true"}
@@ -146,7 +146,7 @@ export default function NewLessonPage() {
               />
             </div>
             <div className="flex items-center gap-3">
-              <label className="text-sm font-medium text-gray-700">ترتیبی</label>
+              <label className="text-sm font-medium text-foreground">ترتیبی</label>
               <input
                 type="checkbox"
                 checked={form.sequential === "true"}
@@ -165,7 +165,7 @@ export default function NewLessonPage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="گام‌های درس" />
           <FormField
             label="اسلاگ مقاله‌ها (با کاما جدا کنید)"
@@ -182,7 +182,7 @@ export default function NewLessonPage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors"
           >
             انصراف
           </button>

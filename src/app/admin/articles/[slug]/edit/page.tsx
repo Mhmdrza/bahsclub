@@ -93,7 +93,7 @@ export default function EditArticlePage() {
 
   if (fetching) {
     return (
-      <div className="text-center py-12 text-gray-500">در حال بارگذاری...</div>
+      <div className="text-center py-12 text-muted">در حال بارگذاری...</div>
     );
   }
 
@@ -116,7 +116,7 @@ export default function EditArticlePage() {
       />
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="اطلاعات اصلی" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -146,7 +146,7 @@ export default function EditArticlePage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="دسته‌بندی و وضعیت" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -235,7 +235,7 @@ export default function EditArticlePage() {
           />
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-surface rounded-xl border border-border p-6 space-y-4">
           <SectionHeading title="محتوا" />
           <FormField
             label="متن مقاله (Markdown)"
@@ -251,7 +251,7 @@ export default function EditArticlePage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors"
           >
             انصراف
           </button>

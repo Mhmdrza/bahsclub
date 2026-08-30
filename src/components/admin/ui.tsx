@@ -18,13 +18,13 @@ export function PageHeader({
         {backHref && (
           <Link
             href={backHref}
-            className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 transition-colors"
+            className="text-sm text-muted hover:text-foreground flex items-center gap-1 transition-colors"
           >
             <ArrowRight size={16} />
             {backLabel}
           </Link>
         )}
-        <h1 className="text-xl font-bold text-gray-900">{title}</h1>
+        <h1 className="text-xl font-bold text-foreground">{title}</h1>
       </div>
       {actions && <div className="flex items-center gap-2">{actions}</div>}
     </div>
@@ -65,7 +65,7 @@ export function FormField({
     <div className="space-y-1">
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-foreground"
       >
         {label}
         {required && <span className="text-red-500 mr-0.5">*</span>}
@@ -79,8 +79,8 @@ export function FormField({
           placeholder={placeholder}
           required={required}
           rows={rows || 5}
-          className={`w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y font-mono ${
-            error ? "border-red-500" : "border-gray-300"
+          className={`w-full px-3 py-2 border rounded-lg text-sm bg-surface text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent resize-y font-mono ${
+            error ? "border-red-500" : "border-border"
           }`}
         />
       ) : as === "select" ? (
@@ -90,8 +90,8 @@ export function FormField({
           value={value}
           onChange={onChange}
           required={required}
-          className={`w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-            error ? "border-red-500" : "border-gray-300"
+          className={`w-full px-3 py-2 border rounded-lg text-sm bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent ${
+            error ? "border-red-500" : "border-border"
           }`}
         >
           {options?.map((opt) => (
@@ -109,13 +109,13 @@ export function FormField({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className={`w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-            error ? "border-red-500" : "border-gray-300"
+          className={`w-full px-3 py-2 border rounded-lg text-sm bg-surface text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent ${
+            error ? "border-red-500" : "border-border"
           }`}
         />
       )}
-      {hint && <p className="text-xs text-gray-500">{hint}</p>}
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {hint && <p className="text-xs text-muted">{hint}</p>}
+      {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
   );
 }
@@ -136,10 +136,10 @@ export function ToggleField({
   return (
     <div className="flex items-center justify-between py-2">
       <div>
-        <label className="text-sm font-medium text-gray-700" htmlFor={name}>
+        <label className="text-sm font-medium text-foreground" htmlFor={name}>
           {label}
         </label>
-        {hint && <p className="text-xs text-gray-500">{hint}</p>}
+        {hint && <p className="text-xs text-muted">{hint}</p>}
       </div>
       <button
         id={name}
@@ -147,8 +147,8 @@ export function ToggleField({
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-          checked ? "bg-blue-600" : "bg-gray-300"
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface ${
+          checked ? "bg-accent" : "bg-border"
         }`}
       >
         <span
@@ -163,7 +163,7 @@ export function ToggleField({
 
 export function SectionHeading({ title }: { title: string }) {
   return (
-    <h2 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4">
+    <h2 className="text-lg font-semibold text-foreground border-b border-border pb-2 mb-4">
       {title}
     </h2>
   );
@@ -179,9 +179,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-      <p className="text-gray-900 font-medium">{title}</p>
-      <p className="text-gray-500 text-sm mt-1">{description}</p>
+    <div className="text-center py-12 bg-surface rounded-xl border border-border">
+      <p className="text-foreground font-medium">{title}</p>
+      <p className="text-muted text-sm mt-1">{description}</p>
       {action && <div className="mt-4">{action}</div>}
     </div>
   );
@@ -200,7 +200,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={loading}
-      className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      className="px-6 py-2 bg-accent text-accent-fg text-sm font-medium rounded-lg hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
     >
       {loading ? loadingLabel : label}
     </button>
