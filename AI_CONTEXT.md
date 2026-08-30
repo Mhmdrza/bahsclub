@@ -10,15 +10,43 @@ Built with **Next.js 16** (`proxy.ts` not `middleware.ts`), **React 19**, **Tail
 
 ## Content Model (file-based, in repo)
 
-| Type | Directory | Extension | Frontmatter |
-|---|---|---|---|
-| Articles | `content/articles/` | `.mdx` | `title, slug, description, status, category, level, readingTime, order, tags[], topics[], type, publishedAt, updatedAt, related[], featuredOnHome, exercise?` |
-| Lessons | `content/lessons/` | `.md` | `title, slug, description, status, level, audience, featured, sequential, milestone, order, steps[]` |
-| Topics | `content/topics/` | `.md` | `title, slug, description, status, order` |
-| Pages | `content/pages/` | `.md` | `title, slug, description, status, order` + body |
-| Site Config | `content/` | `site.yaml` | Full YAML: nav, homeSlots, principles, livePractice |
+| Type | Directory | Extension | Frontmatter | Count |
+|---|---|---|---|---|
+| Articles | `content/articles/` | `.mdx` | `title, slug, description, status, category, level, readingTime, order, tags[], topics[], type, publishedAt, updatedAt, related[], featuredOnHome, exercise?` | 37 |
+| Lessons | `content/lessons/` | `.md` | `title, slug, description, status, level, audience, featured, sequential, milestone, order, steps[]` | 3 |
+| Topics | `content/topics/` | `.md` | `title, slug, description, status, order` | 5 |
+| Pages | `content/pages/` | `.md` | `title, slug, description, status, order` + body | 3 |
+| Site Config | `content/` | `site.yaml` | Full YAML: nav, homeSlots, principles, livePractice | 1 |
 
 Content is read at build time via `src/lib/content.ts` using `fs.readFileSync` and `gray-matter`.
+
+## Project Content (current state)
+
+### Articles (37)
+Courses on fallacies, argumentation, and judgment literacy — with categories like
+`fallacy`, `method`, `technique`, `foundation`, `tactic`, `literacy`.
+
+Key additions in the latest batch: `alternative-explanations`, `belief-stress-test`,
+`claim-vs-interpretation`, `claim-vs-taste`, `confidence-and-uncertainty`,
+`correlation-and-causation`, `emotional-persuasion`, `evidence-quality`,
+`expertise-and-incentives`, `falsifiability-and-revision`, `framing-and-omission`,
+`what-is-judgment-testing`, `whataboutism`.
+
+Removed (folded into other articles or replaced): `burden-shifting`,
+`claim-vs-opinion`, `tu-quoque`, `what-is-debate`.
+
+### Lessons (3)
+| Slug | Title | Articles |
+|---|---|---|
+| `spotting-tactics` | Spotting Tactics | 17 articles |
+| `judgment-literacy` | Judgment Literacy | 8 articles (new track) |
+| `deeper-curriculum` | Deeper Curriculum | 3 articles (new track) |
+
+### Topics (5)
+`fallacies`, `foundations`, `judgment-literacy`, `practice`, `tactics`
+
+### Pages (3)
+`about`, `club-rules` (new), `session-format` (new)
 
 ## Admin Panel (added Aug 2025)
 
@@ -85,7 +113,7 @@ Changes are committed directly to the repo; Vercel's Git integration auto-deploy
 
 | Route | File | Description |
 |---|---|---|
-| `/` | `src/app/page.tsx` | Home page with hero, featured links, principles |
+| `/` | `src/app/page.tsx` | Home page with hero ("بحثی که مجبور نیستی برنده‌اش شوی"), featured learning path, all paths grid, daily picks, club principles, session format preview, and live practice CTA |
 | `/articles` | `src/app/articles/page.tsx` | Articles index with search/filter |
 | `/articles/[slug]` | `src/app/articles/[slug]/page.tsx` | Single article with TOC, breadcrumbs, exercises |
 | `/learn` | `src/app/learn/page.tsx` | Lessons index |
@@ -93,7 +121,7 @@ Changes are committed directly to the repo; Vercel's Git integration auto-deploy
 | `/topics` | `src/app/topics/page.tsx` | Topics index |
 | `/topics/[slug]` | `src/app/topics/[slug]/page.tsx` | Articles grouped by topic |
 | `/practice` | `src/app/practice/page.tsx` | Practice articles list |
-| `/[slug]` | `src/app/[slug]/page.tsx` | Catch-all for static pages (e.g., `/about`) |
+| `/[slug]` | `src/app/[slug]/page.tsx` | Catch-all for static pages (e.g., `/about`, `/club-rules`, `/session-format`) |
 
 ### Components
 
