@@ -1,0 +1,40 @@
+title: "بحث‌کلاب"
+tagline: "از ادعا تا استدلال"
+description: "بحث‌کلاب جایی برای یادگیری بحث بهتر، فکر روشن‌تر و گفت‌وگوی منصفانه است."
+featuredLessonSlug: "beginner-debate"
+nav:
+  - label: "مسیر یادگیری"
+    href: "/learn"
+  - label: "مقاله‌ها"
+    href: "/articles"
+  - label: "مغالطه‌ها و تاکتیک‌ها"
+    href: "/topics/tactics"
+  - label: "تمرین‌ها"
+    href: "/practice"
+  - label: "درباره بحث‌کلاب"
+    href: "/about"
+homeSlots:
+  - type: concept
+    label: "یک مفهوم پایه"
+    articleSlug: "precise-claims"
+  - type: tactic
+    label: "یک تاکتیک رایج"
+    articleSlug: "ad-hominem"
+  - type: practice
+    label: "یک تمرین کوتاه"
+    articleSlug: "claim-vs-opinion"
+principles:
+  - title: "ادعا را دقیق بیان کن"
+    description: "قبل از بحث، بگویید دقیقاً چه چیزی را می‌گویید و چه چیزی را نمی‌گویید."
+  - title: "به پرسش پاسخ بده"
+    description: "اگر سؤالی پرسیده شد، ابتدا همان را روشن کنید؛ بعد سراغ موضوع دیگر بروید."
+  - title: "شواهد مرتبط ارائه کن"
+    description: "شاهد باید به ادعای شما ربط داشته باشد، نه فقط احساس درست بودن ایجاد کند."
+  - title: "دیدگاه مخالف را تحریف نکن"
+    description: "قوی‌ترین نسخهٔ دیدگاه طرف مقابل را بیان کنید، نه ضعیف‌ترین."
+  - title: "وقتی اشتباه می‌کنی، اصلاح کن"
+    description: "پذیرفتن اصلاح، نشانهٔ ضعف نیست؛ نشانهٔ صداقت فکری است."
+livePractice:
+  title: "تمرین زنده"
+  description: "در آینده می‌توانید در بحث‌های ساختاریافته و با میانجی‌گری شرکت کنید. فعلاً با تمرین‌های نوشتاری شروع کنید."
+  href: "/practice"
