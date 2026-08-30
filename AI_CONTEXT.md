@@ -12,7 +12,7 @@ Built with **Next.js 16** (`proxy.ts` not `middleware.ts`), **React 19**, **Tail
 
 | Type | Directory | Extension | Frontmatter | Count |
 |---|---|---|---|---|
-| Articles | `content/articles/` | `.mdx` | `title, slug, description, status, category, level, readingTime, order, tags[], topics[], type, publishedAt, updatedAt, related[], featuredOnHome, exercise?` | 37 |
+| Articles | `content/articles/` | `.mdx` | `title, slug, description, status, category, level, readingTime, order, tags[], topics[], type, publishedAt, updatedAt, related[], featuredOnHome, exercise?, family` | 55 |
 | Lessons | `content/lessons/` | `.md` | `title, slug, description, status, level, audience, featured, sequential, milestone, order, steps[]` | 3 |
 | Topics | `content/topics/` | `.md` | `title, slug, description, status, order` | 5 |
 | Pages | `content/pages/` | `.md` | `title, slug, description, status, order` + body | 3 |
@@ -22,15 +22,17 @@ Content is read at build time via `src/lib/content.ts` using `fs.readFileSync` a
 
 ## Project Content (current state)
 
-### Articles (37)
+### Articles (55)
 Courses on fallacies, argumentation, and judgment literacy — with categories like
 `fallacy`, `method`, `technique`, `foundation`, `tactic`, `literacy`.
 
-Key additions in the latest batch: `alternative-explanations`, `belief-stress-test`,
-`claim-vs-interpretation`, `claim-vs-taste`, `confidence-and-uncertainty`,
-`correlation-and-causation`, `emotional-persuasion`, `evidence-quality`,
-`expertise-and-incentives`, `falsifiability-and-revision`, `framing-and-omission`,
-`what-is-judgment-testing`, `whataboutism`.
+Full Schopenhauer mapping (8 articles): `absurd-extension`, `appeal-to-consequences`,
+`begging-the-question`, `hair-splitting`, `poisoning-the-well`, `provocation`,
+`theory-vs-practice`, `schopenhauer-art-of-being-right`.
+
+Classic fallacy additions: `slippery-slope`, `hasty-generalization`, `nirvana-fallacy`,
+`shifting-burden-of-proof`, `false-analogy`, `appeal-to-tradition`, `appeal-to-novelty`,
+`all-or-nothing`, `composition-division`, `appeal-to-ignorance`.
 
 Removed (folded into other articles or replaced): `burden-shifting`,
 `claim-vs-opinion`, `tu-quoque`, `what-is-debate`.
@@ -38,9 +40,9 @@ Removed (folded into other articles or replaced): `burden-shifting`,
 ### Lessons (3)
 | Slug | Title | Articles |
 |---|---|---|
-| `spotting-tactics` | Spotting Tactics | 17 articles |
-| `judgment-literacy` | Judgment Literacy | 8 articles (new track) |
-| `deeper-curriculum` | Deeper Curriculum | 3 articles (new track) |
+| `judgment-literacy` | مسیر اصلی: سواد قضاوت | 10 articles (featured track) |
+| `spotting-tactics` | تشخیص و پاسخ به تاکتیک‌های انحرافی | 8 articles |
+| `deeper-curriculum` | مسیر پیشرفته: عمیق‌تر شدن | 10 articles |
 
 ### Topics (5)
 `fallacies`, `foundations`, `judgment-literacy`, `practice`, `tactics`
@@ -102,10 +104,76 @@ Changes are committed directly to the repo; Vercel's Git integration auto-deploy
 | `/api/admin/pages/[slug]` | `route.ts` | GET, DELETE |
 | `/admin/site-config` | `page.tsx`+`form.tsx` | Site config editor (raw YAML + simple form mode) |
 | `/admin/settings` | `page.tsx` | Shows env config, setup instructions |
+| `/admin/content-map` | `page.tsx` + `client.tsx` | Content governance dashboard — table/family/gap views (see Content Governance section) |
 
 ### Shared Admin UI Components
 
 `src/components/admin/ui.tsx` — `PageHeader`, `FormField`, `SectionHeading`, `EmptyState`, `SubmitButton`
+
+## Content Governance System
+
+The content library (55 articles, 3 lessons, 5 topics, 3 pages) is managed through a four-layer governance system:
+
+### Layer 1 — Auto-generated Manifest
+
+`npm run content:index` → `node scripts/build-manifest.mjs` → `content/manifest.yaml`
+
+Reads ALL content files, extracts metadata, cross-references, lesson memberships, inbound links, families, and gap analysis. Produces a single YAML file that serves as the source of truth.
+
+| File | Purpose |
+|---|---|
+| `scripts/build-manifest.mjs` | Generates `content/manifest.yaml` from all MDX/MD files |
+| `content/manifest.yaml` | Single source of truth — articles, lessons, cross-refs, families, gaps |
+
+### Layer 2 — Article Families
+
+Every article has a `family` frontmatter field grouping related content. When editing one article in a family, the others should be checked for consistency.
+
+| Family | Members | Description |
+|---|---|---|
+| `classic-fallacies` | 19 | Core logical fallacies (ad-hominem, straw-man, false-dilemma, etc.) |
+| `judgment-literacy-core` | 10 | The featured learning path |
+| `schopenhauer-tactics` | 8 | Tactics from Schopenhauer's "The Art of Being Right" |
+| `appeal-fallacies` | 5 | Appeal-based fallacies (fear, majority, authority, novelty, tradition) |
+| `hidden-distortions` | 4 | Framing, assumptions, emotional persuasion |
+| `club-philosophy` | 4 | Club identity docs (belief stress test, responding to tactics, etc.) |
+| `practice-exercises` | 3 | Hands-on exercises |
+| `advanced-judgment` | 2 | Deeper analytical concepts |
+
+### Layer 3 — Validation
+
+`npm run content:validate` → `node scripts/validate-content.mjs`
+
+Checks every cross-reference, lesson step, topic slug, site-config reference, slug uniqueness, and order uniqueness. Returns 0 errors for a clean library.
+
+Also runs during `npm run build` AND as a **pre-commit hook** (installed via `sh scripts/install-hooks.sh`):
+
+| File | Purpose |
+|---|---|
+| `scripts/validate-content.mjs` | Validates all cross-references, slugs, orders, lesson/topic/site-config refs |
+| `scripts/pre-commit` | Git pre-commit hook script — runs validation before every commit |
+| `scripts/install-hooks.sh` | One-time installer for the pre-commit hook |
+
+### Layer 4 — Admin Content Map
+
+`/admin/content-map` — Interactive dashboard showing the entire content library.
+
+Three views:
+- **جدول (Table):** All 55 articles with filters (type, family, level, search). Columns: order, title, type badge, level, family, reading time, lesson count, inbound link count, edit link.
+- **خانواده‌ها (Families):** Expandable family groups. Click any family to see all members with quick edit links.
+- **شکاف‌ها (Gaps):** Four gap analyses — orphans (no lesson), unreferenced articles, sparse tags, sparse topics.
+
+| File | Purpose |
+|---|---|
+| `src/app/admin/content-map/page.tsx` | Server component — reads manifest at build time |
+| `src/app/admin/content-map/client.tsx` | Client component — filtering, view switching, families, gaps |
+
+### Workflow
+
+1. Edit an article → `npm run content:check` to verify integrity
+2. Commit → pre-commit hook runs validation automatically
+3. Push → build server runs validation before next build
+4. Browse `/admin/content-map` any time for the full picture
 
 ## Frontend (public site)
 
@@ -165,7 +233,7 @@ Changes are committed directly to the repo; Vercel's Git integration auto-deploy
 | File | Purpose |
 |---|---|
 | `next.config.ts` | Minimal Next.js config |
-| `package.json` | Scripts: `dev`, `build`, `start`, `lint` |
+| `package.json` | Scripts: `dev`, `build` (runs `content:validate` first), `start`, `lint`, `content:index`, `content:validate`, `content:check` |
 | `tsconfig.json` | TypeScript config with `@/` path alias |
 
 ## Env Vars for Admin Panel
