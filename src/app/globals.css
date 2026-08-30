@@ -1,48 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9f7;
-  --foreground: #1f2933;
-  --muted: #5f6c7b;
-  --border: #e4e1db;
-  --accent: #0f766e;
-  --accent-light: #ccfbf1;
+  --background: #f5f0eb;
+  --foreground: #1a1e2b;
+  --muted: #6b7280;
+  --border: #e4dbd0;
+  --accent: #0d9488;
+  --accent-light: #d5f5f1;
   --surface: #ffffff;
-  --code-bg: #f3f4f6;
-  --pre-bg: #1f2933;
+  --code-bg: #f0eeec;
+  --pre-bg: #1a1e2b;
   --pre-fg: #f9fafb;
   --accent-fg: #ffffff;
 }
 
 /* Explicit dark theme */
 [data-theme="dark"] {
-  --background: #0f172a;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
-  --border: #1e293b;
+  --background: #0a0f1a;
+  --foreground: #e8edf5;
+  --muted: #8899b0;
+  --border: #1a2334;
   --accent: #2dd4bf;
-  --accent-light: #134e4a;
-  --surface: #1e293b;
-  --code-bg: #334155;
-  --pre-bg: #0f172a;
+  --accent-light: #0c3d3a;
+  --surface: #121a28;
+  --code-bg: #1a2334;
+  --pre-bg: #0a0f1a;
   --pre-fg: #e2e8f0;
-  --accent-fg: #0f172a;
+  --accent-fg: #0a0f1a;
 }
 
 /* System preference: dark */
 @media (prefers-color-scheme: dark) {
   [data-theme="system"] {
-    --background: #0f172a;
-    --foreground: #f1f5f9;
-    --muted: #94a3b8;
-    --border: #1e293b;
+    --background: #0a0f1a;
+    --foreground: #e8edf5;
+    --muted: #8899b0;
+    --border: #1a2334;
     --accent: #2dd4bf;
-    --accent-light: #134e4a;
-    --surface: #1e293b;
-    --code-bg: #334155;
-    --pre-bg: #0f172a;
+    --accent-light: #0c3d3a;
+    --surface: #121a28;
+    --code-bg: #1a2334;
+    --pre-bg: #0a0f1a;
     --pre-fg: #e2e8f0;
-    --accent-fg: #0f172a;
+    --accent-fg: #0a0f1a;
   }
 }
 
