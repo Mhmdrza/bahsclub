@@ -1,0 +1,14 @@
+#!/bin/sh
+# Auto-generated pre-commit hook — validates content integrity
+# Run `npm run content:validate` before each commit
+# Installed by: sh scripts/install-git-hooks.sh
+
+echo "→ Checking content integrity..."
+node scripts/validate-content.mjs
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Content validation failed. Fix errors before committing."
+  echo "   The manifest may be stale — run: npm run content:index"
+  exit 1
+fi
+echo "✓ Content OK"

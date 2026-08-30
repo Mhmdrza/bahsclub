@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run content:validate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "content:index": "node scripts/build-manifest.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "content:check": "npm run content:index && npm run content:validate"
   },
   "dependencies": {
     "fuse.js": "^7.5.0",

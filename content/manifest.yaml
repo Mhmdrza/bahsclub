@@ -1,0 +1,1755 @@
+generatedAt: '2026-08-30T19:27:01.088Z'
+counts:
+  articles: 55
+  lessons: 3
+  pages: 3
+  topics: 5
+  families: 8
+articles:
+  - slug: what-is-judgment-testing
+    title: محکِ قضاوت چیست؟
+    description: بحثی که لازم نیست در آن برنده شوی — معرفی فلسفهٔ محک قضاوت و تفاوت آن با بحث‌های رقابتی
+    type: article
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 7
+    order: 1
+    tags:
+      - محک قضاوت
+      - بحث
+      - کندوکاو
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-15'
+    related: []
+    file: what-is-judgment-testing.mdx
+    lessons: &ref_0
+      - judgment-literacy
+    inboundLinks: []
+  - slug: claim-vs-interpretation
+    title: ادعا در برابر تفسیر
+    description: چرا بعضی چیزها را می‌شود با شواهد آزمود و بعضی چیزها را نه؟
+    type: article
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 6
+    order: 2
+    tags:
+      - ادعا
+      - تفسیر
+      - چهارچوب‌بندی
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-16'
+    related: []
+    file: claim-vs-interpretation.mdx
+    lessons: &ref_1
+      - judgment-literacy
+    inboundLinks: []
+  - slug: precise-claims
+    title: ادعای دقیق؛ شرط لازم برای آزمایش قضاوت
+    description: چطور یک ادعای مبهم را به جمله‌ای تبدیل کنیم که واقعاً بتوان آن را آزمود.
+    type: article
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 6
+    order: 3
+    tags:
+      - ادعای دقیق
+      - شفاف‌سازی
+      - تعریف
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-17'
+    related: []
+    file: precise-claims.mdx
+    lessons: &ref_2
+      - judgment-literacy
+    inboundLinks: []
+  - slug: steelman-opponent
+    title: استیلمن‌نینگ؛ ساختن قوی‌ترین روایت از دیدگاه مخالف
+    description: چطور پیش از نقد یک دیدگاه، آن را در قوی‌ترین شکل ممکن بازگو کنیم.
+    type: article
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 7
+    order: 4
+    tags:
+      - استیلمن
+      - قوی‌ترین روایت
+      - انصاف
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-18'
+    related: []
+    file: steelman-opponent.mdx
+    lessons: &ref_3
+      - judgment-literacy
+    inboundLinks: []
+  - slug: evidence-quality
+    title: 'کیفیت شواهد: همهٔ شواهد یکسان ساخته نشده‌اند'
+    description: یک حکایت شخصی، یک نظر متخصص، یک کارآزمایی تصادفی و یک فراتحلیل — وزن هرکدام در محک زدن یک قضاوت چقدر است؟
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 7
+    order: 5
+    tags:
+      - شواهد
+      - کیفیت شواهد
+      - تحقیق
+    topics:
+      - judgment-literacy
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-20'
+    related: []
+    file: evidence-quality.mdx
+    lessons: &ref_4
+      - judgment-literacy
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: framing-and-omission
+    title: 'چهارچوب‌بندی و حذف: آنچه گفته می‌شود، آنچه نمی‌شود'
+    description: >-
+      «۹۰٪ زنده ماندند» با «۱۰٪ مردند» یک واقعیت است، اما دو برداشت کاملاً متفاوت. یاد بگیرید چطور چهارچوب‌بندی را تشخیص
+      دهید.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 7
+    order: 6
+    tags:
+      - چهارچوب‌بندی
+      - حذف
+      - رسانه
+    topics:
+      - judgment-literacy
+      - tactics
+    family: hidden-distortions
+    status: published
+    publishedAt: '2025-01-21'
+    related: []
+    file: framing-and-omission.mdx
+    lessons: &ref_5
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: alternative-explanations
+    title: 'توضیحات جایگزین: همیشه بیش از یک توضیح وجود دارد'
+    description: اولین توضیحی که به ذهنتان می‌رسد، لزوماً درست نیست. یاد بگیرید برای هر شواهدی، توضیحات رقیب پیدا کنید.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 8
+    order: 7
+    tags:
+      - توضیح جایگزین
+      - سوگیری تأییدی
+      - تفکر نقاد
+    topics:
+      - judgment-literacy
+    family: advanced-judgment
+    status: published
+    publishedAt: '2025-01-22'
+    related: []
+    file: alternative-explanations.mdx
+    lessons: &ref_6
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: correlation-and-causation
+    title: 'همبستگی و علیت: چرا A و B با هم اتفاق می‌افتند'
+    description: >-
+      «با هم رخ دادن» با «یکی باعث دیگری شدن» فرق دارد. یاد بگیرید این دو را از هم تشخیص دهید — یکی از سخت‌ترین
+      مهارت‌های سواد قضاوت.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 8
+    order: 8
+    tags:
+      - همبستگی
+      - علیت
+      - آمار
+    topics:
+      - judgment-literacy
+      - fallacies
+    family: advanced-judgment
+    status: published
+    publishedAt: '2025-01-23'
+    related: []
+    file: correlation-and-causation.mdx
+    lessons: &ref_7
+      - deeper-curriculum
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: expertise-and-incentives
+    title: تخصص و انگیزه‌ها
+    description: چطور تخصص را ارزیابی کنیم و نقش انگیزه‌های مالی، سیاسی و اعتباری را در قضاوت بشناسیم.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 7
+    order: 9
+    tags:
+      - تخصص
+      - انگیزه
+      - تعارض منافع
+    topics:
+      - judgment-literacy
+    family: hidden-distortions
+    status: published
+    publishedAt: '2025-01-25'
+    related: []
+    file: expertise-and-incentives.mdx
+    lessons: &ref_8
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: emotional-persuasion
+    title: اقناع عاطفی
+    description: چطور احساسات را از ادعا جدا کنیم و دستکاری عاطفی را تشخیص دهیم.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 7
+    order: 10
+    tags:
+      - اقناع عاطفی
+      - احساسات
+      - دستکاری
+    topics:
+      - judgment-literacy
+      - tactics
+    family: hidden-distortions
+    status: published
+    publishedAt: '2025-01-26'
+    related: []
+    file: emotional-persuasion.mdx
+    lessons: &ref_9
+      - deeper-curriculum
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: confidence-and-uncertainty
+    title: اطمینان و عدم قطعیت
+    description: چطور سطح اطمینان خود را به شواهد تنظیم کنیم، نه به شخصیت یا فشار اجتماعی.
+    type: practice
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 7
+    order: 11
+    tags:
+      - اطمینان
+      - عدم قطعیت
+      - تنظیم باور
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-27'
+    related: []
+    file: confidence-and-uncertainty.mdx
+    lessons: &ref_10
+      - judgment-literacy
+    inboundLinks: []
+  - slug: falsifiability-and-revision
+    title: ابطال‌پذیری و بازنگری
+    description: چطور بفهمیم یک ادعا واقعاً معنادار است و چطور عضلهٔ تغییر عقیده را تقویت کنیم.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 8
+    order: 12
+    tags:
+      - ابطال‌پذیری
+      - بازنگری
+      - تغییر نظر
+    topics:
+      - judgment-literacy
+      - foundations
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-01-28'
+    related: []
+    file: falsifiability-and-revision.mdx
+    lessons: &ref_11
+      - judgment-literacy
+    inboundLinks: []
+  - slug: what-is-fallacy
+    title: مغالطه چیست؟ خطا در استدلال، نه برچسب برای برنده شدن
+    description: مغالطه ابزاری برای تشخیص ضعف استدلال است، نه سلاحی برای حمله به طرف مقابل.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 6
+    order: 13
+    tags:
+      - مغالطه
+      - خطای استدلال
+      - تشخیص
+    topics:
+      - fallacies
+      - foundations
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-01'
+    related: []
+    file: what-is-fallacy.mdx
+    lessons: &ref_12
+      - spotting-tactics
+    inboundLinks: []
+  - slug: structure-of-argument
+    title: 'ساختار استدلال: نقشه‌ای برای محک زدن قضاوت‌ها'
+    description: 'هر استدلال از سه بخش اصلی تشکیل شده: ادعا، شواهد، و استدلالی که آن‌ها را به هم وصل می‌کند.'
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 7
+    order: 14
+    tags:
+      - ساختار استدلال
+      - نقشه استدلال
+      - ادعا
+    topics:
+      - foundations
+      - judgment-literacy
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-02-02'
+    related: []
+    file: structure-of-argument.mdx
+    lessons: &ref_13
+      - judgment-literacy
+    inboundLinks: []
+  - slug: asking-better-questions
+    title: چگونه سؤال‌های بهتر بپرسیم؟ روشن کنیم، نه حمله کنیم
+    description: سه نوع سؤال خوب و سه نوع سؤال بد — و این که چرا قبل از نقد کردن باید سؤال پرسید.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 6
+    order: 15
+    tags:
+      - پرسشگری
+      - شفاف‌سازی
+      - گفت‌وگو
+    topics:
+      - foundations
+      - judgment-literacy
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-02-03'
+    related: []
+    file: asking-better-questions.mdx
+    lessons: &ref_14
+      - judgment-literacy
+    inboundLinks: []
+  - slug: responding-to-tactics
+    title: 'پاسخ به تاکتیک‌های انحرافی: بازگشت به قضاوت، نه جنگ'
+    description: وقتی کسی از تاکتیک استفاده می‌کند، هدف بردن نیست — هدف بازگرداندن بحث به مسیر اصلی است.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 7
+    order: 16
+    tags:
+      - پاسخ
+      - تاکتیک
+      - مدیریت بحث
+    topics:
+      - foundations
+      - tactics
+    family: club-philosophy
+    status: published
+    publishedAt: '2025-02-04'
+    related: []
+    file: responding-to-tactics.mdx
+    lessons: &ref_15
+      - spotting-tactics
+    inboundLinks: []
+  - slug: fair-effective-debate
+    title: 'محک زدن مؤثر قضاوت‌ها: پنج اصل برای فهمیدن، نه برنده شدن'
+    description: بحث منصفانه یعنی چی؟ یعنی هر دو طرف بعد از گفت‌وگو، چیزی یاد گرفته باشند — حتی اگر نظرشان عوض نشده باشد.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 7
+    order: 17
+    tags:
+      - محک قضاوت
+      - مؤثر
+      - منصفانه
+    topics:
+      - foundations
+      - judgment-literacy
+    family: judgment-literacy-core
+    status: published
+    publishedAt: '2025-02-05'
+    related: []
+    file: fair-effective-debate.mdx
+    lessons: &ref_16
+      - judgment-literacy
+    inboundLinks: []
+  - slug: ad-hominem
+    title: 'حمله شخصی: وقتی ادعا را رها می‌کنی تا به شخص حمله کنی'
+    description: حمله به شخص به‌جای ادعا — چطور تشخیصش دهیم و بدون تشدید، بحث را به آزمایش قضاوت برگردانیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 18
+    tags:
+      - تاکتیک
+      - حمله شخصی
+      - اد هومینم
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-10'
+    related: []
+    file: ad-hominem.mdx
+    lessons: &ref_17
+      - spotting-tactics
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: straw-man
+    title: 'مرد پوشالی: چرا نباید از نسخهٔ ضعیف‌تر یک ادعا دفاع کرد'
+    description: تحریف استدلال طرف مقابل و حمله به نسخهٔ ضعیف‌تر — و چطور با بازگشت به ادعای اصلی پاسخ دهیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 19
+    tags:
+      - تاکتیک
+      - مرد پوشالی
+      - استرومن
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-11'
+    related: []
+    file: straw-man.mdx
+    lessons: &ref_18
+      - spotting-tactics
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: false-dilemma
+    title: 'دوگانه کاذب: وقتی بحث را به اجبار بین دو گزینه محدود می‌کنی'
+    description: ارائهٔ فقط دو گزینه در حالی که گزینه‌های بیشتری وجود دارد — و چطور دامنه را باز کنیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 20
+    tags:
+      - تاکتیک
+      - دوگانه کاذب
+      - مغالطه
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-12'
+    related: []
+    file: false-dilemma.mdx
+    lessons: &ref_19
+      - spotting-tactics
+    inboundLinks: []
+  - slug: red-herring
+    title: 'انحراف موضوع: وقتی سؤالی جدید جای سؤال اصلی را می‌گیرد'
+    description: معرفی موضوعی نامربوط برای منحرف کردن بحث از ادعای اصلی — و چطور به مسیر برگردیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 21
+    tags:
+      - تاکتیک
+      - انحراف
+      - رد هرینگ
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-13'
+    related: []
+    file: red-herring.mdx
+    lessons: &ref_20
+      - spotting-tactics
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: appeal-to-authority
+    title: 'استناد به مرجع: چرا «فلانی گفته» کافی نیست'
+    description: وقتی ادعا را با استناد به یک شخصیت معتبر توجیه می‌کنیم — و چطور شواهد پشت آن مرجع را بررسی کنیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 22
+    tags:
+      - تاکتیک
+      - استناد به مرجع
+      - مغالطه
+    topics:
+      - tactics
+    family: appeal-fallacies
+    status: published
+    publishedAt: '2025-02-14'
+    related: []
+    file: appeal-to-authority.mdx
+    lessons: &ref_21
+      - spotting-tactics
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: whataboutism
+    title: 'چه‌درباره‌گرایی: وقتی «اما فلانی هم…» جای ادعای اصلی را می‌گیرد'
+    description: منحرف کردن بحث با اشاره به موضوعی دیگر یا رفتار دیگران — و چطور بدون گرفتار شدن، به آزمایش قضاوت برگردیم
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 23
+    tags:
+      - تاکتیک
+      - چه‌درباره‌گرایی
+      - وت‌ابات‌ایسم
+      - تغییر موضوع
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-15'
+    related: []
+    file: whataboutism.mdx
+    lessons: &ref_22
+      - spotting-tactics
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: hidden-assumption
+    title: 'پیش‌فرض پنهان: باورهایی که نگفته می‌مانند'
+    description: هر استدلالی روی باورهایی می‌ایستد که گفته نمی‌شوند. پیدا کردن این پیش‌فرض‌ها، قلبِ آزمایش قضاوت است.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 6
+    order: 24
+    tags:
+      - پیش‌فرض پنهان
+      - مفروضات
+      - آزمایش قضاوت
+    topics:
+      - foundations
+      - judgment-literacy
+    family: hidden-distortions
+    status: published
+    publishedAt: '2025-02-20'
+    related: []
+    file: hidden-assumption.mdx
+    lessons: &ref_23
+      - deeper-curriculum
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: cherry-picking
+    title: 'انتخاب گزینشی شواهد: دیدن فقط نیمی از تصویر'
+    description: وقتی فقط شواهدی را می‌بینیم که باورمان را تأیید می‌کند، قضاوتمان آزمایش نمی‌شود—فقط تأیید می‌شود.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 5
+    order: 25
+    tags:
+      - انتخاب گزینشی
+      - شواهد
+      - سوگیری تأیید
+      - تاکتیک
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-21'
+    related: []
+    file: cherry-picking.mdx
+    lessons: &ref_24
+      - deeper-curriculum
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: moving-goalposts
+    title: 'جابه‌جایی تیرک دروازه: وقتی معیار پذیرش همیشه عوض می‌شود'
+    description: وقتی هر بار شواهد کافی ارائه می‌دهید، استاندارد پذیرش تغییر می‌کند—ادعا هرگز نمی‌تواند رد شود.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 5
+    order: 26
+    tags:
+      - جابه‌جایی تیرک دروازه
+      - ابطال‌ناپذیری
+      - معیار پذیرش
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-22'
+    related: []
+    file: moving-goalposts.mdx
+    lessons: &ref_25 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: loaded-question
+    title: 'سؤال بارگذاری‌شده: وقتی سؤال خودش یک ادعاست'
+    description: بعضی سؤال‌ها ظاهراً بی‌ضررند، اما یک ادعای اثبات‌نشده را در خود پنهان کرده‌اند.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 5
+    order: 27
+    tags:
+      - سؤال بارگذاری‌شده
+      - پیش‌فرض پنهان
+      - سؤال جهت‌دار
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-23'
+    related: []
+    file: loaded-question.mdx
+    lessons: &ref_26 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: equivocation
+    title: 'بازی با ابهام واژه‌ها: یک کلمه، دو معنا'
+    description: وقتی یک واژه در میانهٔ استدلال معنی خود را عوض می‌کند، نتیجه ظاهراً منطقی به نظر می‌رسد—اما در واقع فریبنده است.
+    type: tactic
+    category: مغالطه‌ها
+    level: intermediate
+    readingTime: 6
+    order: 28
+    tags:
+      - ابهام واژه
+      - معانی چندگانه
+      - سفسطه
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-24'
+    related: []
+    file: equivocation.mdx
+    lessons: &ref_27 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: gish-gallop
+    title: 'بمباران ادعاها: وقتی حجم جای کیفیت را می‌گیرد'
+    description: هر چه ادعاهای ضعیف‌تر بیشتر باشند، پاسخ دادن به همه سخت‌تر می‌شود—و آزمایش قضاوت غیرممکن.
+    type: tactic
+    category: تاکتیک‌ها
+    level: intermediate
+    readingTime: 6
+    order: 29
+    tags:
+      - بمباران ادعا
+      - گیش گالوپ
+      - حجم استدلال
+    topics:
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-02-25'
+    related: []
+    file: gish-gallop.mdx
+    lessons: &ref_28 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: when-to-say-i-dont-know
+    title: کی باید بگوییم «نمی‌دانم»؟ — قدرت نه گفتن به قطعیت
+    description: گفتن «نمی‌دانم» نشانهٔ ضعف نیست—نشانهٔ این است که قضاوتت را می‌شناسی و به آن احترام می‌گذاری.
+    type: article
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 6
+    order: 30
+    tags:
+      - نمی‌دانم
+      - فروتنی فکری
+      - قطعیت
+      - مرز دانش
+    topics:
+      - judgment-literacy
+      - foundations
+    family: club-philosophy
+    status: published
+    publishedAt: '2025-02-26'
+    related: []
+    file: when-to-say-i-dont-know.mdx
+    lessons: &ref_29
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: three-sentence-response
+    title: 'پاسخ سه‌جمله‌ای: تکنیکی برای بحث بدون تشدید'
+    description: 'یک ساختار ساده برای پاسخ دادن به نقطه‌نظرات چالش‌برانگیز: بپذیر، موافقت کن، سؤال بپرس.'
+    type: practice
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 5
+    order: 31
+    tags:
+      - پاسخ سه‌جمله‌ای
+      - ارتباط مؤثر
+      - کاهش تنش
+      - ساختار
+    topics:
+      - judgment-literacy
+      - practice
+    family: club-philosophy
+    status: published
+    publishedAt: '2025-02-27'
+    related: []
+    file: three-sentence-response.mdx
+    lessons: &ref_30 []
+    inboundLinks: []
+  - slug: rewrite-vague-claim
+    title: از ادعای مبهم تا ادعای دقیق
+    description: >-
+      «این محصول کیفیت زندگی شما را متحول می‌کند.» واقعاً؟ چطور؟ برای چه کسی؟ چقدر؟ تمرین تبدیل ادعاهای مبهم به جملاتی
+      که واقعاً می‌توان آن‌ها را آزمود.
+    type: practice
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 6
+    order: 32
+    tags:
+      - ادعای دقیق
+      - تمرین
+      - شفاف‌سازی
+    topics:
+      - judgment-literacy
+      - practice
+    family: practice-exercises
+    status: published
+    publishedAt: '2025-03-01'
+    related: []
+    file: rewrite-vague-claim.mdx
+    lessons: &ref_31 []
+    inboundLinks: []
+  - slug: claim-vs-taste
+    title: ادعا در برابر سلیقه
+    description: >-
+      «پیتزا بهترین غذای دنیاست.» این یک ادعاست یا یک سلیقه؟ تفاوت را یاد بگیر — چون اگر سلیقه را با شواهد رد کنی، بحث
+      به جایی نمی‌رسد.
+    type: practice
+    category: سواد قضاوت
+    level: beginner
+    readingTime: 6
+    order: 33
+    tags:
+      - ادعا
+      - سلیقه
+      - تمرین
+    topics:
+      - judgment-literacy
+      - practice
+    family: practice-exercises
+    status: published
+    publishedAt: '2025-03-02'
+    related: []
+    file: claim-vs-taste.mdx
+    lessons: &ref_32 []
+    inboundLinks: []
+  - slug: spot-fallacy-dialogue
+    title: تشخیص تاکتیک در گفتگو
+    description: >-
+      آیا می‌توانی در میان یک گفتگوی معمولی تشخیص بدهی کدام جمله از مسیر شواهد خارج می‌شود؟ یک گفتگو با چهار تاکتیک
+      پنهان، و تمرین پاسخ به سبک بحث‌کلاب.
+    type: practice
+    category: تمرین
+    level: intermediate
+    readingTime: 8
+    order: 34
+    tags:
+      - تمرین
+      - مغالطه
+      - تاکتیک
+      - تشخیص
+    topics:
+      - practice
+      - fallacies
+      - tactics
+    family: practice-exercises
+    status: published
+    publishedAt: '2025-03-03'
+    related: []
+    file: spot-fallacy-dialogue.mdx
+    lessons: &ref_33 []
+    inboundLinks: []
+  - slug: belief-stress-test
+    title: آزمایش باور — محک اصلی بحث‌کلاب
+    description: >-
+      قوی‌ترین تمرین بحث‌کلاب: یک باور را انتخاب کن، آن را از هشت زاویه محک بزن، و ببین چه چیزی از آن باقی می‌ماند. یک
+      نسخهٔ انفرادی از جلسهٔ گروهی.
+    type: practice
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 10
+    order: 35
+    tags:
+      - آزمایش باور
+      - محک زدن
+      - تمرین کلیدی
+    topics:
+      - judgment-literacy
+      - practice
+    family: club-philosophy
+    status: published
+    publishedAt: '2025-03-04'
+    related: []
+    file: belief-stress-test.mdx
+    lessons: &ref_34
+      - deeper-curriculum
+    inboundLinks: []
+  - slug: appeal-to-fear
+    title: توسل به ترس
+    description: >-
+      «اگر این کار را نکنی، فاجعه رخ می‌دهد.» ترس قوی‌ترین میان‌بر به تصمیم‌گیری بدون فکر است. یاد بگیر چطور آن را تشخیص
+      بدهی و از آن عبور کنی.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 36
+    tags:
+      - تاکتیک
+      - مغالطه
+      - توسل به ترس
+    topics:
+      - tactics
+      - fallacies
+    family: appeal-fallacies
+    status: published
+    publishedAt: '2025-03-05'
+    related: []
+    file: appeal-to-fear.mdx
+    lessons: &ref_35 []
+    inboundLinks: []
+  - slug: appeal-to-majority
+    title: توسل به اکثریت
+    description: >-
+      «میلیون‌ها نفر اشتباه نمی‌کنند.» واقعاً؟ تعداد باورکنندگان ربطی به درستی یک ادعا ندارد — یاد بگیر چطور این تاکتیک
+      را تشخیص بدهی.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 37
+    tags:
+      - تاکتیک
+      - مغالطه
+      - توسل به اکثریت
+    topics:
+      - tactics
+      - fallacies
+    family: appeal-fallacies
+    status: published
+    publishedAt: '2025-03-06'
+    related: []
+    file: appeal-to-majority.mdx
+    lessons: &ref_36 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: begging-the-question
+    title: استدلال دوری — وقتی نتیجه در مقدمه پنهان شده
+    description: >-
+      وقتی ادعا، خودش را ثابت می‌کند. استدلال دوری چطور بحث را از آزمایش واقعی فراری می‌دهد — و چطور بی‌صدا خنثی‌اش
+      کنیم.
+    type: tactic
+    category: مغالطه‌ها
+    level: intermediate
+    readingTime: 7
+    order: 38
+    tags:
+      - استدلال دوری
+      - مصادره به مطلوب
+      - شوپنهاور
+    topics:
+      - fallacies
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-20'
+    related: []
+    file: begging-the-question.mdx
+    lessons: &ref_37 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: poisoning-the-well
+    title: مسموم کردن چاه — وقتی برچسب، جای بحث را می‌گیرد
+    description: >-
+      «تو فقط چون X هستی اینو می‌گی.» برچسب زدن قبل از شنیدن. شوپنهاور (استراتژی ۳۲) این را یاد داد — ما یاد می‌گیریم
+      خنثی‌اش کنیم.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 39
+    tags:
+      - مسموم کردن چاه
+      - برچسب
+      - شوپنهاور
+    topics:
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-21'
+    related: []
+    file: poisoning-the-well.mdx
+    lessons: &ref_38 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: appeal-to-consequences
+    title: توسل به پیامد — «اگر این درست باشد، فاجعه می‌شود»
+    description: >-
+      وقتی ترس از نتیجه، جای بررسی واقعیت را می‌گیرد. شوپنهاور (استراتژی ۳۵) نشان داد چطور از پیامدهای ناخوشایند برای رد
+      یک ادعا استفاده می‌شود.
+    type: tactic
+    category: مغالطه‌ها
+    level: intermediate
+    readingTime: 7
+    order: 40
+    tags:
+      - توسل به پیامد
+      - ترس
+      - شوپنهاور
+    topics:
+      - fallacies
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-22'
+    related: []
+    file: appeal-to-consequences.mdx
+    lessons: &ref_39 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: provocation
+    title: تحریک به خشم — وقتی عصبانیت، سلاح می‌شود
+    description: >-
+      عصبانی کردن عمدی طرف مقابل تا کنترل بحث را از دست بدهد. شوپنهاور (استراتژی‌های ۸ و ۳۸) نشان داد چطور خشم، قضاوت را
+      کور می‌کند.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 7
+    order: 41
+    tags:
+      - تحریک
+      - خشم
+      - شوپنهاور
+    topics:
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-23'
+    related: []
+    file: provocation.mdx
+    lessons: &ref_40 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: absurd-extension
+    title: بسط اغراق‌آمیز — وقتی حرفت را تا مرز پوچی می‌کِشند
+    description: >-
+      بسط دادن ادعای طرف مقابل تا یک نتیجهٔ مسخره که خودش نگفته. شوپنهاور (استراتژی ۱۵) این را ابزاری برای تخریب بی‌زحمت
+      می‌دانست.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 42
+    tags:
+      - بسط پوچ
+      - اغراق
+      - شوپنهاور
+    topics:
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-24'
+    related: []
+    file: absurd-extension.mdx
+    lessons: &ref_41 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: theory-vs-practice
+    title: «در تئوری درسته، در عمل نه» — وقتی بحث بی‌آزمایش متوقف می‌شود
+    description: >-
+      جمله‌ای که هزاران بحث را کشته: «این فقط یه تئوریه.» شوپنهاور (استراتژی ۳۳) نشان داد چطور این جمله بحث را بدون
+      بررسی شواهد، خفه می‌کند.
+    type: tactic
+    category: تاکتیک‌ها
+    level: beginner
+    readingTime: 6
+    order: 43
+    tags:
+      - تئوری
+      - عمل
+      - شوپنهاور
+    topics:
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-25'
+    related: []
+    file: theory-vs-practice.mdx
+    lessons: &ref_42 []
+    inboundLinks: []
+  - slug: hair-splitting
+    title: موشکافی گریز — وقتی با تعریف فرار می‌کنی
+    description: >-
+      «بله، ولی من دقیقاً منظورم این نبود.» ایجاد تمایزهای ظریف و ad-hoc برای فرار از پذیرش اشتباه. شوپنهاور (استراتژی
+      ۱۷) به این می‌گفت هنر گریز.
+    type: tactic
+    category: تاکتیک‌ها
+    level: intermediate
+    readingTime: 7
+    order: 44
+    tags:
+      - موشکافی
+      - گریز
+      - شوپنهاور
+    topics:
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-26'
+    related: []
+    file: hair-splitting.mdx
+    lessons: &ref_43 []
+    inboundLinks:
+      - schopenhauer-art-of-being-right
+  - slug: schopenhauer-art-of-being-right
+    title: هنر همیشه بر حق بودن — درس‌هایی که شوپنهاور ناخواسته به ما داد
+    description: >-
+      شوپنهاور ۳۸ ترفند برای برنده شدن در بحث نوشت — نه برای اینکه استفاده کنیم، برای اینکه بشناسیم و خنثی کنیم. نقشهٔ
+      راه دفاعی بحث‌کلاب.
+    type: article
+    category: سواد قضاوت
+    level: intermediate
+    readingTime: 8
+    order: 45
+    tags:
+      - شوپنهاور
+      - هنر همیشه بر حق بودن
+      - دفاع
+    topics:
+      - judgment-literacy
+      - tactics
+    family: schopenhauer-tactics
+    status: published
+    publishedAt: '2025-03-27'
+    related: []
+    file: schopenhauer-art-of-being-right.mdx
+    lessons: &ref_44 []
+    inboundLinks: []
+  - slug: slippery-slope
+    title: شیب لغزنده — «اگر این را اجازه دهیم، فاجعه قطعی است»
+    description: >-
+      وقتی یک قدم کوچک را به زنجیره‌ای از پیامدهای فاجعه‌بار و اجتناب‌ناپذیر وصل می‌کنند — بدون شواهدی برای هر حلقهٔ
+      زنجیر.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 46
+    tags:
+      - شیب لغزنده
+      - زنجیره علّی
+      - ترس
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-01'
+    related: []
+    file: slippery-slope.mdx
+    lessons: &ref_45 []
+    inboundLinks: []
+  - slug: hasty-generalization
+    title: تعمیم شتاب‌زده — وقتی چند نمونه، «همیشه» می‌شوند
+    description: >-
+      از دو تا تجربهٔ بد، نتیجه می‌گیری «همه فلان‌اند». تعمیم شتاب‌زده چطور قضاوت را از دقت می‌اندازد — و چطور جلویش را
+      بگیری.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 7
+    order: 47
+    tags:
+      - تعمیم شتاب‌زده
+      - نمونه ناکافی
+      - سوگیری
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-02'
+    related: []
+    file: hasty-generalization.mdx
+    lessons: &ref_46 []
+    inboundLinks: []
+  - slug: nirvana-fallacy
+    title: مغالطه کمال‌گرایی — «اگر کامل نیست، بی‌فایده است»
+    description: رد کردن یک راه‌حل مفید فقط به این دلیل که کامل نیست. چطور کمال‌طلبی، پیشرفت را متوقف می‌کند — و چطور پاسخ دهیم.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 48
+    tags:
+      - کمال‌گرایی
+      - راه‌حل کامل
+      - نزدیک‌بینی
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-03'
+    related: []
+    file: nirvana-fallacy.mdx
+    lessons: &ref_47 []
+    inboundLinks: []
+  - slug: shifting-burden-of-proof
+    title: انتقال بار اثبات — «اگر قبول نداری، ثابت کن نیست»
+    description: >-
+      وقتی ادعاکننده به‌جای ارائه شواهد، از تو می‌خواهد ثابت کنی اشتباه می‌کند. چرا بار اثبات روی دوش ادعاکننده است — و
+      چطور این را برگردانی.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 49
+    tags:
+      - بار اثبات
+      - ادعای اثبات‌نشده
+      - مسؤولیت دلیل
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-04'
+    related: []
+    file: shifting-burden-of-proof.mdx
+    lessons: &ref_48 []
+    inboundLinks: []
+  - slug: false-analogy
+    title: قیاس مع‌الفارق — وقتی دو چیز متفاوت را «مثل هم» جا می‌زنند
+    description: «مدیریت شرکت مثل مدیریت خانواده است.» مقایسهٔ دو چیز که تفاوت‌های اساسیشان شباهت‌ها را بی‌معنی می‌کند.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 7
+    order: 50
+    tags:
+      - قیاس مع‌الفارق
+      - مقایسه غلط
+      - استعاره گمراه‌کننده
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-05'
+    related: []
+    file: false-analogy.mdx
+    lessons: &ref_49 []
+    inboundLinks: []
+  - slug: appeal-to-tradition
+    title: توسل به سنت — «همیشه همین‌طور بوده، پس درست است»
+    description: قدیمی بودن یک کار، دلیل درستی‌اش نیست. چطور «همیشه همین‌طور بوده» بحث را بدون شواهد متوقف می‌کند.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 51
+    tags:
+      - سنت
+      - توسل به گذشته
+      - مقاومت در برابر تغییر
+    topics:
+      - fallacies
+      - tactics
+    family: appeal-fallacies
+    status: published
+    publishedAt: '2025-04-06'
+    related: []
+    file: appeal-to-tradition.mdx
+    lessons: &ref_50 []
+    inboundLinks: []
+  - slug: appeal-to-novelty
+    title: توسل به تازگی — «جدیده، پس بهتره»
+    description: تازه بودن یک چیز، دلیل برتری آن نیست. چطور «جدید» جای «خوب» می‌نشیند و جلوی ارزیابی واقعی را می‌گیرد.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 52
+    tags:
+      - تازگی
+      - مد
+      - نوگرایی افراطی
+    topics:
+      - fallacies
+      - tactics
+    family: appeal-fallacies
+    status: published
+    publishedAt: '2025-04-07'
+    related: []
+    file: appeal-to-novelty.mdx
+    lessons: &ref_51 []
+    inboundLinks: []
+  - slug: all-or-nothing
+    title: تفکر همه یا هیچ — «یا کامل، یا هیچی»
+    description: دنیا را فقط در دو قطب سیاه و سفید دیدن و همهٔ طیف خاکستری را نادیده گرفتن. برادر کم‌شناخته‌شدهٔ دوگانه کاذب.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 53
+    tags:
+      - همه یا هیچ
+      - سیاه و سفید
+      - کمال‌طلبی
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-08'
+    related: []
+    file: all-or-nothing.mdx
+    lessons: &ref_52 []
+    inboundLinks: []
+  - slug: composition-division
+    title: مغالطه ترکیب و تقسیم — وقتی جزء و کل را با هم اشتباه می‌گیریم
+    description: >-
+      ویژگی اجزا به کل نسبت داده می‌شود، یا ویژگی کل به اجزا. دو مغالطهٔ آینه‌ای که در بحث‌های اقتصادی و اجتماعی زیاد
+      می‌بینیم.
+    type: tactic
+    category: مغالطه‌ها
+    level: intermediate
+    readingTime: 7
+    order: 54
+    tags:
+      - ترکیب
+      - تقسیم
+      - جزء و کل
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-09'
+    related: []
+    file: composition-division.mdx
+    lessons: &ref_53 []
+    inboundLinks: []
+  - slug: appeal-to-ignorance
+    title: توسل به جهل — «چون ثابت نشده نیست، پس هست»
+    description: نبود شواهد برای رد یک ادعا، به‌معنای درستی آن نیست. چطور «هنوز اثبات نشده نیست» بحث را منحرف می‌کند.
+    type: tactic
+    category: مغالطه‌ها
+    level: beginner
+    readingTime: 6
+    order: 55
+    tags:
+      - توسل به جهل
+      - بار اثبات
+      - نادانی
+    topics:
+      - fallacies
+      - tactics
+    family: classic-fallacies
+    status: published
+    publishedAt: '2025-04-10'
+    related: []
+    file: appeal-to-ignorance.mdx
+    lessons: &ref_54 []
+    inboundLinks: []
+lessons:
+  - slug: judgment-literacy
+    title: 'مسیر اصلی: سواد قضاوت'
+    description: >-
+      یاد بگیر چطور باورهایت را محک بزنی، استدلالت را قوی‌تر کنی، و بدون دشمنی مخالفت کنی. این مسیر، مهارت‌های پایهٔ
+      سواد قضاوت را پوشش می‌دهد.
+    status: published
+    order: 1
+    steps:
+      - what-is-judgment-testing
+      - claim-vs-interpretation
+      - precise-claims
+      - steelman-opponent
+      - structure-of-argument
+      - asking-better-questions
+      - evidence-quality
+      - confidence-and-uncertainty
+      - falsifiability-and-revision
+      - fair-effective-debate
+    featured: true
+    milestone: >-
+      می‌توانی یک باور را با کمک دیگران محک بزنی، استدلالش را نقشه‌برداری کنی، و تشخیص دهی چه شواهدی می‌تواند نظرات را
+      تغییر دهد.
+  - slug: spotting-tactics
+    title: تشخیص و پاسخ به تاکتیک‌های انحرافی
+    description: تاکتیک‌های رایجی که بحث را از مسیر خارج می‌کنند بشناس و یاد بگیر چطور بدون تشدید تنش، بحث را به مسیر برگردانی.
+    status: published
+    order: 2
+    steps:
+      - what-is-fallacy
+      - ad-hominem
+      - straw-man
+      - false-dilemma
+      - red-herring
+      - appeal-to-authority
+      - whataboutism
+      - responding-to-tactics
+    featured: false
+    milestone: می‌توانی هشت تاکتیک رایج را در گفت‌وگو تشخیص دهی و بدون متهم کردن طرف مقابل، بحث را به موضوع اصلی برگردانی.
+  - slug: deeper-curriculum
+    title: 'مسیر پیشرفته: عمیق‌تر شدن'
+    description: 'مفاهیم پیشرفته‌تر سواد قضاوت: از کیفیت شواهد تا تشخیص اقناع عاطفی. برای کسانی که مسیر اصلی را تمام کرده‌اند.'
+    status: published
+    order: 3
+    steps:
+      - evidence-quality
+      - framing-and-omission
+      - alternative-explanations
+      - correlation-and-causation
+      - expertise-and-incentives
+      - emotional-persuasion
+      - hidden-assumption
+      - cherry-picking
+      - belief-stress-test
+      - when-to-say-i-dont-know
+    featured: false
+    milestone: می‌توانی شواهد را از نظر کیفیت ارزیابی کنی، چهارچوب‌بندی و حذف را تشخیص دهی، و بین همبستگی و علیت تمایز قائل شوی.
+pages:
+  - slug: about
+    title: درباره بحث‌کلاب
+    description: >-
+      بحث‌کلاب یک باشگاه محک زدن قضاوت‌هاست — جایی که هدف، کشف این است که باورهای ما از چه ساخته شده‌اند و چه چیزی
+      می‌تواند آن‌ها را تغییر دهد.
+    status: published
+    order: 1
+  - slug: club-rules
+    title: قوانین ده‌گانهٔ بحث‌کلاب
+    description: ده قانونی که فرهنگ بحث‌کلاب را می‌سازند — قواعدی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.
+    status: published
+    order: 2
+  - slug: session-format
+    title: آزمایشگاه قضاوت — ساختار یک جلسه
+    description: >-
+      ساختار هشت‌مرحله‌ای یک جلسهٔ بحث‌کلاب: از ارائهٔ باور تا مرور فرایند. یاد بگیرید چطور یک قضاوت را بدون رقابت و با
+      همکاری محک بزنید.
+    status: published
+    order: 3
+topics:
+  - slug: fallacies
+    title: مغالطه‌ها
+    description: 'خطاهای رایج در استدلال: یاد بگیرید چطور مغالطه‌ها را بشناسید و چرا گفتن اسم مغالطه کافی نیست.'
+    status: published
+    order: 4
+  - slug: foundations
+    title: مبانی
+    description: 'مفاهیم پایه برای ورود به دنیای محک زدن قضاوت‌ها: تفاوت بحث و کندوکاو، ساختار استدلال، و پرسش‌گری.'
+    status: published
+    order: 2
+  - slug: judgment-literacy
+    title: سواد قضاوت
+    description: 'مهارت‌های پایه برای محک زدن باورها: چطور یک ادعا را بشناسیم، بررسی کنیم، و به‌روزرسانی کنیم.'
+    status: published
+    order: 1
+  - slug: practice
+    title: تمرین
+    description: تمرین‌های عملی برای محک زدن باورها، تقویت استدلال، و یادگیری مشارکتی.
+    status: published
+    order: 5
+  - slug: tactics
+    title: تاکتیک‌های انحرافی
+    description: تکنیک‌هایی که بحث را از مسیر خارج می‌کنند — و چطور بدون تشدید تنش، آن‌ها را خنثی کنیم.
+    status: published
+    order: 3
+families:
+  judgment-literacy-core:
+    - what-is-judgment-testing
+    - claim-vs-interpretation
+    - precise-claims
+    - steelman-opponent
+    - evidence-quality
+    - confidence-and-uncertainty
+    - falsifiability-and-revision
+    - structure-of-argument
+    - asking-better-questions
+    - fair-effective-debate
+  hidden-distortions:
+    - framing-and-omission
+    - expertise-and-incentives
+    - emotional-persuasion
+    - hidden-assumption
+  advanced-judgment:
+    - alternative-explanations
+    - correlation-and-causation
+  classic-fallacies:
+    - what-is-fallacy
+    - ad-hominem
+    - straw-man
+    - false-dilemma
+    - red-herring
+    - whataboutism
+    - cherry-picking
+    - moving-goalposts
+    - loaded-question
+    - equivocation
+    - gish-gallop
+    - slippery-slope
+    - hasty-generalization
+    - nirvana-fallacy
+    - shifting-burden-of-proof
+    - false-analogy
+    - all-or-nothing
+    - composition-division
+    - appeal-to-ignorance
+  club-philosophy:
+    - responding-to-tactics
+    - when-to-say-i-dont-know
+    - three-sentence-response
+    - belief-stress-test
+  appeal-fallacies:
+    - appeal-to-authority
+    - appeal-to-fear
+    - appeal-to-majority
+    - appeal-to-tradition
+    - appeal-to-novelty
+  practice-exercises:
+    - rewrite-vague-claim
+    - claim-vs-taste
+    - spot-fallacy-dialogue
+  schopenhauer-tactics:
+    - begging-the-question
+    - poisoning-the-well
+    - appeal-to-consequences
+    - provocation
+    - absurd-extension
+    - theory-vs-practice
+    - hair-splitting
+    - schopenhauer-art-of-being-right
+crossRefs:
+  schopenhauer-art-of-being-right:
+    - straw-man
+    - absurd-extension
+    - ad-hominem
+    - poisoning-the-well
+    - provocation
+    - equivocation
+    - hair-splitting
+    - begging-the-question
+    - hidden-assumption
+    - correlation-and-causation
+    - red-herring
+    - gish-gallop
+    - whataboutism
+    - appeal-to-consequences
+    - appeal-to-majority
+    - appeal-to-authority
+    - emotional-persuasion
+    - loaded-question
+    - moving-goalposts
+    - cherry-picking
+lessonMemberships:
+  what-is-judgment-testing: *ref_0
+  claim-vs-interpretation: *ref_1
+  precise-claims: *ref_2
+  steelman-opponent: *ref_3
+  evidence-quality: *ref_4
+  framing-and-omission: *ref_5
+  alternative-explanations: *ref_6
+  correlation-and-causation: *ref_7
+  expertise-and-incentives: *ref_8
+  emotional-persuasion: *ref_9
+  confidence-and-uncertainty: *ref_10
+  falsifiability-and-revision: *ref_11
+  what-is-fallacy: *ref_12
+  structure-of-argument: *ref_13
+  asking-better-questions: *ref_14
+  responding-to-tactics: *ref_15
+  fair-effective-debate: *ref_16
+  ad-hominem: *ref_17
+  straw-man: *ref_18
+  false-dilemma: *ref_19
+  red-herring: *ref_20
+  appeal-to-authority: *ref_21
+  whataboutism: *ref_22
+  hidden-assumption: *ref_23
+  cherry-picking: *ref_24
+  moving-goalposts: *ref_25
+  loaded-question: *ref_26
+  equivocation: *ref_27
+  gish-gallop: *ref_28
+  when-to-say-i-dont-know: *ref_29
+  three-sentence-response: *ref_30
+  rewrite-vague-claim: *ref_31
+  claim-vs-taste: *ref_32
+  spot-fallacy-dialogue: *ref_33
+  belief-stress-test: *ref_34
+  appeal-to-fear: *ref_35
+  appeal-to-majority: *ref_36
+  begging-the-question: *ref_37
+  poisoning-the-well: *ref_38
+  appeal-to-consequences: *ref_39
+  provocation: *ref_40
+  absurd-extension: *ref_41
+  theory-vs-practice: *ref_42
+  hair-splitting: *ref_43
+  schopenhauer-art-of-being-right: *ref_44
+  slippery-slope: *ref_45
+  hasty-generalization: *ref_46
+  nirvana-fallacy: *ref_47
+  shifting-burden-of-proof: *ref_48
+  false-analogy: *ref_49
+  appeal-to-tradition: *ref_50
+  appeal-to-novelty: *ref_51
+  all-or-nothing: *ref_52
+  composition-division: *ref_53
+  appeal-to-ignorance: *ref_54
+gaps:
+  orphans:
+    - moving-goalposts
+    - loaded-question
+    - equivocation
+    - gish-gallop
+    - three-sentence-response
+    - rewrite-vague-claim
+    - claim-vs-taste
+    - spot-fallacy-dialogue
+    - appeal-to-fear
+    - appeal-to-majority
+    - begging-the-question
+    - poisoning-the-well
+    - appeal-to-consequences
+    - provocation
+    - absurd-extension
+    - theory-vs-practice
+    - hair-splitting
+    - schopenhauer-art-of-being-right
+    - slippery-slope
+    - hasty-generalization
+    - nirvana-fallacy
+    - shifting-burden-of-proof
+    - false-analogy
+    - appeal-to-tradition
+    - appeal-to-novelty
+    - all-or-nothing
+    - composition-division
+    - appeal-to-ignorance
+  noFamily: []
+  unreferenced:
+    - claim-vs-interpretation
+    - precise-claims
+    - steelman-opponent
+    - framing-and-omission
+    - alternative-explanations
+    - expertise-and-incentives
+    - confidence-and-uncertainty
+    - falsifiability-and-revision
+    - structure-of-argument
+    - asking-better-questions
+    - responding-to-tactics
+    - fair-effective-debate
+    - false-dilemma
+    - when-to-say-i-dont-know
+    - three-sentence-response
+    - rewrite-vague-claim
+    - claim-vs-taste
+    - spot-fallacy-dialogue
+    - belief-stress-test
+    - appeal-to-fear
+    - theory-vs-practice
+    - schopenhauer-art-of-being-right
+    - slippery-slope
+    - hasty-generalization
+    - nirvana-fallacy
+    - shifting-burden-of-proof
+    - false-analogy
+    - appeal-to-tradition
+    - appeal-to-novelty
+    - all-or-nothing
+    - composition-division
+    - appeal-to-ignorance
+  sparseTags:
+    - بحث
+    - کندوکاو
+    - تفسیر
+    - تعریف
+    - استیلمن
+    - قوی‌ترین روایت
+    - انصاف
+    - کیفیت شواهد
+    - تحقیق
+    - حذف
+    - رسانه
+    - توضیح جایگزین
+    - سوگیری تأییدی
+    - تفکر نقاد
+    - همبستگی
+    - علیت
+    - آمار
+    - تخصص
+    - انگیزه
+    - تعارض منافع
+    - اقناع عاطفی
+    - احساسات
+    - دستکاری
+    - اطمینان
+    - عدم قطعیت
+    - تنظیم باور
+    - ابطال‌پذیری
+    - بازنگری
+    - تغییر نظر
+    - خطای استدلال
+    - ساختار استدلال
+    - نقشه استدلال
+    - پرسشگری
+    - گفت‌وگو
+    - پاسخ
+    - مدیریت بحث
+    - مؤثر
+    - منصفانه
+    - حمله شخصی
+    - اد هومینم
+    - مرد پوشالی
+    - استرومن
+    - دوگانه کاذب
+    - انحراف
+    - رد هرینگ
+    - استناد به مرجع
+    - چه‌درباره‌گرایی
+    - وت‌ابات‌ایسم
+    - تغییر موضوع
+    - مفروضات
+    - آزمایش قضاوت
+    - انتخاب گزینشی
+    - سوگیری تأیید
+    - جابه‌جایی تیرک دروازه
+    - ابطال‌ناپذیری
+    - معیار پذیرش
+    - سؤال بارگذاری‌شده
+    - سؤال جهت‌دار
+    - ابهام واژه
+    - معانی چندگانه
+    - سفسطه
+    - بمباران ادعا
+    - گیش گالوپ
+    - حجم استدلال
+    - نمی‌دانم
+    - فروتنی فکری
+    - قطعیت
+    - مرز دانش
+    - پاسخ سه‌جمله‌ای
+    - ارتباط مؤثر
+    - کاهش تنش
+    - ساختار
+    - سلیقه
+    - آزمایش باور
+    - محک زدن
+    - تمرین کلیدی
+    - توسل به ترس
+    - توسل به اکثریت
+    - استدلال دوری
+    - مصادره به مطلوب
+    - مسموم کردن چاه
+    - برچسب
+    - توسل به پیامد
+    - تحریک
+    - خشم
+    - بسط پوچ
+    - اغراق
+    - تئوری
+    - عمل
+    - موشکافی
+    - گریز
+    - هنر همیشه بر حق بودن
+    - دفاع
+    - شیب لغزنده
+    - زنجیره علّی
+    - تعمیم شتاب‌زده
+    - نمونه ناکافی
+    - سوگیری
+    - کمال‌گرایی
+    - راه‌حل کامل
+    - نزدیک‌بینی
+    - ادعای اثبات‌نشده
+    - مسؤولیت دلیل
+    - قیاس مع‌الفارق
+    - مقایسه غلط
+    - استعاره گمراه‌کننده
+    - سنت
+    - توسل به گذشته
+    - مقاومت در برابر تغییر
+    - تازگی
+    - مد
+    - نوگرایی افراطی
+    - همه یا هیچ
+    - سیاه و سفید
+    - کمال‌طلبی
+    - ترکیب
+    - تقسیم
+    - جزء و کل
+    - توسل به جهل
+    - نادانی
+  sparseTopics: []
+siteConfig:
+  title: بحث‌کلاب
+  tagline: از ایده‌هایت دفاع نکن. محکشان بزن.
+  featuredLessonSlug: judgment-literacy
+  homeSlots:
+    - type: concept
+      label: یک مفهوم پایه
+      articleSlug: claim-vs-interpretation
+    - type: tactic
+      label: یک مهارت کلیدی
+      articleSlug: steelman-opponent
+    - type: practice
+      label: یک تمرین کوتاه
+      articleSlug: confidence-and-uncertainty
+  nav:
+    - label: مسیر یادگیری
+      href: /learn
+    - label: مقاله‌ها
+      href: /articles
+    - label: تاکتیک‌های انحرافی
+      href: /topics/tactics
+    - label: تمرین‌ها
+      href: /practice
+    - label: قوانین باشگاه
+      href: /club-rules
+    - label: درباره ما
+      href: /about

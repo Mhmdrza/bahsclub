@@ -27,6 +27,7 @@ export default async function AdminLayout({
                   <NavLink href="/admin/lessons" label="درس‌ها" />
                   <NavLink href="/admin/topics" label="موضوعات" />
                   <NavLink href="/admin/pages" label="برگه‌ها" />
+                  <NavLink href="/admin/content-map" label="نقشه محتوا" />
                   <NavLink href="/admin/site-config" label="تنظیمات سایت" />
                   <NavLink href="/admin/settings" label="تنظیمات" />
                 </div>
