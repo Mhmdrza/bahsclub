@@ -5,7 +5,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 
 export const metadata: Metadata = {
   title: "تمرین‌ها",
-  description: "تمرین‌های عملی برای تقویت مهارت‌های بحث و تفکر انتقادی.",
+  description: "تمرین‌های عملی برای محک زدن باورها، تقویت استدلال، و یادگیری مهارت‌های سواد قضاوت.",
 };
 
 export default function PracticePage() {
@@ -19,7 +19,8 @@ export default function PracticePage() {
       />
       <h1 className="mb-2 text-3xl font-bold">تمرین‌ها</h1>
       <p className="mb-8 max-w-2xl text-muted">
-        تمرین‌های کوتاه برای تقویت مهارت‌های تشخیص ادعا، مغالطه و پاسخ‌دهی.
+        تمرین‌های کوتاه و عملی برای تقویت مهارت‌های سواد قضاوت: از محک زدن
+        باورهای شخصی تا تشخیص تاکتیک‌های انحرافی در گفت‌وگو.
       </p>
 
       <section className="mb-10 rounded-lg border border-border bg-surface p-6">

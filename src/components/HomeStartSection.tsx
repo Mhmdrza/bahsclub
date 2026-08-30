@@ -38,7 +38,7 @@ export function HomeStartSection({ lesson }: HomeStartSectionProps) {
       <p className="mb-6 max-w-2xl text-muted">
         {hasProgress
           ? `در مسیر «${lesson.title}» هستید. می‌توانید از جایی که مانده‌اید ادامه دهید.`
-          : "با یک مسیر کوتاه، مبانی بحث و استدلال را یاد بگیرید. هر درس چند دقیقه زمان می‌برد."}
+          : "با مسیر سواد قضاوت، یاد بگیر چطور باورهایت را محک بزنی، استدلالت را قوی‌تر کنی، و بدون دشمنی مخالفت کنی."}
       </p>
       <ProgressBar completed={completed} total={total} className="mb-6" />
       {targetSlug && (

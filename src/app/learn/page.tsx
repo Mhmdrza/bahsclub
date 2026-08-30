@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "مسیر یادگیری",
-  description: "مسیرهای یادگیری بحث‌کلاب برای شروع و ادامهٔ آموزش.",
+  description: "مسیرهای یادگیری بحث‌کلاب — از سواد قضاوت تا تشخیص تاکتیک‌های انحرافی.",
 };
 
 export default function LearnPage() {
@@ -18,8 +18,9 @@ export default function LearnPage() {
       />
       <h1 className="mb-2 text-3xl font-bold">مسیر یادگیری</h1>
       <p className="mb-8 max-w-2xl text-muted">
-        هر مسیر مجموعه‌ای از درس‌های مرتبط است. می‌توانید چند مسیر را هم‌زمان
-        دنبال کنید.
+        هر مسیر مجموعه‌ای از درس‌های مرتبط است که یک مهارت را گام‌به‌گام آموزش
+        می‌دهد. از مسیر اصلی (سواد قضاوت) شروع کنید و بعد سراغ مسیرهای دیگر
+        بروید.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {lessons.map((lesson) => (
