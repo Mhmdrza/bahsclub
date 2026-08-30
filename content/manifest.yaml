@@ -1,4 +1,4 @@
-generatedAt: '2026-08-30T19:27:01.088Z'
+generatedAt: '2026-08-30T20:00:12.311Z'
 counts:
   articles: 55
   lessons: 3
@@ -7,16 +7,16 @@ counts:
   families: 8
 articles:
   - slug: what-is-judgment-testing
-    title: محکِ قضاوت چیست؟
-    description: بحثی که لازم نیست در آن برنده شوی — معرفی فلسفهٔ محک قضاوت و تفاوت آن با بحث‌های رقابتی
+    title: تفاوت بحث و جدل
+    description: بحثی که لازم نیست در آن برنده شوی — همهٔ بحث‌ها بحث نیستند، بعضی جدل‌اند. یاد بگیر فرقشان را.
     type: article
     category: سواد قضاوت
     level: beginner
     readingTime: 7
     order: 1
     tags:
-      - محک قضاوت
       - بحث
+      - جدل
       - کندوکاو
     topics:
       - judgment-literacy
@@ -53,7 +53,7 @@ articles:
       - judgment-literacy
     inboundLinks: []
   - slug: precise-claims
-    title: ادعای دقیق؛ شرط لازم برای آزمایش قضاوت
+    title: ادعای دقیق؛ شرط لازم برای بحث
     description: چطور یک ادعای مبهم را به جمله‌ای تبدیل کنیم که واقعاً بتوان آن را آزمود.
     type: article
     category: سواد قضاوت
@@ -310,7 +310,7 @@ articles:
       - spotting-tactics
     inboundLinks: []
   - slug: structure-of-argument
-    title: 'ساختار استدلال: نقشه‌ای برای محک زدن قضاوت‌ها'
+    title: 'ساختار استدلال: نقشه‌ای برای بحث'
     description: 'هر استدلال از سه بخش اصلی تشکیل شده: ادعا، شواهد، و استدلالی که آن‌ها را به هم وصل می‌کند.'
     type: article
     category: مبانی
@@ -379,7 +379,7 @@ articles:
       - spotting-tactics
     inboundLinks: []
   - slug: fair-effective-debate
-    title: 'محک زدن مؤثر قضاوت‌ها: پنج اصل برای فهمیدن، نه برنده شدن'
+    title: 'پنج اصل بحثِ سازنده: برای فهمیدن، نه برنده شدن'
     description: بحث منصفانه یعنی چی؟ یعنی هر دو طرف بعد از گفت‌وگو، چیزی یاد گرفته باشند — حتی اگر نظرشان عوض نشده باشد.
     type: article
     category: مبانی
@@ -387,8 +387,8 @@ articles:
     readingTime: 7
     order: 17
     tags:
-      - محک قضاوت
-      - مؤثر
+      - بحث
+      - سازنده
       - منصفانه
     topics:
       - foundations
@@ -403,7 +403,7 @@ articles:
     inboundLinks: []
   - slug: ad-hominem
     title: 'حمله شخصی: وقتی ادعا را رها می‌کنی تا به شخص حمله کنی'
-    description: حمله به شخص به‌جای ادعا — چطور تشخیصش دهیم و بدون تشدید، بحث را به آزمایش قضاوت برگردانیم
+    description: حمله به شخص به‌جای ادعا — چطور تشخیصش دهیم و بدون تشدید، بحث را به مسیر درست برگردانیم
     type: tactic
     category: تاکتیک‌ها
     level: beginner
@@ -517,7 +517,7 @@ articles:
       - schopenhauer-art-of-being-right
   - slug: whataboutism
     title: 'چه‌درباره‌گرایی: وقتی «اما فلانی هم…» جای ادعای اصلی را می‌گیرد'
-    description: منحرف کردن بحث با اشاره به موضوعی دیگر یا رفتار دیگران — و چطور بدون گرفتار شدن، به آزمایش قضاوت برگردیم
+    description: منحرف کردن بحث با اشاره به موضوعی دیگر یا رفتار دیگران — و چطور بدون گرفتار شدن، به بحث برگردیم
     type: tactic
     category: تاکتیک‌ها
     level: beginner
@@ -541,7 +541,7 @@ articles:
       - schopenhauer-art-of-being-right
   - slug: hidden-assumption
     title: 'پیش‌فرض پنهان: باورهایی که نگفته می‌مانند'
-    description: هر استدلالی روی باورهایی می‌ایستد که گفته نمی‌شوند. پیدا کردن این پیش‌فرض‌ها، قلبِ آزمایش قضاوت است.
+    description: هر استدلالی روی باورهایی می‌ایستد که گفته نمی‌شوند. پیدا کردن این پیش‌فرض‌ها، قلبِ بحث است.
     type: article
     category: مبانی
     level: beginner
@@ -550,7 +550,7 @@ articles:
     tags:
       - پیش‌فرض پنهان
       - مفروضات
-      - آزمایش قضاوت
+      - بحث
     topics:
       - foundations
       - judgment-literacy
@@ -659,7 +659,7 @@ articles:
       - schopenhauer-art-of-being-right
   - slug: gish-gallop
     title: 'بمباران ادعاها: وقتی حجم جای کیفیت را می‌گیرد'
-    description: هر چه ادعاهای ضعیف‌تر بیشتر باشند، پاسخ دادن به همه سخت‌تر می‌شود—و آزمایش قضاوت غیرممکن.
+    description: هر چه ادعاهای ضعیف‌تر بیشتر باشند، پاسخ دادن به همه سخت‌تر می‌شود—و بحثِ سازنده غیرممکن.
     type: tactic
     category: تاکتیک‌ها
     level: intermediate
@@ -1299,8 +1299,8 @@ lessons:
   - slug: judgment-literacy
     title: 'مسیر اصلی: سواد قضاوت'
     description: >-
-      یاد بگیر چطور باورهایت را محک بزنی، استدلالت را قوی‌تر کنی، و بدون دشمنی مخالفت کنی. این مسیر، مهارت‌های پایهٔ
-      سواد قضاوت را پوشش می‌دهد.
+      یاد بگیر چطور باورهایت را محک بزنی، استدلالت را قوی‌تر کنی، و بدون دشمنی مخالفت کنی. این مسیر، مهارت‌های پایهٔ بحث
+      را پوشش می‌دهد.
     status: published
     order: 1
     steps:
@@ -1356,8 +1356,8 @@ pages:
   - slug: about
     title: درباره بحث‌کلاب
     description: >-
-      بحث‌کلاب یک باشگاه محک زدن قضاوت‌هاست — جایی که هدف، کشف این است که باورهای ما از چه ساخته شده‌اند و چه چیزی
-      می‌تواند آن‌ها را تغییر دهد.
+      بحث‌کلاب یک باشگاه بحثِ سازنده است — جایی که هدف، کشف این است که باورهای ما از چه ساخته شده‌اند و چه چیزی می‌تواند
+      آن‌ها را تغییر دهد.
     status: published
     order: 1
   - slug: club-rules
@@ -1366,7 +1366,7 @@ pages:
     status: published
     order: 2
   - slug: session-format
-    title: آزمایشگاه قضاوت — ساختار یک جلسه
+    title: ساختار یک جلسهٔ بحث
     description: >-
       ساختار هشت‌مرحله‌ای یک جلسهٔ بحث‌کلاب: از ارائهٔ باور تا مرور فرایند. یاد بگیرید چطور یک قضاوت را بدون رقابت و با
       همکاری محک بزنید.
@@ -1380,12 +1380,12 @@ topics:
     order: 4
   - slug: foundations
     title: مبانی
-    description: 'مفاهیم پایه برای ورود به دنیای محک زدن قضاوت‌ها: تفاوت بحث و کندوکاو، ساختار استدلال، و پرسش‌گری.'
+    description: 'مفاهیم پایه برای ورود به دنیای بحثِ سازنده: تفاوت بحث و جدل، ساختار استدلال، و پرسش‌گری.'
     status: published
     order: 2
   - slug: judgment-literacy
     title: سواد قضاوت
-    description: 'مهارت‌های پایه برای محک زدن باورها: چطور یک ادعا را بشناسیم، بررسی کنیم، و به‌روزرسانی کنیم.'
+    description: 'مهارت‌های پایه برای بحثِ سازنده: چطور یک ادعا را بشناسیم، بررسی کنیم، و به‌روزرسانی کنیم.'
     status: published
     order: 1
   - slug: practice
@@ -1605,7 +1605,7 @@ gaps:
     - composition-division
     - appeal-to-ignorance
   sparseTags:
-    - بحث
+    - جدل
     - کندوکاو
     - تفسیر
     - تعریف
@@ -1641,7 +1641,7 @@ gaps:
     - گفت‌وگو
     - پاسخ
     - مدیریت بحث
-    - مؤثر
+    - سازنده
     - منصفانه
     - حمله شخصی
     - اد هومینم
@@ -1655,7 +1655,6 @@ gaps:
     - وت‌ابات‌ایسم
     - تغییر موضوع
     - مفروضات
-    - آزمایش قضاوت
     - انتخاب گزینشی
     - سوگیری تأیید
     - جابه‌جایی تیرک دروازه

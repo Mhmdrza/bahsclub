@@ -142,7 +142,7 @@ export default function HomePage() {
       <section className="mb-16 rounded-lg border border-border bg-surface p-6 sm:p-8">
         <h2 className="mb-2 text-xl font-bold">یک جلسه چطور می‌گذرد؟</h2>
         <p className="mb-6 text-sm text-muted max-w-xl">
-          به جلسه‌های ما «آزمایشگاه قضاوت» می‌گوییم. ساختارش این است:
+          به جلسه‌های ما «جلسهٔ بحث» می‌گوییم. ساختارش این است:
         </p>
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -153,7 +153,7 @@ export default function HomePage() {
             { step: "۵", title: "آزمون", desc: "از زوایای مختلف محک بزن" },
             { step: "۶", title: "واژگونی", desc: "خودت علیه باورت استدلال کن" },
             { step: "۷", title: "بازبینی", desc: "چه تغییری کرد؟ چقدر مطمئنی؟" },
-            { step: "۸", title: "مرور فرایند", desc: "خودِ بحث منصفانه بود؟" },
+            { step: "۸", title: "مرور فرایند", desc: "خودِ بحث سازنده بود؟" },
           ].map((item) => (
             <li
               key={item.step}
