@@ -9,6 +9,9 @@
     "content:index": "node scripts/build-manifest.mjs",
     "content:validate": "node scripts/validate-content.mjs",
     "content:check": "npm run content:index && npm run content:validate",
+    "db:init:local": "npm --prefix workers/api run db:init:local",
+    "db:seed": "npm --prefix workers/api run db:seed",
+    "db:seed:local": "npm --prefix workers/api run db:seed:local",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
