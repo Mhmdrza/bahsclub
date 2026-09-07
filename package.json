@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run content:validate && next build",
     "start": "next start",
+    "dev": "next dev -p 4321",
     "lint": "eslint",
     "content:index": "node scripts/build-manifest.mjs",
     "content:validate": "node scripts/validate-content.mjs",
