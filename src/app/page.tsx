@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   XCircle,
   CheckCircle2,
@@ -17,7 +18,20 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       {/* 1. Hero Section: The Invitation & Mission */}
-      <section className="mb-20 text-center sm:mb-24">
+      <section className="relative mb-20 overflow-hidden rounded-3xl border border-border/80 bg-surface/60 px-6 py-12 text-center shadow-sm sm:mb-24 sm:px-12 sm:py-20">
+        {/* Background Artwork */}
+        <div className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden">
+          <Image
+            src="/hero-bg.jpg"
+            alt="Old philosophers debating"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="scale-105 object-cover object-center opacity-80 blur-[2px] filter transition-all dark:opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
+        </div>
+
         <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
         <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">
           آخرین باری که یک بحث خوب دیدی، کِی بود؟
@@ -31,7 +45,7 @@ export default function HomePage() {
           <span className="w-12 border-t border-gold/60" />
         </div>
         <p className="mx-auto mb-10 max-w-2xl text-lg leading-loose text-muted">
-          دلت برای یک مباحثه‌ی خوب تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
+          دلت برای یک گفت‌وگوی درست تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
           <strong className="font-semibold text-foreground">
             بحث‌کلاب برای بازسازی همین حس و مهارت است:
           </strong>{" "}

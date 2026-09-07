@@ -1,4 +1,4 @@
-generatedAt: '2026-09-07T14:54:27.307Z'
+generatedAt: '2026-09-07T15:03:54.995Z'
 counts:
   articles: 55
   lessons: 3
@@ -1727,7 +1727,7 @@ gaps:
   sparseTopics: []
 siteConfig:
   title: بحث‌کلاب
-  tagline: جایی برای تست کردن قدرت استدلال‌ها
+  tagline: جایی برای سنجش قدرت استدلال‌ها
   featuredLessonSlug: judgment-literacy
   homeSlots:
     - type: concept
