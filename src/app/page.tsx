@@ -1,232 +1,260 @@
 import Link from "next/link";
-import { Target, Users, TrendingUp } from "lucide-react";
 import {
-  getSiteConfig,
-  getPublishedLessons,
-  getFeaturedLesson,
-  getHomeSlotArticles,
-} from "@/lib/content";
-import { LessonCard } from "@/components/LessonCard";
-import { ArticleCard } from "@/components/ArticleCard";
-import { HomeStartSection } from "@/components/HomeStartSection";
+  XCircle,
+  CheckCircle2,
+  ArrowLeft,
+  LifeBuoy,
+  MessageSquare,
+  Sparkles,
+  Search,
+  BookOpen,
+} from "lucide-react";
+import { getSiteConfig } from "@/lib/content";
 
 export default function HomePage() {
   const config = getSiteConfig();
-  const lessons = getPublishedLessons();
-  const featuredLesson = getFeaturedLesson();
-  const homeSlots = getHomeSlotArticles();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
-      {/* Hero Section */}
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
+      {/* 1. Hero Section: The Invitation & Mission */}
       <section className="mb-20 text-center sm:mb-24">
-        <p className="eyebrow eyebrow-centered mb-5">{config.tagline}</p>
-        <h1 className="mx-auto mb-5 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">
-          {config.title}
+        <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
+        <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">
+          آخرین باری که یک بحث خوب دیدی، کِی بود؟
         </h1>
         <div
           aria-hidden
           className="mx-auto mb-6 flex items-center justify-center gap-2"
         >
-          <span className="w-10 border-t border-gold/60" />
+          <span className="w-12 border-t border-gold/60" />
           <span className="h-1.5 w-1.5 rotate-45 bg-gold/70" />
-          <span className="w-10 border-t border-gold/60" />
+          <span className="w-12 border-t border-gold/60" />
         </div>
-        <p className="mx-auto mb-9 max-w-xl text-lg leading-loose text-muted">
-          {config.description}
+        <p className="mx-auto mb-10 max-w-2xl text-lg leading-loose text-muted">
+          دلت برای یک مباحثه‌ی خوب تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
+          <strong className="font-semibold text-foreground">
+            بحث‌کلاب برای بازسازی همین حس و مهارت است:
+          </strong>{" "}
+          تمرین گفت‌وگو روی عمیق‌ترین اختلاف‌ها، با ذهن باز، استدلال شفاف و شوق کشف حقیقت.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/learn"
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-7 py-3 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
           >
-            از کجا شروع کنم؟
+            <BookOpen className="h-4 w-4" />
+            شروع یادگیری و آموزش‌ها
           </Link>
           <Link
-            href="/articles/what-is-judgment-testing"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-7 py-3 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
+            href="/debate"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
           >
-            ایدهٔ اصلی چیست؟
+            <MessageSquare className="h-4 w-4 text-accent" />
+            ورود به تالار بحث
           </Link>
         </div>
       </section>
 
-      {/* The Hook: A Debate You Don't Have to Win */}
-      <section className="mb-20 rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:mb-24 sm:p-12">
-        <p className="eyebrow eyebrow-centered mb-3">روش ما</p>
-        <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">
-          بحثی که مجبور نیستی برنده‌اش شوی
-        </h2>
-        <blockquote className="mx-auto mb-8 max-w-xl border-r-2 border-gold pr-4 text-right leading-loose text-muted">
-          در بیشتر بحث‌ها، هر طرف سعی می‌کند طرف مقابل را شکست دهد. ما کار
-          متفاوتی می‌کنیم:{" "}
-          <strong className="font-semibold text-foreground">
-            یک باور را وسط می‌گذاریم و همه با هم محکش می‌زنیم.
-          </strong>{" "}
-          رقیب شما آدم روبه‌رویتان نیست — موضوع تحت فشار، خودِ قضاوت است.
-        </blockquote>
-        <div className="mx-auto grid max-w-2xl gap-3 text-sm sm:grid-cols-3">
-          {[
-            {
-              icon: Target,
-              title: "محک بزن",
-              desc: "یک باور بیاور و ببین از چند جهت مختلف می‌تواند جان سالم به در ببرد",
-            },
-            {
-              icon: Users,
-              title: "همکاری کن",
-              desc: "دیگران کمکت می‌کنند ضعف‌های استدلالت را پیدا کنی، نه اینکه شکستت دهند",
-            },
-            {
-              icon: TrendingUp,
-              title: "قوی‌تر شو",
-              desc: "با یک قضاوت به‌روزرسانی‌شده بیرون برو — حتی اگر نتیجه‌ات عوض نشده باشد",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl border border-border bg-background p-5"
-            >
-              <span className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent-light text-accent">
-                <item.icon className="h-5 w-5" aria-hidden />
-              </span>
-              <p className="mb-1 font-semibold">{item.title}</p>
-              <p className="text-xs leading-relaxed text-muted">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Learning Path */}
-      {featuredLesson && (
-        <div className="mb-20 sm:mb-24">
-          <HomeStartSection lesson={featuredLesson} />
-        </div>
-      )}
-
-      {/* All Learning Paths */}
-      {lessons.length > 0 && (
-        <section className="mb-20 sm:mb-24">
-          <div className="mb-2 flex items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow mb-2">یادگیری</p>
-              <h2 className="text-2xl font-extrabold">مسیرهای یادگیری</h2>
-            </div>
-            <Link
-              href="/learn"
-              className="shrink-0 text-sm font-medium text-accent hover:underline"
-            >
-              همه مسیرها
-            </Link>
-          </div>
-          <div className="mb-8 w-full border-t border-border" aria-hidden />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {lessons.map((lesson) => (
-              <LessonCard key={lesson.slug} lesson={lesson} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Daily Picks */}
+      {/* 2. Side-by-Side Contrast: Bad vs Good Debate */}
       <section className="mb-20 sm:mb-24">
-        <p className="eyebrow mb-2">پیشنهاد روز</p>
-        <h2 className="mb-2 text-2xl font-extrabold">امروز چی یاد بگیرم؟</h2>
-        <div className="mb-8 w-full border-t border-border" aria-hidden />
-        <div className="grid gap-4 sm:grid-cols-3">
-          {config.homeSlots.map((slot) => {
-            const article = homeSlots[slot.type];
-            if (!article) return null;
-            return (
-              <div key={slot.type}>
-                <p className="mb-2 text-xs font-semibold text-gold">
-                  {slot.label}
-                </p>
-                <ArticleCard article={article} />
-              </div>
-            );
-          })}
+        <div className="mb-8 text-center">
+          <p className="eyebrow eyebrow-centered mb-2">تفاوت بنیادین</p>
+          <h2 className="text-3xl font-extrabold">گفت‌وگوی مخرب در برابر بحث ایده‌آل</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
+            تفاوت بین یک بحث سازنده و یک جدل فرساینده در نیت و ابزارهای ما نهفته است:
+          </p>
         </div>
-      </section>
 
-      {/* Principles / Club Rules */}
-      <section className="mb-20 sm:mb-24">
-        <p className="eyebrow mb-2">فرهنگ ما</p>
-        <h2 className="mb-2 text-2xl font-extrabold">قوانین باشگاه</h2>
-        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
-          این اصول، فرهنگ بحث‌کلاب را می‌سازند — نه فقط برای جلسه‌ها، که برای هر
-          گفت‌وگویی
-        </p>
-        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {config.principles.map((principle, i) => (
-            <li
-              key={principle.title}
-              className="rounded-xl border border-border bg-surface p-5 shadow-sm"
-            >
-              <span
-                aria-hidden
-                className="mb-3 block text-sm font-bold text-gold"
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mb-2 font-semibold">{principle.title}</h3>
-              <p className="text-sm leading-relaxed text-muted">
-                {principle.description}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* Session Format Preview */}
-      <section className="mb-20 rounded-2xl border border-border bg-surface p-6 shadow-sm sm:mb-24 sm:p-10">
-        <p className="eyebrow mb-2">ساختار جلسه</p>
-        <h2 className="mb-2 text-2xl font-extrabold">یک جلسه چطور می‌گذرد؟</h2>
-        <p className="mb-8 max-w-xl text-sm leading-relaxed text-muted">
-          به جلسه‌های ما «جلسهٔ بحث» می‌گوییم. ساختارش این است:
-        </p>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { step: "۱", title: "ارائه", desc: "باورت را بگو و بگو چقدر مطمئنی" },
-            { step: "۲", title: "شفاف‌سازی", desc: "فقط سؤال بپرس، نقد نکن" },
-            { step: "۳", title: "قوی‌ترین روایت", desc: "بهترین نسخهٔ ادعا را بساز" },
-            { step: "۴", title: "نقشهٔ استدلال", desc: "شواهد، پیش‌فرض‌ها، شکاف‌ها" },
-            { step: "۵", title: "آزمون", desc: "از زوایای مختلف محک بزن" },
-            { step: "۶", title: "واژگونی", desc: "خودت علیه باورت استدلال کن" },
-            { step: "۷", title: "بازبینی", desc: "چه تغییری کرد؟ چقدر مطمئنی؟" },
-            { step: "۸", title: "مرور فرایند", desc: "خودِ بحث سازنده بود؟" },
-          ].map((item) => (
-            <li
-              key={item.step}
-              className="flex gap-3 rounded-xl border border-border bg-background p-4"
-            >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-accent/30 text-xs font-bold text-accent">
-                {item.step}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Destructive Debate Column */}
+          <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-6 sm:p-8">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-destructive/15 text-destructive">
+                <XCircle className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-sm font-semibold">{item.title}</p>
-                <p className="text-xs leading-relaxed text-muted">{item.desc}</p>
+                <h3 className="text-lg font-bold text-foreground">بحث‌های روزمره و فرساینده</h3>
+                <p className="text-xs text-muted">جدل‌های بی‌حاصل و قطبی‌شده</p>
               </div>
-            </li>
-          ))}
-        </ol>
+            </div>
+
+            <ul className="space-y-4 text-sm leading-relaxed text-muted">
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
+                <span>
+                  <strong className="text-foreground">هدف بردن است:</strong> شکست دادن حریف و تحمیل عقیده به هر قیمتی.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
+                <span>
+                  <strong className="text-foreground">حمله به شخص:</strong> نیت‌خوانی، برچسب زدن و تخریب شخصیت به‌جای نقد استدلال.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
+                <span>
+                  <strong className="text-foreground">حالت تدافعی:</strong> ترس از اعتراف به اشتباه و پناه بردن به توجیه و مغالطه.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
+                <span>
+                  <strong className="text-foreground">سرانجام:</strong> عصبانیت، تخریب رابطه، تعمیق شکاف و صفر درصد پیشرفت.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Healthy Debate Column */}
+          <div className="rounded-2xl border border-gold/40 bg-surface p-6 shadow-sm sm:p-8">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <CheckCircle2 className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="text-lg font-bold text-foreground">بحث ایده‌آل در بحث‌کلاب</h3>
+                <p className="text-xs text-muted">گفت‌وگوی سنجش‌گر و همکارانه</p>
+              </div>
+            </div>
+
+            <ul className="space-y-4 text-sm leading-relaxed text-muted">
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                <span>
+                  <strong className="text-foreground">هدف فهمیدن است:</strong> ادعا را وسط می‌گذاریم و با همکاری هم عیارش را می‌سنجیم.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                <span>
+                  <strong className="text-foreground">قوی‌ترین روایت (Steelman):</strong> قبل از نقد، حرف طرف مقابل را در بهترین شکلش بازگو می‌کنیم.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                <span>
+                  <strong className="text-foreground">استقبال از بازنگری:</strong> تغییر نظر یا گفتن «هنوز نمی‌دانم» امتیاز و افتخار است، نه باخت.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                <span>
+                  <strong className="text-foreground">سرانجام:</strong> شفافیت ذهنی، احترام متقابل، اصلاح خطاها و کشف حقیقت.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      {/* Live Practice CTA */}
-      <section className="border-t border-border pt-10 text-center sm:pt-12">
-        <p className="eyebrow eyebrow-centered mb-3">تمرین زنده</p>
-        <h2 className="mb-2 text-xl font-extrabold">
-          {config.livePractice.title}
-        </h2>
-        <p className="mx-auto mb-5 max-w-xl text-sm leading-relaxed text-muted">
-          {config.livePractice.description}
+      {/* 3. De-escalation & Rescue Toolkit */}
+      <section className="mb-20 rounded-2xl border border-border bg-surface p-6 shadow-sm sm:mb-24 sm:p-10">
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className="eyebrow mb-2">جعبه‌ابزار اضطراری</p>
+            <h2 className="text-2xl font-extrabold sm:text-3xl">وقتی بحث منحرف شد، چطور نجاتش دهیم؟</h2>
+          </div>
+          <Link
+            href="/learn"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
+          >
+            مشاهده همه تکنیک‌ها در آموزش
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-muted">
+          وقتی گفت‌وگو به سمت لجبازی، برد/باخت یا دعوا می‌رود، لازم نیست تسلیم شوید یا با خشم پاسخ دهید. این چهار اصل ساده بلافاصله ترمز تنش را می‌کشند:
         </p>
-        <Link
-          href={config.livePractice.href}
-          className="text-sm font-semibold text-gold hover:underline"
-        >
-          رفتن به تمرین‌ها ←
-        </Link>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-border bg-background p-5">
+            <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-accent">
+              <LifeBuoy className="h-4 w-4" />
+            </span>
+            <h3 className="mb-2 font-semibold">۱. نقد ادعا، نه نیت</h3>
+            <p className="text-xs leading-relaxed text-muted">
+              نیت‌خوانی و برچسب‌زنی را متوقف کنید. فقط جمله و گزارهٔ مطرح‌شده را ارزیابی کنید.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-background p-5">
+            <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-accent">
+              <Sparkles className="h-4 w-4" />
+            </span>
+            <h3 className="mb-2 font-semibold">۲. بازگویی منصفانه</h3>
+            <p className="text-xs leading-relaxed text-muted">
+              پیش از پاسخ دادن بگویید: «اگر درست متوجه شده باشم، نکتهٔ شما این است...» تا گارد دفاعی شکسته شود.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-background p-5">
+            <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-accent">
+              <Search className="h-4 w-4" />
+            </span>
+            <h3 className="mb-2 font-semibold">۳. سؤال به‌جای حمله</h3>
+            <p className="text-xs leading-relaxed text-muted">
+              به‌جای «این حرفت بی‌معنیه»، بپرسید: «چه شواهدی می‌تواند این گزاره را تأیید یا ابطال کند؟»
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-border bg-background p-5">
+            <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-light text-accent">
+              <CheckCircle2 className="h-4 w-4" />
+            </span>
+            <h3 className="mb-2 font-semibold">۴. پذیرش «نمی‌دانم»</h3>
+            <p className="text-xs leading-relaxed text-muted">
+              با شجاعت مرز دانش خود را اعلام کنید. پذیرش عدم قطعیت، لجبازی طرف مقابل را خلع سلاح می‌کند.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Club Rules Preview Link */}
+      <section className="mb-20 rounded-2xl border border-border bg-surface/50 p-6 sm:mb-24 sm:p-10">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <div className="max-w-2xl text-right">
+            <p className="eyebrow mb-2">مرام‌نامه و اصول</p>
+            <h3 className="text-xl font-bold">مرام‌نامه و اصول ده‌گانهٔ بحث‌کلاب را خوانده‌اید؟</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              این ۱۰ اصل ساده تضمین می‌کنند که گفت‌وگوها از مسیر اخلاقی و سازنده خارج نشوند. پیش از هر بحث، نگاهی به آنها بیندازید.
+            </p>
+          </div>
+          <Link
+            href="/rules"
+            className="shrink-0 rounded-lg border border-accent/40 bg-surface px-6 py-3 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-fg"
+          >
+            مشاهده مرام‌نامه ده‌گانه ←
+          </Link>
+        </div>
+      </section>
+
+      {/* 5. Final CTA to Explore Learning Hub */}
+      <section className="border-t border-border pt-12 text-center sm:pt-16">
+        <p className="eyebrow eyebrow-centered mb-3">گام بعدی شما</p>
+        <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">
+          آماده‌اید کیفیت گفت‌وگوهایتان را ارتقا دهید؟
+        </h2>
+        <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-muted">
+          در بخش آموزش، مسیرهای گام‌به‌گام، کاتالوگ تاکتیک‌های انحرافی، مغالطه‌ها و تمرین‌های عملی را برای تسلط بر هنر بحث آماده کرده‌ایم.
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/learn"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
+          >
+            ورود به بخش آموزش و یادگیری
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/debate"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50"
+          >
+            مشاهده مناظره‌های فعال
+          </Link>
+        </div>
       </section>
     </div>
   );

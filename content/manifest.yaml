@@ -1,4 +1,4 @@
-generatedAt: '2026-08-30T20:00:12.311Z'
+generatedAt: '2026-09-07T14:54:27.307Z'
 counts:
   articles: 55
   lessons: 3
@@ -1360,9 +1360,9 @@ pages:
       آن‌ها را تغییر دهد.
     status: published
     order: 1
-  - slug: club-rules
-    title: قوانین ده‌گانهٔ بحث‌کلاب
-    description: ده قانونی که فرهنگ بحث‌کلاب را می‌سازند — قواعدی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.
+  - slug: rules
+    title: مرام‌نامه و اصول ده‌گانهٔ بحث‌کلاب
+    description: ده اصلی که فرهنگ بحث‌کلاب را می‌سازند — اصولی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.
     status: published
     order: 2
   - slug: session-format
@@ -1727,7 +1727,7 @@ gaps:
   sparseTopics: []
 siteConfig:
   title: بحث‌کلاب
-  tagline: از ایده‌هایت دفاع نکن. محکشان بزن.
+  tagline: جایی برای تست کردن قدرت استدلال‌ها
   featuredLessonSlug: judgment-literacy
   homeSlots:
     - type: concept
@@ -1740,15 +1740,9 @@ siteConfig:
       label: یک تمرین کوتاه
       articleSlug: confidence-and-uncertainty
   nav:
-    - label: مسیر یادگیری
+    - label: آموزش
       href: /learn
-    - label: مقاله‌ها
-      href: /articles
-    - label: تاکتیک‌های انحرافی
-      href: /topics/tactics
-    - label: تمرین‌ها
-      href: /practice
-    - label: قوانین باشگاه
-      href: /club-rules
-    - label: درباره ما
-      href: /about
+    - label: تالار بحث
+      href: /debate
+    - label: مرام‌نامه
+      href: /rules
