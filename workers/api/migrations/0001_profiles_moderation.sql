@@ -1,12 +1,7 @@
-ALTER TABLE users ADD COLUMN bio TEXT NOT NULL DEFAULT '';
-ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'member';
-ALTER TABLE users ADD COLUMN reputation INTEGER NOT NULL DEFAULT 100;
-ALTER TABLE users ADD COLUMN rep_locked INTEGER NOT NULL DEFAULT 0;
-ALTER TABLE users ADD COLUMN blocked_until TEXT;
-
-ALTER TABLE debates ADD COLUMN moderation_state TEXT NOT NULL DEFAULT 'normal';
-
-ALTER TABLE turns ADD COLUMN moderation_state TEXT NOT NULL DEFAULT 'normal';
+-- 0001: profiles + moderation tables
+-- Columns (bio, role, reputation, rep_locked, blocked_until, moderation_state) are
+-- already in schema.sql for fresh inits. This migration only creates the
+-- flags/mod_actions tables for DBs that predate them.
 
 CREATE TABLE IF NOT EXISTS flags (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

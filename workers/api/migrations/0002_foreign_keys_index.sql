@@ -1,6 +1,17 @@
 -- Migration 0002: foreign keys + vote index
 PRAGMA foreign_keys = OFF;
 
+DROP TABLE IF EXISTS users_new;
+DROP TABLE IF EXISTS tags_new;
+DROP TABLE IF EXISTS sessions_new;
+DROP TABLE IF EXISTS debates_new;
+DROP TABLE IF EXISTS challengers_new;
+DROP TABLE IF EXISTS turns_new;
+DROP TABLE IF EXISTS debate_tags_new;
+DROP TABLE IF EXISTS votes_new;
+DROP TABLE IF EXISTS flags_new;
+DROP TABLE IF EXISTS mod_actions_new;
+
 -- Clean up any orphan rows before adding FKs
 DELETE FROM sessions WHERE user_id NOT IN (SELECT id FROM users);
 DELETE FROM debates WHERE creator_id NOT IN (SELECT id FROM users);
@@ -10,6 +21,12 @@ DELETE FROM debate_tags WHERE debate_id NOT IN (SELECT id FROM debates) OR tag_i
 DELETE FROM votes WHERE user_id NOT IN (SELECT id FROM users);
 DELETE FROM flags WHERE flagger_id NOT IN (SELECT id FROM users);
 DELETE FROM mod_actions WHERE judge_id NOT IN (SELECT id FROM users) OR target_user_id NOT IN (SELECT id FROM users);
+
+DROP INDEX IF EXISTS idx_challengers_du;
+DROP INDEX IF EXISTS idx_turns_debate;
+DROP INDEX IF EXISTS idx_votes_user;
+DROP INDEX IF EXISTS idx_votes_target;
+DROP INDEX IF EXISTS idx_flags_one_per_user;
 
 -- Rebuild with foreign keys
 CREATE TABLE users_new (
@@ -135,25 +152,25 @@ CREATE TABLE mod_actions_new (
 );
 INSERT INTO mod_actions_new SELECT * FROM mod_actions;
 
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 ALTER TABLE users_new RENAME TO users;
-DROP TABLE tags;
+DROP TABLE IF EXISTS tags;
 ALTER TABLE tags_new RENAME TO tags;
-DROP TABLE sessions;
+DROP TABLE IF EXISTS sessions;
 ALTER TABLE sessions_new RENAME TO sessions;
-DROP TABLE debates;
+DROP TABLE IF EXISTS debates;
 ALTER TABLE debates_new RENAME TO debates;
-DROP TABLE challengers;
+DROP TABLE IF EXISTS challengers;
 ALTER TABLE challengers_new RENAME TO challengers;
-DROP TABLE turns;
+DROP TABLE IF EXISTS turns;
 ALTER TABLE turns_new RENAME TO turns;
-DROP TABLE debate_tags;
+DROP TABLE IF EXISTS debate_tags;
 ALTER TABLE debate_tags_new RENAME TO debate_tags;
-DROP TABLE votes;
+DROP TABLE IF EXISTS votes;
 ALTER TABLE votes_new RENAME TO votes;
-DROP TABLE flags;
+DROP TABLE IF EXISTS flags;
 ALTER TABLE flags_new RENAME TO flags;
-DROP TABLE mod_actions;
+DROP TABLE IF EXISTS mod_actions;
 ALTER TABLE mod_actions_new RENAME TO mod_actions;
 
 PRAGMA foreign_keys = ON;
