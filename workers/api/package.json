@@ -1,0 +1,14 @@
+{
+  "name": "bahsclub-api",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute bahsclub --remote --file=./src/schema.sql"
+  },
+  "dependencies": {
+    "hono": "^4.13.7"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
+  }
+}

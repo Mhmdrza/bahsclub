@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnpm-store/
 
 # testing
 /coverage
@@ -19,6 +20,11 @@
 
 # production
 /build
+
+# workers (Cloudflare)
+workers/**/node_modules/
+workers/**/.wrangler/
+workers/**/package-lock.json
 
 # misc
 .DS_Store

@@ -1,0 +1,8 @@
+name = "bahsclub-api"
+main = "src/index.ts"
+compatibility_date = "2025-08-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "bahsclub"
+database_id = "2fb8d0eb-b761-4657-b3b6-a3ca251ad4e9"
