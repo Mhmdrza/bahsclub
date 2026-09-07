@@ -73,8 +73,8 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
 
       {/* Inactive status */}
       {d.status === "in_progress" && session && !canSpeak && isParticipant && (
-        <div className="text-center py-4 text-sm" style={{ color: "#5C5C63" }}>
-          منتظر نوبت حریف
+        <div className="text-center py-4 text-xs font-mono text-muted border border-dashed border-border rounded-lg mt-4 bg-surface/50">
+          در انتظار پاسخ طرف مقابل...
         </div>
       )}
 
@@ -89,13 +89,10 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
 
       {/* Closed banner */}
       {d.status === "closed" && d.closedReason && (
-        <div
-          className="border px-4 py-3 text-sm rounded-sm mt-4"
-          style={{ borderColor: "#E5E5EA", background: "#F5F5F7", color: "#5C5C63" }}
-        >
-          {d.closedReason === "mutual" && "این بحث با توافق طرفین پایان یافت"}
-          {d.closedReason === "forfeit" && "این بحث به دلیل عدم فعالیت پایان یافت"}
-          {d.closedReason === "max_turns" && "این بحث به حداکثر نوبت‌ها رسید"}
+        <div className="border border-border bg-surface px-4 py-3 text-xs text-muted rounded-lg mt-6 text-center">
+          {d.closedReason === "mutual" && "این بحث با توافق طرفین پایان یافت."}
+          {d.closedReason === "forfeit" && "این بحث به دلیل عدم فعالیت در مهلت مقرر پایان یافت."}
+          {d.closedReason === "max_turns" && "این بحث به سقف حداکثر نوبت‌ها رسید و به پایان رسید."}
         </div>
       )}
 
@@ -106,37 +103,46 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
 
       {/* Creator's pending challengers */}
       {isCreator && d.status === "challengers" && data.pendingChallengers.length > 0 && (
-        <div className="mt-6 border-t" style={{ borderColor: "#E5E5EA" }}>
-          <h2 className="text-lg font-bold mt-4 mb-3" style={{ color: "#1A1A1D" }}>چالشگران</h2>
-          {data.pendingChallengers.map((c: any) => (
-            <div
-              key={c.id}
-              className="border px-4 py-3 mb-3 rounded-sm"
-              style={{ borderColor: "#E5E5EA", background: "#FFFFFF" }}
-            >
-              <p className="text-sm font-medium mb-1" style={{ color: "#1A1A1D" }}>{c.user.username}</p>
-              <p className="text-sm mb-3" style={{ color: "#5C5C63" }}>{c.positionStatement}</p>
-              <form action={acceptAction}>
-                <input type="hidden" name="debateId" value={d.id} />
-                <input type="hidden" name="challengerUserId" value={c.userId} />
-                <input type="hidden" name="firstSpeakerId" value={d.creatorId} />
-                <button
-                  type="submit"
-                  className="px-3 py-1.5 text-xs rounded-sm"
-                  style={{ background: "#2D8B6E", color: "#FFFFFF" }}
-                >
-                  قبول {c.username}
-                </button>
-              </form>
-            </div>
-          ))}
+        <div className="mt-8 border-t border-border pt-6">
+          <div className="eyebrow mb-1.5">داوطلبان</div>
+          <h2 className="text-lg font-bold text-foreground mb-4">درخواست‌های هماوردی</h2>
+          <div className="flex flex-col gap-3">
+            {data.pendingChallengers.map((c: any) => (
+              <div
+                key={c.id}
+                className="border border-border bg-surface p-4 rounded-lg shadow-xs"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-sm text-foreground">{c.user.username}</span>
+                </div>
+                <p className="text-xs text-muted leading-relaxed mb-4 bg-background p-3 rounded border border-border/60">
+                  {c.positionStatement}
+                </p>
+                <form action={acceptAction}>
+                  <input type="hidden" name="debateId" value={d.id} />
+                  <input type="hidden" name="challengerUserId" value={c.userId} />
+                  <input type="hidden" name="firstSpeakerId" value={d.creatorId} />
+                  <button
+                    type="submit"
+                    className="px-3.5 py-1.5 text-xs rounded bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity"
+                  >
+                    پذیرش مناظره با {c.user.username}
+                  </button>
+                </form>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
       {/* No session — prompt login */}
       {!session && (d.status === "open" || d.status === "challengers") && (
-        <div className="text-center py-4 text-sm mt-4" style={{ color: "#5C5C63" }}>
-          <a href="/debate/login" style={{ color: "#D93B3B" }}>وارد شوید</a> تا بتوانید چالش کنید
+        <div className="text-center py-6 text-xs text-muted mt-6 border border-dashed border-border rounded-lg bg-surface/50">
+          برای شرکت در این بحث یا ارسال چالش،{" "}
+          <a href="/debate/login" className="text-accent underline font-medium">
+            وارد حساب خود شوید
+          </a>
+          .
         </div>
       )}
     </div>

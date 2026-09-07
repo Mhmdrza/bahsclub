@@ -5,31 +5,37 @@ export default async function DebateLayout({ children }: { children: React.React
   const session = await getSession();
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#F5F5F7", color: "#1A1A1D" }}>
-      <header className="border-b border-[#E5E5EA]" style={{ background: "#FFFFFF" }}>
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link href="/debate" className="font-bold text-lg" style={{ color: "#1A1A1D" }}>
+            <Link href="/debate" className="font-bold text-lg tracking-tight hover:text-accent transition-colors">
               باشگاه بحث
             </Link>
-            <nav className="flex gap-4 text-sm" style={{ color: "#5C5C63" }}>
-              <Link href="/debate/debates">بحث‌ها</Link>
-              <Link href="/debate/tags">برچسب‌ها</Link>
+            <nav className="flex gap-4 text-sm text-muted">
+              <Link href="/debate/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
+              <Link href="/debate/tags" className="hover:text-foreground transition-colors">برچسب‌ها</Link>
             </nav>
           </div>
           <div className="flex items-center gap-3 text-sm">
             {session ? (
               <>
-                <span style={{ color: "#5C5C63" }}>{session.user.username}</span>
-                <Link href="/api/debate/auth/logout" style={{ color: "#D93B3B" }}>خروج</Link>
+                <span className="text-muted font-medium">{session.user.username}</span>
+                <Link
+                  href="/api/debate/auth/logout"
+                  className="text-xs px-2.5 py-1 rounded border border-border hover:bg-background text-muted hover:text-foreground transition-colors"
+                >
+                  خروج
+                </Link>
               </>
             ) : (
               <>
-                <Link href="/debate/login" style={{ color: "#5C5C63" }}>ورود</Link>
+                <Link href="/debate/login" className="text-muted hover:text-foreground transition-colors">
+                  ورود
+                </Link>
                 <Link
                   href="/debate/register"
-                  className="px-3 py-1.5 rounded-sm text-sm"
-                  style={{ background: "#D93B3B", color: "#FFFFFF" }}
+                  className="px-3 py-1.5 rounded text-sm bg-accent text-accent-fg hover:opacity-90 transition-opacity font-medium"
                 >
                   ثبت‌نام
                 </Link>
@@ -38,12 +44,12 @@ export default async function DebateLayout({ children }: { children: React.React
           </div>
         </div>
       </header>
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-8">
         {children}
       </main>
-      <footer className="border-t border-[#E5E5EA] py-4 text-xs" style={{ color: "#5C5C63", background: "#FFFFFF" }}>
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          باشگاه بحث — بستری برای مناظره‌های ساختاریافته
+      <footer className="border-t border-border py-6 text-xs text-muted bg-surface">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          باشگاه بحث — بستری برای مناظره‌های عقلانی و ساختاریافته
         </div>
       </footer>
     </div>

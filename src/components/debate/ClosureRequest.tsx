@@ -18,24 +18,26 @@ export function ClosureRequest({
 
   if (hasRequested) {
     return (
-      <div className="mt-4 text-center py-3 text-sm rounded-sm" style={{ background: "#F5F5F7", color: "#5C5C63" }}>
-        شما درخواست اتمام بحث داده‌اید. منتظر تأیید حریف.
+      <div className="mt-6 text-center py-3 px-4 text-xs rounded border border-border bg-surface text-muted">
+        شما درخواست اتمام بحث را ثبت کرده‌اید. در انتظار تأیید طرف مقابل.
       </div>
     );
   }
 
   if (otherRequested) {
     return (
-      <div className="mt-4">
-        <form action={action} className="text-center">
+      <div className="mt-6 text-center p-4 border border-accent/40 bg-accent-light/50 rounded-lg">
+        <p className="text-sm font-medium text-foreground mb-3">
+          طرف مقابل پیشنهاد پایان این مناظره را داده است.
+        </p>
+        <form action={action}>
           <input type="hidden" name="debateId" value={debateId} />
           <button
             type="submit"
             disabled={pending}
-            className="px-4 py-2 text-sm rounded-sm disabled:opacity-50"
-            style={{ background: "#2D8B6E", color: "#FFFFFF" }}
+            className="px-4 py-2 text-sm rounded bg-accent text-accent-fg font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
           >
-            {pending ? "..." : "قبول اتمام بحث"}
+            {pending ? "در حال پردازش..." : "موافقت با پایان بحث"}
           </button>
         </form>
       </div>
@@ -43,20 +45,19 @@ export function ClosureRequest({
   }
 
   return (
-    <div className="mt-4 text-center">
+    <div className="mt-6 text-center">
       <form action={action}>
         <input type="hidden" name="debateId" value={debateId} />
         <button
           type="submit"
           disabled={pending}
-          className="px-4 py-2 text-sm rounded-sm disabled:opacity-50"
-          style={{ background: "#F5F5F7", color: "#5C5C63", border: "1px solid #E5E5EA" }}
+          className="px-3.5 py-1.5 text-xs rounded border border-border bg-surface text-muted hover:text-foreground hover:border-muted/50 transition-colors disabled:opacity-50"
         >
-          {pending ? "..." : "درخواست اتمام بحث"}
+          {pending ? "..." : "درخواست توافقی اتمام بحث"}
         </button>
       </form>
       {state?.error && (
-        <p className="text-sm mt-2" style={{ color: "#D93B3B" }}>{state.error}</p>
+        <p className="text-xs text-red-600 dark:text-red-400 mt-2">{state.error}</p>
       )}
     </div>
   );

@@ -1,4 +1,6 @@
 import { VoteButton } from "./VoteButton";
+import { TagBadge } from "./TagBadge";
+import { StatusBadge } from "./StatusBadge";
 
 export function DebateHeader({
   debate: d,
@@ -22,47 +24,42 @@ export function DebateHeader({
   isCreator: boolean | undefined;
 }) {
   return (
-    <div className="mb-6">
-      <div className="flex items-start gap-4">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
-            <span
-              className="text-xs px-2 py-0.5 rounded-sm font-medium"
-              style={{ background: statusColor + "20", color: statusColor }}
-            >
-              {statusLabel}
-            </span>
-            <span className="text-xs" style={{ color: "#5C5C63" }}>
+    <div className="mb-8 border-b border-border pb-6">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <StatusBadge status={d.status} label={statusLabel} />
+            <span className="text-xs text-muted font-mono">
               نوبت {d.currentTurn}/{d.maxTurns}
             </span>
           </div>
 
-          <h1 className="text-xl font-bold mb-2" style={{ color: "#1A1A1D" }}>{d.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground">
+            {d.title}
+          </h1>
 
-          <p className="text-sm mb-3" style={{ color: "#5C5C63" }}>
-            {creator.username}
-            {opponent ? ` در مقابل ${opponent.username}` : ""}
-          </p>
+          <div className="flex items-center gap-2 text-xs text-muted mb-4">
+            <span className="font-semibold text-foreground">{creator.username}</span>
+            {opponent ? (
+              <>
+                <span className="text-muted/60">در برابر</span>
+                <span className="font-semibold text-foreground">{opponent.username}</span>
+              </>
+            ) : (
+              <span className="text-muted/60">(در جستجوی هماورد)</span>
+            )}
+          </div>
 
-          {/* Initial statement */}
-          <div
-            className="border-r-2 px-3 py-2 text-sm mb-3"
-            style={{ borderColor: "#D93B3B", background: "#F5F5F7" }}
-          >
-            <p style={{ color: "#1A1A1D" }}>{d.initialStatement}</p>
+          {/* Initial statement / Thesis */}
+          <div className="border-r-2 border-accent bg-surface px-4 py-3 rounded-l-md text-sm my-4 text-foreground/90 leading-relaxed shadow-xs">
+            <div className="text-xs font-semibold text-accent mb-1">طرح مسئله / موضع اولیه:</div>
+            <p className="whitespace-pre-wrap">{d.initialStatement}</p>
           </div>
 
           {tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 mt-3">
               {tags.map((t) => (
-                <a
-                  key={t.id}
-                  href={`/debate/tags/${t.slug}`}
-                  className="text-xs px-2 py-0.5 rounded-sm hover:opacity-80"
-                  style={{ background: "#F5F5F7", color: "#5C5C63", border: "1px solid #E5E5EA" }}
-                >
-                  {t.name}
-                </a>
+                <TagBadge key={t.id} name={t.name} slug={t.slug} />
               ))}
             </div>
           )}

@@ -15,13 +15,14 @@ export default async function TagPage({ params }: { params: Promise<{ slug: stri
 
     return (
       <div>
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold mb-1" style={{ color: "#1A1A1D" }}>{data.tag.name}</h1>
-          <p className="text-sm" style={{ color: "#5C5C63" }}>{debates.length} بحث</p>
+        <div className="mb-6 border-b border-border pb-4">
+          <div className="eyebrow mb-1">برچسب</div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">#{data.tag.name}</h1>
+          <p className="text-xs text-muted font-mono mt-1">{debates.length} بحث ثبت‌شده</p>
         </div>
 
         {debates.length === 0 ? (
-          <div className="text-center py-16" style={{ color: "#5C5C63" }}>
+          <div className="text-center py-16 border border-dashed border-border rounded-lg text-sm text-muted">
             هنوز بحثی با این برچسب وجود ندارد
           </div>
         ) : (
@@ -43,10 +44,6 @@ export default async function TagPage({ params }: { params: Promise<{ slug: stri
                   turnCount: d.current_turn || 0,
                   tags: [],
                 }}
-                statusColor={
-                  d.status === "in_progress" ? "#2D8B6E" :
-                  ["open", "challengers"].includes(d.status) ? "#C7883D" : "#7B7B82"
-                }
               />
             ))}
           </div>

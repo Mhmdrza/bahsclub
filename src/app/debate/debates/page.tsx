@@ -6,22 +6,19 @@ export default async function DebatesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6" style={{ color: "#1A1A1D" }}>همه بحث‌ها</h1>
+      <div className="mb-6 border-b border-border pb-4">
+        <div className="eyebrow mb-1">آرشیو گفتگوها</div>
+        <h1 className="text-2xl font-bold tracking-tight">همه بحث‌ها</h1>
+      </div>
+
       {debates.length === 0 ? (
-        <div className="text-center py-16" style={{ color: "#5C5C63" }}>
+        <div className="text-center py-16 border border-dashed border-border rounded-lg text-sm text-muted">
           هنوز بحثی وجود ندارد
         </div>
       ) : (
         <div className="flex flex-col gap-3">
           {debates.map((d) => (
-            <DebateCard
-              key={d.debate.id}
-              debate={d}
-              statusColor={
-                d.debate.status === "in_progress" ? "#2D8B6E" :
-                ["open", "challengers"].includes(d.debate.status) ? "#C7883D" : "#7B7B82"
-              }
-            />
+            <DebateCard key={d.debate.id} debate={d} />
           ))}
         </div>
       )}

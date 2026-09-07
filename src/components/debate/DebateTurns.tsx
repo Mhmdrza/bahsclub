@@ -12,9 +12,11 @@ export function DebateTurns({
   debaterIds: (number | null)[];
 }) {
   return (
-    <div className="flex flex-col mt-6" style={{ borderTop: "1px solid #E5E5EA" }}>
+    <div className="flex flex-col mt-4">
       {turns.length === 0 ? (
-        <p className="text-sm py-4" style={{ color: "#5C5C63" }}>هنوز نوبتی ثبت نشده است</p>
+        <div className="text-center py-10 border border-dashed border-border rounded-lg text-sm text-muted">
+          هنوز نوبتی ثبت نشده است. بحث با اولین نوبت آغاز خواهد شد.
+        </div>
       ) : (
         turns.map((turn) => (
           <TurnBlock

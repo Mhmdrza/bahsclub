@@ -1,14 +1,14 @@
 "use client";
 
 import { toggleVote } from "@/lib/votes";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 export function TurnBlock({
   turnNumber,
   username,
   content,
   createdAt,
-  voteCount,
+  voteCount: initialVoteCount,
   userVoted: initialVoted,
   canVote,
   voteableType,
@@ -24,65 +24,66 @@ export function TurnBlock({
   voteableType: string;
   voteableId: number;
 }) {
+  const [voted, setVoted] = useState(initialVoted);
+  const [voteCount, setVoteCount] = useState(initialVoteCount);
+
   const handleVote = useCallback(async () => {
-    if (canVote) {
-      try {
-        await toggleVote(voteableType, voteableId);
-      } catch {}
+    if (!canVote) return;
+    setVoted((prev) => !prev);
+    setVoteCount((prev) => (voted ? prev - 1 : prev + 1));
+    try {
+      await toggleVote(voteableType, voteableId);
+    } catch {
+      // rollback on failure
+      setVoted(initialVoted);
+      setVoteCount(initialVoteCount);
     }
-  }, [canVote, voteableType, voteableId]);
+  }, [canVote, voted, initialVoted, initialVoteCount, voteableType, voteableId]);
 
   return (
-    <div
-      className="border-b py-4"
-      style={{ borderColor: "#E5E5EA" }}
-    >
-      <div className="flex gap-4">
-        {/* Turn number marker */}
-        <div
-          className="text-xs font-bold pt-0.5 shrink-0"
-          style={{ color: "#5C5C63", minWidth: "2rem" }}
-        >
-          #{turnNumber}
-        </div>
-
-        <div className="flex-1 min-w-0">
-          {/* Header */}
-          <div className="flex items-baseline gap-2 text-sm mb-2">
-            <span className="font-semibold" style={{ color: "#1A1A1D" }}>{username}</span>
-            <span className="text-xs" style={{ color: "#5C5C63" }}>
-              {new Intl.DateTimeFormat("fa-IR", {
-                hour: "2-digit", minute: "2-digit",
-              }).format(new Date(createdAt))}
-            </span>
-          </div>
-
-          {/* Content */}
-          <div className="text-sm leading-relaxed whitespace-pre-wrap" style={{ color: "#1A1A1D", fontSize: "1rem" }}>
-            {content}
-          </div>
-        </div>
-
-        {/* Vote */}
-        <div className="flex flex-col items-center gap-0.5 shrink-0 pt-1">
-          <button
-            onClick={canVote ? handleVote : undefined}
-            className="p-1 rounded-sm transition-colors disabled:opacity-50"
-            style={{
-              color: initialVoted ? "#D93B3B" : "#5C5C63",
-              cursor: canVote ? "pointer" : "default",
-            }}
-            title={canVote ? "رأی" : undefined}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill={initialVoted ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M5 12l7-7 7 7" />
-            </svg>
-          </button>
-          <span className="text-xs" style={{ color: voteCount > 0 ? "#D93B3B" : "#5C5C63" }}>
-            {voteCount}
+    <article className="border border-border bg-surface rounded-lg p-4 sm:p-5 mb-4 shadow-xs">
+      <div className="flex items-start justify-between gap-4 mb-3 pb-3 border-b border-border/50">
+        <div className="flex items-center gap-2.5">
+          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-mono font-bold">
+            {turnNumber}
+          </span>
+          <span className="font-bold text-sm text-foreground">{username}</span>
+          <span className="text-xs text-muted font-mono">
+            {new Intl.DateTimeFormat("fa-IR", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }).format(new Date(createdAt))}
           </span>
         </div>
+
+        {/* Minimal vote button */}
+        <button
+          onClick={canVote ? handleVote : undefined}
+          className={`flex items-center gap-1.5 px-2 py-1 rounded border text-xs font-mono transition-colors ${
+            voted
+              ? "border-accent bg-accent-light text-accent font-bold"
+              : "border-border bg-background text-muted hover:border-muted"
+          } ${canVote ? "cursor-pointer" : "cursor-default opacity-80"}`}
+          title={canVote ? "رأی به این استدلال" : undefined}
+          disabled={!canVote}
+        >
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill={voted ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <path d="M12 5v14M5 12l7-7 7 7" />
+          </svg>
+          <span>{voteCount}</span>
+        </button>
       </div>
-    </div>
+
+      <div className="text-sm sm:text-[0.9375rem] leading-relaxed whitespace-pre-wrap text-foreground/90 font-normal">
+        {content}
+      </div>
+    </article>
   );
 }
