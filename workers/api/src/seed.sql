@@ -1,14 +1,14 @@
 -- Seed users
 -- Passwords are all hashed for 'password123'
--- Generated using standard webcrypto PBKDF2 iterations: 100000, salt
-INSERT OR IGNORE INTO users (id, username, email, password_hash, password_salt, is_trusted, created_at)
+-- Hash: uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc= | Salt: dGVzdHNhbHQxMjM0NTY3OA==
+INSERT OR REPLACE INTO users (id, username, email, password_hash, password_salt, is_trusted, created_at)
 VALUES 
-  (1, 'socrates_teh', 'socrates@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-20 days')),
-  (2, 'ali_rezaei', 'ali@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-18 days')),
-  (3, 'sara_rad', 'sara@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-15 days')),
-  (4, 'mehdi_k', 'mehdi@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-12 days')),
-  (5, 'nima_d', 'nima@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-10 days')),
-  (6, 'yalda_m', 'yalda@bahs.club', 'qM8V4u5w0K9eXw8p4gLzO2k1bJ7dF8mQ5tU6vY7wX8A=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-8 days'));
+  (1, 'socrates_teh', 'socrates@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-20 days')),
+  (2, 'ali_rezaei', 'ali@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-18 days')),
+  (3, 'sara_rad', 'sara@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-15 days')),
+  (4, 'mehdi_k', 'mehdi@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-12 days')),
+  (5, 'nima_d', 'nima@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-10 days')),
+  (6, 'yalda_m', 'yalda@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-8 days'));
 
 -- Seed tags
 INSERT OR IGNORE INTO tags (id, name, slug, created_by, created_at)
