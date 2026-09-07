@@ -20,13 +20,13 @@ export default async function DebateHome() {
 
       <div className="flex items-center gap-3 mb-10">
         <Link
-          href="/debate/debates/new"
+          href="/club/debates/new"
           className="px-4 py-2 text-sm rounded bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity shadow-sm"
         >
           ایجاد بحث جدید
         </Link>
         <Link
-          href="/debate/debates"
+          href="/club/debates"
           className="px-4 py-2 text-sm rounded border border-border bg-surface text-foreground hover:border-muted/50 transition-colors"
         >
           همه بحث‌ها
@@ -67,7 +67,7 @@ export default async function DebateHome() {
         <div className="text-center py-20 border border-dashed border-border rounded-lg bg-surface/50 text-muted">
           <p className="mb-4 text-sm">هنوز بحثی ایجاد نشده است</p>
           <Link
-            href="/debate/debates/new"
+            href="/club/debates/new"
             className="inline-block px-4 py-2 text-sm rounded bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity"
           >
             اولین بحث را ایجاد کنید

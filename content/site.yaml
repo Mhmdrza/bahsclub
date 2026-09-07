@@ -8,7 +8,7 @@ nav:
   - label: "مرام‌نامه"
     href: "/rules"
   - label: "باشگاه"
-    href: "/debate"
+    href: "/club"
 homeSlots:
   - type: concept
     label: "یک مفهوم پایه"

@@ -25,7 +25,7 @@ export default async function TagsPage() {
             {tags.map((t: any) => (
               <Link
                 key={t.id}
-                href={`/debate/tags/${t.slug}`}
+                href={`/club/tags/${t.slug}`}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded border border-border bg-surface text-foreground hover:border-accent hover:text-accent transition-colors shadow-xs"
               >
                 <span>#{t.name}</span>

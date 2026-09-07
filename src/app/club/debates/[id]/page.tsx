@@ -139,7 +139,7 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
       {!session && (d.status === "open" || d.status === "challengers") && (
         <div className="text-center py-6 text-xs text-muted mt-6 border border-dashed border-border rounded-lg bg-surface/50">
           برای شرکت در این بحث یا ارسال چالش،{" "}
-          <a href="/debate/login" className="text-accent underline font-medium">
+          <a href="/club/login" className="text-accent underline font-medium">
             وارد حساب خود شوید
           </a>
           .

@@ -18,8 +18,8 @@ export async function createDebateAction(formData: FormData) {
 
   try {
     const data = await apiFetch<{ id: number }>("/api/debates", { method: "POST", body, token });
-    revalidatePath("/debate/debates");
-    redirect(`/debate/debates/${data.id}`);
+    revalidatePath("/club/debates");
+    redirect(`/club/debates/${data.id}`);
   } catch (e: any) {
     return { error: e.message };
   }
@@ -36,7 +36,7 @@ export async function challengeAction(prev: unknown, formData: FormData) {
       body: { positionStatement: formData.get("positionStatement") as string },
       token,
     });
-    revalidatePath(`/debate/debates/${debateId}`);
+    revalidatePath(`/club/debates/${debateId}`);
     return { error: "" };
   } catch (e: any) {
     return { error: e.message };
@@ -58,8 +58,8 @@ export async function acceptChallengerAction(prev: unknown, formData: FormData) 
       body: { challengerUserId, firstSpeakerId },
       token,
     });
-    revalidatePath(`/debate/debates/${debateId}`);
-    redirect(`/debate/debates/${debateId}`);
+    revalidatePath(`/club/debates/${debateId}`);
+    redirect(`/club/debates/${debateId}`);
   } catch (e: any) {
     return { error: e.message };
   }
@@ -76,7 +76,7 @@ export async function postTurnAction(prev: unknown, formData: FormData) {
       body: { content: formData.get("content") as string },
       token,
     });
-    revalidatePath(`/debate/debates/${debateId}`);
+    revalidatePath(`/club/debates/${debateId}`);
     return { error: "" };
   } catch (e: any) {
     return { error: e.message };
@@ -90,7 +90,7 @@ export async function requestClosureAction(prev: unknown, formData: FormData) {
   const debateId = parseInt(formData.get("debateId") as string);
   try {
     await apiFetch(`/api/debates/${debateId}/closure`, { method: "POST", token });
-    revalidatePath(`/debate/debates/${debateId}`);
+    revalidatePath(`/club/debates/${debateId}`);
     return { error: "" };
   } catch (e: any) {
     return { error: e.message };

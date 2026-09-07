@@ -17,7 +17,7 @@ export function DebateCard({
 }) {
   return (
     <Link
-      href={`/debate/debates/${d.debate.id}`}
+      href={`/club/debates/${d.debate.id}`}
       className="group block border border-border bg-surface hover:border-accent/40 rounded-lg p-4 transition-all duration-150 shadow-xs"
     >
       <div className="flex items-start justify-between gap-4">

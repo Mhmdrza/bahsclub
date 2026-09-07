@@ -16,7 +16,7 @@ export async function registerAction(prev: unknown, formData: FormData) {
   } catch (e: any) {
     return { error: e.message };
   }
-  redirect("/debate");
+  redirect("/club");
 }
 
 export async function loginAction(prev: unknown, formData: FormData) {
@@ -30,10 +30,10 @@ export async function loginAction(prev: unknown, formData: FormData) {
   } catch (e: any) {
     return { error: "نام کاربری یا رمز عبور اشتباه است" };
   }
-  redirect("/debate");
+  redirect("/club");
 }
 
 export async function logoutAction() {
   await clearSessionCookie();
-  redirect("/debate/login");
+  redirect("/club/login");
 }

@@ -25,7 +25,7 @@ export async function getSession(): Promise<{ user: { id: number; username: stri
 
 export async function requireAuth() {
   const session = await getSession();
-  if (!session) redirect("/debate/login");
+  if (!session) redirect("/club/login");
   return session;
 }
 

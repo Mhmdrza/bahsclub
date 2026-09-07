@@ -45,7 +45,7 @@ export default function HomePage() {
           <span className="w-12 border-t border-gold/60" />
         </div>
         <p className="mx-auto mb-10 max-w-2xl text-lg leading-loose text-muted">
-          دلت برای یک گفت‌وگوی درست تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
+          دلت برای گفت‌وگوهای متمدنانه تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
           <strong className="font-semibold text-foreground">
             بحث‌کلاب برای بازسازی همین حس و مهارت است:
           </strong>{" "}
@@ -61,7 +61,7 @@ export default function HomePage() {
             شروع یادگیری و آموزش‌ها
           </Link>
           <Link
-            href="/debate"
+            href="/club"
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
           >
             <MessageSquare className="h-4 w-4 text-accent" />
@@ -263,7 +263,7 @@ export default function HomePage() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <Link
-            href="/debate"
+            href="/club"
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50"
           >
             مشاهده مناظره‌های فعال
