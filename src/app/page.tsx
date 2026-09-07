@@ -34,7 +34,7 @@ export default function HomePage() {
 
         <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
         <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">
-          آخرین باری که یک بحث خوب دیدی، کِی بود؟
+          جایی که دلت برای شنیدن یک نظر مخالف تنگ می‌شود
         </h1>
         <div
           aria-hidden
@@ -65,7 +65,7 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
           >
             <MessageSquare className="h-4 w-4 text-accent" />
-            ورود به تالار بحث
+            ورود به باشگاه
           </Link>
         </div>
       </section>

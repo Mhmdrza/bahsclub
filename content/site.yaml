@@ -5,10 +5,10 @@ featuredLessonSlug: "judgment-literacy"
 nav:
   - label: "آموزش"
     href: "/learn"
-  - label: "تالار بحث"
-    href: "/debate"
   - label: "مرام‌نامه"
     href: "/rules"
+  - label: "باشگاه"
+    href: "/debate"
 homeSlots:
   - type: concept
     label: "یک مفهوم پایه"

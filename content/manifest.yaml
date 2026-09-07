@@ -1742,7 +1742,7 @@ siteConfig:
   nav:
     - label: آموزش
       href: /learn
-    - label: تالار بحث
-      href: /debate
     - label: مرام‌نامه
       href: /rules
+    - label: باشگاه
+      href: /debate
