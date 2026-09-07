@@ -6,6 +6,7 @@ import { DebateTurns } from "@/components/debate/DebateTurns";
 import { ChallengeSection } from "@/components/debate/ChallengeSection";
 import { TurnForm } from "@/components/debate/TurnForm";
 import { ClosureRequest } from "@/components/debate/ClosureRequest";
+import { LivePoll } from "@/components/debate/LivePoll";
 
 async function acceptAction(fd: FormData) {
   "use server";
@@ -49,6 +50,7 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
 
   return (
     <div>
+      <LivePoll debateId={d.id} turnCount={d.currentTurn} active={d.status === "in_progress"} />
       <DebateHeader
         debate={d}
         creator={data.creator || { id: 0, username: "?" }}

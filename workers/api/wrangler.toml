@@ -2,6 +2,9 @@ name = "bahsclub-api"
 main = "src/index.ts"
 compatibility_date = "2025-08-01"
 
+[triggers]
+crons = ["*/15 * * * *"]
+
 [[d1_databases]]
 binding = "DB"
 database_name = "bahsclub"

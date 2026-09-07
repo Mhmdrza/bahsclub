@@ -17,4 +17,25 @@ app.route("/api/tags", tags);
 app.route("/api/users", users);
 app.route("/api/flags", flagsRt);
 
-export default app;
+const FORFEIT_HOURS = 24;
+
+async function runForfeitCheck(db: D1Database) {
+  const cutoff = new Date(Date.now() - FORFEIT_HOURS * 60 * 60 * 1000).toISOString();
+  await db.prepare(`
+    UPDATE debates SET status = 'closed', closed_reason = 'forfeit', updated_at = ?
+    WHERE id IN (
+      SELECT d.id FROM debates d
+      LEFT JOIN turns t ON t.debate_id = d.id
+      WHERE d.status = 'in_progress'
+      GROUP BY d.id
+      HAVING COALESCE(MAX(t.created_at), d.created_at) < ?
+    )
+  `).bind(new Date().toISOString(), cutoff).run();
+}
+
+export default {
+  fetch: app.fetch,
+  async scheduled(_event: ScheduledEvent, env: Bindings, _ctx: ExecutionContext) {
+    await runForfeitCheck(env.DB);
+  },
+};

@@ -71,13 +71,13 @@ export async function postTurnAction(prev: unknown, formData: FormData) {
 
   const debateId = parseInt(formData.get("debateId") as string);
   try {
-    await apiFetch(`/api/debates/${debateId}/turn`, {
+    const result = await apiFetch<{ success: boolean; closureWiped?: boolean }>(`/api/debates/${debateId}/turn`, {
       method: "POST",
       body: { content: formData.get("content") as string },
       token,
     });
     revalidatePath(`/club/debates/${debateId}`);
-    return { error: "" };
+    return { error: "", closureWiped: !!result.closureWiped };
   } catch (e: any) {
     return { error: e.message };
   }
@@ -89,9 +89,9 @@ export async function requestClosureAction(prev: unknown, formData: FormData) {
 
   const debateId = parseInt(formData.get("debateId") as string);
   try {
-    await apiFetch(`/api/debates/${debateId}/closure`, { method: "POST", token });
+    const result = await apiFetch<{ status: "requested" | "closed" }>(`/api/debates/${debateId}/closure`, { method: "POST", token });
     revalidatePath(`/club/debates/${debateId}`);
-    return { error: "" };
+    return { error: "", closureStatus: result.status };
   } catch (e: any) {
     return { error: e.message };
   }

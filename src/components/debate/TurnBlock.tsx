@@ -83,7 +83,7 @@ export function TurnBlock({
           <span className="flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-mono font-bold">
             {turnNumber}
           </span>
-          <span className="font-bold text-sm text-foreground">{username}</span>
+          <span className="font-bold text-sm text-foreground">{username || "کاربر حذف شده"}</span>
           <span className="text-xs text-muted font-mono">
             {new Intl.DateTimeFormat("fa-IR", {
               hour: "2-digit",

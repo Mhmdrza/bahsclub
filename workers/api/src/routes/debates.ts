@@ -5,6 +5,17 @@ const debates = new Hono<{ Bindings: { DB: D1Database } }>();
 
 const FORFEIT_HOURS = 24;
 
+debates.get("/poll/:id", async (c) => {
+  const id = parseInt(c.req.param("id"));
+  const row = await c.env.DB.prepare("SELECT status, current_turn, closure_requested_by FROM debates WHERE id = ?").bind(id).first<any>();
+  if (!row) return err("یافت نشد", 404);
+  return ok({
+    turnCount: row.current_turn || 0,
+    closed: row.status === "closed",
+    closureRequestedBy: row.closure_requested_by,
+  });
+});
+
 async function runForfeitCheck(db: D1Database) {
   const cutoff = new Date(Date.now() - FORFEIT_HOURS * 60 * 60 * 1000).toISOString();
   await db.prepare(`
@@ -251,6 +262,8 @@ debates.post("/:id/turn", async (c) => {
 
   if (!insertResult.meta?.changes) return err("این نوبت قبلاً ثبت شده — ممکن است درخواست همزمان باشد");
 
+  const closureWasWiped = !!debate.closure_requested_by;
+
   if (nextTurn >= debate.max_turns) {
     await c.env.DB.batch([
       c.env.DB.prepare("UPDATE debates SET status = 'closed', closed_reason = 'max_turns', closed_at = ?, current_turn = ?, next_speaker = NULL, updated_at = ? WHERE id = ?")
@@ -261,7 +274,7 @@ debates.post("/:id/turn", async (c) => {
       .bind(nextTurn, nextSpeakerId, now, debateId).run();
   }
 
-  return ok({ success: true });
+  return ok({ success: true, closureWiped: closureWasWiped });
 });
 
 debates.post("/:id/closure", async (c) => {
@@ -282,27 +295,24 @@ debates.post("/:id/closure", async (c) => {
 
   if (debate.closure_requested_by) {
     if (debate.closure_requested_by === user!.id) return err("قبلاً درخواست داده‌اید");
-    // Other user already requested — close mutually
     await c.env.DB.prepare("UPDATE debates SET status = 'closed', closed_reason = 'mutual', closed_at = ?, next_speaker = NULL, updated_at = ? WHERE id = ?")
       .bind(now, now, debateId).run();
-    return ok({ success: true });
+    return ok({ status: "closed" });
   }
 
-  // Atomically set closure_requested_by if still null
   const result = await c.env.DB.prepare("UPDATE debates SET closure_requested_by = ?, updated_at = ? WHERE id = ? AND closure_requested_by IS NULL")
     .bind(user!.id, now, debateId).run();
 
   if (!result.meta?.changes) {
-    // Another request beat us — check if it was the same user
     const current = await c.env.DB.prepare("SELECT closure_requested_by FROM debates WHERE id = ?").bind(debateId).first<any>();
     if (current?.closure_requested_by === user!.id) return err("قبلاً درخواست داده‌اید");
 
-    // Other user set it — close mutually
     await c.env.DB.prepare("UPDATE debates SET status = 'closed', closed_reason = 'mutual', closed_at = ?, next_speaker = NULL, updated_at = ? WHERE id = ?")
       .bind(now, now, debateId).run();
+    return ok({ status: "closed" });
   }
 
-  return ok({ success: true });
+  return ok({ status: "requested" });
 });
 
 export { debates };
