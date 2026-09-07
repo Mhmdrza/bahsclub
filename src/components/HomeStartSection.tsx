@@ -31,11 +31,12 @@ export function HomeStartSection({ lesson }: HomeStartSectionProps) {
     : lesson.resolvedSteps[0]?.slug;
 
   return (
-    <section className="rounded-lg border border-border bg-surface p-6 sm:p-8">
-      <h2 className="mb-2 text-2xl font-bold">
+    <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-10">
+      <p className="eyebrow mb-2">نقطهٔ شروع</p>
+      <h2 className="mb-3 text-2xl font-extrabold">
         {hasProgress ? "ادامه بده" : "از اینجا شروع کن"}
       </h2>
-      <p className="mb-6 max-w-2xl text-muted">
+      <p className="mb-6 max-w-2xl leading-relaxed text-muted">
         {hasProgress
           ? `در مسیر «${lesson.title}» هستید. می‌توانید از جایی که مانده‌اید ادامه دهید.`
           : "با مسیر سواد قضاوت، یاد بگیر چطور باورهایت را محک بزنی، استدلالت را قوی‌تر کنی، و بدون دشمنی مخالفت کنی."}
@@ -44,7 +45,7 @@ export function HomeStartSection({ lesson }: HomeStartSectionProps) {
       {targetSlug && (
         <Link
           href={`/articles/${targetSlug}?lesson=${lesson.slug}`}
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg hover:bg-accent/90"
+          className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
         >
           {hasProgress ? "ادامه مسیر یادگیری" : "شروع مسیر یادگیری"}
           <ArrowLeft className="h-4 w-4" aria-hidden />

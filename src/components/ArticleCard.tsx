@@ -19,10 +19,10 @@ export function ArticleCard({
   return (
     <Link
       href={link}
-      className="group block rounded-lg border border-border bg-surface p-5 transition-colors hover:border-accent/40 hover:bg-background"
+      className="group block rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
     >
       <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-        <span className="rounded-md bg-background px-2 py-0.5">
+        <span className="rounded-md bg-gold-light px-2 py-0.5 font-medium text-gold">
           {article.category}
         </span>
         <span>{levelLabel(article.level)}</span>

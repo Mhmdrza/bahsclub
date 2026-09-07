@@ -18,14 +18,14 @@ export function LessonCard({ lesson }: LessonCardProps) {
   return (
     <Link
       href={`/learn/${lesson.slug}`}
-      className="group block rounded-lg border border-border bg-surface p-5 transition-colors hover:border-accent/40"
+      className="group block rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
     >
       <div className="mb-2 flex items-center justify-between gap-2">
         <span className="text-xs text-muted">
           {formatPersianNumber(lesson.resolvedSteps.length)} درس
         </span>
         {lesson.featured && (
-          <span className="rounded-md bg-accent-light px-2 py-0.5 text-xs text-accent">
+          <span className="rounded-md bg-gold-light px-2 py-0.5 text-xs font-medium text-gold">
             پیشنهادی
           </span>
         )}
