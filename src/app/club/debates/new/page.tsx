@@ -36,7 +36,7 @@ export default function CreateDebatePage() {
         className="flex flex-col gap-5 border border-border bg-surface p-6 rounded-lg shadow-xs"
       >
         <div>
-          <label className="text-xs font-semibold text-foreground block mb-1.5">عنوان مناظره</label>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">موضوع مباحثه</label>
           <input
             name="title"
             placeholder="مثال: آیا هوش مصنوعی خلاقیت اصیل دارد؟"
@@ -46,10 +46,10 @@ export default function CreateDebatePage() {
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-foreground block mb-1.5">بیانیه اولیه / موضع نظری</label>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">بیانیه اولیه</label>
           <textarea
             name="initialStatement"
-            placeholder="استدلال‌ها، تعاریف و مبانی ادعای خود را شرح دهید (حداقل ۵۰ حرف)..."
+            placeholder="استدلال‌ و یا منطق موضع خود را شرح دهید (حداقل ۵۰ حرف)..."
             required
             rows={5}
             className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-md resize-y focus:outline-hidden focus:border-accent"
@@ -57,7 +57,7 @@ export default function CreateDebatePage() {
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-foreground block mb-1.5">برچسب‌ها (حداکثر ۵ مورد)</label>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">تگ‌ها (حداکثر ۵ مورد)</label>
           <div className="flex gap-2 mb-2.5">
             <input
               value={tagInput}
@@ -68,7 +68,7 @@ export default function CreateDebatePage() {
                   addTag();
                 }
               }}
-              placeholder="برچسب موضوعی..."
+              placeholder="تگ موضوعی..."
               className="flex-1 px-3.5 py-2 border border-border bg-background text-foreground text-sm rounded-md focus:outline-hidden focus:border-accent"
             />
             <button
@@ -99,7 +99,7 @@ export default function CreateDebatePage() {
           </div>
           <input type="hidden" name="tags" value={tags.join(",")} />
           {tags.length === 0 && (
-            <p className="text-xs mt-1.5 text-muted">حداقل یک برچسب برای دسته‌بندی موضوع الزامی است.</p>
+            <p className="text-xs mt-1.5 text-muted">حداقل یک تگ برای دسته‌بندی موضوع الزامی است.</p>
           )}
         </div>
 
