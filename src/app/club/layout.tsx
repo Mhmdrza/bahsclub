@@ -16,7 +16,7 @@ export default async function DebateLayout({ children }: { children: React.React
             </Link>
             <nav className="flex gap-4 text-sm text-muted">
               <Link href="/club/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
-              <Link href="/club/tags" className="hover:text-foreground transition-colors">برچسب‌ها</Link>
+              <Link href="/club/tags" className="hover:text-foreground transition-colors">تگ‌ها</Link>
               {session && session.user.role === "judge" && (
                 <Link href="/club/judge" className="hover:text-gold transition-colors text-gold/80">داوری</Link>
               )}

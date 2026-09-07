@@ -129,7 +129,7 @@ export function SearchAndFilters({
           aria-label="فیلتر برچسب"
           className="rounded-md border border-border bg-surface px-3 py-2 text-sm"
         >
-          <option value="">همه برچسب‌ها</option>
+          <option value="">همه تگ‌ها</option>
           {facets.tags.map((t) => (
             <option key={t} value={t}>
               {t}

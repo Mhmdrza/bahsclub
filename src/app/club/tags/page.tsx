@@ -13,7 +13,7 @@ export default async function TagsPage() {
       <div>
         <div className="mb-6 border-b border-border pb-4">
           <div className="eyebrow mb-1">دسته‌بندی موضوعی</div>
-          <h1 className="text-2xl font-bold tracking-tight">برچسب‌ها</h1>
+          <h1 className="text-2xl font-bold tracking-tight">تگ‌ها</h1>
         </div>
 
         {tags.length === 0 ? (
@@ -41,7 +41,7 @@ export default async function TagsPage() {
   } catch {
     return (
       <div className="text-center py-16 border border-dashed border-border rounded-lg text-sm text-muted">
-        خطا در دریافت برچسب‌ها
+        خطا در دریافت تگ‌ها
       </div>
     );
   }
