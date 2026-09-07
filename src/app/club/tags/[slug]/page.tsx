@@ -8,17 +8,17 @@ export default async function TagPage({ params }: { params: Promise<{ slug: stri
   const token = await getTokenForAction();
 
   try {
-    const data = await apiFetch<{ tag: any; debates: any[] }>(`/api/tags/${slug}`, { token });
+    const data = await apiFetch<{ tag: any; items: any[]; pagination: { total: number } }>(`/api/tags/${slug}`, { token });
     if (!data.tag) notFound();
 
-    const debates = data.debates || [];
+    const debates = data.items || [];
 
     return (
       <div>
         <div className="mb-6 border-b border-border pb-4">
           <div className="eyebrow mb-1">برچسب</div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">#{data.tag.name}</h1>
-          <p className="text-xs text-muted font-mono mt-1">{debates.length} بحث ثبت‌شده</p>
+          <p className="text-xs text-muted font-mono mt-1">{data.pagination?.total || debates.length} بحث ثبت‌شده</p>
         </div>
 
         {debates.length === 0 ? (

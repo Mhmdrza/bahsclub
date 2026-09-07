@@ -7,3 +7,55 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+<!-- BEGIN:architecture-roadmap -->
+
+## Future Architecture Work
+
+Items below are known gaps that need addressing as the app scales.
+
+### Real-time / Notifications
+- No WebSocket, SSE, or polling mechanism. Users must manually refresh to see new turns, challenges, closures, or moderation actions.
+- Consider Cloudflare Durable Objects or WebSocket Hibernation API for per-debate rooms.
+- Minimum viable: 5-15s polling for active debate detail pages.
+
+### Search & Discovery
+- No full-text search or filtering on debates beyond status/tag.
+- D1 does not support FTS5 natively. Options: in-memory Fuse.js client-side (like articles), or migrate search to a KV/vector index.
+
+### Debate Analytics & History
+- No win/loss tracking, debate duration stats, or activity dashboards.
+- `debates` table has no winner column. Add `winner_id` field and judge-assigned outcome.
+- User profiles could show win rate, average turns, favorite tags.
+
+### Unified Auth System
+- Admin auth (cookie + env hash) and Club auth (Worker/D1 sessions) are separate systems.
+- Judges, admins, and club users share no identity. Admin must create a separate club account to participate.
+- Consolidate into single Worker-managed auth with role-based access.
+
+### i18n Infrastructure
+- All UI strings, error messages, and validation are hardcoded Persian.
+- No `i18next` or similar framework. Every new language requires rewriting all strings.
+- Add i18n library before adding second language.
+
+### Content CMS Limitations
+- Content lives in GitHub via commit-based CRUD. No draft/preview, scheduling, or collaborative editing.
+- Admin down if GitHub API is unreachable. Content changes == git commits.
+- Consider a database-backed CMS with publish workflow for content-heavy operations.
+
+### Observability
+- No structured logging, metrics, or tracing in the Worker or Next.js server.
+- Debugging production issues requires reading D1 dashboard directly.
+- Add structured JSON logging, request ID propagation, and error tracking (Cloudflare Analytics Engine or similar).
+
+### Backup & Disaster Recovery
+- D1 has Cloudflare's point-in-time recovery but no external backup.
+- All user data (accounts, debates, votes, moderation history) at risk if account is compromised.
+- Export D1 to cloud storage periodically via Worker scheduled cron.
+
+### Email Verification & Password Recovery
+- No email verification on registration, no password reset flow.
+- Users can register with fake emails. No way to recover lost passwords.
+- Requires email service integration (Resend, SendGrid, etc.).
+
+<!-- END:architecture-roadmap -->

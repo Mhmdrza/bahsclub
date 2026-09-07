@@ -6,8 +6,8 @@ export function DebateTurns({
   debateId,
   debaterIds,
 }: {
-  turns: (any & { userVoted: boolean; voteCount: number })[];
-  session: { user: { id: number } } | null;
+  turns: (any & { userVoted: boolean; voteCount: number; moderationState?: string })[];
+  session: { user: { id: number; role: string } } | null;
   debateId: number;
   debaterIds: (number | null)[];
 }) {
@@ -22,14 +22,16 @@ export function DebateTurns({
           <TurnBlock
             key={turn.id}
             turnNumber={turn.turnNumber}
-            username={turn.user.username}
+            username={turn.username}
             content={turn.content}
+            moderationState={turn.moderationState || "normal"}
             createdAt={turn.createdAt}
             voteCount={turn.voteCount}
             userVoted={turn.userVoted}
             canVote={!!session && !debaterIds.includes(session.user.id)}
             voteableType="turn"
             voteableId={turn.id}
+            session={session}
           />
         ))
       )}

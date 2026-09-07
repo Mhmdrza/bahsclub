@@ -2,7 +2,7 @@ import { getDebatesWithVotes } from "@/lib/queries";
 import { DebateCard } from "@/components/debate/DebateCard";
 
 export default async function DebatesPage() {
-  const debates = await getDebatesWithVotes();
+  const { debates } = await getDebatesWithVotes();
 
   return (
     <div>

@@ -16,6 +16,7 @@ function mapDebate(d: any) {
     closureRequestedBy: d.closure_requested_by,
     closedReason: d.closed_reason,
     closedAt: d.closed_at,
+    moderationState: d.moderation_state || "normal",
     createdAt: d.created_at,
     updatedAt: d.updated_at,
   };
@@ -28,6 +29,7 @@ function mapTurn(t: any) {
     userId: t.user_id,
     turnNumber: t.turn_number,
     content: t.content,
+    moderationState: t.moderation_state || "normal",
     createdAt: t.created_at,
     username: t.username,
     voteCount: t.voteCount || 0,
@@ -47,24 +49,36 @@ function mapChallenger(c: any) {
   };
 }
 
-export async function getDebatesWithVotes(opts?: { tag?: string; status?: string }) {
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  hasMore: boolean;
+}
+
+export async function getDebatesWithVotes(opts?: { tag?: string; status?: string; page?: number }) {
   const token = await getTokenForAction();
   const params = new URLSearchParams();
   if (opts?.tag) params.set("tag", opts.tag);
   if (opts?.status) params.set("status", opts.status);
+  if (opts?.page) params.set("page", String(opts.page));
+  params.set("limit", "20");
   const qs = params.toString();
 
   try {
-    const data = await apiFetch<{ debates: any[] }>(`/api/debates${qs ? "?" + qs : ""}`, { token });
-    return data.debates.map((d: any) => ({
-      debate: mapDebate(d),
-      creator: { username: d.creator_username },
-      voteCount: d.vote_count || 0,
-      turnCount: d.current_turn || 0,
-      tags: [],
-    }));
+    const data = await apiFetch<{ items: any[]; pagination: { page: number; limit: number; total: number; hasMore: boolean } }>(`/api/debates${qs ? "?" + qs : ""}`, { token });
+    return {
+      debates: (data.items || []).map((d: any) => ({
+        debate: mapDebate(d),
+        creator: { username: d.creator_username },
+        voteCount: d.vote_count || 0,
+        turnCount: d.current_turn || 0,
+        tags: [],
+      })),
+      pagination: data.pagination,
+    };
   } catch {
-    return [];
+    return { debates: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false } };
   }
 }
 
@@ -90,6 +104,13 @@ export async function getDebateDetail(debateId: number) {
   }
 }
 
-export async function checkForfeit(_debateId: number) {
-  // Handled in Worker GET /api/debates/:id
+export async function getUserProfile(username: string) {
+  const token = await getTokenForAction();
+  try {
+    const data = await apiFetch<any>(`/api/users/${username}`, { token });
+    if (!data || !data.username) return null;
+    return data;
+  } catch {
+    return null;
+  }
 }

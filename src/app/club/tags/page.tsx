@@ -6,8 +6,8 @@ export default async function TagsPage() {
   const token = await getTokenForAction();
 
   try {
-    const data = await apiFetch<{ tags: any[] }>("/api/tags", { token });
-    const tags = data.tags || [];
+    const data = await apiFetch<{ items: any[] }>("/api/tags", { token });
+    const tags = data.items || [];
 
     return (
       <div>

@@ -206,3 +206,15 @@ VALUES
   (3, 'turn', 9),
   (4, 'turn', 9),
   (5, 'turn', 10);
+
+-- Set judge role and bios
+UPDATE users SET role='judge' WHERE id=1;
+UPDATE users SET bio='جستجوگر حقیقت، علاقه‌مند به فلسفه و منطق' WHERE id=1;
+UPDATE users SET bio='پژوهشگر اقتصاد و سیاست‌گذاری عمومی' WHERE id=2;
+UPDATE users SET bio='دانشجوی فلسفه علم، علاقه‌مند به اپیستمولوژی' WHERE id=3;
+
+-- Sample pending flags for judge page testing
+INSERT OR IGNORE INTO flags (flagger_id, flaggable_type, flaggable_id, reason, details, created_at)
+VALUES
+  (5, 'turn', 4, 'derailing', 'این فریمینگ بحث را از موضوع اصلی منحرف می‌کند', datetime('now', '-1 hour')),
+  (6, 'debate', 4, 'pressure', 'لحن بیانیه اولیه اخلال‌گرانه و فشار روانی ایجاد می‌کند', datetime('now', '-30 minutes'));

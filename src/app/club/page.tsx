@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DebateCard } from "@/components/debate/DebateCard";
 
 export default async function DebateHome() {
-  const debates = await getDebatesWithVotes();
+  const { debates } = await getDebatesWithVotes();
   const openDebates = debates.filter((d) => ["open", "challengers"].includes(d.debate.status));
   const liveDebates = debates.filter((d) => d.debate.status === "in_progress");
   const recentClosed = debates.filter((d) => d.debate.status === "closed").slice(0, 5);

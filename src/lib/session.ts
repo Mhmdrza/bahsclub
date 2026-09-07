@@ -11,14 +11,15 @@ async function getToken(): Promise<string | null> {
   return cookieStore.get(SESSION_COOKIE)?.value || null;
 }
 
-export async function getSession(): Promise<{ user: { id: number; username: string; email: string; isTrusted: boolean } } | null> {
+export async function getSession(): Promise<{
+  user: { id: number; username: string; email: string; isTrusted: boolean; role: string; reputation: number; blockedUntil: string | null };
+  warnings: { id: number; note: string; createdAt: string }[];
+} | null> {
   const token = await getToken();
   if (!token) return null;
   try {
     return await apiFetch("/api/auth/session", { token });
   } catch {
-    const cookieStore = await cookies();
-    cookieStore.delete(SESSION_COOKIE);
     return null;
   }
 }

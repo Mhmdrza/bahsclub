@@ -1,11 +1,13 @@
 import { getSession } from "@/lib/session";
+import { logoutAction } from "@/lib/auth-actions";
 import Link from "next/link";
+import { WarningsBanner } from "@/components/club/WarningsBanner";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground" dir="rtl">
       <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -15,18 +17,28 @@ export default async function DebateLayout({ children }: { children: React.React
             <nav className="flex gap-4 text-sm text-muted">
               <Link href="/club/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
               <Link href="/club/tags" className="hover:text-foreground transition-colors">برچسب‌ها</Link>
+              {session && session.user.role === "judge" && (
+                <Link href="/club/judge" className="hover:text-gold transition-colors text-gold/80">داوری</Link>
+              )}
             </nav>
           </div>
           <div className="flex items-center gap-3 text-sm">
             {session ? (
               <>
-                <span className="text-muted font-medium">{session.user.username}</span>
                 <Link
-                  href="/api/club/auth/logout"
-                  className="text-xs px-2.5 py-1 rounded border border-border hover:bg-background text-muted hover:text-foreground transition-colors"
+                  href={`/club/users/${session.user.username}`}
+                  className="text-muted font-medium hover:text-foreground transition-colors"
                 >
-                  خروج
+                  {session.user.username}
                 </Link>
+                <form action={logoutAction}>
+                  <button
+                    type="submit"
+                    className="text-xs px-2.5 py-1 rounded border border-border hover:bg-background text-muted hover:text-foreground transition-colors"
+                  >
+                    خروج
+                  </button>
+                </form>
               </>
             ) : (
               <>
@@ -45,6 +57,14 @@ export default async function DebateLayout({ children }: { children: React.React
         </div>
       </header>
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-8">
+        {session && session.warnings && session.warnings.length > 0 && (
+          <div className="mb-6">
+            <WarningsBanner
+              warnings={session.warnings}
+              blockedUntil={session.user.blockedUntil}
+            />
+          </div>
+        )}
         {children}
       </main>
       <footer className="border-t border-border py-6 text-xs text-muted bg-surface">

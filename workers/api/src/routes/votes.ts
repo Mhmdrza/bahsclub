@@ -1,7 +1,14 @@
 import { Hono } from "hono";
-import { getAuthToken, getCurrentUser, needAuth, err, ok } from "../lib";
+import { getAuthToken, getCurrentUser, needAuth, ensureNotBlocked, err, ok } from "../lib";
 
 const votes = new Hono<{ Bindings: { DB: D1Database } }>();
+
+async function getAuthor(db: D1Database, type: string, id: number): Promise<number | null> {
+  const table = type === "turn" ? "turns" : "debates";
+  const col = type === "turn" ? "user_id" : "creator_id";
+  const row = await db.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(id).first<any>();
+  return row?.author ?? null;
+}
 
 votes.post("/toggle", async (c) => {
   const token = getAuthToken(c);
@@ -9,21 +16,37 @@ votes.post("/toggle", async (c) => {
   const authErr = needAuth(user);
   if (authErr) return authErr;
 
+  const blockedErr = ensureNotBlocked(user!);
+  if (blockedErr) return blockedErr;
+
   const { voteableType, voteableId } = await c.req.json<{ voteableType: string; voteableId: number }>();
   if (!["debate", "turn"].includes(voteableType)) return err("نوع رای نامعتبر");
 
-  const existing = await c.env.DB.prepare("SELECT id FROM votes WHERE user_id = ? AND voteable_type = ? AND voteable_id = ?")
-    .bind(user!.id, voteableType, voteableId).first<any>();
+  const insertResult = await c.env.DB.prepare("INSERT OR IGNORE INTO votes (user_id, voteable_type, voteable_id) VALUES (?, ?, ?)")
+    .bind(user!.id, voteableType, voteableId).run();
 
-  if (existing) {
-    await c.env.DB.prepare("DELETE FROM votes WHERE id = ?").bind(existing.id).run();
-    return ok({ voted: false });
+  if (insertResult.meta?.changes === 1) {
+    const author = await getAuthor(c.env.DB, voteableType, voteableId);
+    if (author && author !== user!.id) {
+      await c.env.DB.batch([
+        c.env.DB.prepare("UPDATE users SET reputation = reputation + 1 WHERE id = ? AND rep_locked = 0").bind(author),
+      ]);
+    }
+    return ok({ voted: true });
   }
 
-  await c.env.DB.prepare("INSERT INTO votes (user_id, voteable_type, voteable_id) VALUES (?, ?, ?)")
-    .bind(user!.id, voteableType, voteableId).run().catch(() => {});
+  // Already voted — unvote
+  await c.env.DB.prepare("DELETE FROM votes WHERE user_id = ? AND voteable_type = ? AND voteable_id = ?")
+    .bind(user!.id, voteableType, voteableId).run();
 
-  return ok({ voted: true });
+  const author = await getAuthor(c.env.DB, voteableType, voteableId);
+  if (author && author !== user!.id) {
+    // ponytail: race between unvote and rep_lock toggle — if author got locked after vote was cast, unvote still deducts
+    await c.env.DB.batch([
+      c.env.DB.prepare("UPDATE users SET reputation = MAX(0, reputation - 1) WHERE id = ? AND rep_locked = 0").bind(author),
+    ]);
+  }
+  return ok({ voted: false });
 });
 
 export { votes };

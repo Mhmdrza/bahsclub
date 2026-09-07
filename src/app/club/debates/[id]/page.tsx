@@ -1,4 +1,4 @@
-import { getDebateDetail, checkForfeit } from "@/lib/queries";
+import { getDebateDetail } from "@/lib/queries";
 import { getSession } from "@/lib/session";
 import { notFound } from "next/navigation";
 import { DebateHeader } from "@/components/debate/DebateHeader";
@@ -18,8 +18,6 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
   const debateId = parseInt(id);
   if (isNaN(debateId)) notFound();
 
-  // Lazy forfeit check
-  await checkForfeit(debateId);
   const data = await getDebateDetail(debateId);
   if (!data) notFound();
 
@@ -61,10 +59,11 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
         debateVoteCount={data.debateVoteCount}
         debateVoted={data.debateVoted}
         isCreator={isCreator}
+        session={session as any}
       />
 
       {/* Turn list */}
-      <DebateTurns turns={data.turns} session={session} debateId={d.id} debaterIds={[d.creatorId, d.opponentId]} />
+      <DebateTurns turns={data.turns} session={session as any} debateId={d.id} debaterIds={[d.creatorId, d.opponentId]} />
 
       {/* Turn form */}
       {canSpeak && (
@@ -113,7 +112,7 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
                 className="border border-border bg-surface p-4 rounded-lg shadow-xs"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-sm text-foreground">{c.user.username}</span>
+                  <span className="font-bold text-sm text-foreground">{c.username}</span>
                 </div>
                 <p className="text-xs text-muted leading-relaxed mb-4 bg-background p-3 rounded border border-border/60">
                   {c.positionStatement}
@@ -126,7 +125,7 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
                     type="submit"
                     className="px-3.5 py-1.5 text-xs rounded bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity"
                   >
-                    پذیرش مناظره با {c.user.username}
+                    پذیرش مناظره با {c.username}
                   </button>
                 </form>
               </div>

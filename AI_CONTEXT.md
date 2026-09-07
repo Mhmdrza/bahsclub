@@ -191,6 +191,80 @@ Three views:
 | `/practice` | `src/app/practice/page.tsx` | Practice articles list |
 | `/[slug]` | `src/app/[slug]/page.tsx` | Catch-all for static pages (e.g., `/about`, `/club-rules`, `/session-format`) |
 
+## Club (debate platform)
+
+Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.js server components + server actions proxying the worker via `debate_session` cookie.
+
+### Club Routes
+
+| Route | File | Description |
+|---|---|---|
+| `/club` | `src/app/club/page.tsx` | Club home — live/open/closed debate lists |
+| `/club/debates` | `src/app/club/debates/page.tsx` | All debates |
+| `/club/debates/new` | `src/app/club/debates/new/page.tsx` | Create debate form (client) |
+| `/club/debates/[id]` | `src/app/club/debates/[id]/page.tsx` | Single debate with turns, challenges, voting |
+| `/club/tags` | `src/app/club/tags/page.tsx` | All tags with debate counts |
+| `/club/tags/[slug]` | `src/app/club/tags/[slug]/page.tsx` | Debates filtered by tag |
+| `/club/users/[username]` | `src/app/club/users/[username]/page.tsx` | User profile — bio, debates, tags, reputation |
+| `/club/judge` | `src/app/club/judge/page.tsx` | Judge dashboard for reviewing flagged content |
+| `/club/login` | `src/app/club/(auth)/login/page.tsx` | Login form |
+| `/club/register` | `src/app/club/(auth)/register/page.tsx` | Register form |
+
+### Club Components
+
+| File | Purpose |
+|---|---|
+| `src/components/debate/DebateCard.tsx` | Debate list card with vote count |
+| `src/components/debate/DebateHeader.tsx` | Debate detail header with vote, flag, moderation cover |
+| `src/components/debate/DebateTurns.tsx` | Turns list with moderation states |
+| `src/components/debate/TurnBlock.tsx` | Single turn with vote, flag, cover/removed states |
+| `src/components/debate/TurnForm.tsx` | Turn submission form |
+| `src/components/debate/ChallengeSection.tsx` | Challenge submission form |
+| `src/components/debate/ClosureRequest.tsx` | Mutual closure flow |
+| `src/components/debate/StatusBadge.tsx` | Debate status pill |
+| `src/components/debate/TagBadge.tsx` | Tag pill linking to tags page |
+| `src/components/debate/VoteButton.tsx` | Upvote button with optimistic UI |
+| `src/components/debate/FlagButton.tsx` | Flag dialog (reasons tied to club rules) |
+| `src/components/club/WarningsBanner.tsx` | Warning/block banners for users |
+
+### Club Lib
+
+| File | Purpose |
+|---|---|
+| `src/lib/api-client.ts` | Fetches Worker API with auth header |
+| `src/lib/session.ts` | Session cookie management (`debate_session`) |
+| `src/lib/auth-actions.ts` | Register/login/logout server actions |
+| `src/lib/debate-actions.ts` | Debate CRUD server actions |
+| `src/lib/queries.ts` | Data fetching: debate lists, detail, user profile |
+| `src/lib/votes.ts` | Vote toggle server action |
+| `src/lib/moderation.ts` | Flag, resolve, bio-edit, warn-ack server actions |
+| `src/lib/validations.ts` | Zod schemas for all forms |
+
+### Worker API
+
+Worker runs at `WORKER_API_URL` via `workers/api/`. Uses Hono, D1, sessions.
+
+| File | Purpose |
+|---|---|
+| `workers/api/src/index.ts` | App entry, mounts all routes |
+| `workers/api/src/lib.ts` | Auth helpers, `getCurrentUser`, `needJudge`, `ensureNotBlocked` |
+| `workers/api/src/routes/auth.ts` | `/api/auth/register`, `/login`, `/session` |
+| `workers/api/src/routes/debates.ts` | `/api/debates/...` CRUD, challenge, accept, turn, closure |
+| `workers/api/src/routes/tags.ts` | `/api/tags` list and per-tag debates |
+| `workers/api/src/routes/votes.ts` | `/api/votes/toggle` with rep-awarding logic |
+| `workers/api/src/routes/users.ts` | `/api/users/:username` profile, `/me` bio edit, warnings ack |
+| `workers/api/src/routes/flags.ts` | `/api/flags` create, list (judge), `/resolve` |
+| `workers/api/src/schema.sql` | Full DDL (fresh installs) |
+| `workers/api/src/seed.sql` | Seed data (users, debates, tags, votes, sample flags) |
+| `workers/api/migrations/0001_profiles_moderation.sql` | Migration for existing DBs (ALTERs + new tables + rep backfill) |
+
+### DB Tables
+
+- `users` — id, username, email, password_*, is_trusted, bio, role (member|judge), reputation, rep_locked, blocked_until
+- `sessions`, `tags`, `debates` (+moderation_state), `challengers`, `turns` (+moderation_state), `debate_tags`, `votes`
+- `flags` — flagger_id, flaggable_type, flaggable_id, reason, details, status, UNIQUE per user+target
+- `mod_actions` — judge_id, target_user_id, user_action (dismiss|warn|temp_block|rep_adjust|rep_lock), content_action (none|cover|remove), note, duration_days, rep_delta, acknowledged
+
 ### Components
 
 | File | Purpose |

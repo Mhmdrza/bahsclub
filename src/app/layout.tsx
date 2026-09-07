@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import Script from "next/script";
 import { getSiteConfig } from "@/lib/content";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -31,11 +32,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full`} suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("bahsclub-theme")||"system";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`,
-          }}
-        />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{var t=localStorage.getItem("bahsclub-theme")||"system";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>

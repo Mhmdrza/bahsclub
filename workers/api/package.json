@@ -6,12 +6,15 @@
     "db:init": "wrangler d1 execute bahsclub --remote --file=./src/schema.sql",
     "db:init:local": "wrangler d1 execute bahsclub --local --file=./src/schema.sql",
     "db:seed": "wrangler d1 execute bahsclub --remote --file=./src/seed.sql",
-    "db:seed:local": "wrangler d1 execute bahsclub --local --file=./src/seed.sql"
+    "db:seed:local": "wrangler d1 execute bahsclub --local --file=./src/seed.sql",
+    "db:migrate": "wrangler d1 migrations apply bahsclub --remote",
+    "db:migrate:local": "wrangler d1 migrations apply bahsclub --local"
   },
   "dependencies": {
     "hono": "^4.13.7"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260906.1",
     "wrangler": "^4.129.0"
   }
 }

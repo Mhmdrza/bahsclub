@@ -1,20 +1,23 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { TagBadge } from "./TagBadge";
 import { StatusBadge } from "./StatusBadge";
 
 export function DebateCard({
   debate: d,
-  statusColor,
 }: {
   debate: {
     debate: { id: number; title: string; status: string; currentTurn: number; maxTurns: number; createdAt: Date };
-    creator: { username: string };
+    creator: { id?: number; username: string };
     voteCount: number;
     turnCount: number;
     tags?: { id: number; name: string; slug: string }[];
   };
   statusColor?: string;
 }) {
+  const router = useRouter();
   return (
     <Link
       href={`/club/debates/${d.debate.id}`}
@@ -28,7 +31,15 @@ export function DebateCard({
               نوبت {d.debate.currentTurn}/{d.debate.maxTurns}
             </span>
             <span className="text-xs text-muted">•</span>
-            <span className="text-xs text-muted">{d.creator.username}</span>
+            <span
+              className="text-xs text-muted hover:text-accent transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/club/users/${d.creator.username}`);
+              }}
+            >
+              {d.creator.username}
+            </span>
           </div>
 
           <h3 className="font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug truncate">
