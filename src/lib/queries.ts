@@ -146,7 +146,7 @@ export async function getStatementDetail(id: number) {
     if (!data || !data.statement) return null;
 
     return {
-      statement: data.statement,
+      statement: mapStatement(data.statement),
       creator: data.creator ? { id: data.creator.id, username: data.creator.username } : null,
       tags: (data.tags || []).map((t: any) => ({ id: t.id, name: t.name, slug: t.slug })),
       counters: (data.counters || []).map(mapCounter),

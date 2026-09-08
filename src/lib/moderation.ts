@@ -75,3 +75,20 @@ export async function acknowledgeWarningsAction() {
   await apiFetch("/api/users/me/acknowledge-warnings", { method: "POST", token });
   revalidatePath("/club");
 }
+
+export async function applyJudgeAction(prev: unknown, formData: FormData) {
+  const name = formData.get("name") as string;
+  const phone = formData.get("phone") as string;
+  const topics = formData.get("topics") as string;
+  const experience = formData.get("experience") as string;
+
+  try {
+    await apiFetch("/api/flags/apply-judge", {
+      method: "POST",
+      body: { name, phone, topics, experience },
+    });
+    return { ok: true as const };
+  } catch (e: any) {
+    return { error: e.message || "خطا در ثبت درخواست" };
+  }
+}

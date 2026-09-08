@@ -181,4 +181,29 @@ flagsRt.post("/resolve", async (c) => {
   return ok({ ok: true });
 });
 
+flagsRt.post("/apply-judge", async (c) => {
+  const { name, phone, topics, experience } = await c.req.json<{
+    name: string;
+    phone: string;
+    topics: string;
+    experience?: string;
+  }>();
+
+  if (!name || typeof name !== "string" || name.trim().length < 2) {
+    return err("نام و نام خانوادگی را وارد کنید");
+  }
+  if (!phone || typeof phone !== "string" || phone.trim().length < 8) {
+    return err("شماره تماس معتبر وارد کنید");
+  }
+  if (!topics || typeof topics !== "string" || topics.trim().length < 3) {
+    return err("حوزه‌های مورد علاقه و توانمندی را وارد کنید");
+  }
+
+  await c.env.DB.prepare(
+    "INSERT INTO judge_applications (name, phone, topics, experience) VALUES (?, ?, ?, ?)"
+  ).bind(name.trim(), phone.trim(), topics.trim(), experience?.trim() || null).run();
+
+  return ok({ ok: true });
+});
+
 export { flagsRt };

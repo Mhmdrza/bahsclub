@@ -9,6 +9,8 @@ const RESERVED = new Set([
   "articles",
   "topics",
   "practice",
+  "judges",
+  "club",
   "api",
   "_next",
 ]);

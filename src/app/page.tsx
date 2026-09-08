@@ -33,8 +33,8 @@ export default function HomePage() {
         </div>
 
         <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
-        <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">
-          جایی که دنبال نظر مخالف میگردی  
+        <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">  
+          جایی که برای قوی‌تر شدن، دنبال منطقی‌ترین مخالف‌ها میگردی
         </h1>
         <div
           aria-hidden
