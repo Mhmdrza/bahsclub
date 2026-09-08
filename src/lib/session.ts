@@ -11,11 +11,21 @@ async function getToken(): Promise<string | null> {
   return cookieStore.get(SESSION_COOKIE)?.value || null;
 }
 
-export async function getSession(): Promise<{
-  user: { id: number; username: string; email: string; isTrusted: boolean; role: string; reputation: number; blockedUntil: string | null };
+export interface SessionData {
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    isTrusted: boolean;
+    role: string;
+    reputation: number;
+    blockedUntil: string | null;
+  };
   warnings: { id: number; note: string; createdAt: string }[];
   notificationCount: number;
-} | null> {
+}
+
+export async function getSession(): Promise<SessionData | null> {
   const token = await getToken();
   if (!token) return null;
   try {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSiteConfig } from "@/lib/content";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function SiteFooter() {
   const config = getSiteConfig();
@@ -11,17 +12,22 @@ export function SiteFooter() {
           <p className="font-semibold text-foreground">{config.title}</p>
           <p className="text-sm text-muted">{config.tagline}</p>
         </div>
-        <nav aria-label="ناوبری پاورقی">
-          <ul className="flex flex-wrap gap-4 text-sm">
-            {config.nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-muted hover:text-accent">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex flex-wrap items-center gap-6">
+          <nav aria-label="ناوبری پاورقی">
+            <ul className="flex flex-wrap gap-4 text-sm">
+              {config.nav.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-muted hover:text-accent">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -24,10 +24,10 @@ export default async function ClubHome() {
             <span>شناسنامه فکری تو</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            باورهایت را ثبت کن و در محک نقد بسنج
+            دیدگاه، مواضع، عقاید ویا نظرات خود را ثبت کن
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
-            در باشگاه اندیشه، هر کاربر با بیانیه‌ها و دیدگاه‌های مستدلش شناخته می‌شود. باوری که داری را تبیین کن، دلایلت را بیاور و بگذار منطق آزموده شود.
+            در باشگاه اندیشه، هر کاربر با بیانیه‌ها و دیدگاه‌های مستدلش شناخته می‌شود. باوری که داری را بیا کن، دلایلت را بیاور و بگذار منطق آزموده شود.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">

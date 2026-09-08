@@ -6,6 +6,7 @@ import { votes } from "./routes/votes";
 import { tags } from "./routes/tags";
 import { users } from "./routes/users";
 import { flagsRt } from "./routes/flags";
+import { invites } from "./routes/invites";
 
 type Bindings = { DB: D1Database };
 
@@ -18,6 +19,7 @@ app.route("/api/votes", votes);
 app.route("/api/tags", tags);
 app.route("/api/users", users);
 app.route("/api/flags", flagsRt);
+app.route("/api/invites", invites);
 
 const FORFEIT_HOURS = 24;
 

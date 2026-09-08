@@ -1,10 +1,12 @@
 import { getUserProfile } from "@/lib/queries";
 import { getSession } from "@/lib/session";
+import { logoutAction } from "@/lib/auth-actions";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { TagBadge } from "@/components/debate/TagBadge";
 import { DebateCard } from "@/components/debate/DebateCard";
 import { EditBioForm } from "./edit-bio-form";
+import { Mail, LogOut } from "lucide-react";
 
 export default async function UserProfilePage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
@@ -44,6 +46,17 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
               <p className="text-xs text-muted flex items-center gap-2">
                 <span>عضویت از {joined}</span>
               </p>
+              {isSelf && (
+                <div className="flex items-center gap-2 mt-3 sm:hidden">
+                  <Link
+                    href="/club/invites"
+                    className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border border-border bg-background hover:bg-surface text-muted hover:text-foreground transition-colors"
+                  >
+                    <Mail size={13} />
+                    <span>کدهای دعوت</span>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 
@@ -184,6 +197,21 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
           </p>
         )}
       </section>
+
+      {/* Account Settings / Danger zone for self */}
+      {isSelf && (
+        <section className="border-t border-border/60 pt-8 pb-4 flex justify-end">
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="inline-flex items-center gap-2 text-xs text-muted/80 hover:text-red-500 py-1.5 px-3 rounded-lg hover:bg-red-500/10 transition-colors"
+            >
+              <LogOut size={14} />
+              <span>خروج از حساب کاربری</span>
+            </button>
+          </form>
+        </section>
+      )}
     </div>
   );
 }
