@@ -34,7 +34,7 @@ export default function HomePage() {
 
         <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
         <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">  
-          جایی که برای قوی‌تر شدن، دنبال منطقی‌ترین مخالف‌ها میگردی
+          جایی که برای رشد کردن، دنبال منطقی‌ترین مخالفت‌ها میگردی
         </h1>
         <div
           aria-hidden
