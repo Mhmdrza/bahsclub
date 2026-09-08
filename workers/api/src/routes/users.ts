@@ -27,6 +27,31 @@ users.post("/me/acknowledge-warnings", async (c) => {
   return ok({ ok: true });
 });
 
+users.get("/me/notifications", async (c) => {
+  const token = getAuthToken(c);
+  const user = await getCurrentUser(c.env.DB, token);
+  const authErr = needAuth(user);
+  if (authErr) return authErr;
+
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, type, reference_type, reference_id, message, is_read, created_at FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 50"
+  ).bind(user!.id).all<any>();
+
+  return ok(results || []);
+});
+
+users.post("/me/notifications/read", async (c) => {
+  const token = getAuthToken(c);
+  const user = await getCurrentUser(c.env.DB, token);
+  const authErr = needAuth(user);
+  if (authErr) return authErr;
+
+  await c.env.DB.prepare(
+    "UPDATE notifications SET is_read = 1 WHERE user_id = ?"
+  ).bind(user!.id).run();
+  return ok({ ok: true });
+});
+
 users.patch("/me", async (c) => {
   const token = getAuthToken(c);
   const user = await getCurrentUser(c.env.DB, token);

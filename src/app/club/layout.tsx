@@ -3,7 +3,7 @@ import { logoutAction } from "@/lib/auth-actions";
 import Link from "next/link";
 import { WarningsBanner } from "@/components/club/WarningsBanner";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Bell, Plus } from "lucide-react";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
@@ -59,6 +59,18 @@ export default async function DebateLayout({ children }: { children: React.React
 
             {session ? (
               <div className="flex items-center gap-2">
+                <Link
+                  href="/club/notifications"
+                  className="relative p-1 text-muted hover:text-foreground transition-colors"
+                  title="اعلان‌ها"
+                >
+                  <Bell size={16} />
+                  {session.notificationCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                      {session.notificationCount > 9 ? "9+" : session.notificationCount}
+                    </span>
+                  )}
+                </Link>
                 <Link
                   href={`/club/users/${session.user.username}`}
                   className="text-xs font-mono font-medium px-2 py-1 rounded-md bg-background border border-border hover:border-accent/50 text-foreground transition-colors"

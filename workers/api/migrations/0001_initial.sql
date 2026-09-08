@@ -1,3 +1,5 @@
+-- 0001: initial schema
+
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT NOT NULL UNIQUE,
@@ -151,5 +153,3 @@ CREATE TABLE IF NOT EXISTS notifications (
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_notif_dedup ON notifications(user_id, reference_type, reference_id, type);
-
-PRAGMA foreign_keys = ON;

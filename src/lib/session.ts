@@ -14,6 +14,7 @@ async function getToken(): Promise<string | null> {
 export async function getSession(): Promise<{
   user: { id: number; username: string; email: string; isTrusted: boolean; role: string; reputation: number; blockedUntil: string | null };
   warnings: { id: number; note: string; createdAt: string }[];
+  notificationCount: number;
 } | null> {
   const token = await getToken();
   if (!token) return null;

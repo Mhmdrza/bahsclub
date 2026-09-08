@@ -54,7 +54,11 @@ auth.get("/session", async (c) => {
     "SELECT id, note, created_at FROM mod_actions WHERE target_user_id = ? AND user_action = 'warn' AND acknowledged = 0 ORDER BY created_at DESC"
   ).bind(user.id).all<any>();
 
-  return ok({ user, warnings: warnings || [] });
+  const [{ cnt }] = (await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM notifications WHERE user_id = ? AND is_read = 0"
+  ).bind(user.id).all<any>()).results || [{ cnt: 0 }];
+
+  return ok({ user, warnings: warnings || [], notificationCount: cnt as number });
 });
 
 export { auth };

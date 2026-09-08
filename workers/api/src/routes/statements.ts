@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { getAuthToken, getCurrentUser, needAuth, ensureNotBlocked, err, ok, getPagination, paginatedResponse } from "../lib";
+import { getAuthToken, getCurrentUser, needAuth, ensureNotBlocked, err, ok, getPagination, paginatedResponse, upsertNotification } from "../lib";
 
 const statements = new Hono<{ Bindings: { DB: D1Database } }>();
 
@@ -169,6 +169,9 @@ statements.post("/:id/counters", async (c) => {
   await c.env.DB.prepare("INSERT INTO counter_statements (statement_id, user_id, content) VALUES (?, ?, ?)")
     .bind(statementId, user!.id, content).run();
 
+  await upsertNotification(c.env.DB, stmt.user_id, "new_counter", "statement", statementId,
+    `${user!.username} پاسخی برای بیانیه «${stmt.title}» ثبت کرد`);
+
   return ok({ success: true });
 });
 
@@ -203,6 +206,9 @@ statements.post("/:id/counters/:cid/accept", async (c) => {
     c.env.DB.prepare("INSERT INTO debate_messages (debate_id, user_id, content, created_at) VALUES (?, ?, ?, ?)").bind(debateId, stmt.user_id, stmt.content, now),
     c.env.DB.prepare("INSERT INTO debate_messages (debate_id, user_id, content, created_at) VALUES (?, ?, ?, ?)").bind(debateId, counter.user_id, counter.content, now),
   ]);
+
+  await upsertNotification(c.env.DB, counter.user_id, "counter_accepted", "debate", debateId,
+    `${user!.username} پاسخ شما به «${stmt.title}» را پذیرفت و بحث آغاز شد`);
 
   return ok({ id: debateId });
 });

@@ -143,3 +143,19 @@ export function paginatedResponse(items: any[], page: number, limit: number, tot
     pagination: { page, limit, total, hasMore: page * limit < total },
   });
 }
+
+// ponytail: upsert — dedup per (user, ref_type, ref_id, type); bumps created_at on repeat
+export async function upsertNotification(
+  DB: D1Database,
+  userId: number,
+  type: string,
+  referenceType: string,
+  referenceId: number,
+  message: string,
+) {
+  await DB.prepare(`INSERT INTO notifications (user_id, type, reference_type, reference_id, message, is_read, created_at)
+    VALUES (?, ?, ?, ?, ?, 0, datetime('now'))
+    ON CONFLICT(user_id, reference_type, reference_id, type)
+    DO UPDATE SET is_read = 0, message = excluded.message, created_at = datetime('now')`)
+    .bind(userId, type, referenceType, referenceId, message).run();
+}

@@ -170,3 +170,43 @@ export async function getUserProfile(username: string) {
     return null;
   }
 }
+
+export interface NotifItem {
+  id: number;
+  type: string;
+  referenceType: string;
+  referenceId: number;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export async function getNotifications(): Promise<NotifItem[]> {
+  const token = await getTokenForAction();
+  if (!token) return [];
+  try {
+    const data = await apiFetch<any>("/api/users/me/notifications", { token });
+    return (data || []).map((n: any) => ({
+      id: n.id,
+      type: n.type,
+      referenceType: n.reference_type,
+      referenceId: n.reference_id,
+      message: n.message,
+      isRead: !!n.is_read,
+      createdAt: n.created_at,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export async function markNotificationsRead(): Promise<boolean> {
+  const token = await getTokenForAction();
+  if (!token) return false;
+  try {
+    await apiFetch("/api/users/me/notifications/read", { method: "POST", token });
+    return true;
+  } catch {
+    return false;
+  }
+}

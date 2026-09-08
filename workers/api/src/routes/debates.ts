@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { getAuthToken, getCurrentUser, needAuth, ensureNotBlocked, err, ok, getPagination, paginatedResponse } from "../lib";
+import { getAuthToken, getCurrentUser, needAuth, ensureNotBlocked, err, ok, getPagination, paginatedResponse, upsertNotification } from "../lib";
 
 const debates = new Hono<{ Bindings: { DB: D1Database } }>();
 
@@ -162,6 +162,12 @@ debates.post("/:id/message", async (c) => {
       .bind(now, debateId).run();
   }
 
+  const otherId = debate.creator_id === user!.id ? debate.opponent_id : debate.creator_id;
+  if (otherId) {
+    await upsertNotification(c.env.DB, otherId, "new_message", "debate", debateId,
+      `${user!.username} پیام جدیدی در بحث «${debate.title}» ارسال کرد`);
+  }
+
   return ok({ success: true, closureWiped });
 });
 
@@ -185,6 +191,13 @@ debates.post("/:id/closure", async (c) => {
     if (debate.closure_requested_by === user!.id) return err("قبلاً درخواست داده‌اید");
     await c.env.DB.prepare("UPDATE debates SET status = 'closed', closed_reason = 'mutual', closed_at = ?, closure_requested_by = NULL, updated_at = ? WHERE id = ?")
       .bind(now, now, debateId).run();
+
+    const otherId2 = debate.creator_id === user!.id ? debate.opponent_id : debate.creator_id;
+    if (otherId2) {
+      await upsertNotification(c.env.DB, otherId2, "closure_requested", "debate", debateId,
+        `${user!.username} با پایان بحث «${debate.title}» موافقت کرد و بحث بسته شد`);
+    }
+
     return ok({ status: "closed" });
   }
 
@@ -198,6 +211,12 @@ debates.post("/:id/closure", async (c) => {
     await c.env.DB.prepare("UPDATE debates SET status = 'closed', closed_reason = 'mutual', closed_at = ?, closure_requested_by = NULL, updated_at = ? WHERE id = ?")
       .bind(now, now, debateId).run();
     return ok({ status: "closed" });
+  }
+
+  const otherId3 = debate.creator_id === user!.id ? debate.opponent_id : debate.creator_id;
+  if (otherId3) {
+    await upsertNotification(c.env.DB, otherId3, "closure_requested", "debate", debateId,
+      `${user!.username} درخواست پایان بحث «${debate.title}» را داده است`);
   }
 
   return ok({ status: "requested" });
