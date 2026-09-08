@@ -3,70 +3,95 @@ import { logoutAction } from "@/lib/auth-actions";
 import Link from "next/link";
 import { WarningsBanner } from "@/components/club/WarningsBanner";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
-const session = await getSession();
+  const session = await getSession();
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground" dir="rtl">
-      <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-6">
+      <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-5">
             <Link
               href="/"
-              className="hidden sm:flex items-center gap-1 text-muted hover:text-foreground transition-colors"
+              className="text-xs text-muted hover:text-foreground transition-colors flex items-center gap-1"
+              title="بازگشت به سایت اصلی"
             >
               <ArrowRight size={14} />
-              <span>سایت</span>
+              <span className="hidden sm:inline">آموزش</span>
             </Link>
+            
+            <div className="h-4 w-px bg-border hidden sm:block" />
+
             <Link href="/club" className="font-bold text-lg tracking-tight hover:text-accent transition-colors">
-              باشگاه
+              باشگاه اندیشه
             </Link>
-            <nav className="flex gap-4 text-sm text-muted">
-              <Link href="/club/statements" className="hover:text-foreground transition-colors">بیانیه‌ها</Link>
-              <Link href="/club/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
-              <Link href="/club/tags" className="hover:text-foreground transition-colors">تگ‌ها</Link>
+
+            <nav className="flex items-center gap-4 text-sm text-muted">
+              <Link href="/club/debates" className="hover:text-foreground transition-colors">
+                مناظره‌ها
+              </Link>
+              <Link href="/club/tags" className="hover:text-foreground transition-colors">
+                موضوعات
+              </Link>
               {session && session.user.role === "judge" && (
-                <Link href="/club/judge" className="hover:text-gold transition-colors text-gold/80">داوری</Link>
+                <Link href="/club/judge" className="hover:text-gold transition-colors text-gold/90 font-medium">
+                  داوری
+                </Link>
               )}
             </nav>
           </div>
-          <div className="flex items-center gap-3 text-sm">
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/club/statements/new"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-accent text-accent-fg text-xs font-semibold hover:opacity-90 transition-opacity shadow-xs"
+            >
+              <Plus size={14} />
+              <span className="hidden sm:inline">ثبت باور / بیانیه</span>
+              <span className="sm:hidden">بیانیه</span>
+            </Link>
+
+            <div className="h-4 w-px bg-border" />
+
             <ThemeToggle />
+
             {session ? (
-              <>
+              <div className="flex items-center gap-2">
                 <Link
                   href={`/club/users/${session.user.username}`}
-                  className="text-muted font-medium hover:text-foreground transition-colors"
+                  className="text-xs font-mono font-medium px-2 py-1 rounded-md bg-background border border-border hover:border-accent/50 text-foreground transition-colors"
                 >
-                  {session.user.username}
+                  @{session.user.username}
                 </Link>
                 <form action={logoutAction}>
                   <button
                     type="submit"
-                    className="text-xs px-2.5 py-1 rounded border border-border hover:bg-background text-muted hover:text-foreground transition-colors"
+                    className="text-xs text-muted hover:text-red-500 transition-colors p-1"
+                    title="خروج"
                   >
                     خروج
                   </button>
                 </form>
-              </>
+              </div>
             ) : (
-              <>
-                <Link href="/club/login" className="text-muted hover:text-foreground transition-colors">
+              <div className="flex items-center gap-2 text-xs">
+                <Link href="/club/login" className="text-muted hover:text-foreground transition-colors px-2 py-1">
                   ورود
                 </Link>
                 <Link
                   href="/club/register"
-                  className="px-3 py-1.5 rounded text-sm bg-accent text-accent-fg hover:opacity-90 transition-opacity font-medium"
+                  className="px-2.5 py-1 rounded-md border border-border bg-background hover:bg-surface text-foreground font-medium transition-colors"
                 >
-                  ثبت‌نام
+                  عضویت
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>
       </header>
+
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-8">
         {session && session.warnings && session.warnings.length > 0 && (
           <div className="mb-6">
@@ -78,9 +103,10 @@ const session = await getSession();
         )}
         {children}
       </main>
-      <footer className="border-t border-border py-6 text-xs text-muted bg-surface">
+
+      <footer className="border-t border-border py-6 text-xs text-muted bg-surface/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          باشگاه بحث — بستری برای مناظره‌های عقلانی و ساختاریافته
+          باشگاه اندیشه — پایگاهی برای ثبت، محک و پالایش عقلانی باورها
         </div>
       </footer>
     </div>
