@@ -73,7 +73,7 @@ export function DebateHeader({
                 </div>
               </Link>
 
-              <span className="text-xs font-bold text-muted/60 px-1">VS</span>
+              <span className="text-xs font-bold text-muted/60 px-1">با</span>
 
               {opponent ? (
                 <Link
