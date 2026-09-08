@@ -36,7 +36,7 @@ export default async function ClubHome() {
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity shadow-xs"
             >
               <Plus size={16} />
-              <span>ثبت باور جدید</span>
+              <span>ثبت دیدگاه جدید</span>
             </Link>
             {session && (
               <Link
@@ -82,7 +82,7 @@ export default async function ClubHome() {
             <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/60">
               <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
                 <Flame size={16} className="text-accent" />
-                <span>مناظره‌های داغ و فعال</span>
+                <span>مباحثه‌های داغ و فعال</span>
               </h3>
               <Link href="/club/debates" className="text-xs text-accent hover:underline">
                 همه ({debates.length})
@@ -97,7 +97,7 @@ export default async function ClubHome() {
               </div>
             ) : (
               <p className="text-xs text-muted text-center py-4">
-                در حال حاضر مناظره فعالی وجود ندارد.
+                در حال حاضر مباحثه فعالی وجود ندارد.
               </p>
             )}
           </div>

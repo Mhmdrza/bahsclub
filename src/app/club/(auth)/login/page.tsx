@@ -26,7 +26,7 @@ export default function LoginPage() {
         </div>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه اندیشه</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
-          برای ثبت باورها، پاسخ به دیگران و شرکت در مناظره‌ها وارد حساب خود شوید
+          برای ثبت نظر پاسخ به دیگران و شرکت در مباحثه‌ها وارد حساب خود شوید
         </p>
 
         <form action={action} className="flex flex-col gap-4">

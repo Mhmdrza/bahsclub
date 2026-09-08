@@ -266,7 +266,7 @@ export default function HomePage() {
             href="/club"
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50"
           >
-            مشاهده مناظره‌های فعال
+            مشاهده مباحثه‌های فعال
           </Link>
         </div>
       </section>

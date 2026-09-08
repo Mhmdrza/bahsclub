@@ -63,7 +63,7 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
 
       {d.status === "in_progress" && session && !isParticipant && (
         <div className="text-center py-4 text-xs font-mono text-muted border border-dashed border-border rounded-lg mt-4 bg-surface/50">
-          این مناظره در حال انجام است. فقط شرکت‌کنندگان می‌توانند پیام ارسال کنند.
+          این مباحثه در حال انجام است. فقط شرکت‌کنندگان می‌توانند پیام ارسال کنند.
         </div>
       )}
 

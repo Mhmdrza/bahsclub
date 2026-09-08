@@ -45,7 +45,7 @@ export function CounterCard({
             </Link>
             {isAccepted && (
               <span className="text-[11px] px-2 py-0.5 rounded-md bg-accent/15 text-accent font-medium border border-accent/20">
-                پذیرفته‌شده برای مناظره
+                پذیرفته‌شده برای مباحثه
               </span>
             )}
           </div>
@@ -78,7 +78,7 @@ export function CounterCard({
             type="submit"
             className="text-xs px-4 py-2 rounded-xl bg-accent text-accent-fg font-semibold hover:opacity-90 transition-opacity shadow-xs cursor-pointer"
           >
-            پذیرش پاسخ و شروع مناظره رسمی
+            پذیرش پاسخ و شروع مباحثه رسمی
           </button>
         </form>
       )}

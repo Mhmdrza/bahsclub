@@ -111,7 +111,7 @@ export default async function StatementPage({ params }: { params: Promise<{ id: 
         <section className="border border-border bg-surface rounded-2xl p-6 shadow-xs">
           <h2 className="text-sm font-bold text-foreground mb-4 flex items-center gap-2">
             <Flame size={16} className="text-accent" />
-            <span>مناظره‌های شکل‌گرفته از این باور</span>
+            <span>مباحثه‌های شکل‌گرفته از این باور</span>
             <span className="text-xs font-normal text-muted font-mono">({data.debates.length})</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

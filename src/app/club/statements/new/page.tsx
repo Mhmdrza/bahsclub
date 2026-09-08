@@ -32,7 +32,7 @@ export default function CreateStatementPage() {
       <div className="border border-border bg-surface p-6 sm:p-8 rounded-2xl shadow-xs">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-3">
           <Sparkles size={13} />
-          <span>ثبت باور جدید</span>
+          <span>ثبت دیدگاه جدید</span>
         </div>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">طرح بیانیه فکری</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
@@ -123,7 +123,7 @@ export default function CreateStatementPage() {
             disabled={tags.length === 0}
             className="w-full py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity mt-2 shadow-xs cursor-pointer"
           >
-            ثبت باور در باشگاه
+            ثبت دیدگاه در باشگاه
           </button>
         </form>
       </div>

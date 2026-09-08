@@ -30,7 +30,7 @@ export default async function DebateLayout({ children }: { children: React.React
 
             <nav className="flex items-center gap-4 text-sm text-muted">
               <Link href="/club/debates" className="hover:text-foreground transition-colors">
-                مناظره‌ها
+                مباحثه‌ها
               </Link>
               <Link href="/club/tags" className="hover:text-foreground transition-colors">
                 موضوعات
@@ -49,7 +49,7 @@ export default async function DebateLayout({ children }: { children: React.React
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-accent text-accent-fg text-xs font-semibold hover:opacity-90 transition-opacity shadow-xs"
             >
               <Plus size={14} />
-              <span className="hidden sm:inline">ثبت باور / بیانیه</span>
+              <span className="hidden sm:inline">ثبت نظر / بیانیه</span>
               <span className="sm:hidden">بیانیه</span>
             </Link>
 

@@ -28,7 +28,7 @@ export function ClosureRequest({
     return (
       <div className="mt-6 text-center p-4 border border-accent/40 bg-accent-light/50 rounded-lg">
         <p className="text-sm font-medium text-foreground mb-3">
-          طرف مقابل پیشنهاد پایان این مناظره را داده است.
+          طرف مقابل پیشنهاد پایان این مباحثه را داده است.
         </p>
         <form action={action}>
           <input type="hidden" name="debateId" value={debateId} />

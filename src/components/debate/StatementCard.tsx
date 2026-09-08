@@ -78,7 +78,7 @@ export function StatementCard({
                 className="inline-flex items-center gap-1 text-accent font-medium hover:underline"
               >
                 <Flame size={14} />
-                <span>{s.activeDebateCount} مناظره در جریان</span>
+                <span>{s.activeDebateCount} مباحثه در جریان</span>
               </Link>
             )}
           </div>

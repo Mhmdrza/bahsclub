@@ -12,8 +12,8 @@ export default async function DebatesPage() {
     <div className="space-y-8" dir="rtl">
       <div className="border-b border-border pb-4">
         <div className="eyebrow mb-1">آرشیو گفتگوها</div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">مناظره‌ها</h1>
-        <p className="text-xs text-muted mt-1">مناظره‌های دوطرفه، ساختاریافته و ثبت‌شده در تاریخچه باشگاه</p>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">مباحثه‌ها</h1>
+        <p className="text-xs text-muted mt-1">مباحثه‌های دوطرفه، ساختاریافته و ثبت‌شده در تاریخچه باشگاه</p>
       </div>
 
       {debates.length === 0 ? (

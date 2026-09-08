@@ -37,7 +37,7 @@ export function DebateHeader({
       <div className="flex items-center gap-2 text-xs text-muted">
         <Link href="/club/debates" className="hover:text-foreground transition-colors flex items-center gap-1">
           <ArrowRight size={14} />
-          <span>همه مناظره‌ها</span>
+          <span>همه مباحثه‌ها</span>
         </Link>
       </div>
 
@@ -49,7 +49,7 @@ export function DebateHeader({
               {d.status === "in_progress" && (
                 <span className="inline-flex items-center gap-1 text-xs text-accent font-medium">
                   <Flame size={13} />
-                  <span>مناظره رسمی زنده</span>
+                  <span>مباحثه رسمی زنده</span>
                 </span>
               )}
             </div>
@@ -95,7 +95,7 @@ export function DebateHeader({
 
             {covered && (
               <div className="border border-gold/30 bg-gold/5 px-4 py-3 rounded-xl my-4 text-xs text-gold font-medium">
-                این مناظره توسط داور پوشانده شده است
+                این مباحثه توسط داور پوشانده شده است
               </div>
             )}
 

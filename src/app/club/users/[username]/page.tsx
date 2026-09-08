@@ -55,7 +55,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
             </div>
             <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
               <span className="block text-lg font-bold text-foreground font-mono">{debatesCount}</span>
-              <span className="text-[11px] text-muted">مناظره</span>
+              <span className="text-[11px] text-muted">مباحثه</span>
             </div>
             <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
               <span className="block text-lg font-bold text-foreground font-mono">{statementsCount}</span>
@@ -134,7 +134,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                   {s.active_debate_count > 0 && (
                     <>
                       <span>•</span>
-                      <span className="text-accent font-medium">{s.active_debate_count} مناظره فعال</span>
+                      <span className="text-accent font-medium">{s.active_debate_count} مباحثه فعال</span>
                     </>
                   )}
                 </div>
@@ -148,7 +148,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-bold text-foreground flex items-center gap-2">
-            <span>مناظره‌ها</span>
+            <span>مباحثه‌ها</span>
             <span className="text-xs font-normal text-muted font-mono">({profile.debates?.length || 0})</span>
           </h2>
         </div>
