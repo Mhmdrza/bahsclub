@@ -21,8 +21,8 @@ export function DebateMessages({
         </div>
       ) : (
         messages.map((msg) => {
-          const isSelf = session ? session.user.id === msg.userId : false;
-          const isCreator = creatorId ? msg.userId === creatorId : false;
+          const isSelf = session ? Number(session.user.id) === Number(msg.userId) : false;
+          const isCreator = creatorId ? Number(msg.userId) === Number(creatorId) : false;
 
           return (
             <MessageBlock
@@ -33,10 +33,11 @@ export function DebateMessages({
               createdAt={msg.createdAt}
               voteCount={msg.voteCount}
               userVoted={msg.userVoted}
-              canVote={!!session && !debaterIds.includes(session.user.id)}
+              canVote={!!session && !debaterIds.map(Number).includes(Number(session.user.id))}
               voteableType="message"
               voteableId={msg.id}
               session={session}
+              alignRight={isCreator}
               isSelf={isSelf}
               isCreator={isCreator}
             />

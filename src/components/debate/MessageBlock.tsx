@@ -16,6 +16,7 @@ export function MessageBlock({
   voteableType,
   voteableId,
   session,
+  alignRight = false,
   isSelf = false,
   isCreator = false,
 }: {
@@ -29,6 +30,7 @@ export function MessageBlock({
   voteableType: string;
   voteableId: number;
   session: { user: { id: number; role: string } } | null;
+  alignRight?: boolean;
   isSelf?: boolean;
   isCreator?: boolean;
 }) {
@@ -50,7 +52,7 @@ export function MessageBlock({
 
   if (initialModeration === "removed") {
     return (
-      <div className={`flex w-full ${isSelf ? "justify-start" : "justify-end"} my-2`}>
+      <div className={`flex w-full ${alignRight ? "justify-start" : "justify-end"} my-2`}>
         <div className="border border-border/40 bg-surface/30 rounded-2xl px-4 py-2 text-xs text-muted/70 italic max-w-sm">
           این پیام توسط داور حذف شده است
         </div>
@@ -60,7 +62,7 @@ export function MessageBlock({
 
   if (initialModeration === "covered" && !revealed) {
     return (
-      <div className={`flex w-full ${isSelf ? "justify-start" : "justify-end"} my-2`}>
+      <div className={`flex w-full ${alignRight ? "justify-start" : "justify-end"} my-2`}>
         <div className="border border-gold/30 bg-gold/5 rounded-2xl p-3 max-w-md w-full">
           <div className="flex items-center justify-between gap-2">
             <div className="text-xs text-gold font-medium flex items-center gap-1.5">
@@ -85,8 +87,19 @@ export function MessageBlock({
 
   const initialLetter = (username || "?").trim().charAt(0).toUpperCase();
 
+  // Color logic:
+  // - Self (my message): green
+  // - Strangers / others (both sides if viewing other's debate, or opponent): blue
+  const avatarStyle = isSelf
+    ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
+    : "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30";
+
+  const bubbleStyle = isSelf
+    ? "bg-emerald-500/5 dark:bg-emerald-500/10 border-emerald-500/25 text-foreground"
+    : "bg-blue-500/5 dark:bg-blue-500/10 border-blue-500/25 text-foreground";
+
   return (
-    <div className={`flex w-full gap-2.5 sm:gap-3 group my-1.5 ${isSelf ? "flex-row-reverse" : "flex-row"}`}>
+    <div className={`flex w-full gap-2.5 sm:gap-3 group my-1.5 ${alignRight ? "flex-row" : "flex-row-reverse"}`}>
       {/* Avatar */}
       <Link
         href={username ? `/club/users/${username}` : "#"}
@@ -94,22 +107,16 @@ export function MessageBlock({
         title={username}
       >
         <div
-          className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold select-none shadow-2xs border transition-transform group-hover:scale-105 ${
-            isSelf
-              ? "bg-accent text-accent-fg border-accent/40"
-              : isCreator
-              ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30"
-              : "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30"
-          }`}
+          className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold select-none shadow-2xs border transition-transform group-hover:scale-105 ${avatarStyle}`}
         >
           {initialLetter}
         </div>
       </Link>
 
       {/* Bubble Container */}
-      <div className={`flex flex-col max-w-[85%] sm:max-w-[78%] ${isSelf ? "items-end" : "items-start"}`}>
+      <div className={`flex flex-col max-w-[85%] sm:max-w-[78%] ${alignRight ? "items-start" : "items-end"}`}>
         {/* Username Header */}
-        <div className={`flex items-center gap-2 mb-1 px-1 text-xs text-muted ${isSelf ? "flex-row-reverse" : "flex-row"}`}>
+        <div className={`flex items-center gap-2 mb-1 px-1 text-xs text-muted ${alignRight ? "flex-row" : "flex-row-reverse"}`}>
           <Link
             href={username ? `/club/users/${username}` : "#"}
             className="font-semibold text-foreground/90 hover:text-accent transition-colors"
@@ -126,10 +133,8 @@ export function MessageBlock({
 
         {/* Message Bubble */}
         <div
-          className={`relative rounded-2xl px-4 py-3 shadow-2xs text-sm sm:text-[0.9375rem] leading-relaxed break-words ${
-            isSelf
-              ? "bg-accent/10 border border-accent/20 text-foreground rounded-tr-xs"
-              : "bg-surface border border-border text-foreground rounded-tl-xs"
+          className={`relative rounded-2xl px-4 py-3 shadow-2xs text-sm sm:text-[0.9375rem] leading-relaxed break-words border ${bubbleStyle} ${
+            alignRight ? "rounded-tr-xs" : "rounded-tl-xs"
           }`}
         >
           {initialModeration === "covered" && revealed && (
@@ -143,8 +148,8 @@ export function MessageBlock({
           {/* Footer inside bubble / actions */}
           <div
             className={`flex items-center gap-1.5 mt-2 pt-1.5 border-t ${
-              isSelf ? "border-accent/15 justify-end" : "border-border/40 justify-start"
-            }`}
+              isSelf ? "border-emerald-500/15" : "border-blue-500/15"
+            } ${alignRight ? "justify-start" : "justify-end"}`}
           >
             {/* Vote button */}
             <button
