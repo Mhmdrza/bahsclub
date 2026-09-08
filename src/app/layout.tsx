@@ -3,6 +3,7 @@ import { Vazirmatn } from "next/font/google";
 import Script from "next/script";
 import { getSiteConfig } from "@/lib/content";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteHeaderWrapper } from "@/components/SiteHeaderWrapper";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SkipLink } from "@/components/SkipLink";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>
           <SkipLink />
-          <SiteHeader />
+          <SiteHeaderWrapper>
+            <SiteHeader />
+          </SiteHeaderWrapper>
           <main id="main-content" className="flex-1">
             {children}
           </main>

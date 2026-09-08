@@ -2,6 +2,8 @@ import { getSession } from "@/lib/session";
 import { logoutAction } from "@/lib/auth-actions";
 import Link from "next/link";
 import { WarningsBanner } from "@/components/club/WarningsBanner";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { ArrowRight } from "lucide-react";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
@@ -11,8 +13,15 @@ export default async function DebateLayout({ children }: { children: React.React
       <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="hidden sm:flex items-center gap-1 text-muted hover:text-foreground transition-colors"
+            >
+              <ArrowRight size={14} />
+              <span>سایت</span>
+            </Link>
             <Link href="/club" className="font-bold text-lg tracking-tight hover:text-accent transition-colors">
-              باشگاه بحث
+              باشگاه
             </Link>
             <nav className="flex gap-4 text-sm text-muted">
               <Link href="/club/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
@@ -23,6 +32,7 @@ export default async function DebateLayout({ children }: { children: React.React
             </nav>
           </div>
           <div className="flex items-center gap-3 text-sm">
+            <ThemeToggle />
             {session ? (
               <>
                 <Link
