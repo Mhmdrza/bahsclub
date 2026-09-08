@@ -6,11 +6,11 @@ export async function GET(
 ) {
   const { id } = await params;
   try {
-    const data = await apiFetch<{ turnCount: number; closed: boolean; closureRequestedBy: number | null }>(
+    const data = await apiFetch<{ messageCount: number; closed: boolean; closureRequestedBy: number | null }>(
       `/api/debates/poll/${id}`
     );
     return Response.json(data);
   } catch {
-    return Response.json({ turnCount: 0, closed: false }, { status: 500 });
+    return Response.json({ messageCount: 0, closed: false }, { status: 500 });
   }
 }

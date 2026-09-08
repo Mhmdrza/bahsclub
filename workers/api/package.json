@@ -1,7 +1,7 @@
 {
   "name": "bahsclub-api",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --port 8342",
     "deploy": "wrangler deploy",
     "db:init": "wrangler d1 execute bahsclub --remote --file=./src/schema.sql",
     "db:init:local": "wrangler d1 execute bahsclub --local --file=./src/schema.sql",

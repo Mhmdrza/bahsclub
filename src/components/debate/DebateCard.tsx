@@ -2,17 +2,16 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { TagBadge } from "./TagBadge";
 import { StatusBadge } from "./StatusBadge";
 
 export function DebateCard({
   debate: d,
 }: {
   debate: {
-    debate: { id: number; title: string; status: string; currentTurn: number; maxTurns: number; createdAt: Date };
+    debate: { id: number; title: string; status: string; createdAt: Date };
     creator: { id?: number; username: string };
     voteCount: number;
-    turnCount: number;
+    messageCount: number;
     tags?: { id: number; name: string; slug: string }[];
   };
   statusColor?: string;
@@ -28,7 +27,7 @@ export function DebateCard({
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             <StatusBadge status={d.debate.status} />
             <span className="text-xs text-muted font-mono">
-              نوبت {d.debate.currentTurn}/{d.debate.maxTurns}
+              {d.messageCount} پیام
             </span>
             <span className="text-xs text-muted">•</span>
             <span
@@ -45,12 +44,6 @@ export function DebateCard({
           <h3 className="font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug truncate">
             {d.debate.title}
           </h3>
-
-          {d.tags && d.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-3">
-              {d.tags.map((t) => <TagBadge key={t.id} name={t.name} slug={t.slug} />)}
-            </div>
-          )}
         </div>
 
         <div className="flex flex-col items-center justify-center min-w-[3rem] py-1 px-2 rounded border border-border/70 bg-background text-muted group-hover:border-accent/30 group-hover:text-accent transition-colors">

@@ -5,73 +5,75 @@ import { getTokenForAction } from "./session";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export async function createDebateAction(formData: FormData) {
+export async function createStatementAction(formData: FormData) {
   const token = await getTokenForAction();
   if (!token) return { error: "نیاز به ورود" };
 
   const tagNames = (formData.get("tags") as string || "").split(",").map(t => t.trim()).filter(Boolean);
   const body = {
     title: formData.get("title") as string,
-    initialStatement: formData.get("initialStatement") as string,
+    content: formData.get("content") as string,
     tags: tagNames,
   };
 
+  let id: number;
   try {
-    const data = await apiFetch<{ id: number }>("/api/debates", { method: "POST", body, token });
-    revalidatePath("/club/debates");
-    redirect(`/club/debates/${data.id}`);
+    const data = await apiFetch<{ id: number }>("/api/statements", { method: "POST", body, token });
+    id = data.id;
+    revalidatePath("/club/statements");
   } catch (e: any) {
     return { error: e.message };
   }
+  redirect(`/club/statements/${id}`);
 }
 
-export async function challengeAction(prev: unknown, formData: FormData) {
+export async function counterAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
   if (!token) return { error: "نیاز به ورود" };
 
-  const debateId = parseInt(formData.get("debateId") as string);
+  const statementId = parseInt(formData.get("statementId") as string);
   try {
-    await apiFetch(`/api/debates/${debateId}/challenge`, {
+    await apiFetch(`/api/statements/${statementId}/counters`, {
       method: "POST",
-      body: { positionStatement: formData.get("positionStatement") as string },
+      body: { content: formData.get("content") as string },
       token,
     });
-    revalidatePath(`/club/debates/${debateId}`);
+    revalidatePath(`/club/statements/${statementId}`);
     return { error: "" };
   } catch (e: any) {
     return { error: e.message };
   }
 }
 
-export async function acceptChallengerAction(prev: unknown, formData: FormData) {
+export async function acceptCounterAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
   if (!token) return { error: "نیاز به ورود" };
 
-  const debateId = parseInt(formData.get("debateId") as string);
-  const challengerUserId = parseInt(formData.get("challengerUserId") as string);
-  const firstSpeakerId = parseInt(formData.get("firstSpeakerId") as string);
-  if (isNaN(debateId) || isNaN(challengerUserId)) return { error: "اطلاعات نامعتبر" };
+  const statementId = parseInt(formData.get("statementId") as string);
+  const counterId = parseInt(formData.get("counterId") as string);
+  if (isNaN(statementId) || isNaN(counterId)) return { error: "اطلاعات نامعتبر" };
 
+  let debateId: number;
   try {
-    await apiFetch(`/api/debates/${debateId}/accept`, {
+    const data = await apiFetch<{ id: number }>(`/api/statements/${statementId}/counters/${counterId}/accept`, {
       method: "POST",
-      body: { challengerUserId, firstSpeakerId },
       token,
     });
-    revalidatePath(`/club/debates/${debateId}`);
-    redirect(`/club/debates/${debateId}`);
+    debateId = data.id;
+    revalidatePath(`/club/statements/${statementId}`);
   } catch (e: any) {
     return { error: e.message };
   }
+  redirect(`/club/debates/${debateId}`);
 }
 
-export async function postTurnAction(prev: unknown, formData: FormData) {
+export async function postMessageAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
   if (!token) return { error: "نیاز به ورود" };
 
   const debateId = parseInt(formData.get("debateId") as string);
   try {
-    const result = await apiFetch<{ success: boolean; closureWiped?: boolean }>(`/api/debates/${debateId}/turn`, {
+    const result = await apiFetch<{ success: boolean; closureWiped?: boolean }>(`/api/debates/${debateId}/message`, {
       method: "POST",
       body: { content: formData.get("content") as string },
       token,

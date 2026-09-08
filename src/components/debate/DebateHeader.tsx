@@ -16,7 +16,7 @@ export function DebateHeader({
   isCreator,
   session,
 }: {
-  debate: { id: number; title: string; status: string; currentTurn: number; maxTurns: number; initialStatement: string; moderationState?: string; createdAt: Date; closedReason: string | null };
+  debate: { id: number; title: string; status: string; moderationState?: string; createdAt: Date; closedReason: string | null };
   creator: { id: number; username: string };
   opponent: { id: number; username: string } | null;
   tags: { id: number; name: string; slug: string }[];
@@ -35,9 +35,6 @@ export function DebateHeader({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             <StatusBadge status={d.status} label={statusLabel} />
-            <span className="text-xs text-muted font-mono">
-              نوبت {d.currentTurn}/{d.maxTurns}
-            </span>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground">
@@ -51,19 +48,12 @@ export function DebateHeader({
                 <span className="text-muted/60">در برابر</span>
                 <Link href={`/club/users/${opponent.username}`} className="font-semibold text-foreground hover:text-accent transition-colors">{opponent.username}</Link>
               </>
-            ) : (
-              <span className="text-muted/60">(در جستجوی هماورد)</span>
-            )}
+            ) : null}
           </div>
 
-          {covered ? (
+          {covered && (
             <div className="border border-gold/30 bg-gold/5 px-4 py-3 rounded-lg my-4 text-xs text-gold font-medium">
-              بیانیه اولیه توسط داور پوشانده شده است
-            </div>
-          ) : (
-            <div className="border-r-2 border-accent bg-surface px-4 py-3 rounded-l-md text-sm my-4 text-foreground/90 leading-relaxed shadow-xs">
-              <div className="text-xs font-semibold text-accent mb-1">طرح مسئله / موضع اولیه:</div>
-              <p className="whitespace-pre-wrap">{d.initialStatement}</p>
+              این مناظره توسط داور پوشانده شده است
             </div>
           )}
 

@@ -4,15 +4,13 @@ import { getTokenForAction } from "./session";
 function mapDebate(d: any) {
   return {
     id: d.id,
+    statementId: d.statement_id,
+    counterStatementId: d.counter_statement_id,
     title: d.title,
     status: d.status,
-    currentTurn: d.current_turn ?? 0,
-    maxTurns: d.max_turns ?? 10,
-    initialStatement: d.initial_statement,
     creatorId: d.creator_id,
     opponentId: d.opponent_id,
     creatorUsername: d.creator_username,
-    nextSpeaker: d.next_speaker,
     closureRequestedBy: d.closure_requested_by,
     closedReason: d.closed_reason,
     closedAt: d.closed_at,
@@ -22,30 +20,48 @@ function mapDebate(d: any) {
   };
 }
 
-function mapTurn(t: any) {
+function mapMessage(m: any) {
   return {
-    id: t.id,
-    debateId: t.debate_id,
-    userId: t.user_id,
-    turnNumber: t.turn_number,
-    content: t.content,
-    moderationState: t.moderation_state || "normal",
-    createdAt: t.created_at,
-    username: t.username,
-    voteCount: t.voteCount || 0,
-    userVoted: t.userVoted || false,
+    id: m.id,
+    debateId: m.debate_id,
+    userId: m.user_id,
+    content: m.content,
+    moderationState: m.moderation_state || "normal",
+    createdAt: m.created_at,
+    username: m.username,
+    voteCount: m.voteCount || 0,
+    userVoted: m.userVoted || false,
   };
 }
 
-function mapChallenger(c: any) {
+function mapCounter(c: any) {
   return {
     id: c.id,
-    debateId: c.debate_id,
+    statementId: c.statement_id,
     userId: c.user_id,
-    positionStatement: c.position_statement,
+    content: c.content,
     status: c.status,
+    moderationState: c.moderation_state || "normal",
     createdAt: c.created_at,
     username: c.username,
+    voteCount: c.voteCount || 0,
+    userVoted: c.userVoted || false,
+  };
+}
+
+function mapStatement(s: any) {
+  return {
+    id: s.id,
+    userId: s.user_id,
+    username: s.username,
+    title: s.title,
+    content: s.content,
+    moderationState: s.moderation_state || "normal",
+    createdAt: s.created_at,
+    voteCount: s.vote_count || 0,
+    counterCount: s.counter_count || 0,
+    activeDebateCount: s.active_debate_count || 0,
+    tags: s.tags || [],
   };
 }
 
@@ -72,7 +88,7 @@ export async function getDebatesWithVotes(opts?: { tag?: string; status?: string
         debate: mapDebate(d),
         creator: { username: d.creator_username },
         voteCount: d.vote_count || 0,
-        turnCount: d.current_turn || 0,
+        messageCount: d.message_count || 0,
         tags: [],
       })),
       pagination: data.pagination,
@@ -93,10 +109,50 @@ export async function getDebateDetail(debateId: number) {
       creator: data.creator ? { id: data.creator.id, username: data.creator.username } : null,
       opponent: data.opponent ? { id: data.opponent.id, username: data.opponent.username } : null,
       tags: (data.tags || []).map((t: any) => ({ id: t.id, name: t.name, slug: t.slug })),
-      turns: (data.turns || []).map(mapTurn),
-      pendingChallengers: (data.pendingChallengers || []).map(mapChallenger),
+      messages: (data.messages || []).map(mapMessage),
       debateVoteCount: data.debateVoteCount || 0,
       debateVoted: !!data.debateVoted,
+      session: data.user ? { user: data.user } : null,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function getStatements(opts?: { tag?: string; username?: string; page?: number }) {
+  const token = await getTokenForAction();
+  const params = new URLSearchParams();
+  if (opts?.tag) params.set("tag", opts.tag);
+  if (opts?.username) params.set("username", opts.username);
+  if (opts?.page) params.set("page", String(opts.page));
+  params.set("limit", "20");
+  const qs = params.toString();
+
+  try {
+    const data = await apiFetch<{ items: any[]; pagination: Pagination }>(`/api/statements${qs ? "?" + qs : ""}`, { token });
+    return {
+      statements: (data.items || []).map(mapStatement),
+      pagination: data.pagination || { page: 1, limit: 20, total: 0, hasMore: false },
+    };
+  } catch {
+    return { statements: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false } };
+  }
+}
+
+export async function getStatementDetail(id: number) {
+  const token = await getTokenForAction();
+  try {
+    const data = await apiFetch<any>(`/api/statements/${id}`, { token });
+    if (!data || !data.statement) return null;
+
+    return {
+      statement: data.statement,
+      creator: data.creator ? { id: data.creator.id, username: data.creator.username } : null,
+      tags: (data.tags || []).map((t: any) => ({ id: t.id, name: t.name, slug: t.slug })),
+      counters: (data.counters || []).map(mapCounter),
+      debates: data.debates || [],
+      statementVoteCount: data.statementVoteCount || 0,
+      statementVoted: !!data.statementVoted,
       session: data.user ? { user: data.user } : null,
     };
   } catch {

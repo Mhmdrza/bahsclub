@@ -8,29 +8,29 @@ const POLL_INTERVAL = 10000;
 
 export function LivePoll({
   debateId,
-  turnCount,
+  messageCount,
   active,
 }: {
   debateId: number;
-  turnCount: number;
+  messageCount: number;
   active: boolean;
 }) {
   const router = useRouter();
-  const lastTurnCount = useRef(turnCount);
+  const lastCount = useRef(messageCount);
   const closedRef = useRef(false);
 
   useEffect(() => {
     if (!active || closedRef.current) return;
 
-    lastTurnCount.current = turnCount;
+    lastCount.current = messageCount;
 
     const interval = setInterval(async () => {
       try {
         const res = await fetch(`/api/poll/debate/${debateId}`);
         if (!res.ok) return;
         const data = await res.json();
-        if (data.turnCount !== lastTurnCount.current || data.closed) {
-          lastTurnCount.current = data.turnCount;
+        if (data.messageCount !== lastCount.current || data.closed) {
+          lastCount.current = data.messageCount;
           if (data.closed) closedRef.current = true;
           router.refresh();
         }
@@ -40,7 +40,7 @@ export function LivePoll({
     }, POLL_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [debateId, turnCount, active, router]);
+  }, [debateId, messageCount, active, router]);
 
   return null;
 }

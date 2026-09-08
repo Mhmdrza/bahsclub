@@ -47,30 +47,41 @@ users.get("/:username", async (c) => {
   ).bind(username).first<any>();
   if (!user) return err("کاربر یافت نشد", 404);
 
-  const pg = getPagination(c.req.query());
+  const dPg = getPagination(c.req.query());
 
-  const [{ total }] = (await c.env.DB.prepare(
+  const [{ total: debateTotal }] = (await c.env.DB.prepare(
     "SELECT COUNT(*) as total FROM debates d WHERE (d.creator_id = ? OR d.opponent_id = ?) AND d.moderation_state != 'removed'"
   ).bind(user.id, user.id).all<{ total: number }>()).results || [{ total: 0 }];
 
   const { results: debates } = await c.env.DB.prepare(`
     SELECT d.*,
-      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'debate' AND voteable_id = d.id) as vote_count
+      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'debate' AND voteable_id = d.id) as vote_count,
+      (SELECT COUNT(*) FROM debate_messages WHERE debate_id = d.id) as message_count
     FROM debates d
     WHERE (d.creator_id = ? OR d.opponent_id = ?) AND d.moderation_state != 'removed'
     ORDER BY d.updated_at DESC
     LIMIT ? OFFSET ?
-  `).bind(user.id, user.id, pg.limit, pg.offset).all<any>();
+  `).bind(user.id, user.id, dPg.limit, dPg.offset).all<any>();
+
+  const { results: statements } = await c.env.DB.prepare(`
+    SELECT s.*,
+      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'statement' AND voteable_id = s.id) as vote_count,
+      (SELECT COUNT(*) FROM debates WHERE statement_id = s.id AND status = 'in_progress') as active_debate_count
+    FROM statements s
+    WHERE s.user_id = ? AND s.moderation_state != 'removed'
+    ORDER BY s.created_at DESC
+    LIMIT 10
+  `).bind(user.id).all<any>();
 
   const { results: tags } = await c.env.DB.prepare(`
-    SELECT DISTINCT t.id, t.name, t.slug, COUNT(DISTINCT dt2.debate_id) as debate_count
+    SELECT DISTINCT t.id, t.name, t.slug, COUNT(DISTINCT st2.statement_id) as statement_count
     FROM tags t
-    JOIN debate_tags dt ON t.id = dt.tag_id
-    JOIN debates d ON dt.debate_id = d.id
-    JOIN debate_tags dt2 ON dt2.tag_id = t.id
-    WHERE d.creator_id = ? OR d.opponent_id = ?
-    GROUP BY t.id ORDER BY debate_count DESC
-  `).bind(user.id, user.id).all<any>();
+    JOIN statement_tags st ON t.id = st.tag_id
+    JOIN statements s ON st.statement_id = s.id
+    JOIN statement_tags st2 ON st2.tag_id = t.id
+    WHERE s.user_id = ?
+    GROUP BY t.id ORDER BY statement_count DESC
+  `).bind(user.id).all<any>();
 
   return ok({
     id: user.id,
@@ -82,8 +93,9 @@ users.get("/:username", async (c) => {
     blockedUntil: user.blocked_until,
     createdAt: user.created_at,
     debates: debates || [],
+    statements: statements || [],
     tags: tags || [],
-    pagination: { page: pg.page, limit: pg.limit, total, hasMore: pg.page * pg.limit < total },
+    pagination: { page: dPg.page, limit: dPg.limit, total: debateTotal, hasMore: dPg.page * dPg.limit < debateTotal },
   });
 });
 

@@ -4,6 +4,15 @@ import { getAuthToken, getCurrentUser, needAuth, needJudge, ensureNotBlocked, er
 const REASONS = ["personal_attack", "insulting_question", "derailing", "motive_guessing", "pressure", "spam", "other"];
 const SEP = "\x00";
 
+const ALLOWED_TYPES = ["statement", "counter_statement", "debate", "message"];
+
+const typeTableMap: Record<string, string> = {
+  statement: "statements",
+  counter_statement: "counter_statements",
+  debate: "debates",
+  message: "debate_messages",
+};
+
 const flagsRt = new Hono<{ Bindings: { DB: D1Database } }>();
 
 flagsRt.post("/", async (c) => {
@@ -18,18 +27,14 @@ flagsRt.post("/", async (c) => {
   const { flaggableType, flaggableId, reason, details } = await c.req.json<{
     flaggableType: string; flaggableId: number; reason: string; details?: string;
   }>();
-  if (!["debate", "turn"].includes(flaggableType)) return err("نوع گزارش نامعتبر");
+  if (!ALLOWED_TYPES.includes(flaggableType)) return err("نوع گزارش نامعتبر");
   if (!REASONS.includes(reason)) return err("دلیل نامعتبر");
 
-  if (flaggableType === "turn") {
-    const turn = await c.env.DB.prepare("SELECT user_id FROM turns WHERE id = ?").bind(flaggableId).first<any>();
-    if (!turn) return err("پیام یافت نشد", 404);
-    if (turn.user_id === user!.id) return err("نمی‌توانید پیام خود را گزارش کنید");
-  } else {
-    const debate = await c.env.DB.prepare("SELECT creator_id FROM debates WHERE id = ?").bind(flaggableId).first<any>();
-    if (!debate) return err("بحث یافت نشد", 404);
-    if (debate.creator_id === user!.id) return err("نمی‌توانید بحث خود را گزارش کنید");
-  }
+  const table = typeTableMap[flaggableType];
+  const col = flaggableType === "debate" ? "creator_id" : "user_id";
+  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first<any>();
+  if (!target) return err("یافت نشد", 404);
+  if (target.author === user!.id) return err("نمی‌توانید محتوای خود را گزارش کنید");
 
   await c.env.DB.prepare(
     "INSERT INTO flags (flagger_id, flaggable_type, flaggable_id, reason, details) VALUES (?, ?, ?, ?, ?)"
@@ -59,22 +64,39 @@ flagsRt.get("/", async (c) => {
   const pendingWithContext = [];
   for (const p of (pending || [])) {
     let contentPreview = "", authorName = "", debateTitle = "";
-    if (p.flaggable_type === "turn") {
-      const turn = await c.env.DB.prepare(
-        "SELECT t.content, u.username, d.title, d.id as debate_id FROM turns t JOIN users u ON t.user_id = u.id JOIN debates d ON t.debate_id = d.id WHERE t.id = ?"
+
+    if (p.flaggable_type === "message") {
+      const msg = await c.env.DB.prepare(
+        "SELECT m.content, u.username, d.title, d.id as debate_id FROM debate_messages m JOIN users u ON m.user_id = u.id JOIN debates d ON m.debate_id = d.id WHERE m.id = ?"
       ).bind(p.flaggable_id).first<any>();
-      if (!turn) continue;
-      contentPreview = turn.content.slice(0, 300);
-      authorName = turn.username;
-      debateTitle = turn.title;
+      if (!msg) continue;
+      contentPreview = msg.content.slice(0, 300);
+      authorName = msg.username;
+      debateTitle = msg.title;
+    } else if (p.flaggable_type === "counter_statement") {
+      const cs = await c.env.DB.prepare(
+        "SELECT cs.content, u.username, s.title FROM counter_statements cs JOIN users u ON cs.user_id = u.id JOIN statements s ON cs.statement_id = s.id WHERE cs.id = ?"
+      ).bind(p.flaggable_id).first<any>();
+      if (!cs) continue;
+      contentPreview = cs.content.slice(0, 300);
+      authorName = cs.username;
+      debateTitle = cs.title;
+    } else if (p.flaggable_type === "statement") {
+      const stmt = await c.env.DB.prepare(
+        "SELECT s.content, u.username FROM statements s JOIN users u ON s.user_id = u.id WHERE s.id = ?"
+      ).bind(p.flaggable_id).first<any>();
+      if (!stmt) continue;
+      contentPreview = stmt.content.slice(0, 300);
+      authorName = stmt.username;
+      debateTitle = "";
     } else {
-      const debate = await c.env.DB.prepare(
-        "SELECT d.initial_statement, u.username, d.title FROM debates d JOIN users u ON d.creator_id = u.id WHERE d.id = ?"
+      const d = await c.env.DB.prepare(
+        "SELECT d.title, u.username FROM debates d JOIN users u ON d.creator_id = u.id WHERE d.id = ?"
       ).bind(p.flaggable_id).first<any>();
-      if (!debate) continue;
-      contentPreview = debate.initial_statement.slice(0, 300);
-      authorName = debate.username;
-      debateTitle = debate.title;
+      if (!d) continue;
+      contentPreview = d.title;
+      authorName = d.username;
+      debateTitle = d.title;
     }
 
     const reasons = (p.reasons || "").split(SEP);
@@ -93,7 +115,7 @@ flagsRt.get("/", async (c) => {
       contentPreview,
       authorName,
       debateTitle,
-      debateId: p.flaggable_type === "turn" ? null : p.flaggable_id,
+      debateId: null,
       flaggers,
     });
   }
@@ -121,19 +143,14 @@ flagsRt.post("/resolve", async (c) => {
       contentAction?: string; note?: string; durationDays?: number; repDelta?: number;
     }>();
 
-  if (!["debate", "turn"].includes(flaggableType)) return err("نوع نامعتبر");
+  if (!ALLOWED_TYPES.includes(flaggableType)) return err("نوع نامعتبر");
   if (!["dismiss", "warn", "temp_block", "rep_adjust", "rep_lock", "rep_unlock"].includes(userAction)) return err("اقدام نامعتبر");
 
-  let targetUserId: number;
-  if (flaggableType === "turn") {
-    const turn = await c.env.DB.prepare("SELECT user_id FROM turns WHERE id = ?").bind(flaggableId).first<any>();
-    if (!turn) return err("پیام یافت نشد", 404);
-    targetUserId = turn.user_id;
-  } else {
-    const debate = await c.env.DB.prepare("SELECT creator_id FROM debates WHERE id = ?").bind(flaggableId).first<any>();
-    if (!debate) return err("بحث یافت نشد", 404);
-    targetUserId = debate.creator_id;
-  }
+  const table = typeTableMap[flaggableType];
+  const col = flaggableType === "debate" ? "creator_id" : "user_id";
+  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first<any>();
+  if (!target) return err("یافت نشد", 404);
+  const targetUserId = target.author;
 
   const batchOps: D1PreparedStatement[] = [
     c.env.DB.prepare("UPDATE flags SET status = 'resolved' WHERE flaggable_type = ? AND flaggable_id = ? AND status = 'pending'")
@@ -157,11 +174,7 @@ flagsRt.post("/resolve", async (c) => {
 
   if (contentAction && ["cover", "remove"].includes(contentAction)) {
     const moderationState = contentAction === "cover" ? "covered" : "removed";
-    if (flaggableType === "turn") {
-      batchOps.push(c.env.DB.prepare("UPDATE turns SET moderation_state = ? WHERE id = ?").bind(moderationState, flaggableId));
-    } else {
-      batchOps.push(c.env.DB.prepare("UPDATE debates SET moderation_state = ? WHERE id = ?").bind(moderationState, flaggableId));
-    }
+    batchOps.push(c.env.DB.prepare(`UPDATE ${table} SET moderation_state = ? WHERE id = ?`).bind(moderationState, flaggableId));
   }
 
   await c.env.DB.batch(batchOps);

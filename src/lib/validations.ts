@@ -11,22 +11,22 @@ export const loginSchema = z.object({
   password: z.string().min(1, "رمز عبور الزامی است"),
 });
 
-export const createDebateSchema = z.object({
+export const createStatementSchema = z.object({
   title: z.string().min(5, "عنوان حداقل ۵ حرف").max(200, "عنوان حداکثر ۲۰۰ حرف"),
-  initialStatement: z.string().min(50, "بیانیه اولیه حداقل ۵۰ حرف").max(5000),
+  content: z.string().min(50, "بیانیه حداقل ۵۰ حرف").max(5000),
   tags: z.array(z.string()).min(1, "حداقل یک برچسب").max(5, "حداکثر ۵ برچسب"),
 });
 
-export const challengeSchema = z.object({
-  positionStatement: z.string().min(50, "موضع‌گیری حداقل ۵۰ حرف").max(5000),
+export const counterSchema = z.object({
+  content: z.string().min(50, "پاسخ حداقل ۵۰ حرف").max(5000),
 });
 
-export const turnSchema = z.object({
+export const messageSchema = z.object({
   content: z.string().min(10, "پیام حداقل ۱۰ حرف").max(5000, "پیام حداکثر ۵۰۰۰ حرف"),
 });
 
 export const flagSchema = z.object({
-  flaggableType: z.enum(["debate", "turn"]),
+  flaggableType: z.enum(["statement", "counter_statement", "debate", "message"]),
   flaggableId: z.number(),
   reason: z.enum(["personal_attack", "insulting_question", "derailing", "motive_guessing", "pressure", "spam", "other"]),
   details: z.string().max(500).optional(),

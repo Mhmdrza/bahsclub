@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { ArrowRight } from "lucide-react";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
-  const session = await getSession();
+const session = await getSession();
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground" dir="rtl">
@@ -24,6 +24,7 @@ export default async function DebateLayout({ children }: { children: React.React
               باشگاه
             </Link>
             <nav className="flex gap-4 text-sm text-muted">
+              <Link href="/club/statements" className="hover:text-foreground transition-colors">بیانیه‌ها</Link>
               <Link href="/club/debates" className="hover:text-foreground transition-colors">بحث‌ها</Link>
               <Link href="/club/tags" className="hover:text-foreground transition-colors">تگ‌ها</Link>
               {session && session.user.role === "judge" && (

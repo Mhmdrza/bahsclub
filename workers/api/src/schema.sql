@@ -28,17 +28,41 @@ CREATE TABLE IF NOT EXISTS tags (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS statements (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  moderation_state TEXT NOT NULL DEFAULT 'normal',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS counter_statements (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  moderation_state TEXT NOT NULL DEFAULT 'normal',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS statement_tags (
+  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
+  tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+  PRIMARY KEY (statement_id, tag_id)
+);
+
 CREATE TABLE IF NOT EXISTS debates (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
+  counter_statement_id INTEGER NOT NULL REFERENCES counter_statements(id),
   creator_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   creator_username TEXT NOT NULL,
-  opponent_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  opponent_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
   title TEXT NOT NULL,
-  initial_statement TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'open',
-  max_turns INTEGER NOT NULL DEFAULT 10,
-  current_turn INTEGER NOT NULL DEFAULT 0,
-  next_speaker INTEGER,
+  status TEXT NOT NULL DEFAULT 'in_progress',
   closure_requested_by INTEGER,
   closed_reason TEXT,
   closed_at TEXT,
@@ -47,34 +71,24 @@ CREATE TABLE IF NOT EXISTS debates (
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE TABLE IF NOT EXISTS challengers (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  debate_id INTEGER NOT NULL REFERENCES debates(id) ON DELETE CASCADE,
-  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  position_statement TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending',
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
-);
-
-CREATE UNIQUE INDEX IF NOT EXISTS idx_challengers_du ON challengers(debate_id, user_id);
-
-CREATE TABLE IF NOT EXISTS turns (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  debate_id INTEGER NOT NULL REFERENCES debates(id) ON DELETE CASCADE,
-  user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
-  turn_number INTEGER NOT NULL,
-  content TEXT NOT NULL,
-  moderation_state TEXT NOT NULL DEFAULT 'normal',
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
-);
-
-CREATE UNIQUE INDEX IF NOT EXISTS idx_turns_debate ON turns(debate_id, turn_number);
-
 CREATE TABLE IF NOT EXISTS debate_tags (
   debate_id INTEGER NOT NULL REFERENCES debates(id) ON DELETE CASCADE,
   tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
   PRIMARY KEY (debate_id, tag_id)
 );
+
+CREATE TABLE IF NOT EXISTS debate_messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  debate_id INTEGER NOT NULL REFERENCES debates(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  content TEXT NOT NULL,
+  moderation_state TEXT NOT NULL DEFAULT 'normal',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_messages_debate ON debate_messages(debate_id, id);
+CREATE INDEX IF NOT EXISTS idx_counter_statement ON counter_statements(statement_id, status);
+CREATE INDEX IF NOT EXISTS idx_statement_user ON statements(user_id, id);
 
 CREATE TABLE IF NOT EXISTS votes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

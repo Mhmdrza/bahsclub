@@ -30,7 +30,7 @@ export default async function TagsPage() {
               >
                 <span>#{t.name}</span>
                 <span className="text-xs text-muted font-mono bg-background px-1.5 py-0.5 rounded border border-border/50">
-                  {t.debate_count}
+                  {t.statement_count}
                 </span>
               </Link>
             ))}

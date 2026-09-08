@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { createDebateAction } from "@/lib/debate-actions";
+import { createStatementAction } from "@/lib/debate-actions";
 
-export default function CreateDebatePage() {
+export default function CreateStatementPage() {
   const [error, setError] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState<string[]>([]);
@@ -21,22 +21,22 @@ export default function CreateDebatePage() {
   return (
     <div className="max-w-xl mx-auto mt-4">
       <div className="mb-6 border-b border-border pb-4">
-        <div className="eyebrow mb-1">طرح بحث</div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">ایجاد بحث جدید</h1>
-        <p className="text-xs text-muted mt-1">موضوع، ادعا و چارچوب نظری اولیه خود را به شکل منقح تبیین کنید.</p>
+        <div className="eyebrow mb-1">طرح بیانیه</div>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">بیانیه جدید</h1>
+        <p className="text-xs text-muted mt-1">موضوع و دیدگاه خود را به شکل منقح تبیین کنید تا دیگران بتوانند پاسخ دهند.</p>
       </div>
 
       <form
         onSubmit={async (e) => {
           e.preventDefault();
           const fd = new FormData(e.currentTarget);
-          const result = await createDebateAction(fd);
+          const result = await createStatementAction(fd);
           if (result?.error) setError(result.error);
         }}
         className="flex flex-col gap-5 border border-border bg-surface p-6 rounded-lg shadow-xs"
       >
         <div>
-          <label className="text-xs font-semibold text-foreground block mb-1.5">موضوع مباحثه</label>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">موضوع</label>
           <input
             name="title"
             placeholder="مثال: آیا هوش مصنوعی خلاقیت اصیل دارد؟"
@@ -46,10 +46,10 @@ export default function CreateDebatePage() {
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-foreground block mb-1.5">بیانیه اولیه</label>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">بیانیه</label>
           <textarea
-            name="initialStatement"
-            placeholder="استدلال‌ و یا منطق موضع خود را شرح دهید (حداقل ۵۰ حرف)..."
+            name="content"
+            placeholder="استدلال و منطق موضع خود را شرح دهید (حداقل ۵۰ حرف)..."
             required
             rows={5}
             className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-md resize-y focus:outline-hidden focus:border-accent"
@@ -110,7 +110,7 @@ export default function CreateDebatePage() {
           disabled={tags.length === 0}
           className="w-full py-2.5 text-sm rounded bg-accent text-accent-fg font-medium hover:opacity-90 disabled:opacity-50 transition-opacity mt-2"
         >
-          ایجاد و انتشار بحث
+          طرح بیانیه
         </button>
       </form>
     </div>
