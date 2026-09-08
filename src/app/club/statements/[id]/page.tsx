@@ -23,7 +23,7 @@ export default async function StatementPage({ params }: { params: Promise<{ id: 
   if (!data) notFound();
 
   const s = data.statement;
-  const isAuthor = !!session && session.user.id === s.user_id;
+  const isAuthor = !!session && session.user.id === s.userId;
   const covered = s.moderationState === "covered";
   const initial = (s.username || "?").trim().charAt(0).toUpperCase();
 
