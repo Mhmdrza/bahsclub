@@ -11,16 +11,16 @@ export function SiteHeaderClient({ config }: { config: SiteConfig }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <div className="flex items-center gap-6">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4">
+        <div className="flex items-center gap-6 sm:gap-8">
           <Link
             href="/"
-            className="text-lg font-bold text-foreground hover:text-accent tracking-tight"
+            className="text-lg sm:text-xl font-bold text-foreground hover:text-accent tracking-tight"
           >
             {config.title}
           </Link>
           <nav aria-label="ناوبری اصلی" className="hidden md:block">
-            <ul className="flex items-center gap-1">
+            <ul className="flex items-center gap-1.5">
               {config.nav.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -38,7 +38,7 @@ export function SiteHeaderClient({ config }: { config: SiteConfig }) {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/club"
-            className="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
+            className="text-xs  px-3 sm:px-3.5 py-1.5 rounded-lg bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             ورود به باشگاه
           </Link>
@@ -47,9 +47,9 @@ export function SiteHeaderClient({ config }: { config: SiteConfig }) {
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
             aria-label={isOpen ? "بستن منو" : "باز کردن منو"}
-            className="md:hidden flex items-center justify-center rounded-lg border border-border bg-surface p-1.5 text-foreground hover:bg-surface/80 transition-colors"
+            className="md:hidden flex items-center justify-center rounded-lg border border-border bg-surface p-2 text-foreground hover:bg-surface/80 transition-colors"
           >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
