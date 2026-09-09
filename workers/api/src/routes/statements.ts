@@ -107,7 +107,7 @@ statements.get("/:id", async (c) => {
   ).bind(id).all<any>();
 
   const { results: counters } = await c.env.DB.prepare(
-    "SELECT cs.*, u.username FROM counter_statements cs JOIN users u ON cs.user_id = u.id WHERE cs.statement_id = ? ORDER BY cs.created_at"
+    "SELECT cs.*, u.username, d.id as debate_id, d.status as debate_status FROM counter_statements cs JOIN users u ON cs.user_id = u.id LEFT JOIN debates d ON d.counter_statement_id = cs.id WHERE cs.statement_id = ? ORDER BY cs.created_at"
   ).bind(id).all<any>();
 
   const { results: debates } = await c.env.DB.prepare(
@@ -175,7 +175,7 @@ statements.post("/:id/counters", async (c) => {
   return ok({ success: true });
 });
 
-statements.post("/:id/counters/:cid/accept", async (c) => {
+statements.post("/:id/counters/:cid/debate", async (c) => {
   const statementId = parseInt(c.req.param("id"));
   const counterId = parseInt(c.req.param("cid"));
   const token = getAuthToken(c);
@@ -188,7 +188,7 @@ statements.post("/:id/counters/:cid/accept", async (c) => {
 
   const stmt = await c.env.DB.prepare("SELECT * FROM statements WHERE id = ?").bind(statementId).first<any>();
   if (!stmt) return err("بیانیه یافت نشد", 404);
-  if (stmt.user_id !== user!.id) return err("فقط ایجادکننده بیانیه می‌تواند بپذیرد");
+  if (stmt.user_id !== user!.id) return err("فقط ایجادکننده بیانیه می‌تواند مباحثه را شروع کند");
 
   const counter = await c.env.DB.prepare("SELECT * FROM counter_statements WHERE id = ? AND statement_id = ?").bind(counterId, statementId).first<any>();
   if (!counter) return err("پاسخ یافت نشد", 404);
@@ -201,14 +201,14 @@ statements.post("/:id/counters/:cid/accept", async (c) => {
   const debateId = inserted![0].id as number;
 
   await c.env.DB.batch([
-    c.env.DB.prepare("UPDATE counter_statements SET status = 'accepted' WHERE id = ?").bind(counterId),
+    c.env.DB.prepare("UPDATE counter_statements SET status = 'debating' WHERE id = ?").bind(counterId),
     c.env.DB.prepare("INSERT INTO debate_tags (debate_id, tag_id) SELECT ?, tag_id FROM statement_tags WHERE statement_id = ?").bind(debateId, statementId),
     c.env.DB.prepare("INSERT INTO debate_messages (debate_id, user_id, content, created_at) VALUES (?, ?, ?, ?)").bind(debateId, stmt.user_id, stmt.content, now),
     c.env.DB.prepare("INSERT INTO debate_messages (debate_id, user_id, content, created_at) VALUES (?, ?, ?, ?)").bind(debateId, counter.user_id, counter.content, now),
   ]);
 
-  await upsertNotification(c.env.DB, counter.user_id, "counter_accepted", "debate", debateId,
-    `${user!.username} پاسخ شما به «${stmt.title}» را پذیرفت و بحث آغاز شد`);
+  await upsertNotification(c.env.DB, counter.user_id, "debate_started", "debate", debateId,
+    `${user!.username} مباحثه‌ای با پاسخ شما به «${stmt.title}» شروع کرد`);
 
   return ok({ id: debateId });
 });

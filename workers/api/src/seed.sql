@@ -36,7 +36,7 @@ INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, st
 VALUES (
   1, 1, 3,
   'فهم یک طیف است نه یک ویژگی صفر و یکی. وقتی یک سیستم قادر به ترکیب مفاهیم جدید، استدلال چندمرحله‌ای و انتقال یادگیری به حوزه‌های نادیده باشد، تفکیک آن از درک انسانی بی‌پایه و ناشی از شهودگرایی بیولوژیکی است.',
-  'accepted',
+  'debating',
   datetime('now', '-4 days')
 );
 
@@ -76,7 +76,7 @@ INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, st
 VALUES (
   2, 2, 4,
   'اجرای UBI به دلیل بار مالیاتی فلج‌کننده موجب تورم مزمن و کاهش انگیزه نوآوری و مشارکت اقتصادی فعال می‌شود. تقویت تضمین اشتغال هدفمند و بازآموزی مهارتی بسیار اثربخش‌تر است.',
-  'accepted',
+  'debating',
   datetime('now', '-11 days')
 );
 
@@ -145,7 +145,7 @@ INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, st
 VALUES (
   5, 5, 2,
   'استقرای بدبینانه تاریخی نشان می‌دهد اکثر نظریه‌های علمی گذشته که شدیداً موفق بودند در نهایت باطل شدند (مانند نظریه فلوژیستون یا اتر). بنابراین ابزارگرایی و ضدواقع‌گرایی ساختاری رویکردی عقلانی‌تر است.',
-  'accepted',
+  'debating',
   datetime('now', '-3 days')
 );
 

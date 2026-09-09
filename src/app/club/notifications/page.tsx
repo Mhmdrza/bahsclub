@@ -7,7 +7,7 @@ const typeIcons: Record<string, React.ReactNode> = {
   new_message: <MessageCircle size={14} />,
   closure_requested: <Flag size={14} />,
   new_counter: <Zap size={14} />,
-  counter_accepted: <CheckCircle size={14} />,
+  debate_started: <CheckCircle size={14} />,
 };
 
 function linkFor(n: { referenceType: string; referenceId: number }): string {

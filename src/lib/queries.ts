@@ -46,6 +46,8 @@ function mapCounter(c: any) {
     username: c.username,
     voteCount: c.voteCount || 0,
     userVoted: c.userVoted || false,
+    debateId: c.debate_id || null,
+    debateStatus: c.debate_status || null,
   };
 }
 

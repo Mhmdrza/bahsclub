@@ -271,7 +271,7 @@ Worker runs at `WORKER_API_URL` via `workers/api/`. Uses Hono, D1, sessions.
 - `users` — id, username, email, password_*, is_trusted, bio, role (member|judge), reputation, rep_locked, blocked_until
 - `sessions`, `tags`
 - `statements` — id, user_id, username, title, content, moderation_state, created_at
-- `counter_statements` — id, statement_id, user_id, content, status (pending|accepted), moderation_state, created_at
+- `counter_statements` — id, statement_id, user_id, content, status (pending|debating), moderation_state, created_at
 - `statement_tags` — (statement_id, tag_id) junction
 - `debates` — id, statement_id, counter_statement_id, creator_id, creator_username, opponent_id, title, status (in_progress|closed), closure_requested_by, closed_reason (mutual|forfeit), closed_at, moderation_state, timestamps
 - `debate_tags`, `debate_messages` (+moderation_state)

@@ -8,10 +8,10 @@ import { VoteButton } from "@/components/debate/VoteButton";
 import { FlagButton } from "@/components/debate/FlagButton";
 import { MessageSquareQuote, Flame, ArrowRight } from "lucide-react";
 
-async function acceptAction(fd: FormData) {
+async function debateAction(fd: FormData) {
   "use server";
-  const { acceptCounterAction } = await import("@/lib/debate-actions");
-  await acceptCounterAction(null, fd);
+  const { debateCounterAction } = await import("@/lib/debate-actions");
+  await debateCounterAction(null, fd);
 }
 
 export default async function StatementPage({ params }: { params: Promise<{ id: string }> }) {
@@ -163,7 +163,7 @@ export default async function StatementPage({ params }: { params: Promise<{ id: 
                 counter={c}
                 isAuthor={isAuthor}
                 statementId={statementId}
-                acceptAction={acceptAction}
+                debateAction={debateAction}
               />
             ))}
           </div>

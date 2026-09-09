@@ -45,7 +45,7 @@ export async function counterAction(prev: unknown, formData: FormData) {
   }
 }
 
-export async function acceptCounterAction(prev: unknown, formData: FormData) {
+export async function debateCounterAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
   if (!token) return { error: "نیاز به ورود" };
 
@@ -55,7 +55,7 @@ export async function acceptCounterAction(prev: unknown, formData: FormData) {
 
   let debateId: number;
   try {
-    const data = await apiFetch<{ id: number }>(`/api/statements/${statementId}/counters/${counterId}/accept`, {
+    const data = await apiFetch<{ id: number }>(`/api/statements/${statementId}/counters/${counterId}/debate`, {
       method: "POST",
       token,
     });

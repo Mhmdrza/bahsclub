@@ -49,7 +49,7 @@ export function DebateHeader({
               {d.status === "in_progress" && (
                 <span className="inline-flex items-center gap-1 text-xs text-accent font-medium">
                   <Flame size={13} />
-                  <span>مباحثه رسمی زنده</span>
+                  <span>مباحثه در جریان</span>
                 </span>
               )}
             </div>

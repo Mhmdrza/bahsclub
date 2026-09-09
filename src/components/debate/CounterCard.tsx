@@ -1,19 +1,20 @@
 import { VoteButton } from "./VoteButton";
 import { FlagButton } from "./FlagButton";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export function CounterCard({
   counter,
   isAuthor,
   statementId,
-  acceptAction,
+  debateAction,
 }: {
-  counter: { id: number; userId: number; content: string; status: string; username: string; voteCount: number; userVoted: boolean; moderationState?: string; createdAt: string };
+  counter: { id: number; userId: number; content: string; status: string; username: string; voteCount: number; userVoted: boolean; moderationState?: string; createdAt: string; debateId?: number | null; debateStatus?: string | null };
   isAuthor: boolean;
   statementId: number;
-  acceptAction: (fd: FormData) => Promise<void>;
+  debateAction: (fd: FormData) => Promise<void>;
 }) {
-  const isAccepted = counter.status === "accepted";
+  const isDebating = counter.status === "debating";
   const initial = (counter.username || "?").trim().charAt(0).toUpperCase();
 
   if (counter.moderationState === "removed") {
@@ -26,7 +27,7 @@ export function CounterCard({
 
   return (
     <div className={`border rounded-2xl p-5 shadow-xs transition-all ${
-      isAccepted ? "border-accent/40 bg-accent/5" : "border-border bg-surface"
+      isDebating ? "border-accent/40 bg-accent/5" : "border-border bg-surface"
     }`}>
       <div className="flex items-start justify-between gap-4 mb-3">
         <div className="flex items-center gap-2.5">
@@ -43,9 +44,9 @@ export function CounterCard({
             >
               @{counter.username}
             </Link>
-            {isAccepted && (
+            {isDebating && (
               <span className="text-[11px] px-2 py-0.5 rounded-md bg-accent/15 text-accent font-medium border border-accent/20">
-                پذیرفته‌شده برای مباحثه
+                نویسنده در حال مباحثه با این پاسخ
               </span>
             )}
           </div>
@@ -70,15 +71,27 @@ export function CounterCard({
         {counter.content}
       </p>
 
-      {isAuthor && !isAccepted && (
-        <form action={acceptAction} className="flex justify-end">
+      {isDebating && counter.debateId && (
+        <div className="flex justify-end mb-3">
+          <Link
+            href={`/club/debates/${counter.debateId}`}
+            className="text-xs px-4 py-2 rounded-xl bg-accent/10 text-accent font-semibold border border-accent/20 hover:bg-accent/20 transition-colors inline-flex items-center gap-1.5"
+          >
+            مشاهده مباحثه در جریان
+            <ArrowLeft size={13} />
+          </Link>
+        </div>
+      )}
+
+      {isAuthor && !isDebating && (
+        <form action={debateAction} className="flex justify-end">
           <input type="hidden" name="statementId" value={statementId} />
           <input type="hidden" name="counterId" value={counter.id} />
           <button
             type="submit"
             className="text-xs px-4 py-2 rounded-xl bg-accent text-accent-fg font-semibold hover:opacity-90 transition-opacity shadow-xs cursor-pointer"
           >
-            پذیرش پاسخ و شروع مباحثه رسمی
+            شروع مباحثه با این پاسخ
           </button>
         </form>
       )}
