@@ -25,7 +25,7 @@ export function SiteHeaderClient({ config }: { config: SiteConfig }) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="rounded-md px-3 py-1.5 text-xs text-muted hover:bg-surface hover:text-foreground transition-colors"
+                    className="rounded-md px-3 py-1.5 text-sm text-muted hover:bg-surface hover:text-foreground transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -38,7 +38,7 @@ export function SiteHeaderClient({ config }: { config: SiteConfig }) {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/club"
-            className="text-xs  px-3 sm:px-3.5 py-1.5 rounded-lg bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
+            className="text-xs sm:text-sm px-3 sm:px-3.5 py-2 rounded-lg bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             ورود به باشگاه
           </Link>

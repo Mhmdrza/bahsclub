@@ -17,14 +17,14 @@ export function ClubHeaderClient({
 
   return (
     <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4 sm:gap-5">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link
             href="/"
             className="text-xs text-muted hover:text-foreground transition-colors flex items-center gap-1"
             title="بازگشت به سایت اصلی"
           >
-            <ArrowRight size={14} />
+            <ArrowRight size={15} />
             <span className="hidden sm:inline">آموزش</span>
           </Link>
 
@@ -52,9 +52,9 @@ export function ClubHeaderClient({
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/club/statements/new"
-            className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-accent text-accent-fg text-xs font-semibold hover:opacity-90 transition-opacity shadow-xs whitespace-nowrap"
+            className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg bg-accent text-accent-fg text-xs  font-semibold hover:opacity-90 transition-opacity shadow-xs whitespace-nowrap"
           >
-            <Plus size={14} />
+            <Plus size={15} />
             <span className="hidden sm:inline">ثبت نظر / بیانیه</span>
             <span className="sm:hidden">بیانیه</span>
           </Link>
