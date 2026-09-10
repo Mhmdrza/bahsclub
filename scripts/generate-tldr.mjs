@@ -37,13 +37,6 @@ function escapeHtml(s) {
   })[c]);
 }
 
-function metaText(article) {
-  const parts = [];
-  if (article.category) parts.push(article.category);
-  if (article.readingTime) parts.push(`${article.readingTime} دقیقه مطالعه`);
-  return parts.join(" · ");
-}
-
 function sceneHook(article) {
   return `<div class="scene" id="s1" data-duration="4.5">
   <span class="eyebrow" data-entrance="eyebrow"><span class="dash"></span>بحث‌کلاب · خلاصه فوری</span>
@@ -66,7 +59,7 @@ function sceneKeyIdea(ideaLines) {
 </div>`;
 }
 
-function sceneCTA(article) {
+function sceneCTA() {
   return `<div class="scene" id="s3" data-duration="4">
   <span class="eyebrow" data-entrance="eyebrow"><span class="dash"></span>پیوستن به گفت‌وگو</span>
   <h1 class="title-lg" data-entrance="slide-up">ادعا را بیازمای، <span class="accent">نه شخص را</span></h1>
@@ -78,7 +71,7 @@ function sceneCTA(article) {
 }
 
 function tldrHtml(article, ideaLines) {
-  const scenes = [sceneHook(article), sceneKeyIdea(ideaLines), sceneCTA(article)];
+  const scenes = [sceneHook(article), sceneKeyIdea(ideaLines), sceneCTA()];
   return `<!doctype html>
 <html lang="fa" dir="rtl">
   <head>
@@ -126,7 +119,6 @@ function generate(slug) {
     description: data.description ?? "",
     readingTime: data.readingTime ?? "",
     category: data.category ?? "",
-    type: data.type ?? "article",
   };
 
   const idea = extractKeyIdea(content);

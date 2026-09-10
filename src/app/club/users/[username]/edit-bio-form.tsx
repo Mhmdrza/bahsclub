@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState } from "react";
 import { updateBioAction } from "@/lib/moderation";
 
 const initialState = { error: "" };
@@ -10,7 +10,8 @@ export function EditBioForm({ initialBio, username }: { initialBio: string; user
   const [state, action, pending] = useActionState(updateBioAction, initialState);
   const ok = "ok" in state;
 
-  useEffect(() => { if (ok) setEditing(false); }, [ok]);
+  // ponytail: direct setState when submission succeeds, no useEffect
+  if (ok && editing) setEditing(false);
 
   if (!editing) {
     return (

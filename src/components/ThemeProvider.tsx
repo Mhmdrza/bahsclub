@@ -52,16 +52,11 @@ export function useTheme(): ThemeContextValue {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
-  const [resolved, setResolved] = useState<ResolvedTheme>("light");
+  const [theme, setThemeState] = useState<Theme>(getStoredTheme);
+  const [resolved, setResolved] = useState<ResolvedTheme>(() => resolveTheme(getStoredTheme()));
 
-  // Hydrate from localStorage on mount
-  useEffect(() => {
-    const stored = getStoredTheme();
-    setThemeState(stored);
-    setResolved(resolveTheme(stored));
-    applyTheme(stored);
-  }, []);
+  // Apply theme on mount
+  useEffect(() => { applyTheme(theme); }, [theme]);
 
   // Listen for system preference changes
   useEffect(() => {

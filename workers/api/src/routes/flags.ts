@@ -32,7 +32,7 @@ flagsRt.post("/", async (c) => {
 
   const table = typeTableMap[flaggableType];
   const col = flaggableType === "debate" ? "creator_id" : "user_id";
-  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first<any>();
+  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first();
   if (!target) return err("یافت نشد", 404);
   if (target.author === user!.id) return err("نمی‌توانید محتوای خود را گزارش کنید");
 
@@ -59,7 +59,7 @@ flagsRt.get("/", async (c) => {
     WHERE f.status = 'pending'
     GROUP BY f.flaggable_type, f.flaggable_id
     ORDER BY MAX(f.created_at) DESC
-  `).all<any>();
+  `).all();
 
   const pendingWithContext = [];
   for (const p of (pending || [])) {
@@ -68,7 +68,7 @@ flagsRt.get("/", async (c) => {
     if (p.flaggable_type === "message") {
       const msg = await c.env.DB.prepare(
         "SELECT m.content, u.username, d.title, d.id as debate_id FROM debate_messages m JOIN users u ON m.user_id = u.id JOIN debates d ON m.debate_id = d.id WHERE m.id = ?"
-      ).bind(p.flaggable_id).first<any>();
+      ).bind(p.flaggable_id).first();
       if (!msg) continue;
       contentPreview = msg.content.slice(0, 300);
       authorName = msg.username;
@@ -76,7 +76,7 @@ flagsRt.get("/", async (c) => {
     } else if (p.flaggable_type === "counter_statement") {
       const cs = await c.env.DB.prepare(
         "SELECT cs.content, u.username, s.title FROM counter_statements cs JOIN users u ON cs.user_id = u.id JOIN statements s ON cs.statement_id = s.id WHERE cs.id = ?"
-      ).bind(p.flaggable_id).first<any>();
+      ).bind(p.flaggable_id).first();
       if (!cs) continue;
       contentPreview = cs.content.slice(0, 300);
       authorName = cs.username;
@@ -84,7 +84,7 @@ flagsRt.get("/", async (c) => {
     } else if (p.flaggable_type === "statement") {
       const stmt = await c.env.DB.prepare(
         "SELECT s.content, u.username FROM statements s JOIN users u ON s.user_id = u.id WHERE s.id = ?"
-      ).bind(p.flaggable_id).first<any>();
+      ).bind(p.flaggable_id).first();
       if (!stmt) continue;
       contentPreview = stmt.content.slice(0, 300);
       authorName = stmt.username;
@@ -92,7 +92,7 @@ flagsRt.get("/", async (c) => {
     } else {
       const d = await c.env.DB.prepare(
         "SELECT d.title, u.username FROM debates d JOIN users u ON d.creator_id = u.id WHERE d.id = ?"
-      ).bind(p.flaggable_id).first<any>();
+      ).bind(p.flaggable_id).first();
       if (!d) continue;
       contentPreview = d.title;
       authorName = d.username;
@@ -126,7 +126,7 @@ flagsRt.get("/", async (c) => {
     JOIN users u ON ma.judge_id = u.id
     JOIN users t ON ma.target_user_id = t.id
     ORDER BY ma.created_at DESC LIMIT 30
-  `).all<any>();
+  `).all();
 
   return ok({ pending: pendingWithContext, resolved: resolved || [] });
 });
@@ -148,7 +148,7 @@ flagsRt.post("/resolve", async (c) => {
 
   const table = typeTableMap[flaggableType];
   const col = flaggableType === "debate" ? "creator_id" : "user_id";
-  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first<any>();
+  const target = await c.env.DB.prepare(`SELECT ${col} as author FROM ${table} WHERE id = ?`).bind(flaggableId).first();
   if (!target) return err("یافت نشد", 404);
   const targetUserId = target.author;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BookOpen, MessageSquare } from "lucide-react";
@@ -49,14 +49,8 @@ function pickVariant(): HeroVariant {
   return VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
 }
 
-export default function HeroSection({ tagline }: { tagline: string }) {
-  const [v, setV] = useState<HeroVariant | null>(null);
-
-  useEffect(() => {
-    setV(pickVariant());
-  }, []);
-
-  if (!v) return null;
+export default function HeroSection() {
+  const [v] = useState<HeroVariant>(pickVariant);
 
   return (
     <section className="relative mb-20 overflow-hidden rounded-3xl border border-border/80 bg-surface/60 px-6 py-12 text-center shadow-sm sm:mb-24 sm:px-12 sm:py-20">

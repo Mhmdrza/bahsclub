@@ -4,20 +4,15 @@ import {
   CheckCircle2,
   ArrowLeft,
   LifeBuoy,
-  MessageSquare,
   Sparkles,
   Search,
-  BookOpen,
 } from "lucide-react";
-import { getSiteConfig } from "@/lib/content";
 import HeroSection from "@/components/HeroSection";
 
 export default function HomePage() {
-  const config = getSiteConfig();
-
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
-      <HeroSection tagline={config.tagline} />
+      <HeroSection />
 
       {/* 2. Side-by-Side Contrast: Bad vs Good Debate */}
       <section className="mb-20 sm:mb-24">

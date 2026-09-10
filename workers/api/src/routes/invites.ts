@@ -45,7 +45,7 @@ invites.get("/me", async (c) => {
 
   const { results } = await c.env.DB.prepare(
     "SELECT id, code, invited_email, used_by, used_at, created_at FROM invites WHERE inviter_id = ? ORDER BY created_at DESC LIMIT 50"
-  ).bind(user!.id).all<any>();
+  ).bind(user!.id).all();
 
   return ok(results || []);
 });
@@ -57,7 +57,7 @@ invites.get("/verify", async (c) => {
 
   const invite = await c.env.DB.prepare(
     "SELECT i.id, i.invited_email, i.used_by, i.inviter_id, u.username as inviter_username FROM invites i JOIN users u ON u.id = i.inviter_id WHERE i.code = ?"
-  ).bind(code).first<any>();
+  ).bind(code).first();
 
   if (!invite) return err("کد دعوت نامعتبر است", 404);
   if (invite.used_by) return err("این کد قبلاً استفاده شده", 410);
@@ -74,7 +74,7 @@ invites.get("/info", async (c) => {
 
   const invite = await c.env.DB.prepare(
     "SELECT i.used_by, u.username FROM invites i JOIN users u ON u.id = i.inviter_id WHERE i.code = ?"
-  ).bind(code).first<any>();
+  ).bind(code).first();
 
   if (!invite) return err("کد دعوت نامعتبر است", 404);
   if (invite.used_by) return err("این کد قبلاً استفاده شده", 410);

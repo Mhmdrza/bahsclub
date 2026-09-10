@@ -4,7 +4,7 @@ import { useActionState, useEffect, useState } from "react";
 import { registerAction } from "@/lib/auth-actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ArrowRight, UserPlus, Mail, Users, Lock } from "lucide-react";
+import { ArrowRight, UserPlus, Mail } from "lucide-react";
 
 const initialRegister = { error: "" };
 

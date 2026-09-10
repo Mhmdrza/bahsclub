@@ -18,12 +18,11 @@ export function MessageBlock({
   session,
   alignRight = false,
   isSelf = false,
-  isCreator = false,
 }: {
   username: string;
   content: string;
   moderationState?: string;
-  createdAt: Date;
+  createdAt: string | Date;
   voteCount: number;
   userVoted: boolean;
   canVote: boolean;
@@ -32,7 +31,6 @@ export function MessageBlock({
   session: { user: { id: number; role: string } } | null;
   alignRight?: boolean;
   isSelf?: boolean;
-  isCreator?: boolean;
 }) {
   const [voted, setVoted] = useState(initialVoted);
   const [voteCount, setVoteCount] = useState(initialVoteCount);

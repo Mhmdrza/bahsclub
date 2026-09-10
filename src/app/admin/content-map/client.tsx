@@ -4,13 +4,11 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import {
   Search,
-  Filter,
   AlertTriangle,
   BookOpen,
   Target,
   Zap,
   Layers,
-  Users,
   FileText,
   Eye,
   ChevronDown,

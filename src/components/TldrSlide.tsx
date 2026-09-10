@@ -54,8 +54,8 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
       const stage = el.querySelector(".tldr-stage") as HTMLElement;
 
       function fit() {
-        const w = el.clientWidth;
-        const h = el.clientHeight;
+        const w = el!.clientWidth;
+        const h = el!.clientHeight;
         stage.style.transform = "scale(" + Math.min(w / 1920, h / 1080) + ")";
       }
       stage.style.opacity = "0";

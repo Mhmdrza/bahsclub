@@ -7,20 +7,28 @@ import { ArrowRight, Mail, Copy, Check, Users, Infinity } from "lucide-react";
 
 const initState = { success: false, code: "", email: "" };
 
+interface Invite {
+  code: string;
+  invited_email: string;
+  used_by: number | null;
+  used_at: string | null;
+  created_at: string;
+}
+
 export default function InvitesPage() {
   const [state, action, pending] = useActionState(createInviteAction, initState);
-  const [invites, setInvites] = useState<any[]>([]);
+  const [invites, setInvites] = useState<Invite[]>([]);
   const [quota, setQuota] = useState<{ remaining: number; unlimited: boolean }>({ remaining: 0, unlimited: false });
   const [copied, setCopied] = useState<string | null>(null);
 
   useEffect(() => {
-    getMyInvitesAction().then((r: any) => setInvites(r.items || []));
+    getMyInvitesAction().then((r) => setInvites(r.items || []));
     getInviteQuotaAction().then(setQuota);
   }, []);
 
   useEffect(() => {
     if (state.success) {
-      getMyInvitesAction().then((r: any) => setInvites(r.items || []));
+      getMyInvitesAction().then((r) => setInvites(r.items || []));
       getInviteQuotaAction().then(setQuota);
     }
   }, [state.success]);
@@ -123,7 +131,7 @@ export default function InvitesPage() {
           <div className="flex flex-col gap-2">
             {invites.map((inv) => (
               <div
-                key={inv.id}
+                key={inv.code}
                 className="flex items-center justify-between p-3 rounded-xl bg-background border border-border text-xs"
               >
                 <div className="min-w-0 flex-1">

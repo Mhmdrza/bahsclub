@@ -77,15 +77,18 @@ export default async function StatementPage({ params }: { params: Promise<{ id: 
 
             {data.tags.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mt-4">
-                {data.tags.map((t: any) => (
-                  <Link
-                    key={t.id}
-                    href={`/club/tags/${t.slug}`}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs rounded-lg border border-border bg-background text-muted hover:text-accent hover:border-accent/40 transition-colors"
-                  >
-                    #{t.name}
-                  </Link>
-                ))}
+                {data.tags.map((t: unknown) => {
+                  const tag = t as { id: number; slug: string; name: string };
+                  return (
+                    <Link
+                      key={tag.id}
+                      href={`/club/tags/${tag.slug}`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-xs rounded-lg border border-border bg-background text-muted hover:text-accent hover:border-accent/40 transition-colors"
+                    >
+                      #{tag.name}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -157,10 +160,10 @@ export default async function StatementPage({ params }: { params: Promise<{ id: 
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {data.counters.map((c: any) => (
+{data.counters.map((counter: any) => (
               <CounterCard
-                key={c.id}
-                counter={c}
+                key={counter.id}
+                counter={counter}
                 isAuthor={isAuthor}
                 statementId={statementId}
                 debateAction={debateAction}

@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { getAuthToken, getCurrentUser, needAuth, err, ok, getPagination, paginatedResponse } from "../lib";
+import { getAuthToken, getCurrentUser, needAuth, err, ok, getPagination } from "../lib";
 
 const users = new Hono<{ Bindings: { DB: D1Database } }>();
 

@@ -15,14 +15,35 @@ const REASON_LABELS: Record<string, string> = {
   other: "سایر",
 };
 
+interface PendingFlag {
+  flaggableType: string;
+  flaggableId: number;
+  flagCount: number;
+  authorName: string;
+  debateTitle?: string;
+  contentPreview?: string;
+  flaggers: { username: string; reason: string; details?: string }[];
+}
+
+interface ResolvedAction {
+  id: number;
+  user_action: string;
+  target_username: string;
+  judge_username: string;
+  note?: string;
+  duration_days?: number;
+  rep_delta?: number;
+  created_at: string;
+}
+
 export default async function JudgePage() {
   const session = await getSession();
   if (!session || session.user.role !== "judge") notFound();
 
   const token = await getTokenForAction();
   const data = await apiFetch<{
-    pending: any[];
-    resolved: any[];
+    pending: PendingFlag[];
+    resolved: ResolvedAction[];
   }>("/api/flags", { token });
 
   return (
@@ -72,12 +93,12 @@ export default async function JudgePage() {
               <div className="p-3.5 rounded-xl bg-background/50 border border-border/60 text-xs">
                 <div className="font-semibold text-muted mb-2">گزارش‌های ثبت‌شده:</div>
                 <div className="flex flex-col gap-1.5">
-                  {item.flaggers.map((f: any, j: number) => (
+                  {item.flaggers.map((flagger, j) => (
                     <div key={j} className="flex items-center gap-2 text-muted">
-                      <span className="text-foreground font-medium">@{f.username}</span>
+                      <span className="text-foreground font-medium">@{flagger.username}</span>
                       <span>•</span>
-                      <span className="text-foreground/80">{REASON_LABELS[f.reason] || f.reason}</span>
-                      {f.details && <span className="text-muted/70 italic">({f.details})</span>}
+                      <span className="text-foreground/80">{REASON_LABELS[flagger.reason] || flagger.reason}</span>
+                      {flagger.details && <span className="text-muted/70 italic">({flagger.details})</span>}
                     </div>
                   ))}
                 </div>
@@ -98,21 +119,21 @@ export default async function JudgePage() {
             <span>تاریخچه اقدامات داوری اخیر ({data.resolved.length})</span>
           </summary>
           <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border/60">
-            {data.resolved.map((r: any) => (
-              <div key={r.id} className="text-xs text-muted border border-border/70 bg-background rounded-xl p-3 flex flex-wrap gap-2 items-center">
+            {data.resolved.map((resolved) => (
+              <div key={resolved.id} className="text-xs text-muted border border-border/70 bg-background rounded-xl p-3 flex flex-wrap gap-2 items-center">
                 <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
-                  r.user_action === "dismiss" ? "bg-muted/10 text-muted" : "bg-gold/15 text-gold border border-gold/30"
+                  resolved.user_action === "dismiss" ? "bg-muted/10 text-muted" : "bg-gold/15 text-gold border border-gold/30"
                 }`}>
-                  {r.user_action === "dismiss" ? "بلاموضوع" : r.user_action === "warn" ? "اخطار" : r.user_action === "temp_block" ? "مسدودیت" : r.user_action === "rep_adjust" ? "تغییر اعتبار" : "قفل اعتبار"}
+                  {resolved.user_action === "dismiss" ? "بلاموضوع" : resolved.user_action === "warn" ? "اخطار" : resolved.user_action === "temp_block" ? "مسدودیت" : resolved.user_action === "rep_adjust" ? "تغییر اعتبار" : "قفل اعتبار"}
                 </span>
                 <span>•</span>
-                <span className="font-semibold text-foreground">@{r.target_username}</span>
+                <span className="font-semibold text-foreground">@{resolved.target_username}</span>
                 <span>•</span>
-                <span className="text-muted/80">داور: @{r.judge_username}</span>
-                {r.note && <span className="text-muted/70">({r.note})</span>}
-                {r.duration_days && <span className="text-red-500 font-mono">{r.duration_days} روز</span>}
-                {r.rep_delta && <span className={`font-mono ${r.rep_delta > 0 ? "text-green-600" : "text-red-500"}`}>{r.rep_delta > 0 ? "+" : ""}{r.rep_delta}</span>}
-                <span className="text-muted/50 ml-auto font-mono">{new Intl.DateTimeFormat("fa-IR", { dateStyle: "short" }).format(new Date(r.created_at))}</span>
+                <span className="text-muted/80">داور: @{resolved.judge_username}</span>
+                {resolved.note && <span className="text-muted/70">({resolved.note})</span>}
+                {resolved.duration_days && <span className="text-red-500 font-mono">{resolved.duration_days} روز</span>}
+                {resolved.rep_delta && <span className={`font-mono ${resolved.rep_delta > 0 ? "text-green-600" : "text-red-500"}`}>{resolved.rep_delta > 0 ? "+" : ""}{resolved.rep_delta}</span>}
+                <span className="text-muted/50 ml-auto font-mono">{new Intl.DateTimeFormat("fa-IR", { dateStyle: "short" }).format(new Date(resolved.created_at))}</span>
               </div>
             ))}
           </div>

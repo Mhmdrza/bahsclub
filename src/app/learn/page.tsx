@@ -11,10 +11,8 @@ import {
 import {
   getPublishedLessons,
   getPublishedTopics,
-  getFeaturedLesson,
   getPracticeArticles,
   getTacticArticles,
-  getPublishedArticles,
 } from "@/lib/content";
 import { LessonCard } from "@/components/LessonCard";
 import { ArticleCard } from "@/components/ArticleCard";
@@ -28,13 +26,9 @@ export const metadata: Metadata = {
 
 export default function LearnPage() {
   const lessons = getPublishedLessons();
-  const featuredLesson = getFeaturedLesson();
   const topics = getPublishedTopics();
   const practiceArticles = getPracticeArticles().slice(0, 4);
   const tacticArticles = getTacticArticles().slice(0, 4);
-  const foundationArticles = getPublishedArticles()
-    .filter((a) => a.category === "سواد قضاوت" || a.category === "مبانی")
-    .slice(0, 4);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">

@@ -31,7 +31,7 @@ export function MessageForm({ debateId }: { debateId: number }) {
         {state?.error && (
           <p className="text-xs text-red-600 dark:text-red-400 font-medium px-1">{state.error}</p>
         )}
-        {"closureWiped" in state && (state as any).closureWiped && (
+        {"closureWiped" in state && (state as { closureWiped?: boolean }).closureWiped && (
           <p className="text-xs text-amber-600 dark:text-amber-400 font-medium px-1">
             درخواست پایان بحث قبلی با ثبت این پیام لغو شد
           </p>

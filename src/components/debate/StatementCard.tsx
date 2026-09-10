@@ -50,7 +50,7 @@ export function StatementCard({
           {/* Tags */}
           {s.tags && s.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-3">
-              {s.tags.map((t: any) => (
+              {s.tags.map((t: { id: number; name: string; slug: string }) => (
                 <Link
                   key={t.id}
                   href={`/club/tags/${t.slug}`}

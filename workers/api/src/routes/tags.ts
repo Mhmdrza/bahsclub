@@ -12,14 +12,14 @@ tags.get("/", async (c) => {
     SELECT t.*, COUNT(DISTINCT st.statement_id) as statement_count
     FROM tags t LEFT JOIN statement_tags st ON t.id = st.tag_id
     GROUP BY t.id ORDER BY statement_count DESC LIMIT ? OFFSET ?
-  `).bind(pg.limit, pg.offset).all<any>();
+  `).bind(pg.limit, pg.offset).all();
 
   return paginatedResponse(results || [], pg.page, pg.limit, total);
 });
 
 tags.get("/:slug", async (c) => {
   const slug = c.req.param("slug");
-  const tag = await c.env.DB.prepare("SELECT * FROM tags WHERE slug = ?").bind(slug).first<any>();
+  const tag = await c.env.DB.prepare("SELECT * FROM tags WHERE slug = ?").bind(slug).first();
   if (!tag) return err("برچسب یافت نشد", 404);
 
   const pg = getPagination(c.req.query());
@@ -37,7 +37,7 @@ tags.get("/:slug", async (c) => {
     WHERE st.tag_id = ? AND s.moderation_state != 'removed'
     ORDER BY vote_count DESC
     LIMIT ? OFFSET ?
-  `).bind(tag.id, pg.limit, pg.offset).all<any>();
+  `).bind(tag.id, pg.limit, pg.offset).all();
 
   return ok({ tag, items: results || [], pagination: { page: pg.page, limit: pg.limit, total, hasMore: pg.page * pg.limit < total } });
 });

@@ -11,7 +11,6 @@ export function DebateHeader({
   opponent,
   tags,
   statusLabel,
-  statusColor,
   debateVoteCount,
   debateVoted,
   isCreator,
@@ -22,7 +21,6 @@ export function DebateHeader({
   opponent: { id: number; username: string } | null;
   tags: { id: number; name: string; slug: string }[];
   statusLabel: string;
-  statusColor: string;
   debateVoteCount: number;
   debateVoted: boolean;
   isCreator: boolean;

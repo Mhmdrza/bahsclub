@@ -15,7 +15,7 @@ export function err(msg: string, status = 400) {
   return new Response(JSON.stringify({ error: msg }), { status, headers: corsHeaders() });
 }
 
-export function ok(data: any) {
+export function ok(data: unknown) {
   return new Response(JSON.stringify(data), { headers: corsHeaders() });
 }
 
@@ -28,9 +28,9 @@ export function generateToken(): string {
 export async function hashPassword(password: string, salt?: Uint8Array): Promise<{ hash: string; salt: string }> {
   const encoder = new TextEncoder();
   const saltBytes = salt || crypto.getRandomValues(new Uint8Array(16));
-  const key = await crypto.subtle.importKey('raw', encoder.encode(password) as any, 'PBKDF2', false, ['deriveBits']);
+  const key = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']);
   const bits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', salt: saltBytes as any, iterations: 100000, hash: 'SHA-256' },
+    { name: 'PBKDF2', salt: saltBytes, iterations: 100000, hash: 'SHA-256' },
     key, 256
   );
   const hash = btoa(String.fromCharCode(...new Uint8Array(bits)));
@@ -55,7 +55,7 @@ export async function deleteUserSessions(DB: D1Database, userId: number): Promis
   await DB.prepare("DELETE FROM sessions WHERE user_id = ?").bind(userId).run();
 }
 
-export function getAuthToken(c: any): string | null {
+export function getAuthToken(c: unknown): string | null {
   const auth = c.req.header('Authorization');
   if (!auth || !auth.startsWith('Bearer ')) return null;
   return auth.slice(7);
@@ -74,12 +74,12 @@ export interface DbUser {
 
 export async function getCurrentUser(DB: D1Database, token: string | null): Promise<DbUser | null> {
   if (!token) return null;
-  const session = await DB.prepare('SELECT user_id, expires_at FROM sessions WHERE id = ?').bind(token).first<any>();
+  const session = await DB.prepare('SELECT user_id, expires_at FROM sessions WHERE id = ?').bind(token).first();
   if (!session || new Date(session.expires_at) < new Date()) {
     if (session) await DB.prepare('DELETE FROM sessions WHERE id = ?').bind(token).run();
     return null;
   }
-  const user = await DB.prepare('SELECT id, username, email, is_trusted, role, reputation, rep_locked, blocked_until FROM users WHERE id = ?').bind(session.user_id).first<any>();
+  const user = await DB.prepare('SELECT id, username, email, is_trusted, role, reputation, rep_locked, blocked_until FROM users WHERE id = ?').bind(session.user_id).first();
   return user ? {
     id: user.id, username: user.username, email: user.email,
     isTrusted: !!user.is_trusted, role: user.role, reputation: user.reputation,
@@ -87,7 +87,7 @@ export async function getCurrentUser(DB: D1Database, token: string | null): Prom
   } : null;
 }
 
-export function needAuth(user: any) {
+export function needAuth(user: unknown) {
   if (!user) return err("نیاز به ورود", 401);
   return null;
 }
@@ -127,7 +127,7 @@ export function isStrongPassword(password: string): string | null {
   return null;
 }
 
-export function getClientIp(c: any): string {
+export function getClientIp(c: unknown): string {
   return c.req.header("CF-Connecting-IP") || c.req.header("X-Forwarded-For") || "unknown";
 }
 
@@ -137,7 +137,7 @@ export function getPagination(query: Record<string, string | undefined>, default
   return { page, limit, offset: (page - 1) * limit };
 }
 
-export function paginatedResponse(items: any[], page: number, limit: number, total: number) {
+export function paginatedResponse(items: unknown[], page: number, limit: number, total: number) {
   return ok({
     items: items,
     pagination: { page, limit, total, hasMore: page * limit < total },

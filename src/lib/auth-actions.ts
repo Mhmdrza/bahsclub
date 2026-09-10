@@ -1,7 +1,7 @@
 "use server";
 
 import { apiFetch } from "./api-client";
-import { setSessionCookie, clearSessionCookie, getTokenForAction } from "./session";
+import { setSessionCookie, clearSessionCookie } from "./session";
 import { redirect } from "next/navigation";
 import { registerSchema, loginSchema } from "./validations";
 
@@ -32,7 +32,7 @@ export async function loginAction(prev: unknown, formData: FormData) {
   try {
     const data = await apiFetch<{ token: string }>("/api/auth/login", { method: "POST", body: parsed.data });
     await setSessionCookie(data.token);
-  } catch (e: any) {
+  } catch {
     return { error: "نام کاربری یا رمز عبور اشتباه است" };
   }
   redirect("/club");

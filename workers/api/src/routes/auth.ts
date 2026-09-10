@@ -29,7 +29,7 @@ auth.post("/register", async (c) => {
   if (inviteCode) {
     const invite = await c.env.DB.prepare(
       "SELECT id FROM invites WHERE code = ? AND used_by IS NULL"
-    ).bind(inviteCode).first<any>();
+    ).bind(inviteCode).first();
     if (invite) {
       await c.env.DB.prepare("UPDATE invites SET used_by = ?, used_at = datetime('now') WHERE id = ?").bind(userId, invite.id).run();
     }
@@ -45,7 +45,7 @@ auth.post("/login", async (c) => {
   if (rl.limited) return err("تعداد درخواست بیش از حد. بعداً تلاش کنید", 429);
 
   const { username, password } = await c.req.json<{ username: string; password: string }>();
-  const user = await c.env.DB.prepare("SELECT id, username, email, password_hash, password_salt, is_trusted FROM users WHERE username = ?").bind(username).first<any>();
+  const user = await c.env.DB.prepare("SELECT id, username, email, password_hash, password_salt, is_trusted FROM users WHERE username = ?").bind(username).first();
   if (!user) return err("نام کاربری یا رمز عبور اشتباه است");
 
   const valid = await verifyPassword(password, user.password_hash, user.password_salt);
@@ -63,11 +63,11 @@ auth.get("/session", async (c) => {
 
   const { results: warnings } = await c.env.DB.prepare(
     "SELECT id, note, created_at FROM mod_actions WHERE target_user_id = ? AND user_action = 'warn' AND acknowledged = 0 ORDER BY created_at DESC"
-  ).bind(user.id).all<any>();
+  ).bind(user.id).all();
 
   const [{ cnt }] = (await c.env.DB.prepare(
     "SELECT COUNT(*) as cnt FROM notifications WHERE user_id = ? AND is_read = 0"
-  ).bind(user.id).all<any>()).results || [{ cnt: 0 }];
+  ).bind(user.id).all()).results || [{ cnt: 0 }];
 
   return ok({ user, warnings: warnings || [], notificationCount: cnt as number });
 });

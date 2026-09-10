@@ -12,7 +12,7 @@ async function getAuthor(db: D1Database, type: string, id: number): Promise<numb
   };
   const m = mapping[type];
   if (!m) return null;
-  const row = await db.prepare(`SELECT ${m.col} as author FROM ${m.table} WHERE id = ?`).bind(id).first<any>();
+  const row = await db.prepare(`SELECT ${m.col} as author FROM ${m.table} WHERE id = ?`).bind(id).first();
   return row?.author ?? null;
 }
 

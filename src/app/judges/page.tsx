@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { Scale, CheckCircle2, AlertCircle, ShieldCheck } from "lucide-react";
+import { Scale, CheckCircle2, ShieldCheck } from "lucide-react";
 import { JudgeApplicationForm } from "./form";
 
 export const metadata: Metadata = {

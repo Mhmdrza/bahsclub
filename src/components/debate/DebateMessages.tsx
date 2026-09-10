@@ -3,13 +3,20 @@ import { MessageBlock } from "./MessageBlock";
 export function DebateMessages({
   messages,
   session,
-  debateId,
   debaterIds,
   creatorId,
 }: {
-  messages: (any & { userVoted: boolean; voteCount: number; moderationState?: string })[];
+  messages: {
+    id: number;
+    userId: number;
+    username: string;
+    content: string;
+    createdAt: string;
+    voteCount: number;
+    userVoted: boolean;
+    moderationState?: string;
+  }[];
   session: { user: { id: number; role: string } } | null;
-  debateId: number;
   debaterIds: (number | null)[];
   creatorId?: number;
 }) {
@@ -39,8 +46,7 @@ export function DebateMessages({
               session={session}
               alignRight={isCreator}
               isSelf={isSelf}
-              isCreator={isCreator}
-            />
+              />
           );
         })
       )}

@@ -2,9 +2,6 @@ import { getSession } from "@/lib/session";
 import { logoutAction } from "@/lib/auth-actions";
 import { WarningsBanner } from "@/components/club/WarningsBanner";
 import { ClubHeaderClient } from "@/components/club/ClubHeaderClient";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { getSiteConfig } from "@/lib/content";
-import Link from "next/link";
 
 export default async function DebateLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();

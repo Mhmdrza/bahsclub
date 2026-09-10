@@ -28,11 +28,6 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
     closed: "پایان یافته",
   };
 
-  const statusColors: Record<string, string> = {
-    in_progress: "#2D8B6E",
-    closed: "#7B7B82",
-  };
-
   return (
     <div>
       <LivePoll debateId={d.id} messageCount={data.messages.length} active={d.status === "in_progress"} />
@@ -42,17 +37,15 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
         opponent={data.opponent}
         tags={data.tags}
         statusLabel={statusLabels[d.status]}
-        statusColor={statusColors[d.status]}
         debateVoteCount={data.debateVoteCount}
         debateVoted={data.debateVoted}
         isCreator={isCreator}
-        session={session as any}
+        session={session}
       />
 
       <DebateMessages
         messages={data.messages}
-        session={session as any}
-        debateId={d.id}
+        session={session}
         debaterIds={[d.creatorId, d.opponentId]}
         creatorId={d.creatorId}
       />

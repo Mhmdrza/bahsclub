@@ -37,9 +37,10 @@ async function runForfeitCheck(db: D1Database) {
   `).bind(new Date().toISOString(), cutoff).run();
 }
 
-export default {
+const handler = {
   fetch: app.fetch,
-  async scheduled(_event: ScheduledEvent, env: Bindings, _ctx: ExecutionContext) {
+  async scheduled(event: ScheduledEvent, env: Bindings) {
     await runForfeitCheck(env.DB);
   },
 };
+export default handler;

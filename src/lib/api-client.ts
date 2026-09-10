@@ -32,7 +32,7 @@ async function doFetch<T>(path: string, method: string, headers: Record<string, 
   }
 }
 
-export async function apiFetch<T = any>(path: string, opts?: FetchOpts): Promise<T> {
+export async function apiFetch<T = unknown>(path: string, opts?: FetchOpts): Promise<T> {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (opts?.token) headers["Authorization"] = `Bearer ${opts.token}`;
 
@@ -42,8 +42,8 @@ export async function apiFetch<T = any>(path: string, opts?: FetchOpts): Promise
 
   try {
     return await doFetch<T>(path, method, headers, body, timeout);
-  } catch (e: any) {
-    if (e.name === "AbortError") throw new Error("زمان درخواست منقضی شد");
+  } catch (e: unknown) {
+    if (e instanceof Error && e.name === "AbortError") throw new Error("زمان درخواست منقضی شد");
 
     // ponytail: single retry for idempotent GET; add configurable retry with backoff if transient errors grow
     if (method === "GET") {
