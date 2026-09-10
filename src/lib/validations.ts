@@ -4,12 +4,7 @@ export const registerSchema = z.object({
   username: z.string().min(2, "نام کاربری باید حداقل ۲ حرف باشد").max(30, "نام کاربری حداکثر ۳۰ حرف"),
   email: z.string().email("ایمیل نامعتبر است"),
   password: z.string().min(8, "رمز عبور باید حداقل ۸ حرف باشد").max(100).regex(/[a-zA-Z]/, "رمز عبور باید شامل حروف باشد").regex(/[0-9]/, "رمز عبور باید شامل عدد باشد"),
-  inviteCode: z.string().min(1, "کد دعوت الزامی است"),
-});
-
-export const waitlistSchema = z.object({
-  email: z.string().email("ایمیل نامعتبر است"),
-  note: z.string().max(200, "حداکثر ۲۰۰ حرف").optional(),
+  inviteCode: z.string().optional(),
 });
 
 export const loginSchema = z.object({

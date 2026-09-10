@@ -3,21 +3,13 @@ import { getAuthToken, getCurrentUser, needAuth, ok, err, generateToken, checkRa
 
 const invites = new Hono<{ Bindings: { DB: D1Database } }>();
 
-const INVITE_LIMIT_NORMAL = 10;
-
 invites.get("/quota", async (c) => {
   const token = getAuthToken(c);
   const user = await getCurrentUser(c.env.DB, token);
   const authErr = needAuth(user);
   if (authErr) return authErr;
 
-  if (user!.role === "judge" || user!.isTrusted) return ok({ remaining: -1, unlimited: true });
-
-  const [{ cnt }] = (await c.env.DB.prepare(
-    "SELECT COUNT(*) as cnt FROM invites WHERE inviter_id = ?"
-  ).bind(user!.id).all<{ cnt: number }>()).results || [{ cnt: 0 }];
-
-  return ok({ remaining: Math.max(0, INVITE_LIMIT_NORMAL - cnt), unlimited: false, totalUsed: cnt, limit: INVITE_LIMIT_NORMAL });
+  return ok({ unlimited: true });
 });
 
 invites.post("/", async (c) => {
@@ -28,34 +20,19 @@ invites.post("/", async (c) => {
 
   const { email } = await c.req.json<{ email: string }>();
   if (!email || !email.includes("@")) return err("ایمیل نامعتبر");
-
   const normalisedEmail = email.toLowerCase().trim();
 
   const ip = getClientIp(c);
   const rl = checkRateLimit(`invite:${ip}`, 5, 60 * 1000);
   if (rl.limited) return err("تعداد درخواست بیش از حد", 429);
 
-  if (user!.role !== "judge" && !user!.isTrusted) {
-    const [{ cnt }] = (await c.env.DB.prepare(
-      "SELECT COUNT(*) as cnt FROM invites WHERE inviter_id = ?"
-    ).bind(user!.id).all<{ cnt: number }>()).results || [{ cnt: 0 }];
-    if (cnt >= INVITE_LIMIT_NORMAL) return err("سهمیه دعوت شما تمام شده", 403);
-  }
-
   const existingUser = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(normalisedEmail).first();
   if (existingUser) return err("این ایمیل قبلاً ثبت‌نام کرده");
-
-  const existingWaitlist = await c.env.DB.prepare("SELECT id, status FROM waitlist WHERE email = ?").bind(normalisedEmail).first<any>();
-  if (existingWaitlist && existingWaitlist.status === "invited") return err("این ایمیل قبلاً دعوت شده");
 
   const code = generateToken().slice(0, 16);
   await c.env.DB.prepare(
     "INSERT INTO invites (code, inviter_id, invited_email) VALUES (?, ?, ?)"
   ).bind(code, user!.id, normalisedEmail).run();
-
-  if (existingWaitlist) {
-    await c.env.DB.prepare("UPDATE waitlist SET status = 'invited' WHERE email = ?").bind(normalisedEmail).run();
-  }
 
   return ok({ code, email: normalisedEmail });
 });

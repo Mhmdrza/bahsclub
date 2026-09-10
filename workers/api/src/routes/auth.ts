@@ -11,16 +11,8 @@ auth.post("/register", async (c) => {
   const { username, email, password, inviteCode } = await c.req.json<{ username: string; email: string; password: string; inviteCode: string }>();
   if (!username || username.length < 2) return err("نام کاربری حداقل ۲ حرف");
   if (!email || !email.includes("@")) return err("ایمیل نامعتبر");
-  if (!inviteCode) return err("ثبت‌نام فقط با دعوت‌نامه امکان‌پذیر است", 403);
 
   const normalisedEmail = email.toLowerCase().trim();
-
-  const invite = await c.env.DB.prepare(
-    "SELECT id, invited_email, used_by FROM invites WHERE code = ?"
-  ).bind(inviteCode).first<any>();
-  if (!invite) return err("کد دعوت نامعتبر است", 404);
-  if (invite.used_by) return err("این کد دعوت قبلاً استفاده شده", 410);
-  if (invite.invited_email !== normalisedEmail) return err("این کد برای ایمیل شما صادر نشده", 403);
 
   const pwErr = isStrongPassword(password);
   if (pwErr) return err(pwErr);
@@ -34,33 +26,17 @@ auth.post("/register", async (c) => {
   ).bind(username, normalisedEmail, hash, salt).run();
   const userId = inserted![0].id as number;
 
-  await c.env.DB.prepare("UPDATE invites SET used_by = ?, used_at = datetime('now') WHERE id = ?").bind(userId, invite.id).run();
+  if (inviteCode) {
+    const invite = await c.env.DB.prepare(
+      "SELECT id FROM invites WHERE code = ? AND used_by IS NULL"
+    ).bind(inviteCode).first<any>();
+    if (invite) {
+      await c.env.DB.prepare("UPDATE invites SET used_by = ?, used_at = datetime('now') WHERE id = ?").bind(userId, invite.id).run();
+    }
+  }
 
   const token = await createSession(c.env.DB, userId);
   return ok({ token, user: { id: userId, username, email: normalisedEmail, isTrusted: false } });
-});
-
-auth.post("/waitlist", async (c) => {
-  const ip = getClientIp(c);
-  const rl = checkRateLimit(`waitlist:${ip}`, 3, 60 * 1000);
-  if (rl.limited) return err("تعداد درخواست بیش از حد. بعداً تلاش کنید", 429);
-
-  const { email, note } = await c.req.json<{ email: string; note?: string }>();
-  if (!email || !email.includes("@")) return err("ایمیل نامعتبر");
-
-  const normalisedEmail = email.toLowerCase().trim();
-
-  const existingUser = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(normalisedEmail).first();
-  if (existingUser) return err("این ایمیل قبلاً ثبت‌نام کرده");
-
-  const existingWaitlist = await c.env.DB.prepare("SELECT id FROM waitlist WHERE email = ?").bind(normalisedEmail).first();
-  if (existingWaitlist) return err("این ایمیل قبلاً در لیست انتظار ثبت شده");
-
-  await c.env.DB.prepare(
-    "INSERT INTO waitlist (email, note) VALUES (?, ?)"
-  ).bind(normalisedEmail, note || "").run();
-
-  return ok({ message: "با موفقیت در لیست انتظار ثبت شدید" });
 });
 
 auth.post("/login", async (c) => {
