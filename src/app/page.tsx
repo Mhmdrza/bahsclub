@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   XCircle,
   CheckCircle2,
@@ -11,64 +10,14 @@ import {
   BookOpen,
 } from "lucide-react";
 import { getSiteConfig } from "@/lib/content";
+import HeroSection from "@/components/HeroSection";
 
 export default function HomePage() {
   const config = getSiteConfig();
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
-      {/* 1. Hero Section: The Invitation & Mission */}
-      <section className="relative mb-20 overflow-hidden rounded-3xl border border-border/80 bg-surface/60 px-6 py-12 text-center shadow-sm sm:mb-24 sm:px-12 sm:py-20">
-        {/* Background Artwork */}
-        <div className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden">
-          <Image
-            src="/hero-bg.jpg"
-            alt="Old philosophers debating"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 1024px"
-            className="scale-105 object-cover object-center opacity-80 blur-[2px] filter transition-all dark:opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background" />
-        </div>
-
-        <p className="eyebrow eyebrow-centered mb-4">{config.tagline}</p>
-        <h1 className="mx-auto mb-6 max-w-3xl text-4xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.4]">  
-          جایی که برای رشد کردن، دنبال منطقی‌ترین مخالفت‌ها میگردی
-        </h1>
-        <div
-          aria-hidden
-          className="mx-auto mb-6 flex items-center justify-center gap-2"
-        >
-          <span className="w-12 border-t border-gold/60" />
-          <span className="h-1.5 w-1.5 rotate-45 bg-gold/70" />
-          <span className="w-12 border-t border-gold/60" />
-        </div>
-        <p className="mx-auto mb-10 max-w-2xl text-lg leading-loose text-muted">
-          دلت برای گفت‌وگوهای متمدنانه تنگ نشده؟ جایی که اختلاف‌نظر به تحقیر و برچسب‌زنی ختم نشود، دو طرف به حرف هم گوش بدهند و هدف، بردن به هر قیمتی نباشد.{" "}
-          <strong className="font-semibold text-foreground">
-            بحث‌کلاب برای بازسازی همین حس و مهارت است:
-          </strong>{" "}
-          تمرین گفت‌وگو روی عمیق‌ترین اختلاف‌ها، با ذهن باز، استدلال شفاف و شوق کشف حقیقت.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/learn"
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
-          >
-            <BookOpen className="h-4 w-4" />
-            شروع یادگیری و آموزش‌ها
-          </Link>
-          <Link
-            href="/club"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
-          >
-            <MessageSquare className="h-4 w-4 text-accent" />
-            ورود به باشگاه
-          </Link>
-        </div>
-      </section>
+      <HeroSection tagline={config.tagline} />
 
       {/* 2. Side-by-Side Contrast: Bad vs Good Debate */}
       <section className="mb-20 sm:mb-24">
