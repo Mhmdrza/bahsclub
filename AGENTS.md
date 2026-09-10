@@ -59,3 +59,43 @@ Items below are known gaps that need addressing as the app scales.
 - Requires email service integration (Resend, SendGrid, etc.).
 
 <!-- END:architecture-roadmap -->
+
+<!-- BEGIN:tldr-system -->
+
+## TL;DR Animated Slide System
+
+Each article has a 3-scene animated TL;DR intro embedded directly in the article page via `TldrSlide` React component.
+
+### Implementation
+
+```
+src/components/TldrSlide.tsx   # Client component: GSAP timeline, 3 scenes, inline styles
+src/lib/content.ts             # extracts keyIdea from MDX blockquote
+src/app/articles/[slug]/page.tsx  # passes title, description, keyIdea, readingTime, category to TldrSlide
+```
+
+### How it works
+
+`TldrSlide` renders 3 scenes on a fixed 1920×1080 artboard. `fit()` scales to container via JS. GSAP CDN loads via `<script>` tag inside component. Effects mount/unmount with React lifecycle.
+
+### Scenes
+
+| Scene | Content | Duration |
+|-------|---------|----------|
+| 1. Hook | article title, description, metadata | 0–4.5s |
+| 2. Key Idea | `ایده کلیدی` extracted from MDX blockquote | 4.6–8.6s |
+| 3. CTA | "ادعا را آزمایش کن" + article title | 9–25s |
+
+The engine (`useEffect`) builds a single GSAP timeline with `repeat: -1`. Each scene enters with staggered fade/slide animations.
+
+### Modifying
+
+- To change entrance animations: edit the `tl.fromTo()` calls in `TldrSlide.tsx`
+- To add scenes: add a new `.tldr-scene` div + corresponding GSAP tweens
+- To change visual style: edit the `<style>` block in the component
+
+### Regeneration (none needed)
+
+TL;DRs are generated at render time — no build step. Adding a new article automatically gets a TL;DR if it has an `ایده کلیدی` blockquote.
+
+<!-- END:tldr-system -->

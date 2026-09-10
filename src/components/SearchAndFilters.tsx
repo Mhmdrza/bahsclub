@@ -164,6 +164,7 @@ export function SearchAndFilters({
                 publishedAt: "",
                 content: "",
                 headings: [],
+                keyIdea: null,
               }}
               completed={completedSlugs.has(item.slug)}
             />

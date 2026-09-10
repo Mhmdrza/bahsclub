@@ -16,6 +16,8 @@ import type {
 } from "./types";
 import { slugifyHeading } from "./utils";
 
+const KEY_IDEA_RE = /^\s*>\s*\*\*ایده[ٔ]?\s*کلیدی[^*]*\*\*\s*(.+)/m;
+
 const CONTENT_DIR = path.join(process.cwd(), "content");
 const ARTICLES_DIR = path.join(CONTENT_DIR, "articles");
 const LESSONS_DIR = path.join(CONTENT_DIR, "lessons");
@@ -82,8 +84,14 @@ function loadArticlesRaw(): Article[] {
       ...frontmatter,
       content: normalizedContent,
       headings: extractHeadings(normalizedContent),
+      keyIdea: extractKeyIdea(normalizedContent),
     };
   });
+}
+
+function extractKeyIdea(content: string): string | null {
+  const m = content.match(KEY_IDEA_RE);
+  return m ? m[1].trim() : null;
 }
 
 let articlesCache: Article[] | null = null;

@@ -34,6 +34,7 @@ export interface ArticleFrontmatter {
 export interface Article extends ArticleFrontmatter {
   content: string;
   headings: TocHeading[];
+  keyIdea: string | null;
 }
 
 export interface TocHeading {

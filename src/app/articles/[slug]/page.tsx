@@ -10,6 +10,7 @@ import {
 } from "@/lib/content";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TableOfContents } from "@/components/TableOfContents";
+import { TldrSlide } from "@/components/TldrSlide";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { PrevNextNav } from "@/components/PrevNextNav";
 import { MarkCompleteButton } from "@/components/MarkCompleteButton";
@@ -87,6 +88,14 @@ export default async function ArticlePage({ params, searchParams }: Props) {
               </div>
             )}
           </header>
+
+          <TldrSlide
+            title={article.title}
+            description={article.description}
+            keyIdea={article.keyIdea}
+            readingTime={article.readingTime}
+            category={article.category}
+          />
 
           <TableOfContents headings={article.headings} variant="mobile" />
 
