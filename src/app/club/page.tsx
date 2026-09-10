@@ -16,18 +16,19 @@ export default async function ClubHome() {
 
   return (
     <div className="space-y-8">
+      
       {/* Manifesto / Creator Prompt Banner */}
-      <div className="border border-border bg-surface rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
-        <div className="max-w-2xl">
+      <div className="border border-border bg-surface rounded-2xl p-6 sm:p-8 shadow-xs relative overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-3">
             <Sparkles size={13} />
-            <span>شناسنامه فکری تو</span>
+            <span>تقابل اندیشه‌ها</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            دیدگاه، مواضع، عقاید ویا نظرات خود را ثبت کن
+            دیدگاه یا مواضع خود را ثبت کن
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
-            در باشگاه اندیشه، هر کاربر با بیانیه‌ها و دیدگاه‌های مستدلش شناخته می‌شود. باوری که داری را بیا کن، دلایلت را بیاور و بگذار منطق آزموده شود.
+            در باشگاه اندیشه، هر کس قوی‌ترین استدلال و منطق‌های خود را محک میزند. دیدگاه و دلایلت را بیاور تا آزموده شود.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -47,7 +48,16 @@ export default async function ClubHome() {
               </Link>
             )}
           </div>
+          
         </div>
+        <video
+          className="w-full rounded-xl border border-border shadow-xs"
+          src="/club-hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
       </div>
 
       {/* Main Feed Grid (Feed of Statements + Live Debates Sidebar) */}
@@ -109,8 +119,8 @@ export default async function ClubHome() {
               ادعا را نقد کن، نه شخص را. استدلال‌ها باید مستدل، روشن و پذیرای پاسخ‌های ساختارمند باشند.
             </p>
           </div>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
