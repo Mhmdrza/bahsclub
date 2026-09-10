@@ -212,11 +212,11 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
 
             {/* Scene 3: CTA — resolve the tension */}
             <div className="tldr-scene" id="s3" style={{ display: "none" }}>
-              <span className="tldr-eyebrow" id="s3-eye"><span className="tldr-dash" />حفره را پر کن</span>
-              <h1 className="tldr-h1" id="s3-title">ادعا را بیازمای، <span className="accent">نه شخص را</span></h1>
+              <span className="tldr-eyebrow" id="s3-eye"><span className="tldr-dash" />جواب را در مقاله پیدا کن</span>
+              <h1 className="tldr-h1" id="s3-title">{title}</h1>
               <div className="tldr-cta-box" id="s3-body">
-                <p className="tldr-body" style={{ margin: 0 }}>مطالعهٔ کامل مقاله، تمرین‌ها و نمونه‌های استدلالی</p>
-                <span className="tldr-cta-badge">خواندن متن ←</span>
+                <p className="tldr-body" style={{ margin: 0 }}>تمرین‌ها، مثال‌ها و تحلیل کامل در</p>
+                <span className="tldr-cta-badge">{readingTime} دقیقه مطالعه ←</span>
               </div>
             </div>
           </div>
