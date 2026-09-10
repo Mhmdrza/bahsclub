@@ -39,74 +39,77 @@ function splitHook(hook: string): [string, string?] {
 
 export function TldrSlide({ title, description, keyIdea, readingTime, category }: TldrSlideProps) {
   const elRef = useRef<HTMLDivElement>(null);
-  const tlRef = useRef<any>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const el = elRef.current;
-    if (!el || typeof window === "undefined") return;
-    const gsap = (window as any).gsap;
-    if (!gsap) return;
+    if (!el) return;
 
-    const stage = el.querySelector(".tldr-stage") as HTMLElement;
-    stage.style.opacity = "0";
-    function fit() {
-      const w = el!.clientWidth;
-      const h = el!.clientHeight;
-      stage!.style.transform = "scale(" + Math.min(w / 1920, h / 1080) + ")";
-      stage!.style.opacity = "1";
-    }
-    fit();
-    window.addEventListener("resize", fit);
+    let tl: gsap.core.Timeline | null = null;
+    let resizeHandler: (() => void) | null = null;
 
-    const s = (id: string) => el.querySelector("#" + id) as HTMLElement | null;
+    import("gsap").then(({ default: gsap }) => {
+      if (!elRef.current) return; // unmounted before gsap loaded
 
-    const tl = gsap.timeline({ paused: true, repeat: -1 });
+      const stage = el.querySelector(".tldr-stage") as HTMLElement;
 
-    // hide all scenes except first
-    tl.set("#s2, #s3", { opacity: 0, visibility: "hidden", display: "none" });
-    tl.set("#s1", { opacity: 1, visibility: "visible", display: "flex" });
+      function fit() {
+        const w = el.clientWidth;
+        const h = el.clientHeight;
+        stage.style.transform = "scale(" + Math.min(w / 1920, h / 1080) + ")";
+      }
+      stage.style.opacity = "0";
+      fit();
+      resizeHandler = fit;
+      window.addEventListener("resize", fit);
+      stage.style.opacity = "1";
 
-    // glow breathe
-    tl.fromTo(s("glowA")!, { opacity: 0.08 }, { opacity: 0.18, duration: 3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
-    tl.fromTo(s("glowB")!, { opacity: 0.05 }, { opacity: 0.12, duration: 3.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.5);
+      const s = (id: string) => el.querySelector("#" + id) as HTMLElement | null;
 
-    // Scene 1: Hook (0–4.5s)
-    tl.fromTo(s("s1-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 0.2);
-    tl.fromTo(s("s1-title")!, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.65, ease: "power3.out" }, 0.55);
-    tl.fromTo(s("s1-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 1.15);
-    tl.fromTo(s("s1-meta")!, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 1.7);
+      tl = gsap.timeline({ paused: true, repeat: -1 });
 
-    // Transition S1→S2 (4.2–4.6s)
-    tl.to(s("s1")!, { opacity: 0, duration: 0.35, ease: "power2.in" }, 4.2);
-    tl.set(s("s2")!, { display: "flex", opacity: 0, visibility: "visible" }, 4.55);
-    tl.to(s("s2")!, { opacity: 1, duration: 0.25, ease: "power2.out" }, 4.6);
+      tl.set("#s2, #s3", { opacity: 0, visibility: "hidden", display: "none" });
+      tl.set("#s1", { opacity: 1, visibility: "visible", display: "flex" });
 
-    // Scene 2: Key Idea (4.6–9s)
-    tl.fromTo(s("s2-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 4.8);
-    tl.fromTo(s("s2-title")!, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 5.2);
-    if (s("s2-card")) {
-      tl.fromTo(s("s2-card")!, { y: 30, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 5.8);
-    } else if (s("s2-body")) {
-      tl.fromTo(s("s2-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 5.8);
-    }
+      tl.fromTo(s("glowA")!, { opacity: 0.22 }, { opacity: 0.35, duration: 3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+      tl.fromTo(s("glowB")!, { opacity: 0.15 }, { opacity: 0.25, duration: 3.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.5);
 
-    // Transition S2→S3 (8.6–9s)
-    tl.to(s("s2")!, { opacity: 0, duration: 0.3, ease: "power2.in" }, 8.6);
-    tl.set(s("s3")!, { display: "flex", opacity: 0, visibility: "visible" }, 8.9);
-    tl.to(s("s3")!, { opacity: 1, duration: 0.2, ease: "power2.out" }, 8.95);
+      tl.fromTo(s("s1-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 0.2);
+      tl.fromTo(s("s1-title")!, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.65, ease: "power3.out" }, 0.55);
+      tl.fromTo(s("s1-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 1.15);
+      tl.fromTo(s("s1-meta")!, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 1.7);
 
-    // Scene 3: CTA (9–25s)
-    tl.fromTo(s("s3-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 9.15);
-    tl.fromTo(s("s3-title")!, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 9.55);
-    tl.fromTo(s("s3-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 10.15);
+      tl.to(s("s1")!, { opacity: 0, duration: 0.35, ease: "power2.in" }, 4.2);
+      tl.set(s("s2")!, { display: "flex", opacity: 0, visibility: "visible" }, 4.55);
+      tl.to(s("s2")!, { opacity: 1, duration: 0.25, ease: "power2.out" }, 4.6);
 
-    // Hold scene 3 for 8s after entrances settle
-    tl.to({ dummy: 0 }, { dummy: 1, duration: 5, ease: "none" }, 10.65);
+      tl.fromTo(s("s2-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 4.8);
+      tl.fromTo(s("s2-title")!, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 5.2);
+      if (s("s2-card")) {
+        tl.fromTo(s("s2-card")!, { y: 30, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 5.8);
+      } else if (s("s2-body")) {
+        tl.fromTo(s("s2-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 5.8);
+      }
 
-    tlRef.current = tl;
-    tl.play();
+      tl.to(s("s2")!, { opacity: 0, duration: 0.3, ease: "power2.in" }, 8.6);
+      tl.set(s("s3")!, { display: "flex", opacity: 0, visibility: "visible" }, 8.9);
+      tl.to(s("s3")!, { opacity: 1, duration: 0.2, ease: "power2.out" }, 8.95);
 
-    return () => { tl.kill(); tlRef.current = null; window.removeEventListener("resize", fit); };
+      tl.fromTo(s("s3-eye")!, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 9.15);
+      tl.fromTo(s("s3-title")!, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 9.55);
+      tl.fromTo(s("s3-body")!, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 10.15);
+
+      tl.to({ dummy: 0 }, { dummy: 1, duration: 5, ease: "none" }, 10.65);
+
+      tlRef.current = tl;
+      tl.play();
+    });
+
+    return () => {
+      if (tl) tl.kill();
+      if (resizeHandler) window.removeEventListener("resize", resizeHandler);
+      tlRef.current = null;
+    };
   }, [keyIdea]);
 
   const curiosityHook = toCuriosityHook(keyIdea);
@@ -118,12 +121,6 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
       className="mb-10 overflow-hidden rounded-2xl border border-border bg-background"
     >
       <div className="relative aspect-[16/9] w-full" ref={elRef}>
-        {/* GSAP CDN — loaded here at component render time */}
-        <script
-          src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"
-          suppressHydrationWarning
-        />
-
         <style>{`
           .tldr-frame { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
           .tldr-stage {
@@ -188,7 +185,6 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
             <div className="tldr-glow" id="glowA" style={{ width: "700px", height: "700px", top: "-150px", right: "-100px", background: "#2563eb", opacity: 0.22 }} />
             <div className="tldr-glow" id="glowB" style={{ width: "500px", height: "500px", bottom: "-100px", left: "-100px", background: "#06b6d4", opacity: 0.15 }} />
 
-            {/* Scene 1: Provocative entry */}
             <div className="tldr-scene" id="s1">
               <span className="tldr-eyebrow" id="s1-eye"><span className="tldr-dash" />باورت را به چالش بکش</span>
               <h1 className="tldr-h1" id="s1-title"><span className="accent">{title}</span></h1>
@@ -199,7 +195,6 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
               </div>
             </div>
 
-            {/* Scene 2: Curiosity gap — not the answer, the tension */}
             <div className="tldr-scene" id="s2" style={{ display: "none" }}>
               <span className="tldr-eyebrow" id="s2-eye"><span className="tldr-dash" />آیا می‌دانی که …</span>
               <h1 className="tldr-h1" id="s2-title">{hookHead}</h1>
@@ -210,7 +205,6 @@ export function TldrSlide({ title, description, keyIdea, readingTime, category }
               )}
             </div>
 
-            {/* Scene 3: CTA — resolve the tension */}
             <div className="tldr-scene" id="s3" style={{ display: "none" }}>
               <span className="tldr-eyebrow" id="s3-eye"><span className="tldr-dash" />جواب را در مقاله پیدا کن</span>
               <h1 className="tldr-h1" id="s3-title">{title}</h1>

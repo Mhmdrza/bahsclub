@@ -2,25 +2,28 @@
   "name": "bahsclub",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "pnpm": ">=10"
+  },
   "scripts": {
-    "build": "npm run content:validate && next build",
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm content:validate && next build",
     "start": "next start",
     "dev": "next dev -p 4321",
     "lint": "eslint",
     "content:index": "node scripts/build-manifest.mjs",
     "content:validate": "node scripts/validate-content.mjs",
-    "content:check": "npm run content:index && npm run content:validate",
-    "db:init:local": "npm --prefix workers/api run db:init:local",
-    "db:seed": "npm --prefix workers/api run db:seed",
-    "db:seed:local": "npm --prefix workers/api run db:seed:local",
-    "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "content:check": "pnpm content:index && pnpm content:validate",
+    "db:init:local": "pnpm --prefix workers/api db:init:local",
+    "db:seed": "pnpm --prefix workers/api db:seed",
+    "db:seed:local": "pnpm --prefix workers/api db:seed:local"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "fuse.js": "^7.5.0",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.15.0",
     "js-yaml": "^5.3.0",
     "lucide-react": "^1.33.0",
     "next": "16.3.2",
