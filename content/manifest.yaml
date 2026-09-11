@@ -1,4 +1,4 @@
-generatedAt: '2026-09-11T08:31:07.021Z'
+generatedAt: '2026-09-11T18:55:55.686Z'
 counts:
   articles: 61
   lessons: 4
@@ -1769,35 +1769,7 @@ lessonMemberships:
   tone-of-voice: *ref_59
   intent-question: *ref_60
 gaps:
-  orphans:
-    - moving-goalposts
-    - loaded-question
-    - equivocation
-    - gish-gallop
-    - three-sentence-response
-    - rewrite-vague-claim
-    - claim-vs-taste
-    - spot-fallacy-dialogue
-    - appeal-to-fear
-    - appeal-to-majority
-    - begging-the-question
-    - poisoning-the-well
-    - appeal-to-consequences
-    - provocation
-    - absurd-extension
-    - theory-vs-practice
-    - hair-splitting
-    - schopenhauer-art-of-being-right
-    - slippery-slope
-    - hasty-generalization
-    - nirvana-fallacy
-    - shifting-burden-of-proof
-    - false-analogy
-    - appeal-to-tradition
-    - appeal-to-novelty
-    - all-or-nothing
-    - composition-division
-    - appeal-to-ignorance
+  orphans: []
   noFamily: []
   unreferenced:
     - precise-claims

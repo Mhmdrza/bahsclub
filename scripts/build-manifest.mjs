@@ -163,11 +163,20 @@ function computeLessonMemberships(articles, lessons) {
 }
 
 // ── Detect gaps ────────────────────────────────────────────────────
-function detectGaps(articles, crossRefs, lessonMemberships, lessons) {
+function detectGaps(articles, crossRefs, lessonMemberships, lessons, topics) {
   const allSlugs = articles.map((a) => a.slug);
+  const publishedTopics = new Set(
+    topics.filter((t) => t.status === "published").map((t) => t.slug)
+  );
 
-  // Orphan articles: not in any lesson
-  const orphans = allSlugs.filter((s) => !lessonMemberships[s]?.length);
+  // Orphan articles: not in any lesson and not reachable via a published topic
+  const orphans = articles
+    .filter(
+      (a) =>
+        !lessonMemberships[a.slug]?.length &&
+        !a.topics.some((t) => publishedTopics.has(t))
+    )
+    .map((a) => a.slug);
 
   // Articles without family
   const noFamily = articles.filter((a) => !a.family).map((a) => a.slug);
@@ -212,7 +221,7 @@ function main() {
   const crossRefs = extractLinks(articleSlugs);
   const families = buildFamilies(articles);
   const lessonMemberships = computeLessonMemberships(articles, lessons);
-  const gaps = detectGaps(articles, crossRefs, lessonMemberships, lessons);
+  const gaps = detectGaps(articles, crossRefs, lessonMemberships, lessons, topics);
 
   // Attach lesson memberships to articles
   const enrichedArticles = articles.map((a) => ({
@@ -258,7 +267,7 @@ function main() {
   console.log(`  Pages:    ${manifest.counts.pages}`);
   console.log(`  Topics:   ${manifest.counts.topics}`);
   console.log(`  Families: ${manifest.counts.families}`);
-  console.log(`  Orphans (no lesson): ${gaps.orphans.length}`);
+  console.log(`  Orphans (no lesson/topic): ${gaps.orphans.length}`);
   console.log(`  No family:          ${gaps.noFamily.length}`);
   console.log(`  Unreferenced:       ${gaps.unreferenced.length}`);
 }
