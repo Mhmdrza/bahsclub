@@ -134,7 +134,7 @@ export default function LadderPage() {
                         <Link
                           key={slug}
                           href={`/articles/${slug}`}
-                          className="group flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:border-accent/40"
+                          className="group flex min-w-0 items-center justify-between gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:border-accent/40"
                         >
                           <span className="truncate text-sm group-hover:text-accent">
                             {article.title}

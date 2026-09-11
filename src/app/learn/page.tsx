@@ -33,7 +33,7 @@ export default function LearnPage() {
   const tacticArticles = getTacticArticles().slice(0, 4);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="mx-auto max-w-6xl px-4 py-8 wrap-anywhere sm:px-6 sm:py-12">
       <Breadcrumbs
         items={[{ label: "خانه", href: "/" }, { label: "آموزش و یادگیری" }]}
       />
