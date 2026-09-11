@@ -120,7 +120,7 @@ export default function RegisterPage() {
       <div className="border border-border bg-surface p-6 sm:p-8 rounded-2xl shadow-xs">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-medium mb-3">
           <Lock size={13} />
-          <span>دسترسی محدود</span>
+          <span>دسترسی اختصاصی</span>
         </div>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه اندیشه</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
