@@ -39,7 +39,7 @@ function escapeHtml(s) {
 
 function sceneHook(article) {
   return `<div class="scene" id="s1" data-duration="4.5">
-  <span class="eyebrow" data-entrance="eyebrow"><span class="dash"></span>بحث‌کلاب · خلاصه فوری</span>
+  <span class="eyebrow" data-entrance="eyebrow"><span class="dash"></span>حرف‌کلاب · خلاصه فوری</span>
   <h1 class="title-lg" data-entrance="pop"><span class="accent">${escapeHtml(article.title)}</span></h1>
   <p class="body-lg" data-entrance="slide-up">${escapeHtml(article.description)}</p>
   <div class="meta-line" data-entrance="slide-meta">

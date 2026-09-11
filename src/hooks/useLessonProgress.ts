@@ -24,10 +24,10 @@ export function useLessonProgress(
     };
     update();
     window.addEventListener("storage", update);
-    window.addEventListener("bahsclub:progress", update);
+    window.addEventListener("harfclub:progress", update);
     return () => {
       window.removeEventListener("storage", update);
-      window.removeEventListener("bahsclub:progress", update);
+      window.removeEventListener("harfclub:progress", update);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugKey, validKey]);

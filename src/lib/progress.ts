@@ -1,8 +1,8 @@
 "use client";
 
-const COMPLETED_KEY = "bahsclub:completed";
-const LAST_LESSON_KEY = "bahsclub:last-lesson";
-const LAST_ARTICLE_KEY = "bahsclub:last-article";
+const COMPLETED_KEY = "harfclub:completed";
+const LAST_LESSON_KEY = "harfclub:last-lesson";
+const LAST_ARTICLE_KEY = "harfclub:last-article";
 
 export function getCompletedSlugs(): string[] {
   if (typeof window === "undefined") return [];

@@ -1,4 +1,4 @@
-# BahsClub — AI Context Cache
+# HarfClub — AI Context Cache
 
 > This file documents the project for AI assistant sessions so they don't need to re-explore the filesystem.  
 > Keep it up to date when adding or renaming files.
@@ -329,7 +329,7 @@ Worker runs at `WORKER_API_URL` via `workers/api/`. Uses Hono, D1, sessions.
 ```
 GITHUB_TOKEN=ghp_...            # PAT with repo contents:write
 GITHUB_OWNER=your-username
-GITHUB_REPO=bahsclub
+GITHUB_REPO=harfclub
 GITHUB_BRANCH=main
 ADMIN_PASSWORD_HASH=<sha256>    # echo -n "password" | shasum -a 256
 SESSION_SECRET=<random>

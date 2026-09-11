@@ -41,7 +41,7 @@ export default function LoginPage() {
           پنل مدیریت
         </h1>
         <p className="text-sm text-muted text-center mb-6">
-          بحث‌کلاب — ورود
+          حرف‌کلاب — ورود
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

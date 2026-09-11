@@ -241,7 +241,7 @@ export default function HomePage() {
         <p className="mt-8 text-xs text-muted">
           می‌خواهید مهارتتان را در عمل بسنجید؟{" "}
           <Link href="/club" className="font-semibold text-accent hover:underline">
-            وارد باشگاه بحث شوید
+            وارد حرف‌کلاب شوید
           </Link>
           .
         </p>

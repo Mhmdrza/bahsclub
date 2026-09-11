@@ -41,7 +41,7 @@ function headers(): Record<string, string> {
   return {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
-    "User-Agent": "bahsclub-admin",
+    "User-Agent": "harfclub-admin",
   };
 }
 

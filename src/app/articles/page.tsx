@@ -9,7 +9,7 @@ import { SearchAndFilters } from "@/components/SearchAndFilters";
 
 export const metadata: Metadata = {
   title: "مقاله‌ها",
-  description: "کتابخانهٔ مقالات، درس‌ها، تاکتیک‌ها و تمرین‌های بحث‌کلاب.",
+  description: "کتابخانهٔ مقالات، درس‌ها، تاکتیک‌ها و تمرین‌های حرف‌کلاب.",
 };
 
 export default function ArticlesPage() {

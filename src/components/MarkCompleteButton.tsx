@@ -29,7 +29,7 @@ export function MarkCompleteButton({
       if (lessonSlug) setLastPosition(lessonSlug, slug);
       setCompleted(true);
     }
-    window.dispatchEvent(new Event("bahsclub:progress"));
+    window.dispatchEvent(new Event("harfclub:progress"));
   };
 
   return (

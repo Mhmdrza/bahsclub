@@ -12,7 +12,7 @@ import {
 export type Theme = "light" | "dark" | "system";
 type ResolvedTheme = "light" | "dark";
 
-const STORAGE_KEY = "bahsclub-theme";
+const STORAGE_KEY = "harfclub-theme";
 
 function getStoredTheme(): Theme {
   if (typeof window === "undefined") return "system";

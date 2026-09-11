@@ -50,7 +50,7 @@ export default async function SettingsPage() {
             <pre className="bg-background border border-border rounded-lg p-3 text-xs font-mono text-foreground" dir="ltr">
               GITHUB_TOKEN=ghp_...{'\n'}
               GITHUB_OWNER=your-username{'\n'}
-              GITHUB_REPO=bahsclub{'\n'}
+              GITHUB_REPO=harfclub{'\n'}
               GITHUB_BRANCH=main{'\n'}
               ADMIN_PASSWORD_HASH=&lt;sha256-of-password&gt;{'\n'}
               SESSION_SECRET=&lt;random-string&gt;
