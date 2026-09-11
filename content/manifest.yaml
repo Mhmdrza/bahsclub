@@ -1,8 +1,8 @@
-generatedAt: '2026-09-11T06:31:55.692Z'
+generatedAt: '2026-09-11T08:31:07.021Z'
 counts:
   articles: 61
   lessons: 4
-  pages: 4
+  pages: 7
   topics: 5
   families: 9
 articles:
@@ -1537,6 +1537,27 @@ pages:
     description: ده اصلی که فرهنگ حرف‌کلاب را می‌سازند — اصولی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.
     status: published
     order: 2
+  - slug: faq
+    title: سؤالات متداول
+    description: >-
+      پاسخ پرسش‌های پرتکرار دربارهٔ حرف‌کلاب: از نحوهٔ شروع و رایگان بودن محتوا تا تفاوت آن با مناظره و چگونگی عضویت در
+      باشگاه.
+    status: published
+    order: 7
+  - slug: getting-started
+    title: از کجا شروع کنم؟
+    description: >-
+      مسیر پیشنهادی برای ورود به حرف‌کلاب در سه گام: نقطهٔ شروع خودت را پیدا کن، مسیر سواد قضاوت را بگذران، و با
+      تمرین‌های کوتاه مهارت را به عمل تبدیل کن.
+    status: published
+    order: 6
+  - slug: glossary
+    title: واژه‌نامه
+    description: >-
+      اصطلاح‌های کلیدی گفت‌وگوی سازنده — از ادعا و شواهد تا مغالطه‌ها و مهارت‌های گوش دادن. هر واژه با یک تعریف کوتاه و
+      پیوند به مقالهٔ کامل.
+    status: published
+    order: 5
   - slug: mission
     title: مأموریت ما
     description: 'چرا اینجا هستیم: تبدیل گفت‌وگو از یک استعداد نادر به یک مهارت همگانی — از پایه تا تسلط.'
@@ -1958,6 +1979,8 @@ siteConfig:
       label: یک تمرین کوتاه
       articleSlug: confidence-and-uncertainty
   nav:
+    - label: شروع
+      href: /getting-started
     - label: آموزش
       href: /learn
     - label: نردبان یادگیری

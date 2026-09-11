@@ -6,6 +6,7 @@ import {
   getArticleSlugs,
   getLessonsForArticle,
   getLessonNavigation,
+  getPublishedTopics,
   getRelatedArticles,
 } from "@/lib/content";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -45,6 +46,9 @@ export default async function ArticlePage({ params, searchParams }: Props) {
   if (!article) notFound();
 
   const lessons = getLessonsForArticle(slug);
+  const topicLabels = Object.fromEntries(
+    getPublishedTopics().map((topic) => [topic.slug, topic.title])
+  );
   const nav = lessonSlug
     ? getLessonNavigation(lessonSlug, slug)
     : { prev: undefined, next: undefined };
@@ -83,6 +87,20 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                     className="rounded-md bg-accent-light px-2 py-0.5 text-accent hover:underline"
                   >
                     {lesson.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+            {article.topics.length > 0 && (
+              <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
+                <span className="text-muted">موضوع‌ها:</span>
+                {article.topics.map((topicSlug) => (
+                  <Link
+                    key={topicSlug}
+                    href={`/topics/${topicSlug}`}
+                    className="rounded-md bg-surface px-2 py-0.5 text-muted hover:text-accent"
+                  >
+                    {topicLabels[topicSlug] ?? topicSlug}
                   </Link>
                 ))}
               </div>

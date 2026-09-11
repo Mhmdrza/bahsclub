@@ -27,6 +27,7 @@ export interface ArticleFrontmatter {
   publishedAt: string;
   updatedAt?: string;
   related?: string[];
+  family?: string;
   featuredOnHome?: "concept" | "tactic" | "practice";
   exercise?: ExerciseData;
 }

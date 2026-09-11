@@ -267,21 +267,31 @@ export function getFeaturedLesson(): Lesson | undefined {
 }
 
 export function getRelatedArticles(article: Article, limit = 3): Article[] {
-  if (article.related?.length) {
-    return article.related
-      .map((slug) => getArticleBySlug(slug))
-      .filter((a): a is Article => Boolean(a))
-      .slice(0, limit);
-  }
-
-  return getPublishedArticles()
-    .filter(
-      (candidate) =>
-        candidate.slug !== article.slug &&
-        (candidate.topics.some((t) => article.topics.includes(t)) ||
-          candidate.tags.some((t) => article.tags.includes(t)))
-    )
+  const explicit = (article.related ?? [])
+    .map((slug) => getArticleBySlug(slug))
+    .filter((a): a is Article => Boolean(a))
     .slice(0, limit);
+  if (explicit.length >= limit) return explicit;
+
+  const seen = new Set([article.slug, ...explicit.map((a) => a.slug)]);
+  const score = (candidate: Article) =>
+    (candidate.family && candidate.family === article.family ? 4 : 0) +
+    candidate.topics.filter((t) => article.topics.includes(t)).length * 3 +
+    candidate.tags.filter((t) => article.tags.includes(t)).length * 2 +
+    (candidate.category === article.category ? 1 : 0);
+
+  const rest = getPublishedArticles()
+    .filter((candidate) => !seen.has(candidate.slug))
+    .map((candidate) => ({ candidate, score: score(candidate) }))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        a.candidate.order - b.candidate.order ||
+        a.candidate.slug.localeCompare(b.candidate.slug, "fa")
+    )
+    .map(({ candidate }) => candidate);
+
+  return [...explicit, ...rest].slice(0, limit);
 }
 
 export function getPracticeArticles(): Article[] {

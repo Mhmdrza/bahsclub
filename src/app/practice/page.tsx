@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getSiteConfig, getPracticeArticles } from "@/lib/content";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ExerciseBlock } from "@/components/ExerciseBlock";
 
 export const metadata: Metadata = {
   title: "تمرین‌ها",
@@ -11,9 +13,11 @@ export const metadata: Metadata = {
 export default function PracticePage() {
   const config = getSiteConfig();
   const practices = getPracticeArticles();
+  const interactive = practices.filter((article) => article.exercise);
+  const rest = practices.filter((article) => !article.exercise);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs
         items={[{ label: "خانه", href: "/" }, { label: "تمرین‌ها" }]}
       />
@@ -28,11 +32,35 @@ export default function PracticePage() {
         <p className="text-sm text-muted">{config.livePractice.description}</p>
       </section>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        {practices.map((article) => (
-          <ArticleCard key={article.slug} article={article} />
-        ))}
-      </div>
+      {interactive.map((article) => (
+        <article key={article.slug} className="mb-10">
+          <div className="mb-3 flex items-end justify-between gap-4">
+            <h2 className="text-lg font-bold">
+              <Link
+                href={`/articles/${article.slug}`}
+                className="hover:text-accent"
+              >
+                {article.title}
+              </Link>
+            </h2>
+            <Link
+              href={`/articles/${article.slug}`}
+              className="shrink-0 text-sm font-semibold text-accent hover:underline"
+            >
+              متن کامل ←
+            </Link>
+          </div>
+          {article.exercise && <ExerciseBlock exercise={article.exercise} />}
+        </article>
+      ))}
+
+      {rest.length > 0 && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {rest.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
