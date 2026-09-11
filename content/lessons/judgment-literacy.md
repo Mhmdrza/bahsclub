@@ -10,7 +10,6 @@ sequential: false
 order: 1
 milestone: "می‌توانی یک باور را با کمک دیگران محک بزنی، استدلالش را نقشه‌برداری کنی، و تشخیص دهی چه شواهدی می‌تواند نظرات را تغییر دهد."
 steps:
-  - what-is-judgment-testing
   - claim-vs-interpretation
   - precise-claims
   - steelman-opponent

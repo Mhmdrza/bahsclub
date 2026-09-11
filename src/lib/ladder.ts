@@ -51,7 +51,6 @@ export const LADDER: LadderRung[] = [
       {
         label: "شفاف فکر کردن",
         slugs: [
-          "what-is-judgment-testing",
           "claim-vs-interpretation",
           "precise-claims",
           "structure-of-argument",

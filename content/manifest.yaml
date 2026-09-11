@@ -1,34 +1,11 @@
-generatedAt: '2026-09-11T05:53:34.642Z'
+generatedAt: '2026-09-11T06:26:44.565Z'
 counts:
-  articles: 62
+  articles: 61
   lessons: 4
   pages: 4
   topics: 5
   families: 9
 articles:
-  - slug: what-is-judgment-testing
-    title: تفاوت بحث و جدل
-    description: بحثی که لازم نیست در آن برنده شوی — همهٔ بحث‌ها بحث نیستند، بعضی جدل‌اند. یاد بگیر فرقشان را.
-    type: article
-    category: سواد قضاوت
-    level: beginner
-    readingTime: 7
-    order: 1
-    tags:
-      - بحث
-      - جدل
-      - کندوکاو
-    topics:
-      - judgment-literacy
-      - foundations
-    family: judgment-literacy-core
-    status: published
-    publishedAt: '2025-01-15'
-    related: []
-    file: what-is-judgment-testing.mdx
-    lessons: &ref_0
-      - judgment-literacy
-    inboundLinks: []
   - slug: claim-vs-interpretation
     title: ادعا در برابر تفسیر
     description: چرا بعضی چیزها را می‌شود با شواهد آزمود و بعضی چیزها را نه؟
@@ -49,7 +26,7 @@ articles:
     publishedAt: '2025-01-16'
     related: []
     file: claim-vs-interpretation.mdx
-    lessons: &ref_1
+    lessons: &ref_0
       - judgment-literacy
     inboundLinks: []
   - slug: precise-claims
@@ -72,7 +49,7 @@ articles:
     publishedAt: '2025-01-17'
     related: []
     file: precise-claims.mdx
-    lessons: &ref_2
+    lessons: &ref_1
       - judgment-literacy
     inboundLinks: []
   - slug: steelman-opponent
@@ -95,7 +72,7 @@ articles:
     publishedAt: '2025-01-18'
     related: []
     file: steelman-opponent.mdx
-    lessons: &ref_3
+    lessons: &ref_2
       - judgment-literacy
     inboundLinks:
       - active-listening
@@ -118,7 +95,7 @@ articles:
     publishedAt: '2025-01-20'
     related: []
     file: evidence-quality.mdx
-    lessons: &ref_4
+    lessons: &ref_3
       - judgment-literacy
       - deeper-curriculum
     inboundLinks: []
@@ -144,7 +121,7 @@ articles:
     publishedAt: '2025-01-21'
     related: []
     file: framing-and-omission.mdx
-    lessons: &ref_5
+    lessons: &ref_4
       - deeper-curriculum
     inboundLinks: []
   - slug: alternative-explanations
@@ -166,7 +143,7 @@ articles:
     publishedAt: '2025-01-22'
     related: []
     file: alternative-explanations.mdx
-    lessons: &ref_6
+    lessons: &ref_5
       - deeper-curriculum
     inboundLinks: []
   - slug: correlation-and-causation
@@ -191,7 +168,7 @@ articles:
     publishedAt: '2025-01-23'
     related: []
     file: correlation-and-causation.mdx
-    lessons: &ref_7
+    lessons: &ref_6
       - deeper-curriculum
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -214,7 +191,7 @@ articles:
     publishedAt: '2025-01-25'
     related: []
     file: expertise-and-incentives.mdx
-    lessons: &ref_8
+    lessons: &ref_7
       - deeper-curriculum
     inboundLinks: []
   - slug: emotional-persuasion
@@ -237,7 +214,7 @@ articles:
     publishedAt: '2025-01-26'
     related: []
     file: emotional-persuasion.mdx
-    lessons: &ref_9
+    lessons: &ref_8
       - deeper-curriculum
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -261,7 +238,7 @@ articles:
     publishedAt: '2025-01-27'
     related: []
     file: confidence-and-uncertainty.mdx
-    lessons: &ref_10
+    lessons: &ref_9
       - judgment-literacy
     inboundLinks: []
   - slug: falsifiability-and-revision
@@ -284,7 +261,7 @@ articles:
     publishedAt: '2025-01-28'
     related: []
     file: falsifiability-and-revision.mdx
-    lessons: &ref_11
+    lessons: &ref_10
       - judgment-literacy
     inboundLinks: []
   - slug: what-is-fallacy
@@ -307,7 +284,7 @@ articles:
     publishedAt: '2025-02-01'
     related: []
     file: what-is-fallacy.mdx
-    lessons: &ref_12
+    lessons: &ref_11
       - spotting-tactics
     inboundLinks: []
   - slug: structure-of-argument
@@ -330,7 +307,7 @@ articles:
     publishedAt: '2025-02-02'
     related: []
     file: structure-of-argument.mdx
-    lessons: &ref_13
+    lessons: &ref_12
       - judgment-literacy
     inboundLinks: []
   - slug: asking-better-questions
@@ -353,7 +330,7 @@ articles:
     publishedAt: '2025-02-03'
     related: []
     file: asking-better-questions.mdx
-    lessons: &ref_14
+    lessons: &ref_13
       - judgment-literacy
     inboundLinks: []
   - slug: responding-to-tactics
@@ -376,7 +353,7 @@ articles:
     publishedAt: '2025-02-04'
     related: []
     file: responding-to-tactics.mdx
-    lessons: &ref_15
+    lessons: &ref_14
       - spotting-tactics
     inboundLinks: []
   - slug: fair-effective-debate
@@ -399,7 +376,7 @@ articles:
     publishedAt: '2025-02-05'
     related: []
     file: fair-effective-debate.mdx
-    lessons: &ref_16
+    lessons: &ref_15
       - judgment-literacy
     inboundLinks: []
   - slug: ad-hominem
@@ -421,7 +398,7 @@ articles:
     publishedAt: '2025-02-10'
     related: []
     file: ad-hominem.mdx
-    lessons: &ref_17
+    lessons: &ref_16
       - spotting-tactics
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -444,7 +421,7 @@ articles:
     publishedAt: '2025-02-11'
     related: []
     file: straw-man.mdx
-    lessons: &ref_18
+    lessons: &ref_17
       - spotting-tactics
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -467,7 +444,7 @@ articles:
     publishedAt: '2025-02-12'
     related: []
     file: false-dilemma.mdx
-    lessons: &ref_19
+    lessons: &ref_18
       - spotting-tactics
     inboundLinks: []
   - slug: red-herring
@@ -489,7 +466,7 @@ articles:
     publishedAt: '2025-02-13'
     related: []
     file: red-herring.mdx
-    lessons: &ref_20
+    lessons: &ref_19
       - spotting-tactics
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -512,7 +489,7 @@ articles:
     publishedAt: '2025-02-14'
     related: []
     file: appeal-to-authority.mdx
-    lessons: &ref_21
+    lessons: &ref_20
       - spotting-tactics
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -536,7 +513,7 @@ articles:
     publishedAt: '2025-02-15'
     related: []
     file: whataboutism.mdx
-    lessons: &ref_22
+    lessons: &ref_21
       - spotting-tactics
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -560,7 +537,7 @@ articles:
     publishedAt: '2025-02-20'
     related: []
     file: hidden-assumption.mdx
-    lessons: &ref_23
+    lessons: &ref_22
       - deeper-curriculum
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -585,7 +562,7 @@ articles:
     publishedAt: '2025-02-21'
     related: []
     file: cherry-picking.mdx
-    lessons: &ref_24
+    lessons: &ref_23
       - deeper-curriculum
     inboundLinks:
       - schopenhauer-art-of-being-right
@@ -609,7 +586,7 @@ articles:
     publishedAt: '2025-02-22'
     related: []
     file: moving-goalposts.mdx
-    lessons: &ref_25 []
+    lessons: &ref_24 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: loaded-question
@@ -632,7 +609,7 @@ articles:
     publishedAt: '2025-02-23'
     related: []
     file: loaded-question.mdx
-    lessons: &ref_26 []
+    lessons: &ref_25 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: equivocation
@@ -655,7 +632,7 @@ articles:
     publishedAt: '2025-02-24'
     related: []
     file: equivocation.mdx
-    lessons: &ref_27 []
+    lessons: &ref_26 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: gish-gallop
@@ -677,7 +654,7 @@ articles:
     publishedAt: '2025-02-25'
     related: []
     file: gish-gallop.mdx
-    lessons: &ref_28 []
+    lessons: &ref_27 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: when-to-say-i-dont-know
@@ -701,7 +678,7 @@ articles:
     publishedAt: '2025-02-26'
     related: []
     file: when-to-say-i-dont-know.mdx
-    lessons: &ref_29
+    lessons: &ref_28
       - deeper-curriculum
     inboundLinks: []
   - slug: three-sentence-response
@@ -725,7 +702,7 @@ articles:
     publishedAt: '2025-02-27'
     related: []
     file: three-sentence-response.mdx
-    lessons: &ref_30 []
+    lessons: &ref_29 []
     inboundLinks: []
   - slug: rewrite-vague-claim
     title: از ادعای مبهم تا ادعای دقیق
@@ -749,7 +726,7 @@ articles:
     publishedAt: '2025-03-01'
     related: []
     file: rewrite-vague-claim.mdx
-    lessons: &ref_31 []
+    lessons: &ref_30 []
     inboundLinks: []
   - slug: claim-vs-taste
     title: ادعا در برابر سلیقه
@@ -773,7 +750,7 @@ articles:
     publishedAt: '2025-03-02'
     related: []
     file: claim-vs-taste.mdx
-    lessons: &ref_32 []
+    lessons: &ref_31 []
     inboundLinks: []
   - slug: spot-fallacy-dialogue
     title: تشخیص تاکتیک در گفتگو
@@ -799,7 +776,7 @@ articles:
     publishedAt: '2025-03-03'
     related: []
     file: spot-fallacy-dialogue.mdx
-    lessons: &ref_33 []
+    lessons: &ref_32 []
     inboundLinks: []
   - slug: belief-stress-test
     title: آزمایش باور — محک اصلی بحث‌کلاب
@@ -823,7 +800,7 @@ articles:
     publishedAt: '2025-03-04'
     related: []
     file: belief-stress-test.mdx
-    lessons: &ref_34
+    lessons: &ref_33
       - deeper-curriculum
     inboundLinks: []
   - slug: appeal-to-fear
@@ -848,7 +825,7 @@ articles:
     publishedAt: '2025-03-05'
     related: []
     file: appeal-to-fear.mdx
-    lessons: &ref_35 []
+    lessons: &ref_34 []
     inboundLinks: []
   - slug: appeal-to-majority
     title: توسل به اکثریت
@@ -872,7 +849,7 @@ articles:
     publishedAt: '2025-03-06'
     related: []
     file: appeal-to-majority.mdx
-    lessons: &ref_36 []
+    lessons: &ref_35 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: begging-the-question
@@ -897,7 +874,7 @@ articles:
     publishedAt: '2025-03-20'
     related: []
     file: begging-the-question.mdx
-    lessons: &ref_37 []
+    lessons: &ref_36 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: poisoning-the-well
@@ -921,7 +898,7 @@ articles:
     publishedAt: '2025-03-21'
     related: []
     file: poisoning-the-well.mdx
-    lessons: &ref_38 []
+    lessons: &ref_37 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: appeal-to-consequences
@@ -946,7 +923,7 @@ articles:
     publishedAt: '2025-03-22'
     related: []
     file: appeal-to-consequences.mdx
-    lessons: &ref_39 []
+    lessons: &ref_38 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: provocation
@@ -970,7 +947,7 @@ articles:
     publishedAt: '2025-03-23'
     related: []
     file: provocation.mdx
-    lessons: &ref_40 []
+    lessons: &ref_39 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: absurd-extension
@@ -994,7 +971,7 @@ articles:
     publishedAt: '2025-03-24'
     related: []
     file: absurd-extension.mdx
-    lessons: &ref_41 []
+    lessons: &ref_40 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: theory-vs-practice
@@ -1018,7 +995,7 @@ articles:
     publishedAt: '2025-03-25'
     related: []
     file: theory-vs-practice.mdx
-    lessons: &ref_42 []
+    lessons: &ref_41 []
     inboundLinks: []
   - slug: hair-splitting
     title: موشکافی گریز — وقتی با تعریف فرار می‌کنی
@@ -1041,7 +1018,7 @@ articles:
     publishedAt: '2025-03-26'
     related: []
     file: hair-splitting.mdx
-    lessons: &ref_43 []
+    lessons: &ref_42 []
     inboundLinks:
       - schopenhauer-art-of-being-right
   - slug: schopenhauer-art-of-being-right
@@ -1066,7 +1043,7 @@ articles:
     publishedAt: '2025-03-27'
     related: []
     file: schopenhauer-art-of-being-right.mdx
-    lessons: &ref_44 []
+    lessons: &ref_43 []
     inboundLinks: []
   - slug: slippery-slope
     title: شیب لغزنده — «اگر این را اجازه دهیم، فاجعه قطعی است»
@@ -1090,7 +1067,7 @@ articles:
     publishedAt: '2025-04-01'
     related: []
     file: slippery-slope.mdx
-    lessons: &ref_45 []
+    lessons: &ref_44 []
     inboundLinks: []
   - slug: hasty-generalization
     title: تعمیم شتاب‌زده — وقتی چند نمونه، «همیشه» می‌شوند
@@ -1114,7 +1091,7 @@ articles:
     publishedAt: '2025-04-02'
     related: []
     file: hasty-generalization.mdx
-    lessons: &ref_46 []
+    lessons: &ref_45 []
     inboundLinks: []
   - slug: nirvana-fallacy
     title: مغالطه کمال‌گرایی — «اگر کامل نیست، بی‌فایده است»
@@ -1136,7 +1113,7 @@ articles:
     publishedAt: '2025-04-03'
     related: []
     file: nirvana-fallacy.mdx
-    lessons: &ref_47 []
+    lessons: &ref_46 []
     inboundLinks: []
   - slug: shifting-burden-of-proof
     title: انتقال بار اثبات — «اگر قبول نداری، ثابت کن نیست»
@@ -1160,7 +1137,7 @@ articles:
     publishedAt: '2025-04-04'
     related: []
     file: shifting-burden-of-proof.mdx
-    lessons: &ref_48 []
+    lessons: &ref_47 []
     inboundLinks: []
   - slug: false-analogy
     title: قیاس مع‌الفارق — وقتی دو چیز متفاوت را «مثل هم» جا می‌زنند
@@ -1182,7 +1159,7 @@ articles:
     publishedAt: '2025-04-05'
     related: []
     file: false-analogy.mdx
-    lessons: &ref_49 []
+    lessons: &ref_48 []
     inboundLinks: []
   - slug: appeal-to-tradition
     title: توسل به سنت — «همیشه همین‌طور بوده، پس درست است»
@@ -1204,7 +1181,7 @@ articles:
     publishedAt: '2025-04-06'
     related: []
     file: appeal-to-tradition.mdx
-    lessons: &ref_50 []
+    lessons: &ref_49 []
     inboundLinks: []
   - slug: appeal-to-novelty
     title: توسل به تازگی — «جدیده، پس بهتره»
@@ -1226,7 +1203,7 @@ articles:
     publishedAt: '2025-04-07'
     related: []
     file: appeal-to-novelty.mdx
-    lessons: &ref_51 []
+    lessons: &ref_50 []
     inboundLinks: []
   - slug: all-or-nothing
     title: تفکر همه یا هیچ — «یا کامل، یا هیچی»
@@ -1248,7 +1225,7 @@ articles:
     publishedAt: '2025-04-08'
     related: []
     file: all-or-nothing.mdx
-    lessons: &ref_52 []
+    lessons: &ref_51 []
     inboundLinks: []
   - slug: composition-division
     title: مغالطه ترکیب و تقسیم — وقتی جزء و کل را با هم اشتباه می‌گیریم
@@ -1272,7 +1249,7 @@ articles:
     publishedAt: '2025-04-09'
     related: []
     file: composition-division.mdx
-    lessons: &ref_53 []
+    lessons: &ref_52 []
     inboundLinks: []
   - slug: appeal-to-ignorance
     title: توسل به جهل — «چون ثابت نشده نیست، پس هست»
@@ -1294,7 +1271,7 @@ articles:
     publishedAt: '2025-04-10'
     related: []
     file: appeal-to-ignorance.mdx
-    lessons: &ref_54 []
+    lessons: &ref_53 []
     inboundLinks: []
   - slug: dialogue-autonomy
     title: احترام به استقلال طرف مقابل
@@ -1317,7 +1294,7 @@ articles:
       - fair-effective-debate
       - intent-question
     file: dialogue-autonomy.mdx
-    lessons: &ref_55
+    lessons: &ref_54
       - dialogue-basics
     inboundLinks:
       - intent-question
@@ -1342,7 +1319,7 @@ articles:
       - steelman-opponent
       - echo-last-three-words
     file: active-listening.mdx
-    lessons: &ref_56
+    lessons: &ref_55
       - dialogue-basics
     inboundLinks: []
   - slug: strategic-silence
@@ -1366,7 +1343,7 @@ articles:
       - active-listening
       - tone-of-voice
     file: strategic-silence.mdx
-    lessons: &ref_57
+    lessons: &ref_56
       - dialogue-basics
     inboundLinks:
       - echo-last-three-words
@@ -1392,7 +1369,7 @@ articles:
       - active-listening
       - intonation-up-down
     file: echo-last-three-words.mdx
-    lessons: &ref_58
+    lessons: &ref_57
       - dialogue-basics
     inboundLinks:
       - intonation-up-down
@@ -1417,7 +1394,7 @@ articles:
       - tone-of-voice
       - echo-last-three-words
     file: intonation-up-down.mdx
-    lessons: &ref_59
+    lessons: &ref_58
       - dialogue-basics
     inboundLinks:
       - echo-last-three-words
@@ -1444,7 +1421,7 @@ articles:
       - intonation-up-down
       - strategic-silence
     file: tone-of-voice.mdx
-    lessons: &ref_60
+    lessons: &ref_59
       - dialogue-basics
     inboundLinks:
       - intent-question
@@ -1471,7 +1448,7 @@ articles:
       - dialogue-autonomy
       - responding-to-tactics
     file: intent-question.mdx
-    lessons: &ref_61
+    lessons: &ref_60
       - dialogue-basics
     inboundLinks: []
 lessons:
@@ -1483,7 +1460,6 @@ lessons:
     status: published
     order: 1
     steps:
-      - what-is-judgment-testing
       - claim-vs-interpretation
       - precise-claims
       - steelman-opponent
@@ -1601,7 +1577,6 @@ topics:
     order: 3
 families:
   judgment-literacy-core:
-    - what-is-judgment-testing
     - claim-vs-interpretation
     - precise-claims
     - steelman-opponent
@@ -1711,68 +1686,67 @@ crossRefs:
     - strategic-silence
     - intonation-up-down
 lessonMemberships:
-  what-is-judgment-testing: *ref_0
-  claim-vs-interpretation: *ref_1
-  precise-claims: *ref_2
-  steelman-opponent: *ref_3
-  evidence-quality: *ref_4
-  framing-and-omission: *ref_5
-  alternative-explanations: *ref_6
-  correlation-and-causation: *ref_7
-  expertise-and-incentives: *ref_8
-  emotional-persuasion: *ref_9
-  confidence-and-uncertainty: *ref_10
-  falsifiability-and-revision: *ref_11
-  what-is-fallacy: *ref_12
-  structure-of-argument: *ref_13
-  asking-better-questions: *ref_14
-  responding-to-tactics: *ref_15
-  fair-effective-debate: *ref_16
-  ad-hominem: *ref_17
-  straw-man: *ref_18
-  false-dilemma: *ref_19
-  red-herring: *ref_20
-  appeal-to-authority: *ref_21
-  whataboutism: *ref_22
-  hidden-assumption: *ref_23
-  cherry-picking: *ref_24
-  moving-goalposts: *ref_25
-  loaded-question: *ref_26
-  equivocation: *ref_27
-  gish-gallop: *ref_28
-  when-to-say-i-dont-know: *ref_29
-  three-sentence-response: *ref_30
-  rewrite-vague-claim: *ref_31
-  claim-vs-taste: *ref_32
-  spot-fallacy-dialogue: *ref_33
-  belief-stress-test: *ref_34
-  appeal-to-fear: *ref_35
-  appeal-to-majority: *ref_36
-  begging-the-question: *ref_37
-  poisoning-the-well: *ref_38
-  appeal-to-consequences: *ref_39
-  provocation: *ref_40
-  absurd-extension: *ref_41
-  theory-vs-practice: *ref_42
-  hair-splitting: *ref_43
-  schopenhauer-art-of-being-right: *ref_44
-  slippery-slope: *ref_45
-  hasty-generalization: *ref_46
-  nirvana-fallacy: *ref_47
-  shifting-burden-of-proof: *ref_48
-  false-analogy: *ref_49
-  appeal-to-tradition: *ref_50
-  appeal-to-novelty: *ref_51
-  all-or-nothing: *ref_52
-  composition-division: *ref_53
-  appeal-to-ignorance: *ref_54
-  dialogue-autonomy: *ref_55
-  active-listening: *ref_56
-  strategic-silence: *ref_57
-  echo-last-three-words: *ref_58
-  intonation-up-down: *ref_59
-  tone-of-voice: *ref_60
-  intent-question: *ref_61
+  claim-vs-interpretation: *ref_0
+  precise-claims: *ref_1
+  steelman-opponent: *ref_2
+  evidence-quality: *ref_3
+  framing-and-omission: *ref_4
+  alternative-explanations: *ref_5
+  correlation-and-causation: *ref_6
+  expertise-and-incentives: *ref_7
+  emotional-persuasion: *ref_8
+  confidence-and-uncertainty: *ref_9
+  falsifiability-and-revision: *ref_10
+  what-is-fallacy: *ref_11
+  structure-of-argument: *ref_12
+  asking-better-questions: *ref_13
+  responding-to-tactics: *ref_14
+  fair-effective-debate: *ref_15
+  ad-hominem: *ref_16
+  straw-man: *ref_17
+  false-dilemma: *ref_18
+  red-herring: *ref_19
+  appeal-to-authority: *ref_20
+  whataboutism: *ref_21
+  hidden-assumption: *ref_22
+  cherry-picking: *ref_23
+  moving-goalposts: *ref_24
+  loaded-question: *ref_25
+  equivocation: *ref_26
+  gish-gallop: *ref_27
+  when-to-say-i-dont-know: *ref_28
+  three-sentence-response: *ref_29
+  rewrite-vague-claim: *ref_30
+  claim-vs-taste: *ref_31
+  spot-fallacy-dialogue: *ref_32
+  belief-stress-test: *ref_33
+  appeal-to-fear: *ref_34
+  appeal-to-majority: *ref_35
+  begging-the-question: *ref_36
+  poisoning-the-well: *ref_37
+  appeal-to-consequences: *ref_38
+  provocation: *ref_39
+  absurd-extension: *ref_40
+  theory-vs-practice: *ref_41
+  hair-splitting: *ref_42
+  schopenhauer-art-of-being-right: *ref_43
+  slippery-slope: *ref_44
+  hasty-generalization: *ref_45
+  nirvana-fallacy: *ref_46
+  shifting-burden-of-proof: *ref_47
+  false-analogy: *ref_48
+  appeal-to-tradition: *ref_49
+  appeal-to-novelty: *ref_50
+  all-or-nothing: *ref_51
+  composition-division: *ref_52
+  appeal-to-ignorance: *ref_53
+  dialogue-autonomy: *ref_54
+  active-listening: *ref_55
+  strategic-silence: *ref_56
+  echo-last-three-words: *ref_57
+  intonation-up-down: *ref_58
+  tone-of-voice: *ref_59
+  intent-question: *ref_60
 gaps:
   orphans:
     - moving-goalposts
@@ -1805,7 +1779,6 @@ gaps:
     - appeal-to-ignorance
   noFamily: []
   unreferenced:
-    - claim-vs-interpretation
     - precise-claims
     - framing-and-omission
     - alternative-explanations
@@ -1839,8 +1812,6 @@ gaps:
     - active-listening
     - intent-question
   sparseTags:
-    - جدل
-    - کندوکاو
     - تفسیر
     - تعریف
     - استیلمن
