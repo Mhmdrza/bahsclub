@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function JudgesPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12" dir="rtl">
+    <div dir="rtl">
       <Breadcrumbs
-        items={[{ label: "خانه", href: "/" }, { label: "داوران باشگاه" }]}
+        items={[{ label: "باشگاه", href: "/club" }, { label: "داوران باشگاه" }]}
       />
 
       <header className="mb-10 text-center sm:text-right">

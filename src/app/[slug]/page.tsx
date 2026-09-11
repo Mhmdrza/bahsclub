@@ -10,6 +10,8 @@ const RESERVED = new Set([
   "topics",
   "practice",
   "judges",
+  "ladder",
+  "rules",
   "club",
   "api",
   "_next",
@@ -20,7 +22,9 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getPageSlugs().map((slug) => ({ slug }));
+  return getPageSlugs()
+    .filter((slug) => !RESERVED.has(slug))
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

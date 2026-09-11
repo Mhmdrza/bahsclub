@@ -5,7 +5,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/club-rules",
-        destination: "/rules",
+        destination: "/club/rules",
+        permanent: true,
+      },
+      {
+        source: "/rules",
+        destination: "/club/rules",
+        permanent: true,
+      },
+      {
+        source: "/judges",
+        destination: "/club/judges",
         permanent: true,
       },
     ];

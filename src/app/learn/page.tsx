@@ -6,8 +6,10 @@ import {
   ShieldAlert,
   Dumbbell,
   ArrowLeft,
+  Layers,
   Search,
 } from "lucide-react";
+import { LADDER } from "@/lib/ladder";
 import {
   getPublishedLessons,
   getPublishedTopics,
@@ -60,6 +62,12 @@ export default function LearnPage() {
         {/* Quick Nav Anchor Pills */}
         <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6 text-xs">
           <a
+            href="#ladder"
+            className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
+          >
+            نردبان یادگیری
+          </a>
+          <a
             href="#paths"
             className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
@@ -85,6 +93,48 @@ export default function LearnPage() {
           </a>
         </div>
       </div>
+
+      {/* 0. Learning Ladder */}
+      <section id="ladder" className="mb-16 scroll-mt-20 sm:mb-20">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-accent">
+              <Layers className="h-5 w-5" />
+              <p className="eyebrow">نقشهٔ رشد</p>
+            </div>
+            <h2 className="text-2xl font-extrabold">کجای مسیر ایستاده‌ای؟</h2>
+          </div>
+          <Link
+            href="/ladder"
+            className="shrink-0 text-sm font-semibold text-accent hover:underline"
+          >
+            نردبان کامل و آزمون ←
+          </Link>
+        </div>
+        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
+          آموزش‌های ما سه لایه دارند که روی هم ساخته می‌شوند. اگر نمی‌دانی از کجا شروع
+          کنی، با آزمون کوتاه نردبان، نقطهٔ شروع خودت را پیدا کن.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {LADDER.map((rung) => (
+            <Link
+              key={rung.id}
+              href={`/ladder#rung-${rung.id}`}
+              className="group flex flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
+            >
+              <span className="mb-3 inline-flex w-fit items-center justify-center rounded-full bg-accent-light px-2.5 py-1 text-[11px] font-bold text-accent">
+                {rung.step}
+              </span>
+              <h3 className="mb-1 font-bold group-hover:text-accent">
+                {rung.title}
+              </h3>
+              <p className="text-xs leading-relaxed text-muted">
+                {rung.subtitle}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* 1. Learning Paths Section */}
       <section id="paths" className="mb-16 sm:mb-20">

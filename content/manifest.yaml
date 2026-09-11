@@ -1,10 +1,10 @@
-generatedAt: '2026-09-07T15:03:54.995Z'
+generatedAt: '2026-09-11T05:53:34.642Z'
 counts:
-  articles: 55
-  lessons: 3
-  pages: 3
+  articles: 62
+  lessons: 4
+  pages: 4
   topics: 5
-  families: 8
+  families: 9
 articles:
   - slug: what-is-judgment-testing
     title: تفاوت بحث و جدل
@@ -97,7 +97,8 @@ articles:
     file: steelman-opponent.mdx
     lessons: &ref_3
       - judgment-literacy
-    inboundLinks: []
+    inboundLinks:
+      - active-listening
   - slug: evidence-quality
     title: 'کیفیت شواهد: همهٔ شواهد یکسان ساخته نشده‌اند'
     description: یک حکایت شخصی، یک نظر متخصص، یک کارآزمایی تصادفی و یک فراتحلیل — وزن هرکدام در محک زدن یک قضاوت چقدر است؟
@@ -1295,6 +1296,184 @@ articles:
     file: appeal-to-ignorance.mdx
     lessons: &ref_54 []
     inboundLinks: []
+  - slug: dialogue-autonomy
+    title: احترام به استقلال طرف مقابل
+    description: چرا نمی‌توانی کسی را مجبور به تغییر نظر کنی — و پذیرش همین محدودیت چطور گفت‌وگو را آزاد می‌کند.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 6
+    order: 56
+    tags:
+      - استقلال
+      - احترام
+      - گفت‌وگو
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - fair-effective-debate
+      - intent-question
+    file: dialogue-autonomy.mdx
+    lessons: &ref_55
+      - dialogue-basics
+    inboundLinks:
+      - intent-question
+  - slug: active-listening
+    title: 'گوش دادن فعال: شنیدن برای فهمیدن، نه برای پاسخ دادن'
+    description: تفاوت شنیدن و منتظر نوبت ماندن — و چطور گوش دادن واقعی، نیمی از گفت‌وگو را حل می‌کند.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 7
+    order: 57
+    tags:
+      - گوش دادن
+      - شنیدن
+      - گفت‌وگو
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - steelman-opponent
+      - echo-last-three-words
+    file: active-listening.mdx
+    lessons: &ref_56
+      - dialogue-basics
+    inboundLinks: []
+  - slug: strategic-silence
+    title: 'سکوت تاکتیکی: قدرت مکث در گفت‌وگو'
+    description: چطور چند ثانیه سکوت، بیشتر از ده جمله حرف می‌زند — و چرا تحمل سکوت یک مهارت است.
+    type: article
+    category: مبانی
+    level: intermediate
+    readingTime: 6
+    order: 58
+    tags:
+      - سکوت
+      - مکث
+      - گفت‌وگو
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - active-listening
+      - tone-of-voice
+    file: strategic-silence.mdx
+    lessons: &ref_57
+      - dialogue-basics
+    inboundLinks:
+      - echo-last-three-words
+      - tone-of-voice
+  - slug: echo-last-three-words
+    title: 'تکرار سه کلمهٔ آخر: آینه کردن برای عمیق‌تر شدن'
+    description: تکنیک سادهٔ تکرار آخرین کلمات طرف مقابل که او را به گفتن بیشتر وادار می‌کند.
+    type: article
+    category: مبانی
+    level: intermediate
+    readingTime: 6
+    order: 59
+    tags:
+      - آینه کردن
+      - تکرار
+      - پرسش
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - active-listening
+      - intonation-up-down
+    file: echo-last-three-words.mdx
+    lessons: &ref_58
+      - dialogue-basics
+    inboundLinks:
+      - intonation-up-down
+  - slug: intonation-up-down
+    title: 'آهنگ کلام: بالا و پایین بردن صدا'
+    description: چطور بالا و پایین بردن انتهای جمله، معنای حرف را از خبر به سؤال و از دعوت به تهدید تغییر می‌دهد.
+    type: article
+    category: مبانی
+    level: intermediate
+    readingTime: 6
+    order: 60
+    tags:
+      - آهنگ کلام
+      - لحن
+      - صدا
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - tone-of-voice
+      - echo-last-three-words
+    file: intonation-up-down.mdx
+    lessons: &ref_59
+      - dialogue-basics
+    inboundLinks:
+      - echo-last-three-words
+      - intent-question
+      - tone-of-voice
+  - slug: tone-of-voice
+    title: 'لحن صدا: چطور صدایت پیام را عوض می‌کند'
+    description: از «دی‌جی آخر شب» تا لحن رسمی — چطور سرعت، بلندی و گرمی صدا، حرف تو را از آرامش به تهدید می‌برد.
+    type: article
+    category: مبانی
+    level: intermediate
+    readingTime: 7
+    order: 61
+    tags:
+      - لحن
+      - صدا
+      - آرامش
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - intonation-up-down
+      - strategic-silence
+    file: tone-of-voice.mdx
+    lessons: &ref_60
+      - dialogue-basics
+    inboundLinks:
+      - intent-question
+      - intonation-up-down
+      - strategic-silence
+  - slug: intent-question
+    title: 'پرسش دربارهٔ نیت: چه زمانی بپرسیم «منظورت چیست؟»'
+    description: تفاوت نیت و تأثیر — و چطور به‌جای نیت‌خوانی، با یک سؤال ساده سوءتفاهم را حل کنیم.
+    type: article
+    category: مبانی
+    level: beginner
+    readingTime: 7
+    order: 62
+    tags:
+      - نیت
+      - سوءتفاهم
+      - نیت‌خوانی
+    topics:
+      - foundations
+    family: dialogue-basics
+    status: published
+    publishedAt: '2025-09-11'
+    related:
+      - dialogue-autonomy
+      - responding-to-tactics
+    file: intent-question.mdx
+    lessons: &ref_61
+      - dialogue-basics
+    inboundLinks: []
 lessons:
   - slug: judgment-literacy
     title: 'مسیر اصلی: سواد قضاوت'
@@ -1352,6 +1531,23 @@ lessons:
       - when-to-say-i-dont-know
     featured: false
     milestone: می‌توانی شواهد را از نظر کیفیت ارزیابی کنی، چهارچوب‌بندی و حذف را تشخیص دهی، و بین همبستگی و علیت تمایز قائل شوی.
+  - slug: dialogue-basics
+    title: اصول پایهٔ گفت‌وگو
+    description: >-
+      مهارت‌های پایه‌ای که هر گفت‌وگوی سالمی روی آن‌ها ساخته می‌شود: احترام به استقلال طرف مقابل، گوش دادن واقعی، سکوت
+      آگاهانه، آینه کردن، آهنگ کلام، لحن صدا، و پرسش دربارهٔ نیت.
+    status: published
+    order: 4
+    steps:
+      - dialogue-autonomy
+      - active-listening
+      - strategic-silence
+      - echo-last-three-words
+      - intonation-up-down
+      - tone-of-voice
+      - intent-question
+    featured: false
+    milestone: می‌توانی گفت‌وگویی را با احترام، گوش دادن فعال، سکوت آگاهانه، و لحن مناسب پیش ببری و به‌جای نیت‌خوانی، شفاف بپرسی.
 pages:
   - slug: about
     title: درباره بحث‌کلاب
@@ -1365,6 +1561,11 @@ pages:
     description: ده اصلی که فرهنگ بحث‌کلاب را می‌سازند — اصولی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.
     status: published
     order: 2
+  - slug: mission
+    title: مأموریت ما
+    description: 'چرا اینجا هستیم: تبدیل گفت‌وگو از یک استعداد نادر به یک مهارت همگانی — از پایه تا تسلط.'
+    status: published
+    order: 4
   - slug: session-format
     title: ساختار یک جلسهٔ بحث
     description: >-
@@ -1462,7 +1663,27 @@ families:
     - theory-vs-practice
     - hair-splitting
     - schopenhauer-art-of-being-right
+  dialogue-basics:
+    - dialogue-autonomy
+    - active-listening
+    - strategic-silence
+    - echo-last-three-words
+    - intonation-up-down
+    - tone-of-voice
+    - intent-question
 crossRefs:
+  active-listening:
+    - steelman-opponent
+  echo-last-three-words:
+    - intonation-up-down
+    - strategic-silence
+  intent-question:
+    - tone-of-voice
+    - intonation-up-down
+    - dialogue-autonomy
+  intonation-up-down:
+    - echo-last-three-words
+    - tone-of-voice
   schopenhauer-art-of-being-right:
     - straw-man
     - absurd-extension
@@ -1484,6 +1705,11 @@ crossRefs:
     - loaded-question
     - moving-goalposts
     - cherry-picking
+  strategic-silence:
+    - tone-of-voice
+  tone-of-voice:
+    - strategic-silence
+    - intonation-up-down
 lessonMemberships:
   what-is-judgment-testing: *ref_0
   claim-vs-interpretation: *ref_1
@@ -1540,6 +1766,13 @@ lessonMemberships:
   all-or-nothing: *ref_52
   composition-division: *ref_53
   appeal-to-ignorance: *ref_54
+  dialogue-autonomy: *ref_55
+  active-listening: *ref_56
+  strategic-silence: *ref_57
+  echo-last-three-words: *ref_58
+  intonation-up-down: *ref_59
+  tone-of-voice: *ref_60
+  intent-question: *ref_61
 gaps:
   orphans:
     - moving-goalposts
@@ -1574,7 +1807,6 @@ gaps:
   unreferenced:
     - claim-vs-interpretation
     - precise-claims
-    - steelman-opponent
     - framing-and-omission
     - alternative-explanations
     - expertise-and-incentives
@@ -1604,6 +1836,8 @@ gaps:
     - all-or-nothing
     - composition-division
     - appeal-to-ignorance
+    - active-listening
+    - intent-question
   sparseTags:
     - جدل
     - کندوکاو
@@ -1638,7 +1872,6 @@ gaps:
     - ساختار استدلال
     - نقشه استدلال
     - پرسشگری
-    - گفت‌وگو
     - پاسخ
     - مدیریت بحث
     - سازنده
@@ -1724,6 +1957,20 @@ gaps:
     - جزء و کل
     - توسل به جهل
     - نادانی
+    - استقلال
+    - احترام
+    - گوش دادن
+    - شنیدن
+    - سکوت
+    - مکث
+    - آینه کردن
+    - تکرار
+    - پرسش
+    - آهنگ کلام
+    - آرامش
+    - نیت
+    - سوءتفاهم
+    - نیت‌خوانی
   sparseTopics: []
 siteConfig:
   title: بحث‌کلاب
@@ -1742,7 +1989,7 @@ siteConfig:
   nav:
     - label: آموزش
       href: /learn
-    - label: مرام‌نامه
-      href: /rules
-    - label: باشگاه
-      href: /club
+    - label: نردبان یادگیری
+      href: /ladder
+    - label: مأموریت
+      href: /mission

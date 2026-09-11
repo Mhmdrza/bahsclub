@@ -41,6 +41,12 @@ export function ClubHeaderClient({
             <Link href="/club/tags" className="hover:text-foreground transition-colors">
               موضوعات
             </Link>
+            <Link href="/club/rules" className="hover:text-foreground transition-colors">
+              مرام‌نامه
+            </Link>
+            <Link href="/club/judges" className="hover:text-foreground transition-colors">
+              داوران
+            </Link>
             {session && session.user.role === "judge" && (
               <Link href="/club/judge" className="hover:text-gold transition-colors text-gold/90 font-medium">
                 داوری
@@ -145,6 +151,20 @@ export function ClubHeaderClient({
               className="block rounded-md px-3 py-2 text-muted hover:bg-background hover:text-foreground transition-colors"
             >
               موضوعات
+            </Link>
+            <Link
+              href="/club/rules"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-md px-3 py-2 text-muted hover:bg-background hover:text-foreground transition-colors"
+            >
+              مرام‌نامه
+            </Link>
+            <Link
+              href="/club/judges"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-md px-3 py-2 text-muted hover:bg-background hover:text-foreground transition-colors"
+            >
+              داوران
             </Link>
 
             {session ? (
