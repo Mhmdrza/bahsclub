@@ -111,6 +111,7 @@ export default async function ArticlePage({ params, searchParams }: Props) {
             title={article.title}
             description={article.description}
             keyIdea={article.keyIdea}
+            tldr={article.tldr}
             readingTime={article.readingTime}
             category={article.category}
           />

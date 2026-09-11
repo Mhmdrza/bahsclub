@@ -46,3 +46,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .codebase-memory/
+
+# video pipeline (generated renders, raw voice recordings, frames)
+/video/frames/
+/video/out/
+/video/html/
+/video/vo/
+/video/plan.json
+/video/scripts/
+/video/srt/

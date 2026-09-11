@@ -165,6 +165,7 @@ export function SearchAndFilters({
                 content: "",
                 headings: [],
                 keyIdea: null,
+                tldr: null,
               }}
               completed={completedSlugs.has(item.slug)}
             />

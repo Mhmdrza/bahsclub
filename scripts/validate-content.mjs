@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { load as loadYaml } from "js-yaml";
+import { parseTldr } from "./lib/tldr.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -31,7 +32,7 @@ function loadArticleSlugs() {
     .filter((f) => f.endsWith(".mdx"))
     .map((f) => {
       const raw = fs.readFileSync(path.join(ARTICLES_DIR, f), "utf8");
-      const { data } = matter(raw);
+      const { data, content } = matter(raw);
       return {
         slug: data.slug ?? f.replace(".mdx", ""),
         file: f,
@@ -41,6 +42,8 @@ function loadArticleSlugs() {
         related: data.related ?? [],
         topics: data.topics ?? [],
         family: data.family ?? "",
+        tldr: parseTldr(content),
+        hasKeyIdea: /^\s*>\s*\*\*ایده[ٔ]?\s*کلیدی/m.test(content),
       };
     });
 }
@@ -191,6 +194,31 @@ function main() {
   for (const p of pages) {
     if (pageSeen[p.slug]) err(`Duplicate page slug "${p.slug}" in ${p.file}`);
     pageSeen[p.slug] = p.file;
+  }
+
+  // 10. TL;DR section — required and well-formed for published articles
+  for (const a of articles) {
+    const required = a.status === "published";
+    const t = a.tldr;
+    if (!t) {
+      if (required) err(`Article "${a.slug}" (${a.file}) is missing a "## خلاصهٔ فوری" section`);
+      continue;
+    }
+    if (!t.line && !a.hasKeyIdea) {
+      if (required) err(`Article "${a.slug}" (${a.file}) TL;DR needs a "**در یک خط:**" or an "ایدهٔ کلیدی" blockquote`);
+    }
+    if (t.points.length < 2) {
+      if (required) err(`Article "${a.slug}" (${a.file}) TL;DR needs at least 2 bullet points (found ${t.points.length})`);
+    }
+    if (t.points.length > 5) {
+      warn(`Article "${a.slug}" (${a.file}) TL;DR has ${t.points.length} bullets — video layout shows max 5`);
+    }
+    if (!t.takeaway) {
+      if (required) err(`Article "${a.slug}" (${a.file}) TL;DR is missing a "**ته‌خط:**" line`);
+    }
+    for (const p of t.points) {
+      if (p.length > 160) warn(`Article "${a.slug}" (${a.file}) TL;DR bullet is ${p.length} chars — keep under 160`);
+    }
   }
 
   // ── Summary ──────────────────────────────────────────────────────

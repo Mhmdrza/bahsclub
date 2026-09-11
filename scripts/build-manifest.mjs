@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { load as loadYaml, dump as dumpYaml } from "js-yaml";
+import { parseTldr } from "./lib/tldr.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -21,7 +22,7 @@ function loadArticles() {
     .filter((f) => f.endsWith(".mdx"))
     .map((f) => {
       const raw = fs.readFileSync(path.join(ARTICLES_DIR, f), "utf8");
-      const { data } = matter(raw);
+      const { data, content } = matter(raw);
       return {
         slug: data.slug ?? f.replace(".mdx", ""),
         title: data.title ?? data.slug,
@@ -37,6 +38,7 @@ function loadArticles() {
         status: data.status ?? "published",
         publishedAt: data.publishedAt ?? "",
         related: data.related ?? [],
+        tldr: parseTldr(content),
         file: f,
       };
     })
@@ -206,7 +208,12 @@ function detectGaps(articles, crossRefs, lessonMemberships, lessons, topics) {
     .filter(([, c]) => c < 3)
     .map(([t]) => t);
 
-  return { orphans, noFamily, unreferenced, sparseTags, sparseTopics };
+  // Articles missing a well-formed TL;DR section
+  const missingTldr = articles
+    .filter((a) => !(a.tldr && a.tldr.points.length >= 2 && a.tldr.takeaway))
+    .map((a) => a.slug);
+
+  return { orphans, noFamily, unreferenced, sparseTags, sparseTopics, missingTldr };
 }
 
 // ── MAIN ───────────────────────────────────────────────────────────
@@ -270,6 +277,7 @@ function main() {
   console.log(`  Orphans (no lesson/topic): ${gaps.orphans.length}`);
   console.log(`  No family:          ${gaps.noFamily.length}`);
   console.log(`  Unreferenced:       ${gaps.unreferenced.length}`);
+  console.log(`  Missing TL;DR:      ${gaps.missingTldr.length}`);
 }
 
 main();

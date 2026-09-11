@@ -62,40 +62,65 @@ Items below are known gaps that need addressing as the app scales.
 
 <!-- BEGIN:tldr-system -->
 
-## TL;DR Animated Slide System
+## TL;DR System (source of truth + renderers)
 
-Each article has a 3-scene animated TL;DR intro embedded directly in the article page via `TldrSlide` React component.
+Every published article owns a real TL;DR in its **body**, immediately after the
+`> **ایدهٔ کلیدی:**` blockquote. Renderers never derive summaries from headings.
+
+### The canonical section (edit this in the article)
+
+```md
+> **ایدهٔ کلیدی:** <one-line hook>          ← the «در یک خط»
+
+## خلاصهٔ فوری
+
+- <takeaway 1>
+- <takeaway 2>
+- <takeaway 3>
+
+**ته‌خط:** <actionable bottom line>
+```
+
+Parser contract (tolerant; heading may also be `## خلاصه فوری`, `## چکیده`, `## TL;DR`):
+
+| Field | Source | Rules |
+|---|---|---|
+| `line` | optional `**در یک خط:** …` inside the section | falls back to the `ایدهٔ کلیدی` blockquote |
+| `points` | `-` bullets | 2–5; validation errors below 2, warns above 5 |
+| `takeaway` | `**ته‌خط:**` (or `نتیجه` / `حرف آخر`) | required |
+
+The section is stripped from the prose before `MarkdownContent` and its heading is
+excluded from `headings`/TOC, so it is never rendered twice.
 
 ### Implementation
 
 ```
-src/components/TldrSlide.tsx   # Client component: GSAP timeline, 3 scenes, inline styles
-src/lib/content.ts             # extracts keyIdea from MDX blockquote
-src/app/articles/[slug]/page.tsx  # passes title, description, keyIdea, readingTime, category to TldrSlide
+src/lib/types.ts                 # Tldr interface + Article.tldr
+src/lib/tldr.ts                  # parseTldr / stripTldr (site)
+scripts/lib/tldr.mjs             # mirror for scripts + applyTldr / buildTldrSection
+scripts/tldr-apply.mjs           # writes sections from a {slug:{points,takeaway}} JSON batch
+scripts/tldr-report.mjs          # `pnpm content:tldr` — lists missing/malformed sections
+src/lib/content.ts               # parses tldr, strips section, excludes heading from TOC
+src/components/TldrSlide.tsx     # site renderer (GSAP artboard + sr-only static fallback)
+scripts/video-plan.mjs           # video scene plan (5 scenes from the same tldr)
+scripts/video-html.mjs           # deterministic 1920×1080 scene page for rendering
 ```
 
-### How it works
+### Rendering
 
-`TldrSlide` renders 3 scenes on a fixed 1920×1080 artboard. `fit()` scales to container via JS. GSAP CDN loads via `<script>` tag inside component. Effects mount/unmount with React lifecycle.
+- **Site** (`TldrSlide`): 4 animated scenes — Hook → در یک خط → نکته‌های کلیدی → ته‌خط.
+  A real semantic summary (`sr-only`) is always in the DOM for a11y/SEO, and
+  becomes visible (animation hidden) under `prefers-reduced-motion: reduce`.
+- **Video** (`pnpm video:*`): 5 scenes — Hook → در یک خط → نکته‌های کلیدی → ته‌خط →
+  قسمت بعدی. See `video/TODO.md`.
 
-### Scenes
+### Editing / adding TL;DRs (incl. future LLM passes)
 
-| Scene | Content | Duration |
-|-------|---------|----------|
-| 1. Hook | article title, description, metadata | 0–4.5s |
-| 2. Key Idea | `ایده کلیدی` extracted from MDX blockquote | 4.6–8.6s |
-| 3. CTA | "ادعا را آزمایش کن" + article title | 9–25s |
+1. Fill a JSON batch `{ "<slug>": { "points": ["…","…"], "takeaway": "…" } }`.
+2. `node scripts/tldr-apply.mjs <batch.json|dir>` — idempotent; replaces an existing section.
+3. `pnpm content:tldr` to check coverage, `pnpm content:validate` for strict structure.
+4. Published articles **must** have a valid section; `content:validate` (and the build) fails otherwise.
 
-The engine (`useEffect`) builds a single GSAP timeline with `repeat: -1`. Each scene enters with staggered fade/slide animations.
-
-### Modifying
-
-- To change entrance animations: edit the `tl.fromTo()` calls in `TldrSlide.tsx`
-- To add scenes: add a new `.tldr-scene` div + corresponding GSAP tweens
-- To change visual style: edit the `<style>` block in the component
-
-### Regeneration (none needed)
-
-TL;DRs are generated at render time — no build step. Adding a new article automatically gets a TL;DR if it has an `ایده کلیدی` blockquote.
+`scripts/generate-tldr.mjs` was retired; `video-html.mjs` supersedes it.
 
 <!-- END:tldr-system -->

@@ -15,6 +15,7 @@ import type {
   Topic,
 } from "./types";
 import { slugifyHeading } from "./utils";
+import { parseTldr, stripTldr } from "./tldr";
 
 const KEY_IDEA_RE = /^\s*>\s*\*\*ایده[ٔ]?\s*کلیدی[^*]*\*\*\s*(.+)/m;
 
@@ -79,12 +80,15 @@ function loadArticlesRaw(): Article[] {
     const { data, content } = matter(raw);
     const frontmatter = normalizeArticleFrontmatter(data as ArticleFrontmatter);
     const normalizedContent = normalizeArticleContent(content, frontmatter.title);
+    const tldr = parseTldr(normalizedContent);
+    const bodyContent = tldr ? stripTldr(normalizedContent) : normalizedContent;
 
     return {
       ...frontmatter,
-      content: normalizedContent,
-      headings: extractHeadings(normalizedContent),
+      content: bodyContent,
+      headings: extractHeadings(bodyContent),
       keyIdea: extractKeyIdea(normalizedContent),
+      tldr,
     };
   });
 }

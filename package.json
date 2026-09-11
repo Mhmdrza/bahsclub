@@ -15,6 +15,11 @@
     "content:index": "node scripts/build-manifest.mjs",
     "content:validate": "node scripts/validate-content.mjs",
     "content:check": "pnpm content:index && pnpm content:validate",
+    "content:tldr": "node scripts/tldr-report.mjs",
+    "video:plan": "node scripts/video-plan.mjs",
+    "video:html": "node scripts/video-html.mjs",
+    "video:render": "node scripts/video-render.mjs",
+    "video:all": "pnpm video:plan && pnpm video:html && pnpm video:render",
     "db:init:local": "pnpm --prefix workers/api db:init:local",
     "db:seed": "pnpm --prefix workers/api db:seed",
     "db:seed:local": "pnpm --prefix workers/api db:seed:local"
@@ -43,6 +48,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
