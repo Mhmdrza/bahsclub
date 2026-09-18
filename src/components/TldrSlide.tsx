@@ -1,24 +1,26 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Tldr } from "@/lib/types";
+import type { Latch, Tldr } from "@/lib/types";
 
 interface TldrSlideProps {
   title: string;
   description: string;
   keyIdea: string | null;
   tldr: Tldr | null;
+  latch: Latch | null;
   readingTime: number;
   category: string;
 }
 
-export function TldrSlide({ title, description, keyIdea, tldr, readingTime, category }: TldrSlideProps) {
+export function TldrSlide({ title, description, keyIdea, tldr, latch, readingTime, category }: TldrSlideProps) {
   const elRef = useRef<HTMLDivElement>(null);
   const [animated, setAnimated] = useState(false);
   const line = tldr?.line ?? keyIdea ?? null;
   const points = tldr?.points ?? [];
   const takeaway = tldr?.takeaway ?? null;
-  const hasContent = Boolean(line || points.length || takeaway);
+  const latchPoints = latch?.points ?? [];
+  const hasContent = Boolean(line || points.length || takeaway || latchPoints.length);
 
   useEffect(() => {
     const el = elRef.current;
@@ -46,7 +48,9 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       stage.style.opacity = "1";
 
       const s = (id: string) => el.querySelector("#" + id) as HTMLElement | null;
-      const ids = ["s1", "s2", "s3", "s4"].filter((id) => s(id));
+      const ids = Array.from(el.querySelectorAll<HTMLElement>(".tldr-scene"))
+        .map((scene) => scene.id)
+        .filter(Boolean);
       const scenes = ids.map((id) => "#" + id);
 
       tl = gsap.timeline({ paused: true, repeat: -1 });
@@ -57,7 +61,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       tl.fromTo(s("glowB")!, { opacity: 0.15 }, { opacity: 0.25, duration: 3.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.5);
 
       let t = 0;
-      const durations: Record<string, number> = { s1: 4.2, s2: 3.8, s3: 6, s4: 5 };
+      const durations: Record<string, number> = { latch: 6.5, s1: 4.2, s2: 3.8, s3: 6, s4: 5 };
       scenes.forEach((sel, i) => {
         const start = t;
         const enter = start + 0.15;
@@ -88,7 +92,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       if (tl) tl.kill();
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
     };
-  }, [hasContent, line, points.length, takeaway]);
+  }, [hasContent, line, points.length, takeaway, latchPoints.length]);
 
   return (
     <section aria-label="خلاصهٔ فوری" className="mb-10 overflow-hidden rounded-2xl border border-border bg-background">
@@ -143,6 +147,17 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
             <div className="tldr-glow" id="glowA" style={{ width: "700px", height: "700px", top: "-150px", right: "-100px", background: "#2563eb", opacity: 0.22 }} />
             <div className="tldr-glow" id="glowB" style={{ width: "500px", height: "500px", bottom: "-100px", left: "-100px", background: "#06b6d4", opacity: 0.15 }} />
 
+            {latchPoints.length > 0 && (
+              <div className="tldr-scene" id="latch" style={{ display: "none" }}>
+                <span className="tldr-eyebrow" id="latch-eye"><span className="tldr-dash" />این مطلب به چه کارتان می‌آید؟</span>
+                <ul className="tldr-list" id="latch-list">
+                  {latchPoints.slice(0, 5).map((p, i) => (
+                    <li key={i}><span className="num">{i + 1}</span>{p}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="tldr-scene" id="s1">
               <span className="tldr-eyebrow" id="s1-eye"><span className="tldr-dash" />حرف‌کلاب · خلاصهٔ فوری</span>
               <h1 className="tldr-h1" id="s1-title"><span className="accent">{title}</span></h1>
@@ -184,6 +199,16 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
 
         <div className={animated ? "tldr-static sr-only" : "tldr-static"}>
           <h2 className="mb-4 text-xl font-bold">خلاصهٔ فوری</h2>
+          {latchPoints.length > 0 && (
+            <>
+              <h3 className="mb-2 text-lg font-bold">این مطلب به چه کارتان می‌آید؟</h3>
+              <ul className="mb-4 list-disc space-y-2 pr-6 leading-8">
+                {latchPoints.map((p, i) => (
+                  <li key={i}>{p}</li>
+                ))}
+              </ul>
+            </>
+          )}
           {line && <p className="mb-4 text-base leading-8 text-muted">{line}</p>}
           {points.length > 0 && (
             <ul className="mb-4 list-disc space-y-2 pr-6 leading-8">

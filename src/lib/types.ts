@@ -37,6 +37,11 @@ export interface Article extends ArticleFrontmatter {
   headings: TocHeading[];
   keyIdea: string | null;
   tldr: Tldr | null;
+  latch: Latch | null;
+}
+
+export interface Latch {
+  points: string[];
 }
 
 export interface Tldr {
