@@ -16,7 +16,6 @@ import type {
 } from "./types";
 import { slugifyHeading } from "./utils";
 import { parseTldr, stripTldr } from "./tldr";
-import { parseLatch, stripLatch } from "./latch";
 
 const KEY_IDEA_RE = /^\s*>\s*\*\*ایده[ٔ]?\s*کلیدی[^*]*\*\*\s*(.+)/m;
 
@@ -82,10 +81,7 @@ function loadArticlesRaw(): Article[] {
     const frontmatter = normalizeArticleFrontmatter(data as ArticleFrontmatter);
     const normalizedContent = normalizeArticleContent(content, frontmatter.title);
     const tldr = parseTldr(normalizedContent);
-    const latch = parseLatch(normalizedContent);
-    const withoutTldr = tldr ? stripTldr(normalizedContent) : normalizedContent;
-    // Latch renders as the first slide scene, so it must not repeat in the prose.
-    const bodyContent = latch ? stripLatch(withoutTldr) : withoutTldr;
+    const bodyContent = tldr ? stripTldr(normalizedContent) : normalizedContent;
 
     return {
       ...frontmatter,
@@ -93,7 +89,6 @@ function loadArticlesRaw(): Article[] {
       headings: extractHeadings(bodyContent),
       keyIdea: extractKeyIdea(normalizedContent),
       tldr,
-      latch,
     };
   });
 }
