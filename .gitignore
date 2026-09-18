@@ -55,3 +55,5 @@ next-env.d.ts
 /video/plan.json
 /video/scripts/
 /video/srt/
+
+.omo
