@@ -4,10 +4,15 @@ import type { Article } from "@/lib/types";
 import { formatPersianNumber, levelLabel, typeLabel } from "@/lib/utils";
 
 interface ArticleCardProps {
-  article: Article;
+  article: ArticleCardData;
   completed?: boolean;
   href?: string;
 }
+
+type ArticleCardData = Pick<
+  Article,
+  "slug" | "title" | "description" | "category" | "level" | "type" | "readingTime"
+>;
 
 export function ArticleCard({
   article,

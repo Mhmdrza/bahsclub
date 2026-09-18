@@ -157,16 +157,7 @@ export function SearchAndFilters({
           {filtered.map((item) => (
             <ArticleCard
               key={item.slug}
-              article={{
-                ...item,
-                status: "published",
-                order: 0,
-                publishedAt: "",
-                content: "",
-                headings: [],
-                keyIdea: null,
-                tldr: null,
-              }}
+              article={item}
               completed={completedSlugs.has(item.slug)}
             />
           ))}
