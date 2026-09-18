@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { load as loadYaml } from "js-yaml";
 import { parseTldr } from "./lib/tldr.mjs";
+import { parseLatch } from "./lib/latch.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -43,6 +44,7 @@ function loadArticleSlugs() {
         topics: data.topics ?? [],
         family: data.family ?? "",
         tldr: parseTldr(content),
+        latch: parseLatch(content),
         hasKeyIdea: /^\s*>\s*\*\*ایده[ٔ]?\s*کلیدی/m.test(content),
       };
     });
@@ -218,6 +220,25 @@ function main() {
     }
     for (const p of t.points) {
       if (p.length > 160) warn(`Article "${a.slug}" (${a.file}) TL;DR bullet is ${p.length} chars — keep under 160`);
+    }
+  }
+
+  // 11. Latch section — required and well-formed for published articles
+  for (const a of articles) {
+    const required = a.status === "published";
+    const l = a.latch;
+    if (!l) {
+      if (required) err(`Article "${a.slug}" (${a.file}) is missing a "## این مطلب به چه کارتان می‌آید؟" section`);
+      continue;
+    }
+    if (l.points.length < 2) {
+      if (required) err(`Article "${a.slug}" (${a.file}) latch needs at least 2 bullet points (found ${l.points.length})`);
+    }
+    if (l.points.length > 5) {
+      warn(`Article "${a.slug}" (${a.file}) latch has ${l.points.length} bullets — keep 2 to 5`);
+    }
+    for (const p of l.points) {
+      if (p.length > 200) warn(`Article "${a.slug}" (${a.file}) latch bullet is ${p.length} chars — keep under 200`);
     }
   }
 

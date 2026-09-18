@@ -16,6 +16,7 @@
     "content:validate": "node scripts/validate-content.mjs",
     "content:check": "pnpm content:index && pnpm content:validate",
     "content:tldr": "node scripts/tldr-report.mjs",
+    "content:latch": "node scripts/latch-report.mjs",
     "video:plan": "node scripts/video-plan.mjs",
     "video:html": "node scripts/video-html.mjs",
     "video:render": "node scripts/video-render.mjs",
