@@ -5,6 +5,14 @@ compatibility_date = "2025-08-01"
 [triggers]
 crons = ["*/15 * * * *"]
 
+# Telegram alerts for new waitlist signups.
+# Fill these, then run: wrangler secret put TELEGRAM_BOT_TOKEN
+#                        wrangler secret put TELEGRAM_CHAT_ID
+# Leave empty to disable (notifications become a no-op).
+[vars]
+TELEGRAM_BOT_TOKEN = ""
+TELEGRAM_CHAT_ID = ""
+
 [[d1_databases]]
 binding = "DB"
 database_name = "harfclub"

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { createSession, deleteUserSessions, hashPassword, verifyPassword, getAuthToken, getCurrentUser, err, ok, isStrongPassword, checkRateLimit, getClientIp } from "../lib";
+import { createSession, deleteUserSessions, hashPassword, verifyPassword, getAuthToken, getCurrentUser, err, ok, isStrongPassword, checkRateLimit, getClientIp, notifyTelegram } from "../lib";
 
-const auth = new Hono<{ Bindings: { DB: D1Database } }>();
+const auth = new Hono<{ Bindings: { DB: D1Database; TELEGRAM_BOT_TOKEN?: string; TELEGRAM_CHAT_ID?: string } }>();
 
 auth.post("/register", async (c) => {
   const ip = getClientIp(c);
@@ -59,6 +59,12 @@ auth.post("/waitlist", async (c) => {
   await c.env.DB.prepare(
     "INSERT INTO waitlist (email, note) VALUES (?, ?)"
   ).bind(normalisedEmail, note || "").run();
+
+  c.executionCtx.waitUntil(notifyTelegram(
+    c.env.TELEGRAM_BOT_TOKEN,
+    c.env.TELEGRAM_CHAT_ID,
+    `New waitlist signup: ${normalisedEmail}${note ? `\nNote: ${note}` : ""}`,
+  ));
 
   return ok({ message: "با موفقیت در لیست انتظار ثبت شدید" });
 });

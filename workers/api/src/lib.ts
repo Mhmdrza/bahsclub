@@ -131,6 +131,18 @@ export function getClientIp(c: unknown): string {
   return c.req.header("CF-Connecting-IP") || c.req.header("X-Forwarded-For") || "unknown";
 }
 
+// Fire-and-forget Telegram ping. No-op unless both env vars are set.
+export async function notifyTelegram(token: string | undefined, chatId: string | undefined, text: string): Promise<void> {
+  if (!token || !chatId) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
+  } catch {}
+}
+
 export function getPagination(query: Record<string, string | undefined>, defaultLimit = 20, maxLimit = 100) {
   const page = Math.max(1, parseInt(query.page || "1"));
   const limit = Math.min(maxLimit, Math.max(1, parseInt(query.limit || String(defaultLimit))));

@@ -8,7 +8,7 @@ import { users } from "./routes/users";
 import { flagsRt } from "./routes/flags";
 import { invites } from "./routes/invites";
 
-type Bindings = { DB: D1Database };
+type Bindings = { DB: D1Database; TELEGRAM_BOT_TOKEN?: string; TELEGRAM_CHAT_ID?: string };
 
 const app = new Hono<{ Bindings: Bindings }>();
 
