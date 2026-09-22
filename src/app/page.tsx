@@ -88,7 +88,7 @@ export default function HomePage() {
               </h3>
               <p className="mb-4 text-xs leading-relaxed text-muted">{line}</p>
               <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-accent">
-                مطالعه درس
+                مطالعه مقاله
                 <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
               </span>
             </Link>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import {
   buildSearchIndex,
   getFacetValues,
@@ -27,11 +28,13 @@ export default function ArticlesPage() {
       <p className="mb-8 text-muted">
         جستجو و فیلتر در میان مقالات، تاکتیک‌ها و تمرین‌ها.
       </p>
-      <SearchAndFilters
-        items={items}
-        facets={facets}
-        topicLabels={topicLabels}
-      />
+      <Suspense fallback={<div className="py-12 text-center text-muted">در حال بارگذاری...</div>}>
+        <SearchAndFilters
+          items={items}
+          facets={facets}
+          topicLabels={topicLabels}
+        />
+      </Suspense>
     </div>
   );
 }
