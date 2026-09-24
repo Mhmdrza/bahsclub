@@ -110,7 +110,12 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
             background-size: 48px 48px;
           }
           .tldr-glow { position: absolute; border-radius: 50%; z-index: 1; filter: blur(100px); pointer-events: none; }
-          .tldr-scene { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; padding: 0 100px; z-index: 2; }
+          .tldr-scene { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; padding: 0 100px; z-index: 2; overflow-wrap: break-word; }
+          .tldr-scene--hook { padding: 0 140px; }
+          .tldr-scene--hook .tldr-eyebrow { font-size: 28px; }
+          .tldr-scene--hook .tldr-h1 { font-size: 96px; line-height: 1.2; max-width: 1640px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+          .tldr-scene--hook .tldr-body { font-size: 42px; max-width: 1640px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+          .tldr-scene--hook .tldr-meta { font-size: 30px; }
           .tldr-eyebrow {
             display: inline-flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700;
             color: #60a5fa; margin-bottom: 28px; width: fit-content;
@@ -143,7 +148,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
             <div className="tldr-glow" id="glowA" style={{ width: "700px", height: "700px", top: "-150px", right: "-100px", background: "#2563eb", opacity: 0.22 }} />
             <div className="tldr-glow" id="glowB" style={{ width: "500px", height: "500px", bottom: "-100px", left: "-100px", background: "#06b6d4", opacity: 0.15 }} />
 
-            <div className="tldr-scene" id="s1">
+            <div className="tldr-scene tldr-scene--hook" id="s1">
               <span className="tldr-eyebrow" id="s1-eye"><span className="tldr-dash" />بحث‌کلاب · خلاصهٔ فوری</span>
               <h1 className="tldr-h1" id="s1-title"><span className="accent">{title}</span></h1>
               <p className="tldr-body" id="s1-body">{description}</p>
