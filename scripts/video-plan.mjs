@@ -44,7 +44,7 @@ function buildScenes(article, membership, durations) {
     {
       kind: "hook",
       duration: durations.hook,
-      eyebrow: `حرف‌کلاب · ${membership?.seriesTitle ?? article.data.category ?? "آموزش"}`,
+      eyebrow: `بحث‌کلاب · ${membership?.seriesTitle ?? article.data.category ?? "آموزش"}`,
       title: article.data.title,
       body: article.data.description ?? "",
       meta: [
@@ -84,8 +84,8 @@ function buildScenes(article, membership, durations) {
       title: nextTitle ?? "ممنون که همراه بودی",
       body: nextTitle
         ? `ادامه در «${membership.seriesTitle}»`
-        : "بقیهٔ مسیرهای حرف‌کلاب در کانال",
-      cta: "حرف‌کلاب · جایی برای تجربهٔ قدرت گفت‌وگو",
+        : "بقیهٔ مسیرهای بحث‌کلاب در کانال",
+      cta: "بحث‌کلاب · جایی برای تجربهٔ قدرت گفت‌وگو",
       narration: nextTitle
         ? `قسمت بعدی: ${nextTitle}.`
         : "به پایان این مسیر رسیدیم. مسیرهای دیگر را در کانال ببینید.",
@@ -106,11 +106,11 @@ function youtubeMeta(video, membership) {
     `📚 پلی‌لیست «${seriesTitle}»:\n${membership.playlistUrl}` +
     nextLine +
     `\n\n🌐 وب‌سایت: ${membership.siteUrl}/articles/${video.slug}` +
-    `\n#حرف‌کلاب #تفکرنقاد #گفت‌وگو`;
+    `\n#بحث‌کلاب #تفکرنقاد #گفت‌وگو`;
   const tags = [
     ...(video.data.tags ?? []),
     seriesTitle,
-    "حرف‌کلاب",
+    "بحث‌کلاب",
     "تفکر نقاد",
     "گفت‌وگوی سازنده",
   ];
@@ -163,7 +163,7 @@ function main() {
         next: membership.next,
         nextSlug: membership.nextSlug,
         prevSlug: lesson.steps[i - 1] ?? null,
-        siteUrl: "https://harfclub.ir",
+        siteUrl: "https://bahsclub.ir",
         playlistUrl: `https://www.youtube.com/playlist?list=<PLAYLIST_${lesson.slug.toUpperCase().replace(/-/g, "_")}>`,
         nextUrl: membership.nextSlug ? `https://youtu.be/<VIDEO_${membership.nextSlug.toUpperCase().replace(/-/g, "_")}>` : null,
       };

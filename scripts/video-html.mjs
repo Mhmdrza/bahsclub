@@ -108,7 +108,7 @@ function sceneHtml(sc, i) {
     return `<div class="scene" id="s${i}">
       ${eye}
       ${title}
-      <div class="cta-box" id="s${i}-cta"><span class="cta-badge">حرف‌کلاب · تمرین و مثال در مقالهٔ کامل</span></div>
+      <div class="cta-box" id="s${i}-cta"><span class="cta-badge">بحث‌کلاب · تمرین و مثال در مقالهٔ کامل</span></div>
     </div>`;
   }
 
@@ -117,7 +117,7 @@ function sceneHtml(sc, i) {
     ${eye}
     ${title}
     <p class="body-lg" id="s${i}-body">${escapeHtml(sc.body)}</p>
-    <div class="cta-box" id="s${i}-cta"><span class="cta-badge">${escapeHtml(sc.cta ?? "حرف‌کلاب")}</span></div>
+    <div class="cta-box" id="s${i}-cta"><span class="cta-badge">${escapeHtml(sc.cta ?? "بحث‌کلاب")}</span></div>
   </div>`;
 }
 

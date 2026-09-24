@@ -1,4 +1,4 @@
-# YouTube production — حرف‌کلاب
+# YouTube production — بحث‌کلاب
 
 Turn the 4 learning paths into 4 YouTube playlists. Each video is one article,
 ~34s silent (grows with voiceover), ends on a **«قسمت بعدی»** card that
@@ -133,7 +133,7 @@ pipeline by adding a synthetic series to `scripts/video-plan.mjs`.
 | 6 | اقناع عاطفی | `emotional-persuasion` | ☐ | ☐ | ☐ | ☐ |
 | 7 | پیش‌فرض پنهان: باورهایی که نگفته می‌مانند | `hidden-assumption` | ☐ | ☐ | ☐ | ☐ |
 | 8 | انتخاب گزینشی شواهد: دیدن فقط نیمی از تصویر | `cherry-picking` | ☐ | ☐ | ☐ | ☐ |
-| 9 | آزمایش باور — محک اصلی حرف‌کلاب | `belief-stress-test` | ☐ | ☐ | ☐ | ☐ |
+| 9 | آزمایش باور — محک اصلی بحث‌کلاب | `belief-stress-test` | ☐ | ☐ | ☐ | ☐ |
 | 10 | کی باید بگوییم «نمی‌دانم»؟ — قدرت نه گفتن به قطعیت | `when-to-say-i-dont-know` | ☐ | ☐ | ☐ | ☐ |
 
 ### اصول پایهٔ گفت‌وگو  `dialogue-basics`  (7 قسمت)
