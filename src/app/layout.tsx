@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full`} suppressHydrationWarning>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var t=localStorage.getItem("harfclub-theme")||"system";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`}
+          {`(function(){try{var k="bahsclub-theme",t=localStorage.getItem(k);if(!t){t=localStorage.getItem("harfclub-theme");if(t){localStorage.setItem(k,t);localStorage.removeItem("harfclub-theme");}}t=t||"system";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`}
         </Script>
       </head>
       <body className="min-h-full flex flex-col antialiased">

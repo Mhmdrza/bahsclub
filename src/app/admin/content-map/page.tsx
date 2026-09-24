@@ -6,7 +6,7 @@ import { ContentMapClient } from "./client";
 
 export const metadata: Metadata = {
   title: "نقشه محتوا",
-  description: "نمای کامل کتابخانهٔ محتوای حرف‌کلاب",
+  description: "نمای کامل کتابخانهٔ محتوای بحث‌کلاب",
 };
 
 interface ManifestArticle {

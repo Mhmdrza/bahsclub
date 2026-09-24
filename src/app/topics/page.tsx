@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "موضوع‌ها",
-  description: "موضوعات آموزشی حرف‌کلاب.",
+  description: "موضوعات آموزشی بحث‌کلاب.",
 };
 
 export default function TopicsPage() {

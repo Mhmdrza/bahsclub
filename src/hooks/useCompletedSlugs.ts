@@ -10,10 +10,10 @@ export function useCompletedSlugs(): Set<string> {
     const update = () => setSlugs(new Set(getCompletedSlugs()));
     update();
     window.addEventListener("storage", update);
-    window.addEventListener("harfclub:progress", update);
+    window.addEventListener("bahsclub:progress", update);
     return () => {
       window.removeEventListener("storage", update);
-      window.removeEventListener("harfclub:progress", update);
+      window.removeEventListener("bahsclub:progress", update);
     };
   }, []);
 

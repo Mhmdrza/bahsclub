@@ -144,7 +144,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
             <div className="tldr-glow" id="glowB" style={{ width: "500px", height: "500px", bottom: "-100px", left: "-100px", background: "#06b6d4", opacity: 0.15 }} />
 
             <div className="tldr-scene" id="s1">
-              <span className="tldr-eyebrow" id="s1-eye"><span className="tldr-dash" />حرف‌کلاب · خلاصهٔ فوری</span>
+              <span className="tldr-eyebrow" id="s1-eye"><span className="tldr-dash" />بحث‌کلاب · خلاصهٔ فوری</span>
               <h1 className="tldr-h1" id="s1-title"><span className="accent">{title}</span></h1>
               <p className="tldr-body" id="s1-body">{description}</p>
               <div className="tldr-meta" id="s1-meta">

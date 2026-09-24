@@ -1,13 +1,31 @@
 "use client";
 
-const COMPLETED_KEY = "harfclub:completed";
-const LAST_LESSON_KEY = "harfclub:last-lesson";
-const LAST_ARTICLE_KEY = "harfclub:last-article";
+const COMPLETED_KEY = "bahsclub:completed";
+const LAST_LESSON_KEY = "bahsclub:last-lesson";
+const LAST_ARTICLE_KEY = "bahsclub:last-article";
+
+// ponytail: one-time read-migration from old harfclub:* keys.
+function readKey(key: string): string | null {
+  if (typeof window === "undefined") return null;
+  const oldKey = "harfclub:" + key.slice("bahsclub:".length);
+  const existing = localStorage.getItem(key);
+  if (existing === null) {
+    const old = localStorage.getItem(oldKey);
+    if (old !== null) {
+      localStorage.setItem(key, old);
+      localStorage.removeItem(oldKey);
+      return old;
+    }
+  } else {
+    localStorage.removeItem(oldKey);
+  }
+  return existing;
+}
 
 export function getCompletedSlugs(): string[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = localStorage.getItem(COMPLETED_KEY);
+    const raw = readKey(COMPLETED_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw) as string[];
     return Array.isArray(parsed) ? parsed : [];
@@ -59,7 +77,7 @@ export function getLastPosition(): {
 } {
   if (typeof window === "undefined") return {};
   return {
-    lessonSlug: localStorage.getItem(LAST_LESSON_KEY) ?? undefined,
-    articleSlug: localStorage.getItem(LAST_ARTICLE_KEY) ?? undefined,
+    lessonSlug: readKey(LAST_LESSON_KEY) ?? undefined,
+    articleSlug: readKey(LAST_ARTICLE_KEY) ?? undefined,
   };
 }
