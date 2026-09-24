@@ -13,19 +13,10 @@ export type Theme = "light" | "dark" | "system";
 type ResolvedTheme = "light" | "dark";
 
 const STORAGE_KEY = "bahsclub-theme";
-const LEGACY_STORAGE_KEY = "harfclub-theme";
 
 function getStoredTheme(): Theme {
   if (typeof window === "undefined") return "system";
-  let stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === null) {
-    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
-    if (legacy !== null) {
-      localStorage.setItem(STORAGE_KEY, legacy);
-      localStorage.removeItem(LEGACY_STORAGE_KEY);
-      stored = legacy;
-    }
-  }
+  const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === "light" || stored === "dark" || stored === "system")
     return stored;
   return "system";

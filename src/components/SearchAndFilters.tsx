@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useSearchParams, usePathname } from "next/navigation";
 import Fuse from "fuse.js";
 import { Search } from "lucide-react";
@@ -41,21 +41,17 @@ export function SearchAndFilters({
   );
   const completedSlugs = useCompletedSlugs();
 
-  useEffect(() => {
-    const q = searchParams.get("q") || "";
-    const c = searchParams.get("category") || searchParams.get("type") || "";
-    const l = searchParams.get("level") || "";
-    const t = searchParams.get("tag") || "";
-    const top = searchParams.get("topic") || "";
-    const s = (searchParams.get("sort") as SortOption) || "recommended";
-
-    setQuery(q);
-    setCategory(c);
-    setLevel(l);
-    setTag(t);
-    setTopic(top);
-    setSort(s);
-  }, [searchParams]);
+  const paramsKey = searchParams.toString();
+  const [syncedKey, setSyncedKey] = useState(paramsKey);
+  if (paramsKey !== syncedKey) {
+    setSyncedKey(paramsKey);
+    setQuery(searchParams.get("q") || "");
+    setCategory(searchParams.get("category") || searchParams.get("type") || "");
+    setLevel(searchParams.get("level") || "");
+    setTag(searchParams.get("tag") || "");
+    setTopic(searchParams.get("topic") || "");
+    setSort((searchParams.get("sort") as SortOption) || "recommended");
+  }
 
   const updateUrl = useCallback(
     (updates: {
