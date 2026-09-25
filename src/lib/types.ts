@@ -26,6 +26,7 @@ export interface ArticleFrontmatter {
   type: ArticleType;
   publishedAt: string;
   updatedAt?: string;
+  lastEditedBy?: string;
   related?: string[];
   family?: string;
   featuredOnHome?: "concept" | "tactic" | "practice";

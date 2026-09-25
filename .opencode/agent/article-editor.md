@@ -1,7 +1,7 @@
 ---
 description: Rewrites/rewords exactly one Persian MDX article in content/articles, preserving structure, frontmatter and links.
 mode: all
-model: google/gemini-3.7-flash
+model: 9router/gemini/gemini-3.7-flash
 temperature: 0.6
 permission:
   edit: allow
@@ -31,6 +31,9 @@ same meaning, same claims, same teaching value.
   rename, reorder or add keys. Values may be reworded ONLY if the value is
   long Persian prose (`description`), and then only lightly.
 - The H1 line and every `##` / `###` heading — same order, same wording.
+- Article provenance fields: if frontmatter has `lastEditedBy`, set it to your own
+  model id (`9router/gemini/gemini-3.7-flash`) and set `updatedAt` to today's
+  date (YYYY-MM-DD). Never remove them. If absent, do not add them.
 - The TL;DR block, verbatim in structure:
   - `> **ایدهٔ کلیدی:** ...` blockquote
   - `## خلاصهٔ فوری` heading
