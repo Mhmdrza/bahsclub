@@ -127,7 +127,7 @@ export default async function ArticlePage({ params, searchParams }: Props) {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <MarkCompleteButton slug={slug} lessonSlug={lessonSlug} />
-            <CopyArticleButton slug={slug} />
+            <CopyArticleButton slug={slug} content={article.content} />
           </div>
 
           {(nav.prev || nav.next) && (

@@ -1,47 +1,79 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { useState, useRef } from "react";
+import { Copy, Check, ChevronDown } from "lucide-react";
 
 interface CopyArticleButtonProps {
   slug: string;
+  content?: string;
 }
 
-export function CopyArticleButton({ slug }: CopyArticleButtonProps) {
-  const [copied, setCopied] = useState(false);
+export function CopyArticleButton({ slug, content }: CopyArticleButtonProps) {
+  const [copied, setCopied] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const copy = async () => {
-    const url = `${window.location.origin}/articles/${slug}`;
+  const copyToClipboard = async (text: string, type: string) => {
     try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await navigator.clipboard.writeText(text);
+      setCopied(type);
+      setTimeout(() => setCopied(null), 2000);
     } catch {
       // fallback for older browsers
       const input = document.createElement("textarea");
-      input.value = url;
+      input.value = text;
       document.body.appendChild(input);
       input.select();
       document.execCommand("copy");
       document.body.removeChild(input);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopied(type);
+      setTimeout(() => setCopied(null), 2000);
+    }
+  };
+
+  const copyUrl = async () => {
+    const url = `${window.location.origin}/articles/${slug}`;
+    await copyToClipboard(url, "url");
+  };
+
+  const copyContent = async () => {
+    if (content) {
+      await copyToClipboard(content, "content");
     }
   };
 
   return (
-    <button
-      type="button"
-      onClick={copy}
-      className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent/40"
-      title="کپی لینک مقاله"
-    >
-      {copied ? (
-        <Check className="h-4 w-4 text-accent" aria-hidden />
-      ) : (
-        <Copy className="h-4 w-4 text-muted" aria-hidden />
+    <div className="relative inline-block">
+      <button
+        type="button"
+        onClick={copyUrl}
+        className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent/40"
+        title="کپی لینک مقاله"
+      >
+        {copied === "url" ? (
+          <Check className="h-4 w-4 text-accent" aria-hidden />
+        ) : (
+          <Copy className="h-4 w-4 text-muted" aria-hidden />
+        )}
+        {copied === "url" ? "کپی شد" : "کپی لینک"}
+      </button>
+      
+      {content && (
+        <button
+          type="button"
+          onClick={copyContent}
+          className="ml-2 inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-2 text-sm font-medium hover:border-accent/40"
+          title="کپی محتوا"
+        >
+          {copied === "content" ? (
+            <Check className="h-4 w-4 text-accent" aria-hidden />
+          ) : (
+            <Copy className="h-4 w-4 text-muted" aria-hidden />
+          )}
+          <span className="hidden sm:inline">
+            {copied === "content" ? "کپی شد" : "کپی محتوا"}
+          </span>
+        </button>
       )}
-      {copied ? "کپی شد" : "کپی لینک"}
-    </button>
+    </div>
   );
 }
