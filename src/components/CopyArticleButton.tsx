@@ -43,33 +43,35 @@ export function CopyArticleButton({ slug, content }: CopyArticleButtonProps) {
 
   return (
     <div className="relative inline-block">
-      <button
-        type="button"
-        onClick={copyUrl}
-        className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent/40"
-        title="کپی لینک مقاله"
-      >
-        {copied === "url" ? (
-          <Check className="h-4 w-4 text-accent" aria-hidden />
-        ) : (
-          <Copy className="h-4 w-4 text-muted" aria-hidden />
-        )}
-        {copied === "url" ? "کپی شد" : "کپی لینک"}
-      </button>
+<button
+          type="button"
+          onClick={copyUrl}
+          className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent/40 whitespace-nowrap"
+          title="کپی لینک مقاله"
+        >
+          {copied === "url" ? (
+            <Check className="h-4 w-4 text-accent" aria-hidden />
+          ) : (
+            <Copy className="h-4 w-4 text-muted" aria-hidden />
+          )}
+          <span>
+            {copied === "url" ? "کپی شد" : "کپی لینک"}
+          </span>
+        </button>
       
       {content && (
         <button
           type="button"
           onClick={copyContent}
-          className="ml-2 inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-2 text-sm font-medium hover:border-accent/40"
-          title="کپی محتوا"
+          className="ml-2 inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-2 text-sm font-medium hover:border-accent/40 whitespace-nowrap"
+          title="کپی محتوای مقاله"
         >
           {copied === "content" ? (
             <Check className="h-4 w-4 text-accent" aria-hidden />
           ) : (
             <Copy className="h-4 w-4 text-muted" aria-hidden />
           )}
-          <span className="hidden sm:inline">
+          <span>
             {copied === "content" ? "کپی شد" : "کپی محتوا"}
           </span>
         </button>

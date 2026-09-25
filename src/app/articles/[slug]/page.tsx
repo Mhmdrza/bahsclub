@@ -125,7 +125,7 @@ export default async function ArticlePage({ params, searchParams }: Props) {
             <ExerciseBlock exercise={article.exercise} />
           )}
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-2 sm:gap-3">
             <MarkCompleteButton slug={slug} lessonSlug={lessonSlug} />
             <CopyArticleButton slug={slug} content={article.content} />
           </div>
