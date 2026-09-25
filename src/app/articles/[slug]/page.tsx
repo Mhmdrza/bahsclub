@@ -15,6 +15,7 @@ import { TldrSlide } from "@/components/TldrSlide";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { PrevNextNav } from "@/components/PrevNextNav";
 import { MarkCompleteButton } from "@/components/MarkCompleteButton";
+import { CopyArticleButton } from "@/components/CopyArticleButton";
 import { ExerciseBlock } from "@/components/ExerciseBlock";
 import { ArticleCard } from "@/components/ArticleCard";
 import { formatPersianNumber, levelLabel } from "@/lib/utils";
@@ -124,8 +125,9 @@ export default async function ArticlePage({ params, searchParams }: Props) {
             <ExerciseBlock exercise={article.exercise} />
           )}
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
             <MarkCompleteButton slug={slug} lessonSlug={lessonSlug} />
+            <CopyArticleButton slug={slug} />
           </div>
 
           {(nav.prev || nav.next) && (
