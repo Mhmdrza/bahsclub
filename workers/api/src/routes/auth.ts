@@ -3,6 +3,8 @@ import { createSession, deleteUserSessions, hashPassword, verifyPassword, getAut
 
 const auth = new Hono<{ Bindings: { DB: D1Database; TELEGRAM_BOT_TOKEN?: string; TELEGRAM_CHAT_ID?: string; REQUIRE_INVITE?: string } }>();
 
+auth.get("/config", (c) => ok({ requireInvite: c.env.REQUIRE_INVITE === "true" }));
+
 auth.post("/register", async (c) => {
   const ip = getClientIp(c);
   const rl = checkRateLimit(`register:${ip}`, 10, 60 * 1000);

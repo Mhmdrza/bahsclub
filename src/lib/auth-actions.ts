@@ -10,7 +10,7 @@ export async function registerAction(prev: unknown, formData: FormData) {
     username: formData.get("username") as string,
     email: formData.get("email") as string,
     password: formData.get("password") as string,
-    inviteCode: formData.get("inviteCode") as string,
+    inviteCode: (formData.get("inviteCode") as string | null) || undefined,
   };
   const parsed = registerSchema.safeParse(raw);
   if (!parsed.success) return { error: parsed.error.issues.map((e: any) => e.message).join("، ") };

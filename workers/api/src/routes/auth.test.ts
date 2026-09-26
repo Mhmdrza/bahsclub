@@ -93,3 +93,17 @@ describe("register when invite-only is on", () => {
     expect(res.status).toBe(200);
   });
 });
+
+describe("GET /api/auth/config", () => {
+  it("reports requireInvite false by default", async () => {
+    const res = await SELF.fetch("http://localhost/api/auth/config");
+    expect(res.status).toBe(200);
+    expect(await res.json<{ requireInvite: boolean }>()).toEqual({ requireInvite: false });
+  });
+
+  it("reports requireInvite true when the flag is on", async () => {
+    (env as unknown as { REQUIRE_INVITE: string }).REQUIRE_INVITE = "true";
+    const res = await SELF.fetch("http://localhost/api/auth/config");
+    expect(await res.json<{ requireInvite: boolean }>()).toEqual({ requireInvite: true });
+  });
+});
