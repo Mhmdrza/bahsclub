@@ -42,7 +42,7 @@ export function ClubHeaderClient({
               موضوعات
             </Link>
             <Link href="/club/rules" className="hover:text-foreground transition-colors">
-              مرام‌نامه
+              قوانین
             </Link>
             <Link href="/club/judges" className="hover:text-foreground transition-colors">
               داوران
@@ -157,7 +157,7 @@ export function ClubHeaderClient({
               onClick={() => setIsOpen(false)}
               className="block rounded-md px-3 py-2 text-muted hover:bg-background hover:text-foreground transition-colors"
             >
-              مرام‌نامه
+              قوانین
             </Link>
             <Link
               href="/club/judges"

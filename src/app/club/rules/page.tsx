@@ -6,7 +6,7 @@ import { getPageBySlug } from "@/lib/content";
 import { MarkdownContent } from "@/components/MarkdownContent";
 
 export const metadata: Metadata = {
-  title: "مرام‌نامهٔ باشگاه",
+  title: "قوانینٔ باشگاه",
   description:
     "ده اصلی که فرهنگ باشگاه را می‌سازند — اصولی برای بحث‌هایی که هدفشان فهمیدن است، نه برنده شدن.",
 };

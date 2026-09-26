@@ -54,7 +54,7 @@ export default async function JudgePage() {
           <ShieldAlert className="text-gold" />
           <span>بررسی گزارش‌ها و داوری</span>
         </h1>
-        <p className="text-xs text-muted mt-1">بررسی تخلفات گزارش‌شده بر اساس اصول و مرام‌نامه باشگاه</p>
+        <p className="text-xs text-muted mt-1">بررسی تخلفات گزارش‌شده بر اساس اصول و قوانین باشگاه</p>
       </div>
 
       {(!data.pending || data.pending.length === 0) ? (
