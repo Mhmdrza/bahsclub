@@ -1,26 +1,38 @@
 import { Hono } from "hono";
 import { createSession, deleteUserSessions, hashPassword, verifyPassword, getAuthToken, getCurrentUser, err, ok, isStrongPassword, checkRateLimit, getClientIp, notifyTelegram } from "../lib";
 
-const auth = new Hono<{ Bindings: { DB: D1Database; TELEGRAM_BOT_TOKEN?: string; TELEGRAM_CHAT_ID?: string } }>();
+const auth = new Hono<{ Bindings: { DB: D1Database; TELEGRAM_BOT_TOKEN?: string; TELEGRAM_CHAT_ID?: string; REQUIRE_INVITE?: string } }>();
 
 auth.post("/register", async (c) => {
   const ip = getClientIp(c);
   const rl = checkRateLimit(`register:${ip}`, 10, 60 * 1000);
   if (rl.limited) return err("تعداد درخواست بیش از حد. بعداً تلاش کنید", 429);
 
-  const { username, email, password, inviteCode } = await c.req.json<{ username: string; email: string; password: string; inviteCode: string }>();
+  const { username, email, password, inviteCode } = await c.req.json<{ username: string; email: string; password: string; inviteCode?: string }>();
   if (!username || username.length < 2) return err("نام کاربری حداقل ۲ حرف");
   if (!email || !email.includes("@")) return err("ایمیل نامعتبر");
-  if (!inviteCode) return err("ثبت‌نام فقط با دعوت‌نامه امکان‌پذیر است", 403);
 
   const normalisedEmail = email.toLowerCase().trim();
 
-  const invite = await c.env.DB.prepare(
-    "SELECT id, invited_email, used_by FROM invites WHERE code = ?"
-  ).bind(inviteCode).first<any>();
-  if (!invite) return err("کد دعوت نامعتبر است", 404);
-  if (invite.used_by) return err("این کد دعوت قبلاً استفاده شده", 410);
-  if (invite.invited_email !== normalisedEmail) return err("این کد برای ایمیل شما صادر نشده", 403);
+  const requireInvite = c.env.REQUIRE_INVITE === "true";
+
+  let invite: { id: number; invited_email: string; used_by: number | null } | null = null;
+  if (requireInvite) {
+    if (!inviteCode) return err("ثبت‌نام فقط با دعوت‌نامه امکان‌پذیر است", 403);
+    invite = await c.env.DB.prepare(
+      "SELECT id, invited_email, used_by FROM invites WHERE code = ?"
+    ).bind(inviteCode).first<any>();
+    if (!invite) return err("کد دعوت نامعتبر است", 404);
+    if (invite.used_by) return err("این کد دعوت قبلاً استفاده شده", 410);
+    if (invite.invited_email !== normalisedEmail) return err("این کد برای ایمیل شما صادر نشده", 403);
+  } else if (inviteCode) {
+    invite = await c.env.DB.prepare(
+      "SELECT id, invited_email, used_by FROM invites WHERE code = ?"
+    ).bind(inviteCode).first<any>();
+    if (!invite) return err("کد دعوت نامعتبر است", 404);
+    if (invite.used_by) return err("این کد دعوت قبلاً استفاده شده", 410);
+    if (invite.invited_email !== normalisedEmail) return err("این کد برای ایمیل شما صادر نشده", 403);
+  }
 
   const pwErr = isStrongPassword(password);
   if (pwErr) return err(pwErr);
@@ -34,7 +46,9 @@ auth.post("/register", async (c) => {
   ).bind(username, normalisedEmail, hash, salt).run();
   const userId = inserted![0].id as number;
 
-  await c.env.DB.prepare("UPDATE invites SET used_by = ?, used_at = datetime('now') WHERE id = ?").bind(userId, invite.id).run();
+  if (inviteCode && invite) {
+    await c.env.DB.prepare("UPDATE invites SET used_by = ?, used_at = datetime('now') WHERE id = ?").bind(userId, invite.id).run();
+  }
 
   const token = await createSession(c.env.DB, userId);
   return ok({ token, user: { id: userId, username, email: normalisedEmail, isTrusted: false } });
