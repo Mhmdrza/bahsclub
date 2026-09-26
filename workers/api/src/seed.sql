@@ -18,7 +18,17 @@ VALUES
   (3, 'اقتصاد و جامعه', 'economics-society', 2, datetime('now', '-18 days')),
   (4, 'مغالطات و منطق', 'fallacies-logic', 3, datetime('now', '-15 days')),
   (5, 'علم و اپیستمولوژی', 'epistemology-science', 4, datetime('now', '-12 days')),
-  (6, 'آموزش و یادگیری', 'education-learning', 2, datetime('now', '-10 days'));
+  (6, 'آموزش و یادگیری', 'education-learning', 2, datetime('now', '-10 days')),
+  (7, 'سیاست و حکمرانی', 'politics-governance', 1, datetime('now', '-9 days')),
+  (8, 'عدالت اجتماعی', 'social-justice', 2, datetime('now', '-9 days')),
+  (9, 'آزادی بیان', 'free-speech', 3, datetime('now', '-8 days')),
+  (10, 'دین و سکولاریسم', 'religion-secularism', 4, datetime('now', '-8 days')),
+  (11, 'رسانه و اطلاعات نادرست', 'media-misinformation', 2, datetime('now', '-7 days')),
+  (12, 'حریم خصوصی و فناوری', 'tech-privacy', 5, datetime('now', '-7 days')),
+  (13, 'تغییر اقلیم و محیط', 'climate-environment', 3, datetime('now', '-6 days')),
+  (14, 'سلامت و اخلاق', 'health-ethics', 4, datetime('now', '-6 days')),
+  (15, 'روانشناسی و جامعه', 'psychology-society', 6, datetime('now', '-5 days')),
+  (16, 'کار و اشتغال', 'work-labor', 2, datetime('now', '-5 days'));
 
 -- Challenge 1: AI & Consciousness (by socrates_teh)
 INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
