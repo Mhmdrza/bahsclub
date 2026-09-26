@@ -35,7 +35,7 @@ export function LivePoll({
           router.refresh();
         }
       } catch {
-        // ponytail: silent retry on next tick; add error counter + user notification if failures persist
+        // ponytail: silent retry on next tick; add error response + user notification if failures persist
       }
     }, POLL_INTERVAL);
 

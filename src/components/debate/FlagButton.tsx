@@ -20,7 +20,7 @@ export function FlagButton({
   flaggableId,
   disabled,
 }: {
-  flaggableType: "statement" | "counter_statement" | "debate" | "message";
+  flaggableType: "challenge" | "challenge_response" | "debate" | "message";
   flaggableId: number;
   disabled: boolean;
 }) {

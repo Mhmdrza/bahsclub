@@ -4,8 +4,8 @@ import { getTokenForAction } from "./session";
 function mapDebate(d: any) {
   return {
     id: d.id,
-    statementId: d.statement_id,
-    counterStatementId: d.counter_statement_id,
+    challengeId: d.challenge_id,
+    counterResponseId: d.counter_response_id,
     title: d.title,
     status: d.status,
     creatorId: d.creator_id,
@@ -34,10 +34,10 @@ function mapMessage(m: any) {
   };
 }
 
-function mapCounter(c: any) {
+function mapResponse(c: any) {
   return {
     id: c.id,
-    statementId: c.statement_id,
+    challengeId: c.challenge_id,
     userId: c.user_id,
     content: c.content,
     status: c.status,
@@ -51,7 +51,7 @@ function mapCounter(c: any) {
   };
 }
 
-function mapStatement(s: any) {
+function mapChallenge(s: any) {
   return {
     id: s.id,
     userId: s.user_id,
@@ -61,7 +61,7 @@ function mapStatement(s: any) {
     moderationState: s.moderation_state || "normal",
     createdAt: s.created_at,
     voteCount: s.vote_count || 0,
-    counterCount: s.counter_count || 0,
+    responseCount: s.response_count || 0,
     activeDebateCount: s.active_debate_count || 0,
     tags: s.tags || [],
   };
@@ -121,7 +121,7 @@ export async function getDebateDetail(debateId: number) {
   }
 }
 
-export async function getStatements(opts?: { tag?: string; username?: string; page?: number }) {
+export async function getChallenges(opts?: { tag?: string; username?: string; page?: number }) {
   const token = await getTokenForAction();
   const params = new URLSearchParams();
   if (opts?.tag) params.set("tag", opts.tag);
@@ -131,30 +131,45 @@ export async function getStatements(opts?: { tag?: string; username?: string; pa
   const qs = params.toString();
 
   try {
-    const data = await apiFetch<{ items: any[]; pagination: Pagination }>(`/api/statements${qs ? "?" + qs : ""}`, { token });
+    const data = await apiFetch<{ items: any[]; pagination: Pagination }>(`/api/challenges${qs ? "?" + qs : ""}`, { token });
     return {
-      statements: (data.items || []).map(mapStatement),
+      challenges: (data.items || []).map(mapChallenge),
       pagination: data.pagination || { page: 1, limit: 20, total: 0, hasMore: false },
     };
   } catch {
-    return { statements: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false } };
+    return { challenges: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false } };
   }
 }
 
-export async function getStatementDetail(id: number) {
+export async function getTags() {
   const token = await getTokenForAction();
   try {
-    const data = await apiFetch<any>(`/api/statements/${id}`, { token });
-    if (!data || !data.statement) return null;
+    const data = await apiFetch<{ items: any[] }>("/api/tags?limit=100", { token });
+    return (data.items || []).map((t: any) => ({
+      id: t.id,
+      name: t.name,
+      slug: t.slug,
+      count: t.challenge_count || 0,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export async function getChallengeDetail(id: number) {
+  const token = await getTokenForAction();
+  try {
+    const data = await apiFetch<any>(`/api/challenges/${id}`, { token });
+    if (!data || !data.challenge) return null;
 
     return {
-      statement: mapStatement(data.statement),
+      challenge: mapChallenge(data.challenge),
       creator: data.creator ? { id: data.creator.id, username: data.creator.username } : null,
       tags: (data.tags || []).map((t: any) => ({ id: t.id, name: t.name, slug: t.slug })),
-      counters: (data.counters || []).map(mapCounter),
+      responses: (data.responses || []).map(mapResponse),
       debates: data.debates || [],
-      statementVoteCount: data.statementVoteCount || 0,
-      statementVoted: !!data.statementVoted,
+      challengeVoteCount: data.challengeVoteCount || 0,
+      challengeVoted: !!data.challengeVoted,
       session: data.user ? { user: data.user } : null,
     };
   } catch {

@@ -1,14 +1,14 @@
-import { getStatements, getDebatesWithVotes } from "@/lib/queries";
+import { getChallenges, getDebatesWithVotes } from "@/lib/queries";
 import { getSession } from "@/lib/session";
 import Link from "next/link";
-import { StatementCard } from "@/components/debate/StatementCard";
+import { ChallengeCard } from "@/components/debate/ChallengeCard";
 import { DebateCard } from "@/components/debate/DebateCard";
 import { Plus, Sparkles, MessageSquareQuote, Flame } from "lucide-react";
 
 export default async function ClubHome() {
-  const [session, { statements }, { debates }] = await Promise.all([
+  const [session, { challenges }, { debates }] = await Promise.all([
     getSession(),
-    getStatements(),
+    getChallenges(),
     getDebatesWithVotes(),
   ]);
 
@@ -25,26 +25,26 @@ export default async function ClubHome() {
             <span>تقابل اندیشه‌ها</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            دیدگاه یا مواضع خود را ثبت کن
+            چالشی مطرح کن و هم‌آورد بطلب
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
-            در باشگاه اندیشه، هر کس قوی‌ترین استدلال و منطق‌های خود را محک میزند. دیدگاه و دلایلت را بیاور تا آزموده شود.
+            در باشگاه اندیشه، هر کس استدلال خود را محک میزند. موضع و دلیلت را بیاور تا کسی هم‌آوردی‌اش کند.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/club/statements/new"
+              href="/club/challenges/new"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity shadow-xs"
             >
               <Plus size={16} />
-              <span>ثبت دیدگاه جدید</span>
+              <span>شروع چالش جدید</span>
             </Link>
             {session && (
               <Link
                 href={`/club/users/${session.user.username}`}
                 className="inline-flex items-center gap-1.5 px-4 py-2.5 text-sm rounded-xl border border-border bg-background text-foreground hover:border-accent/40 transition-colors"
               >
-                <span>دیدگاه‌های ثبت‌شده من</span>
+                <span>چالش‌های من</span>
               </Link>
             )}
           </div>
@@ -60,26 +60,26 @@ export default async function ClubHome() {
         />
       </div>
 
-      {/* Main Feed Grid (Feed of Statements + Live Debates Sidebar) */}
+      {/* Main Feed Grid (Feed of Challenges + Live Debates Sidebar) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Left 2 columns: Feed of Statements / Thoughts */}
+        {/* Left 2 columns: Feed of Challenges / Thoughts */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-border">
             <h2 className="text-base font-bold text-foreground flex items-center gap-2">
               <MessageSquareQuote size={18} className="text-accent" />
-              <span>جریان اندیشه‌ها و بیانیه‌ها</span>
+              <span>چالش‌های باشگاه</span>
             </h2>
-            <span className="text-xs text-muted font-mono">{statements.length} دیدگاه</span>
+            <span className="text-xs text-muted font-mono">{challenges.length} چالش</span>
           </div>
 
-          {statements.length === 0 ? (
+          {challenges.length === 0 ? (
             <div className="text-center py-16 border border-dashed border-border rounded-xl text-sm text-muted">
-              هنوز باوری ثبت نشده است. اولین نفری باشید که دیدگاه خود را مطرح می‌کند!
+              هنوز چالشی ثبت نشده است. اولین نفری باش که چالشش را مطرح می‌کند!
             </div>
           ) : (
             <div className="flex flex-col gap-3">
-              {statements.map((s) => (
-                <StatementCard key={s.id} statement={s} />
+              {challenges.map((s) => (
+                <ChallengeCard key={s.id} challenge={s} />
               ))}
             </div>
           )}
@@ -116,7 +116,7 @@ export default async function ClubHome() {
           <div className="border border-gold/30 bg-gold/5 rounded-xl p-4 text-xs space-y-2">
             <h4 className="font-bold text-gold">قاعده باشگاه</h4>
             <p className="text-muted leading-relaxed">
-              ادعا را نقد کن، نه شخص را. استدلال‌ها باید مستدل، روشن و پذیرای پاسخ‌های ساختارمند باشند.
+              ادعا را نقد کن، نه شخص را. استدلال‌ها باید مستدل، روشن و پذیرای هم‌آوردی‌های ساختارمند باشند.
             </p>
           </div>
           </div>

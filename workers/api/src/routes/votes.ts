@@ -5,8 +5,8 @@ const votes = new Hono<{ Bindings: { DB: D1Database } }>();
 
 async function getAuthor(db: D1Database, type: string, id: number): Promise<number | null> {
   const mapping: Record<string, { table: string; col: string }> = {
-    statement: { table: "statements", col: "user_id" },
-    counter_statement: { table: "counter_statements", col: "user_id" },
+    challenge: { table: "challenges", col: "user_id" },
+    challenge_response: { table: "challenge_responses", col: "user_id" },
     debate: { table: "debates", col: "creator_id" },
     message: { table: "debate_messages", col: "user_id" },
   };
@@ -26,7 +26,7 @@ votes.post("/toggle", async (c) => {
   if (blockedErr) return blockedErr;
 
   const { voteableType, voteableId } = await c.req.json<{ voteableType: string; voteableId: number }>();
-  if (!["statement", "counter_statement", "debate", "message"].includes(voteableType)) return err("نوع رای نامعتبر");
+  if (!["challenge", "challenge_response", "debate", "message"].includes(voteableType)) return err("نوع رای نامعتبر");
 
   const author = await getAuthor(c.env.DB, voteableType, voteableId);
   if (author === user!.id) return err("نمی‌توانید به محتوای خود رأی دهید");

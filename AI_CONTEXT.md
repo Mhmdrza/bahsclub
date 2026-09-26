@@ -199,15 +199,15 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 
 | Route | File | Description |
 |---|---|---|
-| `/club` | `src/app/club/page.tsx` | Club home — statements feed, active debates, recent closed |
-| `/club/statements` | `src/app/club/statements/page.tsx` | All statements |
-| `/club/statements/new` | `src/app/club/statements/new/page.tsx` | Create statement form (client) |
-| `/club/statements/[id]` | `src/app/club/statements/[id]/page.tsx` | Statement detail — counters, accept→debate, voting |
+| `/club` | `src/app/club/page.tsx` | Club home — challenges feed, active debates, recent closed |
+| `/club/challenges` | `src/app/club/challenges/page.tsx` | All challenges |
+| `/club/challenges/new` | `src/app/club/challenges/new/page.tsx` | Create challenge form (client) |
+| `/club/challenges/[id]` | `src/app/club/challenges/[id]/page.tsx` | Challenge detail — responses, accept→debate, voting |
 | `/club/debates` | `src/app/club/debates/page.tsx` | All debates |
 | `/club/debates/[id]` | `src/app/club/debates/[id]/page.tsx` | Single debate with free-form messages, voting |
-| `/club/tags` | `src/app/club/tags/page.tsx` | All tags with statement counts |
-| `/club/tags/[slug]` | `src/app/club/tags/[slug]/page.tsx` | Statements filtered by tag |
-| `/club/users/[username]` | `src/app/club/users/[username]/page.tsx` | User profile — bio, statements, debates, tags, reputation |
+| `/club/tags` | `src/app/club/tags/page.tsx` | All tags with challenge counts |
+| `/club/tags/[slug]` | `src/app/club/tags/[slug]/page.tsx` | Challenges filtered by tag |
+| `/club/users/[username]` | `src/app/club/users/[username]/page.tsx` | User profile — bio, challenges, debates, tags, reputation |
 | `/club/judge` | `src/app/club/judge/page.tsx` | Judge dashboard for reviewing flagged content |
 | `/club/login` | `src/app/club/(auth)/login/page.tsx` | Login form |
 | `/club/register` | `src/app/club/(auth)/register/page.tsx` | Register form |
@@ -216,11 +216,12 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 
 | File | Purpose |
 |---|---|
-| `src/components/debate/StatementCard.tsx` | Statement list card with votes, counter count |
-| `src/components/debate/CounterCard.tsx` | Counter statement with vote, flag, accept button for author |
-| `src/components/debate/CounterForm.tsx` | Counter (answer) submission form |
+| `src/components/debate/ChallengeCard.tsx` | Challenge list card with votes, response count |
+| `src/components/debate/ResponseCard.tsx` | Response challenge with vote, flag, accept button for author |
+| `src/components/debate/ResponseForm.tsx` | Challenge response composer — files a critique or starts a debate (`allowResponse`) |
+| `src/components/debate/ChallengeComposer.tsx` | New-challenge composer — existing-tag picker + new tag, live char count |
 | `src/components/debate/DebateCard.tsx` | Debate list card with vote + message count |
-| `src/components/debate/DebateHeader.tsx` | Debate detail header with opening statement/counter, vote, flag, moderation cover |
+| `src/components/debate/DebateHeader.tsx` | Debate detail header with opening challenge/response, vote, flag, moderation cover |
 | `src/components/debate/DebateMessages.tsx` | Messages list with moderation states |
 | `src/components/debate/MessageBlock.tsx` | Single message with vote, flag, cover/removed states |
 | `src/components/debate/MessageForm.tsx` | Message submission form (both participants anytime) |
@@ -239,8 +240,8 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 | `src/lib/api-client.ts` | Fetches Worker API with auth header |
 | `src/lib/session.ts` | Session cookie management (`debate_session`) |
 | `src/lib/auth-actions.ts` | Register/login/logout server actions |
-| `src/lib/debate-actions.ts` | Statement/debate CRUD server actions (createStatement, counter, acceptCounter, postMessage, closure) |
-| `src/lib/queries.ts` | Data fetching: statement lists, statement detail, debate lists, debate detail, user profile |
+| `src/lib/debate-actions.ts` | Challenge/debate CRUD server actions (createChallenge, response, acceptResponse, postMessage, closure) |
+| `src/lib/queries.ts` | Data fetching: challenge lists, challenge detail, debate lists, debate detail, user profile |
 | `src/lib/votes.ts` | Vote toggle server action |
 | `src/lib/moderation.ts` | Flag, resolve, bio-edit, warn-ack server actions |
 | `src/lib/validations.ts` | Zod schemas for all forms |
@@ -254,28 +255,28 @@ Worker runs at `WORKER_API_URL` via `workers/api/`. Uses Hono, D1, sessions.
 | `workers/api/src/index.ts` | App entry, mounts all routes, cron forfeit check |
 | `workers/api/src/lib.ts` | Auth helpers, `getCurrentUser`, `needJudge`, `ensureNotBlocked` |
 | `workers/api/src/routes/auth.ts` | `/api/auth/register`, `/login`, `/session` |
-| `workers/api/src/routes/statements.ts` | `/api/statements/...` CRUD, counters, accept→debate |
+| `workers/api/src/routes/challenges.ts` | `/api/challenges/...` CRUD, responses, accept→debate |
 | `workers/api/src/routes/debates.ts` | `/api/debates/...` list, detail, message, closure, poll |
-| `workers/api/src/routes/tags.ts` | `/api/tags` list (counts via statements) and per-tag statements |
-| `workers/api/src/routes/votes.ts` | `/api/votes/toggle` with rep-awarding logic, types: statement/counter_statement/debate/message |
-| `workers/api/src/routes/users.ts` | `/api/users/:username` profile (+statements), `/me` bio edit, warnings ack |
-| `workers/api/src/routes/flags.ts` | `/api/flags` create, list (judge), `/resolve`, types: statement/counter_statement/debate/message |
+| `workers/api/src/routes/tags.ts` | `/api/tags` list (counts via challenges) and per-tag challenges |
+| `workers/api/src/routes/votes.ts` | `/api/votes/toggle` with rep-awarding logic, types: challenge/challenge_response/debate/message |
+| `workers/api/src/routes/users.ts` | `/api/users/:username` profile (+challenges), `/me` bio edit, warnings ack |
+| `workers/api/src/routes/flags.ts` | `/api/flags` create, list (judge), `/resolve`, types: challenge/challenge_response/debate/message |
 | `workers/api/src/schema.sql` | Full DDL (fresh installs) |
-| `workers/api/src/seed.sql` | Seed data (users, statements, counters, debates, messages, votes, flags) |
+| `workers/api/src/seed.sql` | Seed data (users, challenges, responses, debates, messages, votes, flags) |
 | `workers/api/migrations/0001_profiles_moderation.sql` | Migration 1 (profiles + moderation) |
 | `workers/api/migrations/0002_foreign_keys_index.sql` | Migration 2 (FK + indexes) |
-| `workers/api/migrations/0003_statements.sql` | Migration 3 — statements refactor, drops old debate/challenger/turn tables |
+| `workers/api/migrations/0003_debating_status.sql` | Migration 3 — challenges refactor, drops old debate/challenger/turn tables |
 
 ### DB Tables
 
 - `users` — id, username, email, password_*, is_trusted, bio, role (member|judge), reputation, rep_locked, blocked_until
 - `sessions`, `tags`
-- `statements` — id, user_id, username, title, content, moderation_state, created_at
-- `counter_statements` — id, statement_id, user_id, content, status (pending|debating), moderation_state, created_at
-- `statement_tags` — (statement_id, tag_id) junction
-- `debates` — id, statement_id, counter_statement_id, creator_id, creator_username, opponent_id, title, status (in_progress|closed), closure_requested_by, closed_reason (mutual|forfeit), closed_at, moderation_state, timestamps
+- `challenges` — id, user_id, username, title, content, moderation_state, created_at
+- `challenge_responses` — id, challenge_id, user_id, content, status (pending|debating), moderation_state, created_at
+- `challenge_tags` — (challenge_id, tag_id) junction
+- `debates` — id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status (in_progress|closed), closure_requested_by, closed_reason (mutual|forfeit), closed_at, moderation_state, timestamps
 - `debate_tags`, `debate_messages` (+moderation_state)
-- `votes` — polymorphic: statement, counter_statement, debate, message
+- `votes` — polymorphic: challenge, challenge_response, debate, message
 - `flags` — flagger_id, flaggable_type, flaggable_id, reason, details, status, UNIQUE per user+target
 - `mod_actions` — judge_id, target_user_id, user_action (dismiss|warn|temp_block|rep_adjust|rep_lock), content_action (none|cover|remove), note, duration_days, rep_delta, acknowledged
 

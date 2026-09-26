@@ -4,11 +4,11 @@ import { getAuthToken, getCurrentUser, needAuth, needJudge, ensureNotBlocked, er
 const REASONS = ["personal_attack", "insulting_question", "derailing", "motive_guessing", "pressure", "spam", "other"];
 const SEP = "\x00";
 
-const ALLOWED_TYPES = ["statement", "counter_statement", "debate", "message"];
+const ALLOWED_TYPES = ["challenge", "challenge_response", "debate", "message"];
 
 const typeTableMap: Record<string, string> = {
-  statement: "statements",
-  counter_statement: "counter_statements",
+  challenge: "challenges",
+  challenge_response: "challenge_responses",
   debate: "debates",
   message: "debate_messages",
 };
@@ -73,17 +73,17 @@ flagsRt.get("/", async (c) => {
       contentPreview = msg.content.slice(0, 300);
       authorName = msg.username;
       debateTitle = msg.title;
-    } else if (p.flaggable_type === "counter_statement") {
+    } else if (p.flaggable_type === "challenge_response") {
       const cs = await c.env.DB.prepare(
-        "SELECT cs.content, u.username, s.title FROM counter_statements cs JOIN users u ON cs.user_id = u.id JOIN statements s ON cs.statement_id = s.id WHERE cs.id = ?"
+        "SELECT cs.content, u.username, s.title FROM challenge_responses cs JOIN users u ON cs.user_id = u.id JOIN challenges s ON cs.challenge_id = s.id WHERE cs.id = ?"
       ).bind(p.flaggable_id).first();
       if (!cs) continue;
       contentPreview = cs.content.slice(0, 300);
       authorName = cs.username;
       debateTitle = cs.title;
-    } else if (p.flaggable_type === "statement") {
+    } else if (p.flaggable_type === "challenge") {
       const stmt = await c.env.DB.prepare(
-        "SELECT s.content, u.username FROM statements s JOIN users u ON s.user_id = u.id WHERE s.id = ?"
+        "SELECT s.content, u.username FROM challenges s JOIN users u ON s.user_id = u.id WHERE s.id = ?"
       ).bind(p.flaggable_id).first();
       if (!stmt) continue;
       contentPreview = stmt.content.slice(0, 300);

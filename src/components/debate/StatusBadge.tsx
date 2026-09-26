@@ -1,6 +1,6 @@
 export function StatusBadge({ status, label }: { status?: string; label?: string }) {
   const statusLabels: Record<string, string> = {
-    open: "در انتظار چالشگر",
+    open: "در انتظار هم‌آورد",
     challengers: "در حال بررسی",
     in_progress: "در جریان",
     closed: "پایان یافته",

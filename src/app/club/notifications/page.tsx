@@ -6,13 +6,13 @@ import NotifMarkRead from "./NotifMarkRead";
 const typeIcons: Record<string, React.ReactNode> = {
   new_message: <MessageCircle size={14} />,
   closure_requested: <Flag size={14} />,
-  new_counter: <Zap size={14} />,
+  new_response: <Zap size={14} />,
   debate_started: <CheckCircle size={14} />,
 };
 
 function linkFor(n: { referenceType: string; referenceId: number }): string {
   if (n.referenceType === "debate") return `/club/debates/${n.referenceId}`;
-  if (n.referenceType === "statement") return `/club/statements/${n.referenceId}`;
+  if (n.referenceType === "challenge") return `/club/challenges/${n.referenceId}`;
   return "#";
 }
 

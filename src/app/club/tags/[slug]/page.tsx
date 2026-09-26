@@ -1,7 +1,7 @@
 import { apiFetch } from "@/lib/api-client";
 import { getTokenForAction } from "@/lib/session";
 import { notFound } from "next/navigation";
-import { StatementCard } from "@/components/debate/StatementCard";
+import { ChallengeCard } from "@/components/debate/ChallengeCard";
 
 export default async function TagPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -15,35 +15,35 @@ export default async function TagPage({ params }: { params: Promise<{ slug: stri
   }
   if (!data || !data.tag) notFound();
 
-  const statements = data.items || [];
+  const challenges = data.items || [];
 
   return (
     <div>
       <div className="mb-6 border-b border-border pb-4">
         <div className="eyebrow mb-1">برچسب</div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground">#{data.tag.name}</h1>
-        <p className="text-xs text-muted font-mono mt-1">{data.pagination?.total || statements.length} بیانیه ثبت‌شده</p>
+        <p className="text-xs text-muted font-mono mt-1">{data.pagination?.total || challenges.length} چالش ثبت‌شده</p>
       </div>
 
-      {statements.length === 0 ? (
+      {challenges.length === 0 ? (
         <div className="text-center py-16 border border-dashed border-border rounded-lg text-sm text-muted">
-          هنوز بیانیه‌ای با این برچسب وجود ندارد
+          هنوز چالشی با این برچسب وجود ندارد
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {statements.map((s: unknown) => {
-            const stmt = s as { id: number; title: string; username: string; content: string; created_at: string; vote_count: number; counter_count: number };
+          {challenges.map((s: unknown) => {
+            const stmt = s as { id: number; title: string; username: string; content: string; created_at: string; vote_count: number; response_count: number };
             return (
-              <StatementCard
+              <ChallengeCard
                 key={stmt.id}
-                statement={{
+                challenge={{
                   id: stmt.id,
                   title: stmt.title,
                   username: stmt.username,
                   content: stmt.content,
                   createdAt: stmt.created_at,
                   voteCount: stmt.vote_count || 0,
-                  counterCount: stmt.counter_count || 0,
+                  responseCount: stmt.response_count || 0,
                   activeDebateCount: 0,
                   tags: [],
                 }}

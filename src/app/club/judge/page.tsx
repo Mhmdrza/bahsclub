@@ -70,7 +70,7 @@ export default async function JudgePage() {
                   <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
                     item.flaggableType === "turn" ? "border-gold/40 bg-gold/10 text-gold" : "border-accent/40 bg-accent/10 text-accent"
                   }`}>
-                    {item.flaggableType === "turn" ? "پیام / پیامک مباحثه" : "بیانیه / مباحثه"}
+                    {item.flaggableType === "turn" ? "پیام / پیامک مباحثه" : "چالش / مباحثه"}
                   </span>
                   <span className="text-xs text-muted font-mono">{item.flagCount} گزارش تخلف</span>
                 </div>

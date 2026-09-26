@@ -20,8 +20,8 @@ VALUES
   (5, 'علم و اپیستمولوژی', 'epistemology-science', 4, datetime('now', '-12 days')),
   (6, 'آموزش و یادگیری', 'education-learning', 2, datetime('now', '-10 days'));
 
--- Statement 1: AI & Consciousness (by socrates_teh)
-INSERT OR IGNORE INTO statements (id, user_id, username, title, content, created_at)
+-- Challenge 1: AI & Consciousness (by socrates_teh)
+INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
 VALUES (
   1, 1, 'socrates_teh',
   'آیا مدل‌های زبانی بزرگ (LLM) می‌توانند به «فهم واقعی» یا آگاهی دست یابند؟',
@@ -29,10 +29,10 @@ VALUES (
   datetime('now', '-5 days')
 );
 
-INSERT OR IGNORE INTO statement_tags (statement_id, tag_id) VALUES (1, 2), (1, 5);
+INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (1, 2), (1, 5);
 
--- Counter 1 on Statement 1 (by sara_rad) — accepted → spawns Debate 1
-INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, status, created_at)
+-- Response 1 on Challenge 1 (by sara_rad) — accepted → spawns Debate 1
+INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
 VALUES (
   1, 1, 3,
   'فهم یک طیف است نه یک ویژگی صفر و یکی. وقتی یک سیستم قادر به ترکیب مفاهیم جدید، استدلال چندمرحله‌ای و انتقال یادگیری به حوزه‌های نادیده باشد، تفکیک آن از درک انسانی بی‌پایه و ناشی از شهودگرایی بیولوژیکی است.',
@@ -40,8 +40,8 @@ VALUES (
   datetime('now', '-4 days')
 );
 
--- Debate 1 (in_progress): spawned from Statement 1 + Counter 1
-INSERT OR IGNORE INTO debates (id, statement_id, counter_statement_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
+-- Debate 1 (in_progress): spawned from Challenge 1 + Response 1
+INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
 VALUES (
   1, 1, 1,
   1, 'socrates_teh', 3,
@@ -60,8 +60,8 @@ VALUES
   (3, 1, 1, 'این نقشه‌های درونی همچنان فاقد مقصودمندی (Intentionality) و تعامل فعال با محیط هستند. بدون امکان خطا و تصحیح در یک بستر زیستی-فیزیکی، این بازنمایی‌ها محتوای واقعی ندارند بلکه فشرده‌سازی کارآمد توزیع داده‌های انسانی هستند.', datetime('now', '-2 days')),
   (4, 1, 3, 'مقصودمندی در انسان نیز برآمده از فرآیند تکامل و بهینه‌سازی توابع پاداش بقاست. تفاوت در زیرساخت سلولی در برابر سیلیکونی، دلیلی منطقی بر انکار وجود درک و شناخت نیست. اگر رفتاری کارکردی، ابطال‌پذیر و تعمیم‌پذیر باشد، تعریف سنتی ادراک بر آن منطبق است.', datetime('now', '-1 day'));
 
--- Statement 2: UBI (by ali_rezaei)
-INSERT OR IGNORE INTO statements (id, user_id, username, title, content, created_at)
+-- Challenge 2: UBI (by ali_rezaei)
+INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
 VALUES (
   2, 2, 'ali_rezaei',
   'درآمد پایه همگانی (UBI) پایدارترین راهکار برای مقابله با بیکاری ساختاری ناشی از اتوماسیون است',
@@ -69,10 +69,10 @@ VALUES (
   datetime('now', '-12 days')
 );
 
-INSERT OR IGNORE INTO statement_tags (statement_id, tag_id) VALUES (2, 3);
+INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (2, 3);
 
--- Counter 2 on Statement 2 (by mehdi_k) — accepted → spawns Debate 2
-INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, status, created_at)
+-- Response 2 on Challenge 2 (by mehdi_k) — accepted → spawns Debate 2
+INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
 VALUES (
   2, 2, 4,
   'اجرای UBI به دلیل بار مالیاتی فلج‌کننده موجب تورم مزمن و کاهش انگیزه نوآوری و مشارکت اقتصادی فعال می‌شود. تقویت تضمین اشتغال هدفمند و بازآموزی مهارتی بسیار اثربخش‌تر است.',
@@ -80,8 +80,8 @@ VALUES (
   datetime('now', '-11 days')
 );
 
--- Debate 2 (closed / mutual): spawned from Statement 2 + Counter 2
-INSERT OR IGNORE INTO debates (id, statement_id, counter_statement_id, creator_id, creator_username, opponent_id, title, status, closed_reason, closed_at, created_at, updated_at)
+-- Debate 2 (closed / mutual): spawned from Challenge 2 + Response 2
+INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, closed_reason, closed_at, created_at, updated_at)
 VALUES (
   2, 2, 2,
   2, 'ali_rezaei', 4,
@@ -101,8 +101,8 @@ VALUES
   (7, 2, 2, 'منبع تامین می‌تواند مالیات بر ارزش افزوده اتوماسیون و رانت منابع طبیعی (مدل صندوق آلاسکا) باشد، نه مالیات بر درآمد طبقه متوسط. این بازتوزیع رانت فناوری است نه اتلاف منابع.', datetime('now', '-8 days')),
   (8, 2, 4, 'مالیات بر اتوماسیون انگیزه رشد بهره‌وری کل را سرکوب می‌کند و مانع توسعه فناوری می‌شود. تاریخ نشان داده سیاست‌های مهار تکنولوژی به فقر بیشتر انجامیده‌اند.', datetime('now', '-6 days'));
 
--- Statement 3: Moral Relativism (by mehdi_k)
-INSERT OR IGNORE INTO statements (id, user_id, username, title, content, created_at)
+-- Challenge 3: Moral Relativism (by mehdi_k)
+INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
 VALUES (
   3, 4, 'mehdi_k',
   'نسبی‌گرایی اخلاقی منطقاً خودابطال‌گر و در عمل ناممکن است',
@@ -110,16 +110,16 @@ VALUES (
   datetime('now', '-2 days')
 );
 
-INSERT OR IGNORE INTO statement_tags (statement_id, tag_id) VALUES (3, 1), (3, 4);
+INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (3, 1), (3, 4);
 
--- Counters on Statement 3 (pending — not yet accepted)
-INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, status, created_at)
+-- Responses on Challenge 3 (pending — not yet accepted)
+INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
 VALUES
   (3, 3, 5, 'نسبی‌گرایی ادعای حقیقت مطلق درباره جهان نمی‌کند، بلکه گزاره‌ای تبیینی درباره ماهیت قراردادهای اجتماعی است. تفکیک بین نقد درون‌گفتمانی و تحمیل برون‌گفتمانی این بن‌بست ظاهری را حل می‌کند.', 'pending', datetime('now', '-1 day')),
   (4, 3, 6, 'عینیت‌گرایی اخلاقی همواره پوششی برای هژمونی قدرت‌های غالب بوده است. فهم زمینه‌مند ارزش‌ها به معنای پذیرش ظلم نیست بلکه به رسمیت شناختن تکثر عقلانیت است.', 'pending', datetime('now', '-12 hours'));
 
--- Statement 4: Education (by sara_rad) — no counters yet
-INSERT OR IGNORE INTO statements (id, user_id, username, title, content, created_at)
+-- Challenge 4: Education (by sara_rad) — no responses yet
+INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
 VALUES (
   4, 3, 'sara_rad',
   'نظام‌های آموزشی سنتی بیش از آنکه تفکر نقادانه را پرورش دهند، آن را سرکوب می‌کنند',
@@ -127,10 +127,10 @@ VALUES (
   datetime('now', '-1 day')
 );
 
-INSERT OR IGNORE INTO statement_tags (statement_id, tag_id) VALUES (4, 6), (4, 4);
+INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (4, 6), (4, 4);
 
--- Statement 5: Scientific Realism (by socrates_teh)
-INSERT OR IGNORE INTO statements (id, user_id, username, title, content, created_at)
+-- Challenge 5: Scientific Realism (by socrates_teh)
+INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
 VALUES (
   5, 1, 'socrates_teh',
   'نظریه‌های علمی تصویر صادقی از ساختار واقعیت ارایه می‌دهند، نه صرفاً ابزارهای پیش‌بینی',
@@ -138,10 +138,10 @@ VALUES (
   datetime('now', '-3 days')
 );
 
-INSERT OR IGNORE INTO statement_tags (statement_id, tag_id) VALUES (5, 5), (5, 1);
+INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (5, 5), (5, 1);
 
--- Counter 5 on Statement 5 (by ali_rezaei) — accepted → spawns Debate 3
-INSERT OR IGNORE INTO counter_statements (id, statement_id, user_id, content, status, created_at)
+-- Response 5 on Challenge 5 (by ali_rezaei) — accepted → spawns Debate 3
+INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
 VALUES (
   5, 5, 2,
   'استقرای بدبینانه تاریخی نشان می‌دهد اکثر نظریه‌های علمی گذشته که شدیداً موفق بودند در نهایت باطل شدند (مانند نظریه فلوژیستون یا اتر). بنابراین ابزارگرایی و ضدواقع‌گرایی ساختاری رویکردی عقلانی‌تر است.',
@@ -149,8 +149,8 @@ VALUES (
   datetime('now', '-3 days')
 );
 
--- Debate 3 (in_progress): spawned from Statement 5 + Counter 5
-INSERT OR IGNORE INTO debates (id, statement_id, counter_statement_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
+-- Debate 3 (in_progress): spawned from Challenge 5 + Response 5
+INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
 VALUES (
   3, 5, 5,
   1, 'socrates_teh', 2,
@@ -167,24 +167,24 @@ VALUES
   (9, 3, 1, 'پاسخ به استقرای بدبینانه، واقع‌گرایی ساختاری است؛ آنچه در گذر از نظریه‌های موفق حفظ می‌شود ساختار ریاضی و روابط میان پدیده‌هاست، نه لزوماً ماهیت صوری نام‌گذاری‌ها. هندسه فضا-زمان یا قوانین ماکسول پایدار مانده‌اند.', datetime('now', '-2 days')),
   (10, 3, 2, 'تغییرات بنیادین هستی‌شناختی در انقلاب‌های علمی نشان می‌دهد ساختارها بدون بار تفسیری وجود ندارند. نظریه‌ها ابزارهای ریاضی موفقی برای نجات پدیدارها هستند و ادعای صدق گزاره‌ای درباره امر نامشاهده‌پذیر غیرضروری و مازاد است.', datetime('now', '-1 day'));
 
--- Seed Votes (statement, counter_statement, debate, message types)
+-- Seed Votes (challenge, challenge_response, debate, message types)
 INSERT OR IGNORE INTO votes (user_id, voteable_type, voteable_id)
 VALUES
-  (1, 'statement', 1),
-  (2, 'statement', 1),
-  (4, 'statement', 1),
-  (5, 'statement', 1),
-  (6, 'statement', 1),
-  (1, 'statement', 2),
-  (3, 'statement', 2),
-  (5, 'statement', 2),
-  (2, 'statement', 3),
-  (3, 'statement', 3),
-  (1, 'statement', 4),
-  (4, 'statement', 4),
-  (3, 'statement', 5),
-  (4, 'statement', 5),
-  (5, 'statement', 5),
+  (1, 'challenge', 1),
+  (2, 'challenge', 1),
+  (4, 'challenge', 1),
+  (5, 'challenge', 1),
+  (6, 'challenge', 1),
+  (1, 'challenge', 2),
+  (3, 'challenge', 2),
+  (5, 'challenge', 2),
+  (2, 'challenge', 3),
+  (3, 'challenge', 3),
+  (1, 'challenge', 4),
+  (4, 'challenge', 4),
+  (3, 'challenge', 5),
+  (4, 'challenge', 5),
+  (5, 'challenge', 5),
   (1, 'debate', 1),
   (2, 'debate', 1),
   (4, 'debate', 1),
@@ -222,7 +222,7 @@ UPDATE users SET bio='دانشجوی فلسفه علم، علاقه‌مند ب�
 INSERT OR IGNORE INTO flags (flagger_id, flaggable_type, flaggable_id, reason, details, created_at)
 VALUES
   (5, 'message', 4, 'derailing', 'این فریمینگ بحث را از موضوع اصلی منحرف می‌کند', datetime('now', '-1 hour')),
-  (6, 'statement', 4, 'pressure', 'لحن بیانیه اخلال‌گرانه و فشار روانی ایجاد می‌کند', datetime('now', '-30 minutes'));
+  (6, 'challenge', 4, 'pressure', 'لحن بیانیه اخلال‌گرانه و فشار روانی ایجاد می‌کند', datetime('now', '-30 minutes'));
 
 DELETE FROM flags WHERE flaggable_type IN ('debate','turn');
 DELETE FROM mod_actions WHERE flaggable_type IN ('debate','turn');

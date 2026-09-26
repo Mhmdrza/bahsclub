@@ -41,7 +41,7 @@ debates.get("/", async (c) => {
   const where: string[] = ["d.moderation_state != 'removed'"];
 
   if (tag) {
-    fromJoin += ` JOIN statements st ON st.id = d.statement_id JOIN statement_tags stt ON stt.statement_id = st.id JOIN tags t ON t.id = stt.tag_id`;
+    fromJoin += ` JOIN challenges st ON st.id = d.challenge_id JOIN challenge_tags stt ON stt.challenge_id = st.id JOIN tags t ON t.id = stt.tag_id`;
     where.push("t.slug = ?");
     params.push(tag);
   }
@@ -82,8 +82,8 @@ debates.get("/:id", async (c) => {
     }
   }
 
-  const stmt = await c.env.DB.prepare("SELECT content, user_id, username FROM statements WHERE id = ?").bind(debate.statement_id).first();
-  const counter = await c.env.DB.prepare("SELECT cs.content, cs.user_id, u.username FROM counter_statements cs JOIN users u ON cs.user_id = u.id WHERE cs.id = ?").bind(debate.counter_statement_id).first();
+  const stmt = await c.env.DB.prepare("SELECT content, user_id, username FROM challenges WHERE id = ?").bind(debate.challenge_id).first();
+  const response = await c.env.DB.prepare("SELECT cs.content, cs.user_id, u.username FROM challenge_responses cs JOIN users u ON cs.user_id = u.id WHERE cs.id = ?").bind(debate.counter_response_id).first();
 
   const creator = await c.env.DB.prepare("SELECT id, username FROM users WHERE id = ?").bind(debate.creator_id).first();
   const opponent = debate.opponent_id ? await c.env.DB.prepare("SELECT id, username FROM users WHERE id = ?").bind(debate.opponent_id).first() : null;
@@ -115,8 +115,8 @@ debates.get("/:id", async (c) => {
 
   return ok({
     debate,
-    openingStatement: stmt ? { content: stmt.content, username: stmt.username, userId: stmt.user_id } : null,
-    openingCounter: counter ? { content: counter.content, username: counter.username, userId: counter.user_id } : null,
+    openingChallenge: stmt ? { content: stmt.content, username: stmt.username, userId: stmt.user_id } : null,
+    openingResponse: response ? { content: response.content, username: response.username, userId: response.user_id } : null,
     creator,
     opponent,
     tags: tagRows.results || [],

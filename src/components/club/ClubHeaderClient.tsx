@@ -57,12 +57,12 @@ export function ClubHeaderClient({
 
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
-            href="/club/statements/new"
+            href="/club/challenges/new"
             className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg bg-accent text-accent-fg text-xs  font-semibold hover:opacity-90 transition-opacity shadow-xs whitespace-nowrap"
           >
             <Plus size={15} />
             <span className="hidden sm:inline">ثبت بحث</span>
-            <span className="sm:hidden">بیانیه</span>
+            <span className="sm:hidden">چالش</span>
           </Link>
 
           {session ? (

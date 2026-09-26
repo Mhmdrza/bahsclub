@@ -47,7 +47,7 @@ export function LadderAssessment({
               {rung.step} — {rung.title}
             </p>
             <ul className="space-y-3">
-              {rung.selfCheck.map((statement, i) => {
+              {rung.selfCheck.map((challenge, i) => {
                 const key = `${rung.id}-${i}`;
                 const active = Boolean(checked[key]);
                 return (
@@ -64,7 +64,7 @@ export function LadderAssessment({
                         <Circle className="mt-0.5 h-4 w-4 shrink-0 text-muted" />
                       )}
                       <span className={active ? "text-foreground" : "text-muted"}>
-                        {statement}
+                        {challenge}
                       </span>
                     </button>
                   </li>

@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { MessageSquareQuote, Flame } from "lucide-react";
+import { MessageSquareQuote, Flame, Swords } from "lucide-react";
 
-export function StatementCard({
-  statement: s,
+export function ChallengeCard({
+  challenge: s,
 }: {
-  statement: {
+  challenge: {
     id: number;
     title: string;
     username: string;
     content: string;
     createdAt: string;
     voteCount: number;
-    counterCount: number;
+    responseCount: number;
     activeDebateCount: number;
     tags?: { id: number; name: string; slug: string }[];
   };
@@ -37,7 +37,7 @@ export function StatementCard({
             </Link>
           </div>
 
-          <Link href={`/club/statements/${s.id}`} className="block group/link">
+          <Link href={`/club/challenges/${s.id}`} className="block group/link">
             <h3 className="font-bold text-base text-foreground group-hover/link:text-accent transition-colors leading-snug mb-1.5">
               {s.title}
             </h3>
@@ -62,23 +62,31 @@ export function StatementCard({
             </div>
           )}
 
-          {/* Counters & Meta */}
+          {/* Responses & Meta */}
           <div className="flex items-center gap-4 text-xs text-muted font-mono pt-2 border-t border-border/40">
             <Link
-              href={`/club/statements/${s.id}`}
+              href={`/club/challenges/${s.id}`}
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
             >
               <MessageSquareQuote size={14} className="text-muted/80" />
-              <span>{s.counterCount} پاسخ</span>
+              <span>{s.responseCount} نقد</span>
             </Link>
 
-            {s.activeDebateCount > 0 && (
+            {s.activeDebateCount > 0 ? (
               <Link
-                href={`/club/statements/${s.id}`}
+                href={`/club/challenges/${s.id}`}
                 className="inline-flex items-center gap-1 text-accent font-medium hover:underline"
               >
                 <Flame size={14} />
                 <span>{s.activeDebateCount} مباحثه در جریان</span>
+              </Link>
+            ) : (
+              <Link
+                href={`/club/challenges/${s.id}`}
+                className="inline-flex items-center gap-1 text-gold font-medium hover:underline"
+              >
+                <Swords size={14} />
+                <span>در انتظار هم‌آورد</span>
               </Link>
             )}
           </div>
@@ -86,7 +94,7 @@ export function StatementCard({
 
         {/* Vote Score Pill */}
         <Link
-          href={`/club/statements/${s.id}`}
+          href={`/club/challenges/${s.id}`}
           className="flex flex-col items-center justify-center min-w-[3.25rem] py-2 px-2.5 rounded-xl border border-border bg-background text-muted group-hover:border-accent/40 group-hover:text-accent transition-colors shrink-0"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

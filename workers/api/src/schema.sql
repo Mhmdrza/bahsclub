@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS tags (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE TABLE IF NOT EXISTS statements (
+CREATE TABLE IF NOT EXISTS challenges (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS statements (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE TABLE IF NOT EXISTS counter_statements (
+CREATE TABLE IF NOT EXISTS challenge_responses (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
+  challenge_id INTEGER NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
   user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   content TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',
@@ -48,16 +48,16 @@ CREATE TABLE IF NOT EXISTS counter_statements (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE TABLE IF NOT EXISTS statement_tags (
-  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
+CREATE TABLE IF NOT EXISTS challenge_tags (
+  challenge_id INTEGER NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
   tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
-  PRIMARY KEY (statement_id, tag_id)
+  PRIMARY KEY (challenge_id, tag_id)
 );
 
 CREATE TABLE IF NOT EXISTS debates (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  statement_id INTEGER NOT NULL REFERENCES statements(id) ON DELETE CASCADE,
-  counter_statement_id INTEGER NOT NULL REFERENCES counter_statements(id),
+  challenge_id INTEGER NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
+  counter_response_id INTEGER NOT NULL REFERENCES challenge_responses(id),
   creator_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   creator_username TEXT NOT NULL,
   opponent_id INTEGER NOT NULL REFERENCES users(id) ON DELETE SET NULL,
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS debate_messages (
 );
 
 CREATE INDEX IF NOT EXISTS idx_messages_debate ON debate_messages(debate_id, id);
-CREATE INDEX IF NOT EXISTS idx_counter_statement ON counter_statements(statement_id, status);
-CREATE INDEX IF NOT EXISTS idx_statement_user ON statements(user_id, id);
+CREATE INDEX IF NOT EXISTS idx_challenge_response ON challenge_responses(challenge_id, status);
+CREATE INDEX IF NOT EXISTS idx_challenge_user ON challenges(user_id, id);
 
 CREATE TABLE IF NOT EXISTS votes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

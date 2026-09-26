@@ -88,24 +88,24 @@ users.get("/:username", async (c) => {
     LIMIT ? OFFSET ?
   `).bind(user.id, user.id, dPg.limit, dPg.offset).all<any>();
 
-  const { results: statements } = await c.env.DB.prepare(`
+  const { results: challenges } = await c.env.DB.prepare(`
     SELECT s.*,
-      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'statement' AND voteable_id = s.id) as vote_count,
-      (SELECT COUNT(*) FROM debates WHERE statement_id = s.id AND status = 'in_progress') as active_debate_count
-    FROM statements s
+      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'challenge' AND voteable_id = s.id) as vote_count,
+      (SELECT COUNT(*) FROM debates WHERE challenge_id = s.id AND status = 'in_progress') as active_debate_count
+    FROM challenges s
     WHERE s.user_id = ? AND s.moderation_state != 'removed'
     ORDER BY s.created_at DESC
     LIMIT 10
   `).bind(user.id).all<any>();
 
   const { results: tags } = await c.env.DB.prepare(`
-    SELECT DISTINCT t.id, t.name, t.slug, COUNT(DISTINCT st2.statement_id) as statement_count
+    SELECT DISTINCT t.id, t.name, t.slug, COUNT(DISTINCT st2.challenge_id) as challenge_count
     FROM tags t
-    JOIN statement_tags st ON t.id = st.tag_id
-    JOIN statements s ON st.statement_id = s.id
-    JOIN statement_tags st2 ON st2.tag_id = t.id
+    JOIN challenge_tags st ON t.id = st.tag_id
+    JOIN challenges s ON st.challenge_id = s.id
+    JOIN challenge_tags st2 ON st2.tag_id = t.id
     WHERE s.user_id = ?
-    GROUP BY t.id ORDER BY statement_count DESC
+    GROUP BY t.id ORDER BY challenge_count DESC
   `).bind(user.id).all<any>();
 
   return ok({
@@ -118,7 +118,7 @@ users.get("/:username", async (c) => {
     blockedUntil: user.blocked_until,
     createdAt: user.created_at,
     debates: debates || [],
-    statements: statements || [],
+    challenges: challenges || [],
     tags: tags || [],
     pagination: { page: dPg.page, limit: dPg.limit, total: debateTotal, hasMore: dPg.page * dPg.limit < debateTotal },
   });

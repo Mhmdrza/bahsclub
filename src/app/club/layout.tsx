@@ -25,7 +25,7 @@ export default async function DebateLayout({ children }: { children: React.React
       <footer className="border-t border-border py-6 text-xs text-muted bg-surface/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-center sm:text-right">
-            باشگاه اندیشه — پایگاهی برای ثبت، محک و پالایش عقلانی باورها
+            باشگاه اندیشه — چالش مطرح کن، هم‌آورد بطلب و مباحثه کن
           </p>
           {/* <div className="hidden md:block">
             <ThemeToggle />

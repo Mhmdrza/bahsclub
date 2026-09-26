@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { auth } from "./routes/auth";
 import { debates } from "./routes/debates";
-import { statements } from "./routes/statements";
+import { challenges } from "./routes/challenges";
 import { votes } from "./routes/votes";
 import { tags } from "./routes/tags";
 import { users } from "./routes/users";
@@ -14,7 +14,7 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 app.route("/api/auth", auth);
 app.route("/api/debates", debates);
-app.route("/api/statements", statements);
+app.route("/api/challenges", challenges);
 app.route("/api/votes", votes);
 app.route("/api/tags", tags);
 app.route("/api/users", users);

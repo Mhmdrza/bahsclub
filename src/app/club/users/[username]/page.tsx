@@ -17,7 +17,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
   const blocked = profile.blockedUntil && new Date(profile.blockedUntil) > new Date();
 
   const joined = new Intl.DateTimeFormat("fa-IR", { dateStyle: "medium" }).format(new Date(profile.createdAt));
-  const statementsCount = profile.statements?.length || 0;
+  const challengesCount = profile.challenges?.length || 0;
   const debatesCount = profile.pagination?.total ?? (profile.debates?.length || 0);
 
   return (
@@ -71,8 +71,8 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
               <span className="text-[11px] text-muted">مباحثه</span>
             </div>
             <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
-              <span className="block text-lg font-bold text-foreground font-mono">{statementsCount}</span>
-              <span className="text-[11px] text-muted">بیانیه</span>
+              <span className="block text-lg font-bold text-foreground font-mono">{challengesCount}</span>
+              <span className="text-[11px] text-muted">چالش</span>
             </div>
           </div>
         </div>
@@ -111,20 +111,20 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
         </section>
       )}
 
-      {/* Statements section */}
-      {profile.statements && profile.statements.length > 0 && (
+      {/* Challenges section */}
+      {profile.challenges && profile.challenges.length > 0 && (
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-bold text-foreground flex items-center gap-2">
-              <span>بیانیه‌ها</span>
-              <span className="text-xs font-normal text-muted font-mono">({profile.statements.length})</span>
+              <span>چالش‌ها</span>
+              <span className="text-xs font-normal text-muted font-mono">({profile.challenges.length})</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {profile.statements.map((s: any) => (
+            {profile.challenges.map((s: any) => (
               <Link
                 key={s.id}
-                href={`/club/statements/${s.id}`}
+                href={`/club/challenges/${s.id}`}
                 className="group flex flex-col justify-between border border-border bg-surface rounded-xl p-4 hover:border-accent/40 transition-colors shadow-xs"
               >
                 <div>
@@ -172,7 +172,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                 <span className={`absolute top-4 left-4 z-10 text-[11px] px-2 py-0.5 rounded-md font-medium ${
                   d.creator_id === profile.id ? "bg-accent/10 text-accent border border-accent/20" : "bg-surface border border-border text-muted"
                 }`}>
-                  {d.creator_id === profile.id ? "ایجادکننده" : "هماورد"}
+                  {d.creator_id === profile.id ? "ایجادکننده" : "هم‌آورد"}
                 </span>
                 <DebateCard
                   debate={{
