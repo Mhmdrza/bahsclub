@@ -325,6 +325,45 @@ export function getFacetValues(): {
   return { categories, levels, tags, topics };
 }
 
+export interface FacetGroup {
+  slug: string;
+  label: string;
+  articles: Article[];
+}
+
+/**
+ * ASCII, URL-safe slug for a Persian facet label. Non-ASCII path params are not
+ * reliably served by Next's production router, so facets are hex-encoded.
+ */
+export function facetSlug(label: string): string {
+  return Buffer.from(label, "utf8").toString("hex");
+}
+
+function buildFacets(pick: (article: Article) => string[]): FacetGroup[] {
+  const map = new Map<string, FacetGroup>();
+  for (const article of getPublishedArticles()) {
+    for (const label of pick(article)) {
+      const slug = facetSlug(label);
+      if (!slug) continue;
+      const existing = map.get(slug);
+      if (existing) existing.articles.push(article);
+      else map.set(slug, { slug, label, articles: [article] });
+    }
+  }
+  return [...map.values()].sort((a, b) =>
+    a.label.localeCompare(b.label, "fa")
+  );
+}
+
+/** Category hubs — the crawlable facet URLs behind the client-side article filter. */
+export function getCategoryFacets(): FacetGroup[] {
+  return buildFacets((article) => [article.category]);
+}
+
+export function getTagFacets(): FacetGroup[] {
+  return buildFacets((article) => article.tags);
+}
+
 export function getHomeSlotArticles(): {
   concept?: Article;
   tactic?: Article;

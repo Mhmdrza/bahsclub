@@ -18,7 +18,14 @@ import {
   getPracticeArticles,
   getPublishedLessons,
   getPublishedTopics,
+  getSiteConfig,
 } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  path: "/",
+  description: getSiteConfig().description,
+});
 
 const CONVERSATION_SKILLS = [
   {

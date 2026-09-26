@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPublishedPages, getSiteConfig } from "@/lib/content";
+import { getPublishedPages, getPublishedTopics, getSiteConfig } from "@/lib/content";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const CLUB_ONLY_PAGES = new Set(["rules"]);
@@ -11,6 +11,7 @@ export function SiteFooter() {
     (page) =>
       !CLUB_ONLY_PAGES.has(page.slug) && !navHrefs.has(`/${page.slug}`)
   );
+  const topics = getPublishedTopics();
 
   return (
     <footer className="border-t border-border bg-surface">
@@ -26,6 +27,20 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link href={item.href} className="text-muted hover:text-accent">
                     {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label="موضوع‌ها">
+            <ul className="flex flex-wrap gap-4 text-sm">
+              {topics.map((topic) => (
+                <li key={topic.slug}>
+                  <Link
+                    href={`/topics/${topic.slug}`}
+                    className="text-muted hover:text-accent"
+                  >
+                    {topic.title}
                   </Link>
                 </li>
               ))}

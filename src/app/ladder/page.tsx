@@ -6,12 +6,14 @@ import { getLessonBySlug, getPublishedArticles } from "@/lib/content";
 import { LadderAssessment } from "@/components/LadderAssessment";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { formatPersianNumber, levelLabel } from "@/lib/utils";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/ladder",
   title: "نردبان یادگیری",
   description:
     "کجای مسیر یادگیری گفت‌وگو ایستاده‌اید؟ سه مرحله — پایه، مقاومت، تسلط — و این که قدم بعدی شما چیست.",
-};
+});
 
 export default function LadderPage() {
   const bySlug = new Map(getPublishedArticles().map((a) => [a.slug, a]));

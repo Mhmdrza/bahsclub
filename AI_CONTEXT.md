@@ -189,7 +189,27 @@ Three views:
 | `/topics` | `src/app/topics/page.tsx` | Topics index |
 | `/topics/[slug]` | `src/app/topics/[slug]/page.tsx` | Articles grouped by topic |
 | `/practice` | `src/app/practice/page.tsx` | Practice articles list |
+| `/articles/category/[category]` | `src/app/articles/category/[category]/page.tsx` | Category hub (facet pages) |
+| `/articles/tag/[tag]` | `src/app/articles/tag/[tag]/page.tsx` | Tag hub (facet pages) |
 | `/[slug]` | `src/app/[slug]/page.tsx` | Catch-all for static pages (e.g., `/about`, `/club-rules`, `/session-format`) |
+
+### SEO & Discoverability
+
+Crawl plumbing so every published page is reachable and indexable:
+
+| File | Purpose |
+|---|---|
+| `src/lib/site.ts` | `SITE_URL` from `NEXT_PUBLIC_SITE_URL` → `VERCEL_PROJECT_PRODUCTION_URL` → `VERCEL_URL` → localhost |
+| `src/lib/seo.ts` | `pageMetadata()` (canonical + OG + Twitter) and JSON-LD builders (`websiteJsonLd`, `articleJsonLd`, `courseJsonLd`, `breadcrumbJsonLd`, `collectionJsonLd`) |
+| `src/components/JsonLd.tsx` | `<script type="application/ld+json">` with `<` escaped |
+| `src/components/ArticleHub.tsx` | Shared renderer for category/tag hub pages |
+| `src/app/robots.ts` | Allows content; disallows `/admin`, `/api/`, `/club`; advertises sitemap |
+| `src/app/sitemap.ts` | Home, indexes, topics, category/tag hubs, articles, lessons, pages (~235 URLs) |
+
+- Set `NEXT_PUBLIC_SITE_URL` in production for correct canonicals/sitemap.
+- **Facet slugs are hex, not Persian.** `facetSlug(label)` (`src/lib/content.ts`) = `Buffer.from(label,'utf8').toString('hex')`. Non-ASCII dynamic path params are unreliable in Next 16's production router, so category/tag URLs are ASCII hex (`/articles/tag/d8a2d8b1...`). Do not switch back to Persian slugs without verifying `next start`.
+- `/articles` server-renders all article cards plus category/tag/topic hub links, so every article is one hop from home.
+- Community routes (`/club/*`) are intentionally not indexed.
 
 ## Club (debate platform)
 

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import Script from "next/script";
 import { getSiteConfig } from "@/lib/content";
+import { SITE_URL } from "@/lib/site";
+import { websiteJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteHeaderWrapper } from "@/components/SiteHeaderWrapper";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -18,11 +21,30 @@ const vazirmatn = Vazirmatn({
 const siteConfig = getSiteConfig();
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: siteConfig.title,
     template: `%s | ${siteConfig.title}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.title,
+  openGraph: {
+    type: "website",
+    siteName: siteConfig.title,
+    locale: "fa_IR",
+    url: "/",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -36,6 +58,7 @@ export default function RootLayout({
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){try{var k="bahsclub-theme",t=localStorage.getItem(k);if(!t){t=localStorage.getItem("harfclub-theme");if(t){localStorage.setItem(k,t);localStorage.removeItem("harfclub-theme");}}t=t||"system";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`}
         </Script>
+        <JsonLd data={websiteJsonLd()} />
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <ThemeProvider>

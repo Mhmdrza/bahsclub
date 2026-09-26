@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedTopics } from "@/lib/content";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/topics",
   title: "موضوع‌ها",
   description: "موضوعات آموزشی بحث‌کلاب.",
-};
+});
 
 export default function TopicsPage() {
   const topics = getPublishedTopics();

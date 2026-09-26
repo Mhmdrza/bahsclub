@@ -10,6 +10,7 @@ import {
   Search,
 } from "lucide-react";
 import { LADDER } from "@/lib/ladder";
+import { pageMetadata } from "@/lib/seo";
 import {
   getPublishedLessons,
   getPublishedTopics,
@@ -20,11 +21,12 @@ import { LessonCard } from "@/components/LessonCard";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/learn",
   title: "آموزش و یادگیری",
   description:
     "مرکز آموزش جامع بحث‌کلاب — مسیرهای یادگیری، مقالات، تاکتیک‌های انحرافی و تمرین‌های تفکر نقاد.",
-};
+});
 
 export default function LearnPage() {
   const lessons = getPublishedLessons();

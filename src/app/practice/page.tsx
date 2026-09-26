@@ -4,11 +4,13 @@ import { getSiteConfig, getPracticeArticles } from "@/lib/content";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ExerciseBlock } from "@/components/ExerciseBlock";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/practice",
   title: "تمرین‌ها",
   description: "تمرین‌های عملی برای محک زدن باورها، تقویت استدلال، و یادگیری مهارت‌های سواد قضاوت.",
-};
+});
 
 export default function PracticePage() {
   const config = getSiteConfig();

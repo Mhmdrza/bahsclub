@@ -18,6 +18,9 @@ import { MarkCompleteButton } from "@/components/MarkCompleteButton";
 import { CopyArticleButton } from "@/components/CopyArticleButton";
 import { ExerciseBlock } from "@/components/ExerciseBlock";
 import { ArticleCard } from "@/components/ArticleCard";
+import { JsonLd } from "@/components/JsonLd";
+import { articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { facetSlug } from "@/lib/content";
 import { formatPersianNumber, levelLabel } from "@/lib/utils";
 import { Clock } from "lucide-react";
 
@@ -34,10 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) return {};
-  return {
+  return pageMetadata({
+    path: `/articles/${slug}`,
     title: article.title,
     description: article.description,
-  };
+    type: "article",
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt,
+  });
 }
 
 export default async function ArticlePage({ params, searchParams }: Props) {
@@ -54,18 +61,19 @@ export default async function ArticlePage({ params, searchParams }: Props) {
     ? getLessonNavigation(lessonSlug, slug)
     : { prev: undefined, next: undefined };
   const related = getRelatedArticles(article);
+  const breadcrumbs = [
+    { label: "خانه", href: "/" },
+    { label: "مقاله‌ها", href: "/articles" },
+    { label: article.title },
+  ];
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+      <JsonLd data={articleJsonLd(article)} />
+      <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
       <div className="lg:grid lg:grid-cols-[1fr_220px] lg:gap-12">
         <article className="min-w-0 max-w-3xl">
-          <Breadcrumbs
-            items={[
-              { label: "خانه", href: "/" },
-              { label: "مقاله‌ها", href: "/articles" },
-              { label: article.title },
-            ]}
-          />
+          <Breadcrumbs items={breadcrumbs} />
 
           <header className="mb-8">
             <h1 className="mb-3 text-3xl font-bold">{article.title}</h1>
@@ -76,7 +84,15 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                 <Clock className="h-3.5 w-3.5" aria-hidden />
                 {formatPersianNumber(article.readingTime)} دقیقه مطالعه
               </span>
-              <span>دسته: {article.category}</span>
+              <span>
+                دسته:{" "}
+                <Link
+                  href={`/articles/category/${facetSlug(article.category)}`}
+                  className="hover:text-accent"
+                >
+                  {article.category}
+                </Link>
+              </span>
             </div>
             {lessons.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2 text-sm">
@@ -102,6 +118,20 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                     className="rounded-md bg-surface px-2 py-0.5 text-muted hover:text-accent"
                   >
                     {topicLabels[topicSlug] ?? topicSlug}
+                  </Link>
+                ))}
+              </div>
+            )}
+            {article.tags.length > 0 && (
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                <span className="text-muted">برچسب‌ها:</span>
+                {article.tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/articles/tag/${facetSlug(tag)}`}
+                    className="rounded-md bg-surface px-2 py-0.5 text-muted hover:text-accent"
+                  >
+                    {tag}
                   </Link>
                 ))}
               </div>
