@@ -3,23 +3,21 @@ import {
   ArrowLeft,
   BookOpen,
   Compass,
+  Crown,
   Dumbbell,
-  Ear,
-  HelpCircle,
-  Layers,
-  MessageSquare,
-  Sparkles,
+  Shield,
+  Swords,
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import { LessonCard } from "@/components/LessonCard";
 import { ArticleCard } from "@/components/ArticleCard";
 import {
-  getArticleBySlug,
   getPracticeArticles,
   getPublishedLessons,
   getPublishedTopics,
   getSiteConfig,
 } from "@/lib/content";
+import { LADDER } from "@/lib/ladder";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -27,30 +25,24 @@ export const metadata = pageMetadata({
   description: getSiteConfig().description,
 });
 
-const CONVERSATION_SKILLS = [
+const LADDER_META = [
   {
-    slug: "asking-better-questions",
-    icon: HelpCircle,
-    label: "پرسیدن",
-    line: "سؤال شفاف‌کننده، به‌جای حمله.",
+    id: "paye",
+    icon: Shield,
+    warrior: "گارد و ایستادن",
+    line: "مثل نفس و قدم رزمی‌کار؛ بدون این پایه هر تکنیکی فرو می‌ریزد.",
   },
   {
-    slug: "steelman-opponent",
-    icon: Ear,
-    label: "شنیدن",
-    line: "اول قوی‌ترین نسخهٔ حرف طرف مقابل را بفهم.",
+    id: "nabard",
+    icon: Swords,
+    warrior: "دفاع و ضدحمله",
+    line: "مثل دفاع در نبرد؛ وقتی بحث داغ شد گم نشوی و به مسیر برگردی.",
   },
   {
-    slug: "emotional-persuasion",
-    icon: Sparkles,
-    label: "جدا کردن",
-    line: "تفکیک احساس از ادعا و شناخت دستکاری.",
-  },
-  {
-    slug: "responding-to-tactics",
-    icon: MessageSquare,
-    label: "برگرداندن",
-    line: "بازگرداندن آرام گفت‌وگو به مسیر، وقتی منحرف می‌شود.",
+    id: "ghodrat-kalam",
+    icon: Crown,
+    warrior: "ذهن و میدان",
+    line: "مثل استراتژی جنگجو؛ کسی که معنا را تعریف می‌کند میدان را می‌برد.",
   },
 ];
 
@@ -59,47 +51,59 @@ export default function HomePage() {
   const topics = getPublishedTopics();
   const practice = getPracticeArticles().slice(0, 4);
 
-  const skills = CONVERSATION_SKILLS.map((skill) => ({
-    ...skill,
-    article: getArticleBySlug(skill.slug),
-  })).filter((skill) => skill.article);
+  const levels = LADDER.map((rung) => ({
+    ...rung,
+    meta: LADDER_META.find((m) => m.id === rung.id)!,
+  }));
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       <HeroSection />
 
-      {/* 2. Core talking skills */}
+      {/* 2. Three-level ladder: پایه / نبرد / قدرت کلام */}
       <section className="mb-20 sm:mb-24">
         <div className="mb-8 text-center">
-          <p className="eyebrow eyebrow-centered mb-2">مهارت‌های پایه</p>
-          <h2 className="text-3xl font-extrabold">چهار مهارت برای گفت‌وگوهایی که به جایی می‌رسند</h2>
+          <p className="eyebrow eyebrow-centered mb-2">
+            نقشهٔ رشد — مثل یک رزمی‌کار
+          </p>
+          <h2 className="text-3xl font-extrabold">
+            سه سطح: پایه، نبرد، قدرت کلام
+          </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            حرف زدن را در کودکی یاد گرفتیم؛ گفت‌وگو تمرین می‌خواهد. این چهار مهارت،
-            پایهٔ گفت‌وگوهای سازنده‌اند — از هر کدام که برایت جالب‌تر است شروع کن.
+            اول گارد می‌گیری، بعد دفاع و ضدحمله را یاد می‌گیری، آخر میدان معنا را
+            تعریف می‌کنی. ببین کجای مسیری و قدم بعدی‌ات چیست.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {skills.map(({ slug, icon: Icon, label, line, article }) => (
-            <Link
-              key={slug}
-              href={`/articles/${slug}`}
-              className="group flex flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
-            >
-              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent-light text-accent">
-                <Icon className="h-4 w-4" />
-              </span>
-              <span className="eyebrow mb-1">{label}</span>
-              <h3 className="mb-2 font-semibold leading-snug group-hover:text-accent">
-                {article!.title}
-              </h3>
-              <p className="mb-4 text-xs leading-relaxed text-muted">{line}</p>
-              <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-accent">
-                مطالعه مقاله
-                <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-              </span>
-            </Link>
-          ))}
+        <div className="grid gap-4 lg:grid-cols-3">
+          {levels.map(({ id, step, title, subtitle, meta }) => {
+            const Icon = meta.icon;
+            return (
+              <Link
+                key={id}
+                href={`/ladder#rung-${id}`}
+                className="group flex flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
+              >
+                <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent-light text-accent">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span className="eyebrow mb-1">
+                  {step} — {meta.warrior}
+                </span>
+                <h3 className="mb-1 font-semibold leading-snug group-hover:text-accent">
+                  {title}
+                </h3>
+                <p className="mb-2 text-xs font-medium text-muted">{subtitle}</p>
+                <p className="mb-4 text-xs leading-relaxed text-muted">
+                  {meta.line}
+                </p>
+                <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-accent">
+                  دیدن مرحله در نردبان
+                  <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -131,26 +135,21 @@ export default function HomePage() {
         </div>
       </section>
 
-            {/* 1b. Learning ladder */}
+      {/* 3b. Self-check CTA */}
       <section className="mb-20 sm:mb-24">
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-accent/30 bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
-          <div className="flex items-start gap-4">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-light text-accent">
-              <Layers className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="eyebrow mb-1">نقشهٔ رشد</p>
-              <h3 className="text-lg font-bold">
-                نردبان یادگیری: سه مرحله، یک مسیر روشن
-              </h3>
-              <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
-                ببین کجای مسیری و قدم بعدی‌ات چیست — با چند سؤال کوتاه، نقطهٔ شروع
-                خودت را پیدا کن.
-              </p>
-            </div>
+          <div>
+            <p className="eyebrow mb-1">کجای مسیری؟</p>
+            <h3 className="text-lg font-bold">
+              با چند سؤال کوتاه، نقطهٔ شروع خودت را پیدا کن
+            </h3>
+            <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+              آزمون کوتاه نردبان می‌گوید از پایه شروع کنی، به نبرد بروی، یا وقتش
+              رسیده به قدرت کلام فکر کنی.
+            </p>
           </div>
           <Link
-            href="/ladder"
+            href="/ladder#assessment"
             className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-colors hover:bg-accent/90"
           >
             پیدا کردن نقطهٔ شروع

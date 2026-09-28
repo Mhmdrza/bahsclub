@@ -10,9 +10,9 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   path: "/ladder",
-  title: "نردبان یادگیری",
+  title: "نردبان قدرت کلام",
   description:
-    "کجای مسیر یادگیری گفت‌وگو ایستاده‌اید؟ سه مرحله — پایه، مقاومت، تسلط — و این که قدم بعدی شما چیست.",
+    "کجای مسیر یادگیری گفت‌وگو ایستاده‌اید؟ سه سطح — پایه، نبرد، قدرت کلام — و این که قدم بعدی شما چیست.",
 });
 
 export default function LadderPage() {
@@ -27,7 +27,7 @@ export default function LadderPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs
-        items={[{ label: "خانه", href: "/" }, { label: "نردبان یادگیری" }]}
+        items={[{ label: "خانه", href: "/" }, { label: "نردبان قدرت کلام" }]}
       />
 
       {/* Header */}
@@ -37,13 +37,13 @@ export default function LadderPage() {
           <p className="eyebrow">نقشهٔ رشد</p>
         </div>
         <h1 className="mt-3 mb-4 text-3xl font-extrabold sm:text-4xl">
-          نردبان یادگیری: هر سطح زیربنای سطح بعدی
+          نردبان قدرت کلام: از گارد تا میدان معنا
         </h1>
         <p className="max-w-3xl text-sm leading-relaxed text-muted">
-          گفت‌وگو یک مهارت یکپارچه نیست؛ سه لایه دارد که روی هم ساخته می‌شوند. اول یاد
-          می‌گیری خوب حرف بزنی، بعد یاد می‌گیری در تعارض و نفوذ گم نشوی، و آخر سر یاد
-          می‌گیری چهارچوب و روایت را ببینی و خنثی کنی. با آزمون کوتاه زیر بفهم کجای
-          نردبان ایستاده‌ای و قدم بعدی‌ات چیست.
+          گفت‌وگو مثل رزم است و سه لایه دارد که روی هم ساخته می‌شوند. اول گارد
+          می‌گیری و خوب حرف می‌زنی، بعد در تعارض و نفوذ گم نمی‌شوی، و آخر سر
+          میدان معنا — چهارچوب و روایت — را می‌بینی و خنثی می‌کنی. با آزمون کوتاه
+          زیر بفهم کجای نردبان ایستاده‌ای و قدم بعدی‌ات چیست.
         </p>
       </section>
 

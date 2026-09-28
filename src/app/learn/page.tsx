@@ -67,7 +67,7 @@ export default function LearnPage() {
             href="#ladder"
             className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
-            نردبان یادگیری
+            نردبان قدرت کلام
           </a>
           <a
             href="#paths"
@@ -110,12 +110,13 @@ export default function LearnPage() {
             href="/ladder"
             className="shrink-0 text-sm font-semibold text-accent hover:underline"
           >
-            نردبان کامل و آزمون ←
+            نردبان قدرت کلام و آزمون ←
           </Link>
         </div>
         <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
-          آموزش‌های ما سه لایه دارند که روی هم ساخته می‌شوند. اگر نمی‌دانی از کجا شروع
-          کنی، با آزمون کوتاه نردبان، نقطهٔ شروع خودت را پیدا کن.
+          آموزش‌های ما سه سطح دارند که روی هم ساخته می‌شوند — پایه، نبرد و قدرت
+          کلام. اگر نمی‌دانی از کجا شروع کنی، با آزمون کوتاه نردبان، نقطهٔ شروع
+          خودت را پیدا کن.
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
           {LADDER.map((rung) => (
