@@ -3,45 +3,49 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, MessageSquare } from "lucide-react";
+import { ArrowLeft, Compass } from "lucide-react";
 
 type HeroVariant = {
   eyebrow: string;
   heading: string;
   body: string;
   bodyStrong: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
 };
 
 const VARIANTS: HeroVariant[] = [
   {
-    eyebrow: "یک مهارتِ تمرین‌کردنی",
-    heading: "حرف زدن را بلدیم؛ گفت‌وگو تمرین می‌خواهد",
-    body: "حرف زدن را در کودکی یاد گرفتیم، اما شنیدن، پرسیدن و مخالفت کردن بدون شکستن رابطه را کمتر جایی یاد داده‌اند. اینجا مسیرهای قدم‌به‌قدم هست تا جدل را به تفاهم نزدیک کنی — بدون پیش‌نیاز، با انتخاب خودت.",
-    bodyStrong: "از هر نقطه‌ای که کنجکاوی شروع کن — انتخاب با توست.",
+    eyebrow: "نقشهٔ رشد — پایه · نبرد · قدرت کلام",
+    heading: "گفت‌وگو مثل رزم است؛ با گارد شروع می‌شود، با تعیین میدان تمام",
+    body: "حرف زدن را در کودکی یاد گرفتیم؛ گفت‌وگوی واقعی تمرین رزمنده می‌خواهد: اول ایستادن و شنیدن، بعد جا خالی دادن و برگرداندن ضربه در تعارض، و آخر دیدن زمین بازی و چهارچوب معنا.",
+    bodyStrong: "سه سطح، بدون ادعا، از گارد پایه تا استراتژی.",
+    primary: { label: "شروع از نردبان", href: "/ladder#assessment" },
+    secondary: { label: "دیدن هر سه سطح", href: "/ladder" },
   },
   {
-    eyebrow: "یک دعوت ساده",
-    heading: "چه می‌شود اگر طرف مقابل واقعاً بشنود؟",
-    body: "خیلی از اختلاف‌ها از این می‌آید که فقط منتظر نوبت حرف زدن خودمان هستیم. اینجا ابزارهای ساده‌ای هست برای سؤال بهتر پرسیدن، بهتر فهمیدن حرف طرف مقابل و بررسی اختلاف بدون تحقیر.",
-    bodyStrong: "هر درس، یک ابزار واقعی برای گفت‌وگوی بعدی توست.",
+    eyebrow: "هنر دفاع و تسلط فکری",
+    heading: "کسی که معنا را تعریف می‌کند، پیروز گفت‌وگوست",
+    body: "بیشتر ما در بحث‌ها یا گیج می‌شویم یا فریاد می‌زنیم. اینجا ابزار رزمی کلام را یاد می‌گیری: تشخیص مغالطه زیر فشار، خنثی کردن فریب‌های روانی، و دفاع از حقیقت بدون خشونت.",
+    bodyStrong: "نه برای تحقیر دیگران؛ برای اینکه دستکاری نشوی.",
+    primary: { label: "آزمون نقطهٔ شروع", href: "/ladder#assessment" },
+    secondary: { label: "کاوش کتابخانه", href: "/articles" },
   },
   {
-    eyebrow: "یک نگاه دیگر",
-    heading: "بیشتر ما گفت‌وگو را در فضاهای پرتنش یاد گرفته‌ایم",
-    body: "جایی که هدف «بردن» بود، نه فهمیدن. این فضا برای این ساخته شده که طور دیگری هم می‌شود حرف زد: با کنجکاوی و احترام. از ساده‌ترین ایده‌ها تا لایه‌های عمیق‌تر، همه قدم‌به‌قدم و بدون پیش‌فرض کنار هم چیده شده‌اند.",
-    bodyStrong: "همراه شو و با سرعت خودت پیش برو.",
+    eyebrow: "تربیت ذهن و کلام",
+    heading: "هیچ استادی با ضربهٔ آخر شروع نکرده است",
+    body: "پایه: گوش دادن و شفافیت ادعا. نبرد: مدیریت تعارض و شناخت نفوذ. قدرت کلام: شکستن روایت و روایت‌سازی. برای ساختن کلامی که وزن دارد، اول باید بدانی روی کدام پله ایستاده‌ای.",
+    bodyStrong: "جای خودت را در نردبان پیدا کن.",
+    primary: { label: "سنجش سطح خود", href: "/ladder#assessment" },
+    secondary: { label: "مسیر سواد قضاوت", href: "/learn/judgment-literacy" },
   },
   {
-    eyebrow: "از هر جا که راحتی",
-    heading: "هر گفت‌وگوی بهتر، گاهی با یک جملهٔ بهتر شروع می‌شود",
-    body: "تازه رسیده‌ای یا باتجربه — می‌توانی از ابتدا شروع کنی یا فقط یک مقاله بخوانی. دربارهٔ روشن حرف زدن، سؤال درست و نگه داشتن رابطه در اختلاف.",
-    bodyStrong: "یک درس در هر بار — تو ترتیب و سرعت را انتخاب می‌کنی.",
-  },
-  {
-    eyebrow: "یک انتخاب آزادانه",
-    heading: "در گفت‌وگو، بردن مهم‌تر است یا فهمیدن؟",
-    body: "این دو مسیر به جاهای کاملاً متفاوتی می‌رسند. اینجا ایده‌هایی هست برای فهمیدن قوی‌ترین نسخهٔ حرف طرف مقابل، جدا کردن احساس از ادعا، و برگشتن آرام به مسیر وقتی گفت‌وگو منحرف می‌شود.",
-    bodyStrong: "قدم اول را تو انتخاب می‌کنی.",
+    eyebrow: "یک پرسش صادقانه",
+    heading: "وقتی بحث داغ می‌شود، گاردت باز است یا آماده‌ای؟",
+    body: "در فضای پرتنش، آدم‌ها استدلال نمی‌کنند، ضربه می‌زنند. ما سه لایهٔ تمرین ساخته‌ایم تا یاد بگیری آرام بمانی، تکنیک حریف را روی هوا بگیری، و زمین بازی را از جنگ به فهمیدن تغییر دهی.",
+    bodyStrong: "از تمرین نفس و سکوت تا فنون معناداری.",
+    primary: { label: "کجای نردبانی؟", href: "/ladder#assessment" },
+    secondary: { label: "آشنایی با مأموریت", href: "/mission" },
   },
 ];
 
@@ -87,18 +91,18 @@ export default function HeroSection() {
 
       <div className="flex flex-wrap items-center justify-center gap-4">
         <Link
-          href="/learn"
+          href={v.primary.href}
           className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
         >
-          <BookOpen className="h-4 w-4" />
-          شروع مسیر یادگیری
+          <Compass className="h-4 w-4" />
+          {v.primary.label}
         </Link>
         <Link
-          href="/articles"
+          href={v.secondary.href}
           className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
         >
-          <MessageSquare className="h-4 w-4 text-accent" />
-          کاوش کتابخانهٔ مهارت‌ها
+          {v.secondary.label}
+          <ArrowLeft className="h-4 w-4 text-accent" />
         </Link>
       </div>
     </section>
