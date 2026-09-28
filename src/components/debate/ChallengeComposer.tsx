@@ -52,7 +52,7 @@ export function ChallengeComposer({
           name="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="موضع و استدلال خود را شفاف بنویس..."
+          placeholder="موضعت چیست و چرا؟ دلیلت را روشن بنویس تا گفت‌وگوی خوبی شکل بگیرد..."
           required
           rows={6}
           maxLength={5000}
@@ -143,7 +143,7 @@ export function ChallengeComposer({
         disabled={pending || selected.length === 0}
         className="w-full py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity mt-1 shadow-xs cursor-pointer"
       >
-        {pending ? "در حال ثبت..." : "شروع چالش"}
+        {pending ? "در حال ثبت..." : "انتشار چالش"}
       </button>
     </form>
   );

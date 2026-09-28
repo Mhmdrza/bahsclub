@@ -18,11 +18,12 @@ export default async function CreateChallengePage() {
       <div className="border border-border bg-surface p-6 sm:p-8 rounded-2xl shadow-xs">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-3">
           <Sparkles size={13} />
-          <span>شروع چالش</span>
+          <span>چالش جدید</span>
         </div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">شروع چالش</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ایده‌ات را مطرح کن</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
-          موضع و استدلالت را شفاف بنویس؛ دیگران می‌توانند هم‌آوردی کنند و مباحثه را شروع کنند.
+          موضعت را روشن و با دلیل بنویس؛ دیگران نظرشان را می‌آورند و گفت‌وگو شروع
+          می‌شود. هرچه شفاف‌تر بنویسی، جواب‌های بهتری می‌گیری.
         </p>
 
         <ChallengeComposer availableTags={availableTags} />

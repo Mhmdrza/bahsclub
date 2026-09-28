@@ -22,13 +22,14 @@ export default async function ClubHome() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-3">
             <Sparkles size={13} />
-            <span>تقابل اندیشه‌ها</span>
+            <span>باشگاه گفت‌وگو</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            چالشی مطرح کن و هم‌آورد بطلب
+            یک ایده برای گفت‌وگو بیاور
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
-            در باشگاه اندیشه، هر کس استدلال خود را محک میزند. موضع و دلیلت را بیاور تا کسی هم‌آوردی‌اش کند.
+            موضعت را با دلیل مطرح کن و از زاویه‌های دیگر بشنو. تو انتخاب می‌کنی
+            بنویسی، جواب بدهی یا اول تماشا کنی.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -37,7 +38,7 @@ export default async function ClubHome() {
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity shadow-xs"
             >
               <Plus size={16} />
-              <span>شروع چالش جدید</span>
+              <span>ایده‌ات را مطرح کن</span>
             </Link>
             {session && (
               <Link
@@ -74,7 +75,7 @@ export default async function ClubHome() {
 
           {challenges.length === 0 ? (
             <div className="text-center py-16 border border-dashed border-border rounded-xl text-sm text-muted">
-              هنوز چالشی ثبت نشده است. اولین نفری باش که چالشش را مطرح می‌کند!
+              هنوز چالشی ثبت نشده — اولین ایده را تو مطرح کن.
             </div>
           ) : (
             <div className="flex flex-col gap-3">
@@ -92,7 +93,7 @@ export default async function ClubHome() {
             <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/60">
               <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
                 <Flame size={16} className="text-accent" />
-                <span>مباحثه‌های داغ و فعال</span>
+                <span>گفت‌وگوهای در جریان</span>
               </h3>
               <Link href="/club/debates" className="text-xs text-accent hover:underline">
                 همه ({debates.length})
@@ -114,9 +115,10 @@ export default async function ClubHome() {
 
           {/* Guidelines & Thought Identity box */}
           <div className="border border-gold/30 bg-gold/5 rounded-xl p-4 text-xs space-y-2">
-            <h4 className="font-bold text-gold">قاعده باشگاه</h4>
+            <h4 className="font-bold text-gold">حال‌وهوای باشگاه</h4>
             <p className="text-muted leading-relaxed">
-              ادعا را نقد کن، نه شخص را. استدلال‌ها باید مستدل، روشن و پذیرای هم‌آوردی‌های ساختارمند باشند.
+              اینجا ادعا را بررسی می‌کنیم، نه شخص را. روشن و مستدل بنویس و به
+              نگاه‌های دیگر جا بده.
             </p>
           </div>
           </div>
