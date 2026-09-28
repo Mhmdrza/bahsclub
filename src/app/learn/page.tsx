@@ -1,24 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Compass,
-  BookOpen,
-  ShieldAlert,
-  Dumbbell,
   ArrowLeft,
-  Layers,
+  BookOpen,
+  Compass,
+  Dumbbell,
   Search,
 } from "lucide-react";
-import { LADDER } from "@/lib/ladder";
 import { pageMetadata } from "@/lib/seo";
-import {
-  getPublishedLessons,
-  getPublishedTopics,
-  getPracticeArticles,
-  getTacticArticles,
-} from "@/lib/content";
+import { getPublishedLessons } from "@/lib/content";
 import { LessonCard } from "@/components/LessonCard";
-import { ArticleCard } from "@/components/ArticleCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = pageMetadata({
@@ -30,9 +21,6 @@ export const metadata: Metadata = pageMetadata({
 
 export default function LearnPage() {
   const lessons = getPublishedLessons();
-  const topics = getPublishedTopics();
-  const practiceArticles = getPracticeArticles().slice(0, 4);
-  const tacticArticles = getTacticArticles().slice(0, 4);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 wrap-anywhere sm:px-6 sm:py-12">
@@ -64,28 +52,22 @@ export default function LearnPage() {
         {/* Quick Nav Anchor Pills */}
         <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6 text-xs">
           <a
-            href="#ladder"
-            className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
-          >
-            نردبان قدرت کلام
-          </a>
-          <a
             href="#paths"
             className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
             مسیرهای یادگیری
           </a>
           <a
-            href="#topics"
+            href="#ladder"
             className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
-            موضوعات و سرفصل‌ها
+            نردبان قدرت کلام
           </a>
           <a
-            href="#tactics"
+            href="#library"
             className="rounded-full border border-border bg-background px-3.5 py-1.5 font-medium text-muted transition-colors hover:border-accent hover:text-foreground"
           >
-            تاکتیک‌ها و مغالطه‌ها
+            کتابخانه
           </a>
           <a
             href="#practice"
@@ -96,46 +78,32 @@ export default function LearnPage() {
         </div>
       </div>
 
-      {/* 0. Learning Ladder */}
+      {/* 0. Ladder pointer — placement lives on /ladder */}
       <section id="ladder" className="mb-16 scroll-mt-20 sm:mb-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-accent/30 bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
           <div>
-            <div className="flex items-center gap-2 text-accent">
-              <Layers className="h-5 w-5" />
-              <p className="eyebrow">نقشهٔ رشد</p>
-            </div>
-            <h2 className="text-2xl font-extrabold">کجای مسیر ایستاده‌ای؟</h2>
+            <p className="eyebrow mb-1">نقشهٔ رشد</p>
+            <h2 className="text-xl font-extrabold">جای خودت را نمی‌دانی؟</h2>
+            <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+              با آزمون کوتاه نردبان قدرت کلام — پایه، نبرد، قدرت کلام — نقطهٔ
+              شروع خودت را پیدا کن، بعد برای مسیر برگرد اینجا.
+            </p>
           </div>
-          <Link
-            href="/ladder"
-            className="shrink-0 text-sm font-semibold text-accent hover:underline"
-          >
-            نردبان قدرت کلام و آزمون ←
-          </Link>
-        </div>
-        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
-          آموزش‌های ما سه سطح دارند که روی هم ساخته می‌شوند — پایه، نبرد و قدرت
-          کلام. اگر نمی‌دانی از کجا شروع کنی، با آزمون کوتاه نردبان، نقطهٔ شروع
-          خودت را پیدا کن.
-        </p>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {LADDER.map((rung) => (
+          <div className="flex shrink-0 flex-wrap items-center gap-3">
             <Link
-              key={rung.id}
-              href={`/ladder#rung-${rung.id}`}
-              className="group flex flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow"
+              href="/ladder#assessment"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-colors hover:bg-accent/90"
             >
-              <span className="mb-3 inline-flex w-fit items-center justify-center rounded-full bg-accent-light px-2.5 py-1 text-[11px] font-bold text-accent">
-                {rung.step}
-              </span>
-              <h3 className="mb-1 font-bold group-hover:text-accent">
-                {rung.title}
-              </h3>
-              <p className="text-xs leading-relaxed text-muted">
-                {rung.subtitle}
-              </p>
+              رفتن به آزمون
+              <ArrowLeft className="h-4 w-4" />
             </Link>
-          ))}
+            <Link
+              href="/ladder"
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-medium transition-colors hover:border-accent/50"
+            >
+              دیدن هر سه سطح
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -160,106 +128,58 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* 2. Topics / Categories Overview */}
-      <section id="topics" className="mb-16 sm:mb-20">
-        <div className="mb-6">
-          <div className="flex items-center gap-2 text-gold">
-            <BookOpen className="h-5 w-5" />
-            <p className="eyebrow">دسته‌بندی‌ها</p>
-          </div>
-          <h2 className="text-2xl font-extrabold">سرفصل‌های آموزشی</h2>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {topics.map((topic) => (
-            <Link
-              key={topic.slug}
-              href={`/topics/${topic.slug}`}
-              className="group flex flex-col justify-between rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:border-accent/50 hover:shadow-md"
-            >
-              <div>
-                <h3 className="mb-2 font-bold text-foreground group-hover:text-accent">
-                  {topic.title}
-                </h3>
-                <p className="text-xs leading-relaxed text-muted">
-                  {topic.description}
-                </p>
-              </div>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-accent">
-                مشاهده مقالات این سرفصل
-                <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Tactics & Fallacies */}
-      <section id="tactics" className="mb-16 sm:mb-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-accent">
-              <ShieldAlert className="h-5 w-5" />
-              <p className="eyebrow">دفاع فکری</p>
+      {/* 2. Library pointer — articles, topics and tactics live in /articles */}
+      <section id="library" className="mb-16 scroll-mt-20 sm:mb-20">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="flex items-start gap-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-light text-accent">
+              <BookOpen className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="eyebrow mb-1">کتابخانه</p>
+              <h2 className="text-xl font-extrabold">
+                دنبال مقاله یا موضوع خاصی هستی؟
+              </h2>
+              <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+                همهٔ مقاله‌ها، تاکتیک‌ها و سرفصل‌ها با جست‌وجو و فیلتر موضوعی در
+                کتابخانه‌اند — بیش از ۵۰ مطلب.
+              </p>
             </div>
-            <h2 className="text-2xl font-extrabold">تاکتیک‌های انحرافی و مغالطه‌ها</h2>
           </div>
           <Link
-            href="/topics/tactics"
-            className="shrink-0 text-sm font-semibold text-accent hover:underline"
+            href="/articles"
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-accent/40 bg-background px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
           >
-            همه تاکتیک‌ها ←
+            <Search className="h-4 w-4 text-accent" />
+            ورود به کتابخانه
           </Link>
-        </div>
-        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
-          تکنیک‌هایی که بحث را ناخودآگاه یا تعمدی از شواهد دور می‌کنند، و روش‌های آرام و بدون تنش برای خنثی کردن آن‌ها.
-        </p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {tacticArticles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
         </div>
       </section>
 
-      {/* 4. Practical Exercises */}
-      <section id="practice" className="mb-16 sm:mb-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-gold">
+      {/* 3. Practice pointer — exercises live on /practice */}
+      <section id="practice" className="mb-16 scroll-mt-20 sm:mb-20">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="flex items-start gap-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-light text-accent">
               <Dumbbell className="h-5 w-5" />
-              <p className="eyebrow">کارگاه عملی</p>
+            </span>
+            <div>
+              <p className="eyebrow mb-1">کارگاه عملی</p>
+              <h2 className="text-xl font-extrabold">خواندن فقط شروع ماجراست</h2>
+              <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+                مهارت بحث فقط با خواندن به دست نمی‌آید — کمی نوشتن، کمی
+                بازنگری.
+              </p>
             </div>
-            <h2 className="text-2xl font-extrabold">تمرین‌ها و آزمایش‌های فردی</h2>
           </div>
           <Link
             href="/practice"
-            className="shrink-0 text-sm font-semibold text-gold hover:underline"
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-colors hover:bg-accent/90"
           >
-            همه تمرین‌ها ←
+            دیدن تمرین‌ها
+            <ArrowLeft className="h-4 w-4" />
           </Link>
         </div>
-        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
-          مهارت بحث فقط با خواندن به دست نمی‌آید. این تمرین‌ها عضلهٔ تفکر نقاد و صداقت فکری شما را تقویت می‌کنند.
-        </p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {practiceArticles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Direct Link to Search Library */}
-      <section className="rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
-        <h3 className="mb-2 text-xl font-bold">به دنبال موضوع یا مقالهٔ خاصی هستید؟</h3>
-        <p className="mx-auto mb-6 max-w-lg text-sm text-muted">
-          می‌توانید در میان بیش از ۵۰ مقاله، تمرین و تاکتیک با استفاده از فیلترهای موضوعی و سطح دشواری جستجو کنید.
-        </p>
-        <Link
-          href="/articles"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent/90"
-        >
-          <Search className="h-4 w-4" />
-          ورود به موتور جستجوی مقالات
-        </Link>
       </section>
     </div>
   );

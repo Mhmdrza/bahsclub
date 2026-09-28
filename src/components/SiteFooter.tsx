@@ -1,17 +1,24 @@
 import Link from "next/link";
-import { getPublishedPages, getPublishedTopics, getSiteConfig } from "@/lib/content";
+import { getSiteConfig } from "@/lib/content";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const CLUB_ONLY_PAGES = new Set(["rules"]);
+const START_LINKS = [
+  { label: "نردبان قدرت کلام", href: "/ladder" },
+  { label: "مسیر سواد قضاوت", href: "/learn/judgment-literacy" },
+  { label: "کتابخانه", href: "/articles" },
+  { label: "تمرین‌ها", href: "/practice" },
+];
+
+const CLUB_LINKS = [
+  { label: "مأموریت", href: "/mission" },
+  { label: "درباره", href: "/about" },
+  { label: "سؤالات متداول", href: "/faq" },
+  { label: "واژه‌نامه", href: "/glossary" },
+  { label: "ورود به باشگاه", href: "/club" },
+];
 
 export function SiteFooter() {
   const config = getSiteConfig();
-  const navHrefs = new Set(config.nav.map((item) => item.href));
-  const pages = getPublishedPages().filter(
-    (page) =>
-      !CLUB_ONLY_PAGES.has(page.slug) && !navHrefs.has(`/${page.slug}`)
-  );
-  const topics = getPublishedTopics();
 
   return (
     <footer className="border-t border-border bg-surface">
@@ -21,9 +28,9 @@ export function SiteFooter() {
           <p className="text-sm text-muted">{config.tagline}</p>
         </div>
         <div className="flex flex-wrap items-start gap-x-10 gap-y-4">
-          <nav aria-label="ناوبری پاورقی">
+          <nav aria-label="شروع و آموزش">
             <ul className="flex flex-wrap gap-4 text-sm">
-              {config.nav.map((item) => (
+              {START_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-muted hover:text-accent">
                     {item.label}
@@ -32,29 +39,12 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
-          <nav aria-label="موضوع‌ها">
+          <nav aria-label="بحث‌کلاب">
             <ul className="flex flex-wrap gap-4 text-sm">
-              {topics.map((topic) => (
-                <li key={topic.slug}>
-                  <Link
-                    href={`/topics/${topic.slug}`}
-                    className="text-muted hover:text-accent"
-                  >
-                    {topic.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <nav aria-label="صفحه‌های سایت">
-            <ul className="flex flex-wrap gap-4 text-sm">
-              {pages.map((page) => (
-                <li key={page.slug}>
-                  <Link
-                    href={`/${page.slug}`}
-                    className="text-muted hover:text-accent"
-                  >
-                    {page.title}
+              {CLUB_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-muted hover:text-accent">
+                    {item.label}
                   </Link>
                 </li>
               ))}

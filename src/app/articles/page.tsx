@@ -32,7 +32,14 @@ export default function ArticlesPage() {
       <p className="mb-6 text-muted">
         جستجو و فیلتر در میان مقالات، تاکتیک‌ها و تمرین‌ها.
       </p>
-      <nav aria-label="مرور موضوعی" className="mb-8 space-y-3 text-sm">
+      <Suspense fallback={<div className="py-12 text-center text-muted">در حال بارگذاری...</div>}>
+        <SearchAndFilters
+          items={items}
+          facets={facets}
+          topicLabels={topicLabels}
+        />
+      </Suspense>
+      <nav aria-label="مرور موضوعی" className="m-8 space-y-3 text-sm">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-muted">موضوع‌ها:</span>
           {topics.map((topic) => (
@@ -70,13 +77,6 @@ export default function ArticlesPage() {
           ))}
         </div>
       </nav>
-      <Suspense fallback={<div className="py-12 text-center text-muted">در حال بارگذاری...</div>}>
-        <SearchAndFilters
-          items={items}
-          facets={facets}
-          topicLabels={topicLabels}
-        />
-      </Suspense>
     </div>
   );
 }

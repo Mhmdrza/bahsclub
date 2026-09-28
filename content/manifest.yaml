@@ -1,8 +1,8 @@
-generatedAt: '2026-09-28T03:10:47.929Z'
+generatedAt: '2026-09-28T03:31:03.133Z'
 counts:
   articles: 61
   lessons: 4
-  pages: 7
+  pages: 6
   topics: 5
   families: 9
 articles:
@@ -2323,13 +2323,6 @@ pages:
       باشگاه.
     status: published
     order: 7
-  - slug: getting-started
-    title: از کجا شروع کنم؟
-    description: >-
-      مسیر پیشنهادی برای ورود به بحث‌کلاب در سه گام: نقطهٔ شروع خودت را پیدا کن، مسیر سواد قضاوت را بگذران، و با
-      تمرین‌های کوتاه مهارت را به عمل تبدیل کن.
-    status: published
-    order: 6
   - slug: glossary
     title: واژه‌نامه
     description: >-
@@ -2731,15 +2724,11 @@ siteConfig:
       label: یک تمرین کوتاه
       articleSlug: confidence-and-uncertainty
   nav:
-    - label: شروع
-      href: /getting-started
-    - label: آموزش
-      href: /learn
-    - label: مقالات
-      href: /articles
-    - label: سرفصل‌ها
-      href: /topics
     - label: نردبان قدرت کلام
       href: /ladder
+    - label: آموزش
+      href: /learn
+    - label: کتابخانه
+      href: /articles
     - label: مأموریت
       href: /mission
