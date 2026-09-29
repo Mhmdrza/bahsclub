@@ -24,19 +24,19 @@ const LADDER_META = [
     id: "paye",
     icon: Shield,
     warrior: "گارد و ایستادن",
-    line: "مثل نفس و قدم رزمی‌کار؛ بدون این پایه هر تکنیکی فرو می‌ریزد.",
+    line: "بدون این پایه، بحث از ثانیهٔ اول فرومی‌ریزد: خوب نشنوی، داری با خودت حرف می‌زنی.",
   },
   {
     id: "nabard",
     icon: Swords,
     warrior: "دفاع و ضدحمله",
-    line: "مثل دفاع در نبرد؛ وقتی بحث داغ شد گم نشوی و به مسیر برگردی.",
+    line: "سر میز مناظره، مغالطه و تاکتیک حریف را در هوا بگیر، بحث را به مسیر برگردان و جا نزن.",
   },
   {
     id: "ghodrat-kalam",
     icon: Crown,
     warrior: "ذهن و میدان",
-    line: "مثل استراتژی جنگجو؛ کسی که معنا را تعریف می‌کند میدان را می‌برد.",
+    line: "کسی که زمین بازی و چارچوب معنا را تعریف می‌کند، نتیجهٔ مناظره را رقم می‌زند.",
   },
 ];
 
@@ -44,21 +44,21 @@ const STEPS = [
   {
     n: "۱",
     title: "بفهم کجای مسیری",
-    line: "با آزمون کوتاه نردبان، نقطهٔ شروع خودت را پیدا کن.",
+    line: "آزمون نردبان می‌گوید باید از گارد پایه شروع کنی یا آماده‌ای سر میز مناظره بنشینی.",
     href: "/ladder#assessment",
     cta: "رفتن به آزمون",
   },
   {
     n: "۲",
     title: "مسیر «سواد قضاوت» را بگذران",
-    line: "از شناختن ادعا تا ساختار استدلال — قدم‌به‌قدم و بدون پیش‌نیاز.",
+    line: "پایهٔ مبارزهٔ کلامی: تفکیک ادعا از تفسیر و ساختن استدلال محکم — بدون پیش‌نیاز.",
     href: "/learn/judgment-literacy",
     cta: "شروع مسیر",
   },
   {
     n: "۳",
-    title: "با یک تمرین ادامه بده",
-    line: "خوانده‌ها را به عمل تبدیل کن: کمی نوشتن، کمی بازنگری.",
+    title: "مهارتت را صیقل بده",
+    line: "آموزش‌ها را به عمل تبدیل کن: تمرین‌های کوتاه برای آبدیده کردن استدلال.",
     href: "/practice",
     cta: "دیدن تمرین‌ها",
   },
@@ -71,9 +71,9 @@ const QUICK_TASTE = [
 ];
 
 const WHY = [
-  "از پایه شروع می‌کنیم، نه از تکنیک",
-  "هدف فهمیدن است، نه بردن",
-  "بدون پیش‌نیاز و تمرین‌محور",
+  "ساختار داریم، نه هرج‌ومرج — قوانین رینگ را امن نگه می‌دارند",
+  "هدف فهمیدن است، نه بردن — اما استدلال باید بایستد",
+  "باشگاه است، نه تماشاخانه — بدون تمرین، مهارت نمی‌آید",
 ];
 
 export default function HomePage() {
@@ -100,14 +100,14 @@ export default function HomePage() {
       <section className="mb-20 sm:mb-24">
         <div className="mb-8 text-center">
           <p className="eyebrow eyebrow-centered mb-2">
-            نقشهٔ رشد — مثل یک رزمی‌کار
+            سالن تمرین — سه پله
           </p>
           <h2 className="text-3xl font-extrabold">
             سه سطح: پایه، نبرد، قدرت کلام
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            اول گارد می‌گیری، بعد دفاع و ضدحمله را یاد می‌گیری، آخر میدان معنا را
-            تعریف می‌کنی. ببین کجای مسیری و قدم بعدی‌ات چیست.
+            پایه یعنی گارد گرفتن و شنیدن؛ مهارت‌های سطح ۲ و ۳ (نبرد و قدرت کلام)
+            سلاح‌های اصلی تو سر میز مناظره‌اند. ببین کجای مسیری و قدم بعدی‌ات چیست.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function HomePage() {
       <section id="start" className="mb-20 scroll-mt-24 sm:mb-24">
         <div className="mb-8 text-center">
           <p className="eyebrow eyebrow-centered mb-2">از کجا شروع کنی؟</p>
-          <h2 className="text-3xl font-extrabold">سه قدم تا اولین گفت‌وگوی بهتر</h2>
+          <h2 className="text-3xl font-extrabold">سه قدم تا اولین محکِ جدی</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
             لازم نیست همه‌چیز را بخوانی؛ همین سه قدم کافی است.
           </p>
@@ -228,7 +228,7 @@ export default function HomePage() {
         </h2>
         <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-muted">
           آزمون کوتاه نردبان می‌گوید از پایه شروع کنی، به نبرد بروی، یا وقتش
-          رسیده به قدرت کلام فکر کنی.
+          رسیده به قدرت کلام فکر کنی. اول تمرین، بعد رینگ.
         </p>
         <Link
           href="/ladder#assessment"
@@ -238,9 +238,9 @@ export default function HomePage() {
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <p className="mt-8 text-xs text-muted">
-          دوست داری ایده‌هایت را در گفت‌وگوی واقعی امتحان کنی؟{" "}
+          آماده‌ای ایده‌ات را در یک مناظرهٔ ساختارمند محک بزنی؟{" "}
           <Link href="/club" className="font-semibold text-accent hover:underline">
-            نگاهی به بحث‌کلاب بینداز
+            وارد رینگ باشگاه شو
           </Link>
           .
         </p>
