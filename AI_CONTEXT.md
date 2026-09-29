@@ -8,6 +8,13 @@
 Persian-language educational site about debate, logical fallacies, and argumentation.  
 Built with **Next.js 16** (`proxy.ts` not `middleware.ts`), **React 19**, **Tailwind CSS 4**.
 
+## Core Philosophy & Editorial Voice
+
+See `docs/EDITORIAL_VOICE.md` and `AGENTS.md` for the official doctrine:
+- **Metaphor:** Conversation as martial art (رزم).
+- **Ladder:** `پایه` (گارد) → `نبرد` (تکنیک تعارض) → `قدرت کلام` (ذهن و میدان معنا).
+- **Tone:** Calm intensity, sharp, defensive-first (shield not dagger), no weak self-help phrases.
+
 ## Content Model (file-based, in repo)
 
 | Type | Directory | Extension | Frontmatter | Count |

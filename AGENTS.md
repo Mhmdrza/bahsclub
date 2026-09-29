@@ -60,6 +60,24 @@ Items below are known gaps that need addressing as the app scales.
 
 <!-- END:architecture-roadmap -->
 
+<!-- BEGIN:editorial-voice -->
+
+## Editorial Voice & Philosophy: Talking Power (قدرت کلام)
+
+All content, articles (`content/articles/*.mdx`), lessons, and TL;DRs must follow the warrior doctrine in `docs/EDITORIAL_VOICE.md`.
+
+- **Framing:** BahsClub is Fight Club for conversation: talking instead of fighting, structured by rules, playing chess with logic against logic, and stress-testing ideas.
+- **The 3 Rungs & Debating Connection:**
+  1. `پایه` — گارد و ایستادن (listening, questions, clarity, breath)
+  2. `نبرد` — تکنیک نبرد در تعارض (fallacies, steelmanning under fire, defusing tactics) — *primary sparring & debate table weapons*
+  3. `قدرت کلام` — ذهن و میدان معنا (framing, narrative, Schopenhauer counters) — *board-level debate strategy & mastery*
+- **Tone:** Calm intensity, sharp rhythm, no preachiness, no fluff. Defensive weapon (shield, not dagger) — teach maneuvers so the reader isn't manipulated, never to bully others.
+- **Lexicon:** Prefer `قدرت کلام` / `ایستادن` / `گارد` / `دام انحراف` / `رینگ بحث` / `تست فشار ایده` over weak self-help phrases.
+
+Full reference: [`docs/EDITORIAL_VOICE.md`](./docs/EDITORIAL_VOICE.md).
+
+<!-- END:editorial-voice -->
+
 <!-- BEGIN:tldr-system -->
 
 ## TL;DR System (source of truth + renderers)
