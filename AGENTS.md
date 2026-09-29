@@ -67,6 +67,7 @@ Items below are known gaps that need addressing as the app scales.
 All content, articles (`content/articles/*.mdx`), lessons, and TL;DRs must follow the warrior doctrine in `docs/EDITORIAL_VOICE.md`.
 
 - **Framing:** BahsClub is Fight Club for conversation: talking instead of fighting, structured by rules, playing chess with logic against logic, and stress-testing ideas.
+- **Autonomy & No Consensus:** We respect complete intellectual autonomy. We do not aim to change anyone's opinion, nor force an agreement or consensus on anything. The win is clarity and resilience of argument.
 - **The 3 Rungs & Debating Connection:**
   1. `پایه` — گارد و ایستادن (listening, questions, clarity, breath)
   2. `نبرد` — تکنیک نبرد در تعارض (fallacies, steelmanning under fire, defusing tactics) — *primary sparring & debate table weapons*

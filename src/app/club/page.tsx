@@ -25,11 +25,11 @@ export default async function ClubHome() {
             <span>باشگاه گفت‌وگو</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            یک ایده برای گفت‌وگو بیاور
+            ایده‌ات را به رینگ مناظره بیاور
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
-            موضعت را با دلیل مطرح کن و از زاویه‌های دیگر بشنو. تو انتخاب می‌کنی
-            بنویسی، جواب بدهی یا اول تماشا کنی.
+            موضعت را با دلیل مطرح کن و در برابر استدلال‌ها محک بزن. اینجا نه قرار
+            است نظر کسی عوض شود و نه توافق اجباری داریم؛ فقط سنجش قدرت استدلال است.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -117,8 +117,9 @@ export default async function ClubHome() {
           <div className="border border-gold/30 bg-gold/5 rounded-xl p-4 text-xs space-y-2">
             <h4 className="font-bold text-gold">حال‌وهوای باشگاه</h4>
             <p className="text-muted leading-relaxed">
-              اینجا ادعا را بررسی می‌کنیم، نه شخص را. روشن و مستدل بنویس و به
-              نگاه‌های دیگر جا بده.
+              استقلال رأی محترم است. اینجا برای تغییر باور کسی یا توافق اجباری
+              جمع نمی‌شویم؛ ادعا را در ساختاری منصفانه نقد می‌کنیم و تاب‌آوری فکر را
+              می‌سنجیم.
             </p>
           </div>
           </div>
