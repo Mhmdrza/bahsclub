@@ -67,13 +67,16 @@ Items below are known gaps that need addressing as the app scales.
 All content, articles (`content/articles/*.mdx`), lessons, and TL;DRs must follow the warrior doctrine in `docs/EDITORIAL_VOICE.md`.
 
 - **Framing:** BahsClub is Fight Club for conversation: talking instead of fighting, structured by rules, playing chess with logic against logic, and stress-testing ideas.
+- **Two Distinct Spheres:** 
+  1. `تالار آموزش` (Study Hall / Ladder & Articles): learning theory, argument mechanics, cognitive defense, and fallacy recognition.
+  2. `باشگاه` (The Debate Club): the live arena where users put ideas through real stress tests under debate rules.
 - **Autonomy & No Consensus:** We respect complete intellectual autonomy. We do not aim to change anyone's opinion, nor force an agreement or consensus on anything. The win is clarity and resilience of argument.
 - **The 3 Rungs & Debating Connection:**
-  1. `پایه` — گارد و ایستادن (listening, questions, clarity, breath)
+  1. `پایه` — ایستادن و وضوح (listening, questions, clarity, breath)
   2. `نبرد` — تکنیک نبرد در تعارض (fallacies, steelmanning under fire, defusing tactics) — *primary sparring & debate table weapons*
   3. `قدرت کلام` — ذهن و میدان معنا (framing, narrative, Schopenhauer counters) — *board-level debate strategy & mastery*
-- **Tone:** Calm intensity, sharp rhythm, no preachiness, no fluff. Defensive weapon (shield, not dagger) — teach maneuvers so the reader isn't manipulated, never to bully others.
-- **Lexicon:** Prefer `قدرت کلام` / `ایستادن` / `گارد` / `دام انحراف` / `رینگ بحث` / `تست فشار ایده` over weak self-help phrases.
+- **Tone:** Calm intensity, sharp rhythm, no preachiness, no fluff. Constructive, open, and confident — teach maneuvers so the reader understands argument structure, never to encourage defensiveness or bullying.
+- **Lexicon:** Prefer `قدرت کلام` / `ایستادن و وضوح` / `دام انحراف` / `میز مناظره` / `تست فشار ایده` over weak self-help phrases or defensive framing. Avoid `گارد`.
 
 Full reference: [`docs/EDITORIAL_VOICE.md`](./docs/EDITORIAL_VOICE.md).
 
