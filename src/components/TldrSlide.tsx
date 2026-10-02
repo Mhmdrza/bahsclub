@@ -1,7 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Pause, Play, ChevronRight, ChevronLeft } from "lucide-react";
 import type { Tldr } from "@/lib/types";
+import { formatPersianNumber } from "@/lib/utils";
+
+/** Per-scene dwell time, keyed by the scene element id. */
+const SCENE_DURATIONS: Record<string, number> = { s1: 4.2, s2: 3.8, s3: 6, s4: 5 };
+
+/**
+ * A manual jump lands this far into the scene — past the crossfade and the
+ * entrance tweens — so the reader gets a settled page instead of a half-played
+ * animation. Never applied past the scene's own dwell time.
+ */
+const SEEK_INSET = 2.3;
+
+/** Every scene id the stage can hold, in play order. */
+const SCENE_IDS = ["s1", "s2", "s3", "s4"];
 
 interface TldrSlideProps {
   title: string;
@@ -12,15 +27,30 @@ interface TldrSlideProps {
   category: string;
 }
 
+/** Minimal surface of the gsap instance the control handlers need. */
+type GsapLike = { set(target: string, vars: Record<string, unknown>): unknown };
+
 export function TldrSlide({ title, description, keyIdea, tldr, readingTime, category }: TldrSlideProps) {
   const elRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const gsapRef = useRef<GsapLike | null>(null);
+  const startsRef = useRef<number[]>([]);
+  const idsRef = useRef<string[]>([]);
   const [animated, setAnimated] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const [sceneIndex, setSceneIndex] = useState(0);
+  const [sceneCount, setSceneCount] = useState(0);
   const line = tldr?.line ?? keyIdea ?? null;
   const points = tldr?.points ?? [];
   const takeaway = tldr?.takeaway ?? null;
   const hasContent = Boolean(line || points.length || takeaway);
 
   useEffect(() => {
+    tlRef.current = null;
+    gsapRef.current = null;
+    startsRef.current = [];
+    idsRef.current = [];
+
     const el = elRef.current;
     if (!el || !hasContent) return;
     if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
@@ -29,9 +59,13 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
 
     let tl: gsap.core.Timeline | null = null;
     let resizeHandler: (() => void) | null = null;
+    let cancelled = false;
 
     import("gsap").then(({ default: gsap }) => {
-      if (!elRef.current) return;
+      // The import resolves after cleanup has already run (StrictMode remounts,
+      // or a fast navigation). Without this the orphan timeline keeps autoplaying
+      // over the live one and pause appears to do nothing.
+      if (cancelled || !elRef.current) return;
 
       const stage = el.querySelector(".tldr-stage") as HTMLElement;
       function fit() {
@@ -46,7 +80,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       stage.style.opacity = "1";
 
       const s = (id: string) => el.querySelector("#" + id) as HTMLElement | null;
-      const ids = ["s1", "s2", "s3", "s4"].filter((id) => s(id));
+      const ids = SCENE_IDS.filter((id) => s(id));
       const scenes = ids.map((id) => "#" + id);
 
       tl = gsap.timeline({ paused: true, repeat: -1 });
@@ -56,11 +90,12 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       tl.fromTo(s("glowA")!, { opacity: 0.22 }, { opacity: 0.35, duration: 3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
       tl.fromTo(s("glowB")!, { opacity: 0.15 }, { opacity: 0.25, duration: 3.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.5);
 
+      const starts: number[] = [];
       let t = 0;
-      const durations: Record<string, number> = { s1: 4.2, s2: 3.8, s3: 6, s4: 5 };
       scenes.forEach((sel, i) => {
         const start = t;
         const enter = start + 0.15;
+        starts.push(start);
         if (i > 0) {
           tl!.set(sel, { display: "flex", visibility: "visible", opacity: 0 }, start);
           tl!.to(sel, { opacity: 1, duration: 0.25, ease: "power2.out" }, start + 0.05);
@@ -71,7 +106,7 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
         tl!.fromTo(`#${ids[i]}-title`, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, enter + 0.35);
         const bodySel = `#${ids[i]}-list li, #${ids[i]}-body, #${ids[i]}-meta, #${ids[i]}-cta`;
         tl!.fromTo(bodySel, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: "power3.out" }, enter + 0.9);
-        const end = start + (durations[ids[i]] ?? 5);
+        const end = start + (SCENE_DURATIONS[ids[i]] ?? 5);
         if (i < scenes.length - 1) {
           tl!.to(sel, { opacity: 0, duration: 0.3, ease: "power2.in" }, end - 0.3);
           tl!.set(sel, { display: "none" }, end);
@@ -80,15 +115,105 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
       });
       tl.to({ dummy: 0 }, { dummy: 1, duration: 4, ease: "none" }, t);
 
+      tlRef.current = tl;
+      gsapRef.current = gsap;
+      startsRef.current = starts;
+      idsRef.current = ids;
+
+      setSceneCount(scenes.length);
+      setSceneIndex(0);
       setAnimated(true);
+      setPlaying(true);
       tl.play();
     });
 
     return () => {
+      cancelled = true;
       if (tl) tl.kill();
+      tlRef.current = null;
+      gsapRef.current = null;
       if (resizeHandler) window.removeEventListener("resize", resizeHandler);
     };
   }, [hasContent, line, points.length, takeaway]);
+
+  // The timeline runs on its own clock while playing, so mirror it to keep the
+  // dots, the counter and the button states in sync.
+  useEffect(() => {
+    if (!animated || !playing) return;
+    let raf = 0;
+    const tick = () => {
+      const index = currentSceneIndex();
+      setSceneIndex((current) => (current === index ? current : index));
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [animated, playing]);
+
+  /** Which scene the playhead currently sits in. */
+  function currentSceneIndex(): number {
+    const tl = tlRef.current;
+    if (!tl) return 0;
+    const time = tl.time();
+    const starts = startsRef.current;
+    let index = 0;
+    for (let i = 0; i < starts.length; i++) {
+      if (time >= starts[i]) index = i;
+    }
+    return index;
+  }
+
+  /** The first moment inside `index` where its entrance animation has finished. */
+  function settledTime(index: number): number | null {
+    const tl = tlRef.current;
+    const starts = startsRef.current;
+    if (!tl || starts.length === 0) return null;
+    const start = starts[index];
+    const end = index + 1 < starts.length ? starts[index + 1] : tl.duration();
+    return Math.min(start + SEEK_INSET, Math.max(start, end - 0.4));
+  }
+
+  /**
+   * Pause and jump the playhead. Rewinding to 0 first makes GSAP re-apply every
+   * scene `set` on the way forward; jumping straight to a time behind the
+   * playhead would leave scenes stuck mid-state (s1 stays hidden when seeking
+   * back from the last scene).
+   */
+  function renderAt(time: number) {
+    const tl = tlRef.current;
+    if (!tl) return;
+    tl.pause();
+    tl.time(0, true);
+    tl.time(time, true);
+    // A backwards jump can leave a scene parked at display:flex with its
+    // contents still at opacity 0. Pin every scene that is not the one being
+    // shown to fully hidden so the paused frame is always clean.
+    const ids = idsRef.current;
+    const shown = ids[currentSceneIndex()];
+    for (const id of ids) {
+      if (id !== shown) gsapRef.current?.set("#" + id, { display: "none", visibility: "hidden", opacity: 0 });
+    }
+  }
+
+  function seekTo(index: number) {
+    const starts = startsRef.current;
+    if (starts.length === 0) return;
+    const i = ((index % starts.length) + starts.length) % starts.length;
+    const target = settledTime(i);
+    if (target === null) return;
+    renderAt(target);
+    setSceneIndex(i);
+    setPlaying(false);
+  }
+
+  function togglePlayback() {
+    const tl = tlRef.current;
+    if (!tl) return;
+    // Plain pause/play — the frame the reader sees is simply held in place.
+    if (playing) tl.pause();
+    else tl.play();
+    setPlaying(!playing);
+  }
 
   return (
     <section aria-label="خلاصهٔ فوری" className="mb-10 overflow-hidden rounded-2xl border border-border bg-background">
@@ -136,9 +261,40 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
           .tldr-cta-box { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; max-width: 1400px; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(96, 165, 250, 0.3); padding: 28px 36px; border-radius: 20px; }
           .tldr-cta-badge { font-size: 28px; font-weight: 700; background: #2563eb; color: #ffffff; padding: 12px 28px; border-radius: 12px; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4); }
           .tldr-static { padding: 28px 32px; }
+          .tldr-controls {
+            position: absolute; inset-inline: 0; bottom: 0; z-index: 3;
+            display: flex; align-items: center; gap: 18px; padding: 14px 20px;
+            background: linear-gradient(to top, rgba(3, 7, 18, 0.92) 0%, rgba(3, 7, 18, 0.72) 60%, rgba(3, 7, 18, 0) 100%);
+          }
+          .tldr-btn {
+            display: grid; place-items: center; width: 44px; height: 44px; flex: none;
+            border-radius: 9999px; color: #e2e8f0; cursor: pointer;
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+          }
+          .tldr-btn:hover { background: rgba(255, 255, 255, 0.16); color: #ffffff; border-color: rgba(96, 165, 250, 0.5); }
+          .tldr-btn:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+          .tldr-btn--play {
+            width: 52px; height: 52px; color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #38bdf8); border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+          }
+          .tldr-btn--play:hover { background: linear-gradient(135deg, #1d4ed8, #0ea5e9); border-color: rgba(255, 255, 255, 0.4); }
+          .tldr-dots { display: flex; align-items: center; gap: 8px; }
+          .tldr-dot {
+            position: relative; width: 9px; height: 9px; flex: none; padding: 0; cursor: pointer; border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.28); border: none;
+            transition: width 0.2s ease, background-color 0.2s ease;
+          }
+          .tldr-dot::before { content: ''; position: absolute; inset: -12px -7px; }
+          .tldr-dot:hover { background: rgba(255, 255, 255, 0.6); }
+          .tldr-dot:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+          .tldr-dot[aria-current="true"] { width: 26px; background: linear-gradient(90deg, #60a5fa, #38bdf8); }
+          .tldr-count { font-size: 13px; font-weight: 600; color: #cbd5e1; font-variant-numeric: tabular-nums; }
           @media (prefers-reduced-motion: reduce) {
             .tldr-frame { display: none; }
             .tldr-static { position: static !important; width: auto !important; height: auto !important; clip: auto !important; overflow: visible !important; white-space: normal !important; }
+            .tldr-controls { display: none; }
           }
         `}</style>
 
@@ -186,6 +342,42 @@ export function TldrSlide({ title, description, keyIdea, tldr, readingTime, cate
             </div>
           </div>
         </div>
+
+        {animated && (
+          <div className="tldr-controls" role="group" aria-label="کنترل پخش خلاصهٔ فوری">
+            <span className="tldr-count">
+              {formatPersianNumber(sceneIndex + 1)} از {formatPersianNumber(Math.max(sceneCount, 1))}
+            </span>
+            <span className="flex-1" />
+            <div className="tldr-dots">
+              {Array.from({ length: sceneCount }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className="tldr-dot"
+                  aria-current={i === sceneIndex}
+                  aria-label={`رفتن به صحنهٔ ${i + 1}`}
+                  onClick={() => seekTo(i)}
+                />
+              ))}
+            </div>
+            <button type="button" className="tldr-btn" onClick={() => seekTo(sceneIndex - 1)} aria-label="صحنهٔ قبلی" title="صحنهٔ قبلی">
+              <ChevronRight className="h-5 w-5" aria-hidden />
+            </button>
+            <button
+              type="button"
+              className="tldr-btn tldr-btn--play"
+              onClick={togglePlayback}
+              aria-label={playing ? "توقف" : "پخش"}
+              title={playing ? "توقف" : "پخش"}
+            >
+              {playing ? <Pause className="h-5 w-5" aria-hidden /> : <Play className="h-5 w-5" aria-hidden />}
+            </button>
+            <button type="button" className="tldr-btn" onClick={() => seekTo(sceneIndex + 1)} aria-label="صحنهٔ بعدی" title="صحنهٔ بعدی">
+              <ChevronLeft className="h-5 w-5" aria-hidden />
+            </button>
+          </div>
+        )}
 
         <div className={animated ? "tldr-static sr-only" : "tldr-static"}>
           <h2 className="mb-4 text-xl font-bold">خلاصهٔ فوری</h2>
