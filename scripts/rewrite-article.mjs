@@ -184,6 +184,7 @@ function livePick({ title, items, format, initialSel = 0, allowCustom = false })
       done = true;
       stdin.removeListener("keypress", onKey);
       try { stdin.setRawMode(false); } catch { /* not a TTY */ }
+      try { stdin.pause(); } catch { /* ignore */ }
       stdout.write("\x1B[?25h");
       resolve(value);
     };
@@ -381,7 +382,7 @@ Usage:
       article = picked.value;
     } else {
       article = await promptArticle(articles, getTake());
-      if (!article) { console.log("\nAborted."); process.exitCode = 130; return; }
+      if (!article) { console.log("\nAborted."); if (rl) { rl.close(); rl = null; } try { stdin.pause(); } catch { /* ignore */ } process.exitCode = 130; return; }
     }
   }
 
@@ -410,7 +411,7 @@ Usage:
       model = picked.custom ?? picked.value;
     } else {
       model = await promptModel(models, def, getTake());
-      if (!model) { console.log("\nAborted."); process.exitCode = 130; return; }
+      if (!model) { console.log("\nAborted."); if (rl) { rl.close(); rl = null; } try { stdin.pause(); } catch { /* ignore */ } process.exitCode = 130; return; }
     }
   }
   if (rl) { rl.close(); rl = null; }
@@ -425,7 +426,9 @@ Usage:
   if (args.dryRun) {
     console.log("(dry-run: not launching opencode)");
     console.log(`\nPROMPT: ${prompt}`);
-    return;
+    if (rl) { rl.close(); rl = null; }
+    try { stdin.pause(); } catch { /* ignore */ }
+    process.exit(0);
   }
 
   const res = spawnSync("opencode", ["run", "--agent", AGENT, "-m", model, prompt], {
@@ -442,6 +445,10 @@ Usage:
     process.exit(res.status ?? 1);
   }
   console.log(`\n✅ Done. Validate with: pnpm content:validate`);
+  if (rl) { try { rl.close(); } catch { /* ignore */ } rl = null; }
+  try { stdin.pause(); } catch { /* ignore */ }
+  try { stdin.setRawMode(false); } catch { /* not a TTY */ }
+  process.exit(0);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

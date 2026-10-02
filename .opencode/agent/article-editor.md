@@ -32,11 +32,9 @@ same meaning, same teaching value.
 
 ## MUST preserve exactly
 
-- Every frontmatter field and its value (title, slug, description, status,
+- Every frontmatter field and its value (slug, status,
   category, level, readingTime, order, tags, topics, type, family,
-  publishedAt, updatedAt, related, featuredOnHome, exercise, ...). Do not
-  rename, reorder or add keys. Values may be reworded ONLY if the value is
-  long Persian prose (`description`), and then only lightly.
+  publishedAt, updatedAt, related, featuredOnHome, exercise, ...) except title and description. Do not rename, reorder or add keys.
 - The H1 line and every `##` / `###` heading — same order, same wording.
 - Article provenance fields: if frontmatter has `lastEditedBy`, set it to your own
   model id (`9router/gemini/gemini-3.7-flash`) and set `updatedAt` to today's
