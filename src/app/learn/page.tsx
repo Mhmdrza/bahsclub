@@ -85,7 +85,7 @@ export default function LearnPage() {
             <p className="eyebrow mb-1">نقشهٔ رشد</p>
             <h2 className="text-xl font-extrabold">جای خودت را نمی‌دانی؟</h2>
             <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
-              با آزمون کوتاه نردبان قدرت کلام — پایه، نبرد، قدرت کلام — نقطهٔ
+              با آزمون کوتاه نردبان قدرت کلام — پایه، تیزبینی، قدرت کلام — نقطهٔ
               شروع خودت را پیدا کن، بعد برای مسیر برگرد اینجا.
             </p>
           </div>

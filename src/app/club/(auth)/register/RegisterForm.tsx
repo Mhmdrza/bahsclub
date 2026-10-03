@@ -104,9 +104,9 @@ export default function RegisterForm({
             <Users size={13} />
             <span>عضویت آزاد</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه اندیشه</h1>
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه</h1>
           <p className="text-xs text-muted mb-6 leading-relaxed">
-            عضویت در باشگاه اندیشه آزاد است. حساب بسازید و در گفتگوهای ساختاریافته شرکت کنید
+            عضویت در باشگاه آزاد است. حساب بسازید و در گفتگوهای ساختاریافته شرکت کنید
           </p>
 
           <form action={regAction} className="flex flex-col gap-4">
@@ -161,9 +161,9 @@ export default function RegisterForm({
           <Lock size={13} />
           <span>دسترسی اختصاصی</span>
         </div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه اندیشه</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
-          باشگاه اندیشه یک انجمن دربسته برای گفتگوهای ساختاریافته است. در حال حاضر عضویت تنها با دعوت‌نامه اعضا امکان‌پذیر است
+          باشگاه یک انجمن دربسته برای گفتگوهای ساختاریافته است. در حال حاضر عضویت تنها با دعوت‌نامه اعضا امکان‌پذیر است
         </p>
 
         <div className="bg-background border border-border rounded-xl p-4 mb-6">

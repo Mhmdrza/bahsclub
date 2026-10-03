@@ -31,10 +31,13 @@ export function ClubHeaderClient({
           <div className="h-4 w-px bg-border hidden sm:block" />
 
           <Link href="/club" className="font-bold text-base sm:text-lg tracking-tight hover:text-accent transition-colors">
-            باشگاه اندیشه
+            باشگاه
           </Link>
 
           <nav className="hidden md:flex items-center gap-4 text-sm text-muted">
+            <Link href="/club#challenges" className="hover:text-foreground transition-colors">
+              چالش‌ها
+            </Link>
             <Link href="/club/debates" className="hover:text-foreground transition-colors">
               مباحثه‌ها
             </Link>
@@ -61,7 +64,7 @@ export function ClubHeaderClient({
             className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg bg-accent text-accent-fg text-xs  font-semibold hover:opacity-90 transition-opacity shadow-xs whitespace-nowrap"
           >
             <Plus size={15} />
-            <span className="hidden sm:inline">ثبت بحث</span>
+            <span className="hidden sm:inline">دعوت به چالش</span>
             <span className="sm:hidden">چالش</span>
           </Link>
 

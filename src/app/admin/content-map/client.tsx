@@ -385,7 +385,7 @@ export function ContentMapClient({ manifest }: { manifest: Manifest }) {
               </span>
             </h2>
             <p className="mb-3 text-xs text-muted">
-              این مقاله‌ها در هیچ مسیر یادگیری‌ای قرار ندارند. شاید نیاز به یک
+              این مقاله‌ها در هیچ مسیر آموزشی‌ای قرار ندارند. شاید نیاز به یک
               درس جدید باشد.
             </p>
             <div className="flex flex-wrap gap-2">

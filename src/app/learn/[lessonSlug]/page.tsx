@@ -36,7 +36,7 @@ export default async function LessonPage({ params }: Props) {
 
   const breadcrumbs = [
     { label: "خانه", href: "/" },
-    { label: "مسیر یادگیری", href: "/learn" },
+    { label: "تالار آموزش", href: "/learn" },
     { label: lesson.title },
   ];
 

@@ -9,11 +9,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
-import {
-  getArticleBySlug,
-  getLessonBySlug,
-  getSiteConfig,
-} from "@/lib/content";
+import { getArticleBySlug, getSiteConfig } from "@/lib/content";
 import { LADDER } from "@/lib/ladder";
 import { pageMetadata } from "@/lib/seo";
 
@@ -27,19 +23,19 @@ const LADDER_META = [
     id: "paye",
     icon: Shield,
     warrior: "ایستادن و وضوح (پایه)",
-    line: "شنیدن فعال و شفاف‌سازی ادعا؛ بدون این پایهٔ استوار، با اولین ضربه مغالطه تعادلت را از دست می‌دهی.",
+    line: "شنیدن فعال، پرسش دقیق و شفاف‌سازی ادعا؛ بدون این پایه، سخن به هم می‌ریزد و سوءتفاهم‌ها تکرار می‌شوند.",
   },
   {
     id: "nabard",
     icon: Swords,
-    warrior: "تکنیک در تعارض (نبرد)",
-    line: "شناخت مغالطه‌ها و بدل زدن زیر فشار؛ همان سلاحی که سر میز مناظره مانع انحراف بحث می‌شود.",
+    warrior: "تشخیص مغالطه و تاکتیک (تیزبینی)",
+    line: "شناخت مغالطه‌ها و تاکتیک‌های انحرافی زیر فشار؛ تا کمتر در دام فریب، انحراف و فشار روانی بیفتی.",
   },
   {
     id: "ghodrat-kalam",
     icon: Crown,
-    warrior: "ذهن و میدان معنا (تسلط)",
-    line: "مدیریت صفحهٔ شطرنج کلام و افشای چارچوب‌بندی‌ها؛ کسی که میدان را می‌شناسد، مرزهای حقیقت را ترسیم می‌کند.",
+    warrior: "ذهن و میدان معنا (قدرت کلام)",
+    line: "دیدن چارچوب‌بندی و روایت، و اینکه معنا چگونه ساخته می‌شود؛ تا حقیقت را از پشت قالب‌ها ببینی.",
   },
 ];
 
@@ -55,16 +51,16 @@ const STEPS = [
   {
     n: "۲",
     icon: BookOpen,
-    title: "فراگیری تئوری «سواد قضاوت»",
-    line: "مطالعهٔ مبانی: تفکیک ادعا از تفسیر، ساختار استدلال و نقد منصفانه در تالار آموزش — بدون پیش‌نیاز.",
+    title: "یادگیری مبانی سواد قضاوت",
+    line: "اصول بنیادین را مرور کن: تفکیک ادعا از تفسیر، شناخت ساختار استدلال و بررسی منصفانه در تالار آموزش — بدون پیش‌نیاز.",
     href: "/learn/judgment-literacy",
-    cta: "شروع دوره",
+    cta: "شروع دورهٔ سواد قضاوت",
   },
   {
     n: "۳",
     icon: Flame,
-    title: "ورود به باشگاه مناظره",
-    line: "ایده‌ات را به چالش بگذار یا در مناظره‌های در جریان شرکت کن؛ منطق در برابر منطق، بدون تحمیل عقیده.",
+    title: "ورود به باشگاه",
+    line: "ادعایت را برای بررسی به اشتراک بگذار یا در گفت‌وگوهای جاری همراه شو؛ اندیشه‌ها روی میز سنجیده می‌شوند، بدون اجبار به توافق.",
     href: "/club",
     cta: "ورود به باشگاه",
   },
@@ -77,10 +73,10 @@ const QUICK_TASTE = [
 ];
 
 const WHY = [
-  "دو بال یک پرواز: تالار آموزش برای یادگیری تئوری‌ها و فنون، باشگاه برای مناظره و آزمودن عملی استدلال.",
-  "قوانین روشن: چارچوب باشگاه مانع از تبدیل مناظره به جدل و هیاهو می‌شود.",
-  "استقلال کامل اندیشه: قرار نیست کسی نظرش را عوض کند یا به توافق اجباری برسیم؛ ارزش در وضوح استدلال است.",
-  "محک واقعی باورها: در باشگاه باورها زیر بار نقد سنجیده می‌شوند تا استحکام منطقی‌شان معلوم شود.",
+  "فروتنی در نقطهٔ آغاز: پذیرش این‌که ممکن است اشتباه کنیم؛ نقد بر ادعا و شواهد وارد می‌شود، نه بر هویت و انگیزهٔ گوینده.",
+  "آزادی و استقلال اندیشه: هیچ اجباری برای تغییر باور وجود ندارد و توافق ساختگی هدف نیست؛ تغییر دیدگاه تنها به انتخاب خود فرد رخ می‌دهد.",
+  "دعوت به‌جای تقابل: دیگری را همکار خود در شناخت واقعیت می‌دانیم، نه مانعی در برابر خود؛ درهای گفت‌وگو همواره گشوده‌اند.",
+  "معیار یگانه برای سنجش: همان استانداردی را که برای ارزیابی نظر دیگران به کار می‌گیریم، برای باورهای خود نیز نگه می‌داریم.",
 ];
 
 export default function HomePage() {
@@ -92,29 +88,25 @@ export default function HomePage() {
   const taste = QUICK_TASTE.map((slug) => getArticleBySlug(slug)).filter(
     (a) => a !== undefined
   );
-  const flagship = getLessonBySlug("judgment-literacy");
-  const steps = STEPS.map((s) =>
-    s.href === "/learn/judgment-literacy" && flagship
-      ? { ...s, title: `مسیر «${flagship.title}» را بگذران` }
-      : s
-  );
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       <HeroSection />
 
-      {/* 2. Three-level ladder: پایه / نبرد / قدرت کلام */}
+      {/* 2. Three-level ladder: پایه / تیزبینی / قدرت کلام */}
       <section className="mb-20 sm:mb-24">
         <div className="mb-8 text-center">
           <p className="eyebrow eyebrow-centered mb-2">
-            تالار آموزش — از تئوری تا تسلط
+            تالار آموزش — از پایه تا قدرت کلام
           </p>
           <h2 className="text-3xl font-extrabold">
-            سه‌گانهٔ مهارت: پایه، نبرد، قدرت کلام
+            سه پلهٔ مهارت: پایه، تیزبینی، قدرت کلام
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            پیش از نشستن سر میز مناظره، مهارت‌ها را در تالار آموزش صیقل می‌دهی:
-            در پایه ایستادن و شنیدن را یاد می‌گیری، در نبرد فنون مواجهه با مغالطه‌ها را می‌آموزی، و در قدرت کلام چارچوب استدلال را هدایت می‌کنی.
+            نردبان قدرت کلام یک تفنن گذرا نیست؛ ابزاری برای شفاف اندیشیدن و بیان
+            رساست که هزینه‌های روزمرهٔ سوءتفاهم را کم می‌کند. در پایه می‌آموزی
+            دقیق بشنوی و روشن بگویی، در تیزبینی مغالطه و تاکتیک را می‌بینی، و در
+            قدرت کلام چارچوب و میدان معنا را می‌شناسی.
           </p>
         </div>
 
@@ -154,14 +146,15 @@ export default function HomePage() {
       <section id="start" className="mb-20 scroll-mt-24 sm:mb-24">
         <div className="mb-8 text-center">
           <p className="eyebrow eyebrow-centered mb-2">پیوند تئوری و عمل</p>
-          <h2 className="text-3xl font-extrabold">از تالار آموزش تا باشگاه مناظره</h2>
+          <h2 className="text-3xl font-extrabold">از تالار آموزش تا باشگاه</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
-            آموزش و مناظره دو بخش جداناپذیرند؛ در تالار آموزش مفاهیم و فنون را فرا می‌گیری و در باشگاه سر میز مناظره استدلال‌هایت را می‌آزمایی.
+            آموزش و سنجش دو بخش جداناپذیرند؛ در تالار آموزش مفاهیم و فنون را فرا
+            می‌گیری و در باشگاه، با دیگران ادعاها را روی میز می‌سنجی.
           </p>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-3">
-          {steps.map((s) => {
+          {STEPS.map((s) => {
             const Icon = s.icon;
             return (
               <Link
@@ -212,9 +205,9 @@ export default function HomePage() {
       <section className="mb-20 sm:mb-24">
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
           <div>
-            <p className="eyebrow mb-1">فلسفهٔ بحث‌کلاب</p>
+            <p className="eyebrow mb-1">فلسفه و ارزش‌های ما</p>
             <h3 className="text-lg font-bold">
-              تئوری بدون مناظره ناقص است؛ مناظره بدون تئوری به هیاهو می‌رسد
+              تئوری بدون گفت‌وگو خام می‌ماند و گفت‌وگو بدون تئوری به آشفتگی می‌رسد
             </h3>
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
               {WHY.map((w) => (
@@ -237,12 +230,14 @@ export default function HomePage() {
 
       {/* 5. Dual CTA: Study Hall + Club */}
       <section className="border-t border-border pt-12 text-center sm:pt-16">
-        <p className="eyebrow eyebrow-centered mb-3">شروع مسیر</p>
+        <p className="eyebrow eyebrow-centered mb-3">آغاز مسیر</p>
         <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">
-          در تالار آموزش مهارت کسب کن، در باشگاه مناظره کن
+          در تالار آموزش یاد بگیر، در باشگاه تجربه کن
         </h2>
         <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-muted">
-          آزمون نردبان قدرت کلام مشخص می‌کند در کجای مسیر یادگیری ایستاده‌ای؛ از سطح پایه شروع کنی یا آماده‌ای سر میز مناظرهٔ باشگاه بنشینی.
+          با ارزیابی جایگاهت در نردبان قدرت کلام، مهارت‌های تفکر روشن را از پایه
+          فرا بگیر. هر زمان خواستی به جمع باشگاه بپیوند تا ادعاها را در
+          فضایی منصفانه و قاعده‌مند با دیگران به سنجش بگذاری.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
@@ -256,12 +251,13 @@ export default function HomePage() {
             href="/club"
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-8 py-3.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
           >
-            ورود به باشگاه مناظره
+            ورود به باشگاه
             <ArrowLeft className="h-4 w-4 text-accent" />
           </Link>
         </div>
         <p className="mt-8 text-xs text-muted">
-          همهٔ مناظره‌ها در چارچوب قوانین باشگاه و با احترام کامل به استقلال رأی طرفین برگزار می‌شود.
+          تمام گفت‌وگوها بر پایهٔ فروتنی، آزادی اندیشه و با احترام کامل به استقلال
+          نظر برگزار می‌شوند.
         </p>
       </section>
     </div>

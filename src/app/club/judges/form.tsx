@@ -66,11 +66,11 @@ export function JudgeApplicationForm() {
 
       <div>
         <label className="text-xs font-semibold text-foreground block mb-1.5">
-          سوابق، آشنایی با مغالطات و فنون مناظره (اختیاری)
+          سوابق، آشنایی با مغالطات و فنون استدلال و گفت‌وگو (اختیاری)
         </label>
         <textarea
           name="experience"
-          placeholder="شرح مختصری از سوابق مطالعاتی، تجربه در مناظره یا آشنایی با استدلال منطقی و مغالطات..."
+          placeholder="شرح مختصری از سوابق مطالعاتی، تجربه در گفت‌وگو یا آشنایی با استدلال منطقی و مغالطات..."
           rows={4}
           className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-xl resize-y focus:outline-hidden focus:border-accent transition-colors"
         />

@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/ladder",
   title: "نردبان قدرت کلام",
   description:
-    "کجای مسیر یادگیری گفت‌وگو ایستاده‌اید؟ سه سطح — پایه، نبرد، قدرت کلام — و این که قدم بعدی شما چیست.",
+    "کجای نردبان قدرت کلام ایستاده‌اید؟ سه سطح — پایه، تیزبینی، قدرت کلام — و این که قدم بعدی شما چیست.",
 });
 
 export default function LadderPage() {

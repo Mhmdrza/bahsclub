@@ -22,10 +22,10 @@ export default async function ClubHome() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-3">
             <Sparkles size={13} />
-            <span>باشگاه گفت‌وگو</span>
+            <span>باشگاه</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
-            ایده‌ات را به رینگ مناظره بیاور
+            ایده‌ات را برای بررسی مشترک بیاور
           </h1>
           <p className="text-sm text-muted leading-relaxed mb-6">
             موضعت را با دلیل مطرح کن و در برابر استدلال‌ها محک بزن. اینجا نه قرار
@@ -38,16 +38,14 @@ export default async function ClubHome() {
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-medium hover:opacity-90 transition-opacity shadow-xs"
             >
               <Plus size={16} />
-              <span>ایده‌ات را مطرح کن</span>
+              <span>دعوت به چالش</span>
             </Link>
-            {session && (
-              <Link
-                href={`/club/users/${session.user.username}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 text-sm rounded-xl border border-border bg-background text-foreground hover:border-accent/40 transition-colors"
-              >
-                <span>چالش‌های من</span>
-              </Link>
-            )}
+            <Link
+              href="#challenges"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-sm rounded-xl border border-border bg-background text-foreground hover:border-accent/40 transition-colors"
+            >
+              <span>مشاهدهٔ چالش‌ها</span>
+            </Link>
           </div>
           
         </div>
@@ -64,13 +62,20 @@ export default async function ClubHome() {
       {/* Main Feed Grid (Feed of Challenges + Live Debates Sidebar) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Left 2 columns: Feed of Challenges / Thoughts */}
-        <div className="lg:col-span-2 space-y-4">
+        <div id="challenges" className="lg:col-span-2 space-y-4 scroll-mt-24">
           <div className="flex items-center justify-between pb-2 border-b border-border">
             <h2 className="text-base font-bold text-foreground flex items-center gap-2">
               <MessageSquareQuote size={18} className="text-accent" />
               <span>چالش‌های باشگاه</span>
             </h2>
-            <span className="text-xs text-muted font-mono">{challenges.length} چالش</span>
+            <div className="flex items-center gap-3 text-xs">
+              {session && (
+                <Link href={`/club/users/${session.user.username}`} className="text-accent hover:underline">
+                  چالش‌های من
+                </Link>
+              )}
+              <span className="text-muted font-mono">{challenges.length} چالش</span>
+            </div>
           </div>
 
           {challenges.length === 0 ? (
