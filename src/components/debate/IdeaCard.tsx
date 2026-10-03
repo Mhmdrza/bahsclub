@@ -1,18 +1,22 @@
 import Link from "next/link";
-import { MessageSquareQuote, Flame, Swords } from "lucide-react";
+import { MessageSquareQuote, Flame, Repeat2 } from "lucide-react";
 
-export function ChallengeCard({
-  challenge: s,
+export function IdeaCard({
+  idea: s,
 }: {
-  challenge: {
+  idea: {
     id: number;
     title: string;
     username: string;
-    content: string;
+    reasoning: string;
+    confidence: number;
     createdAt: string;
     voteCount: number;
     responseCount: number;
+    challengeCount: number;
     activeDebateCount: number;
+    versionCount: number;
+    openToResponse?: boolean;
     tags?: { id: number; name: string; slug: string }[];
   };
 }) {
@@ -35,15 +39,24 @@ export function ChallengeCard({
                 @{s.username}
               </span>
             </Link>
+            {s.versionCount > 1 && (
+              <span
+                className="inline-flex items-center gap-1 text-[10px] text-gold font-mono"
+                title={`${s.versionCount} نسخه`}
+              >
+                <Repeat2 size={12} />
+                {s.versionCount}
+              </span>
+            )}
           </div>
 
-          <Link href={`/club/challenges/${s.id}`} className="block group/link">
+          <Link href={`/club/ideas/${s.id}`} className="block group/link">
             <h3 className="font-bold text-base text-foreground group-hover/link:text-accent transition-colors leading-snug mb-1.5">
               {s.title}
             </h3>
 
             <p className="text-xs text-muted/90 line-clamp-3 leading-relaxed mb-3">
-              {s.content}
+              {s.reasoning}
             </p>
           </Link>
 
@@ -65,43 +78,55 @@ export function ChallengeCard({
           {/* Responses & Meta */}
           <div className="flex items-center gap-4 text-xs text-muted font-mono pt-2 border-t border-border/40">
             <Link
-              href={`/club/challenges/${s.id}`}
+              href={`/club/ideas/${s.id}`}
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
             >
               <MessageSquareQuote size={14} className="text-muted/80" />
-              <span>{s.responseCount} نقد</span>
+              <span>{s.responseCount} پاسخ</span>
             </Link>
 
             {s.activeDebateCount > 0 ? (
               <Link
-                href={`/club/challenges/${s.id}`}
+                href={`/club/ideas/${s.id}`}
                 className="inline-flex items-center gap-1 text-accent font-medium hover:underline"
               >
                 <Flame size={14} />
                 <span>{s.activeDebateCount} مباحثه در جریان</span>
               </Link>
-            ) : (
+            ) : s.openToResponse ? (
               <Link
-                href={`/club/challenges/${s.id}`}
+                href={`/club/ideas/${s.id}`}
                 className="inline-flex items-center gap-1 text-gold font-medium hover:underline"
               >
-                <Swords size={14} />
-                <span>در انتظار هم‌آورد</span>
+                <span>آمادهٔ نقد</span>
               </Link>
+            ) : (
+              <span className="text-muted">بسته برای پاسخ</span>
             )}
           </div>
         </div>
 
-        {/* Vote Score Pill */}
-        <Link
-          href={`/club/challenges/${s.id}`}
-          className="flex flex-col items-center justify-center min-w-[3.25rem] py-2 px-2.5 rounded-xl border border-border bg-background text-muted group-hover:border-accent/40 group-hover:text-accent transition-colors shrink-0"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M12 5v14M5 12l7-7 7 7" />
-          </svg>
-          <span className="text-xs font-bold mt-1 font-mono">{s.voteCount}</span>
-        </Link>
+        {/* Confidence + votes */}
+        <div className="flex flex-col items-center gap-2 shrink-0">
+          <Link
+            href={`/club/ideas/${s.id}`}
+            className="flex flex-col items-center justify-center min-w-[3.25rem] py-2 px-2.5 rounded-xl border border-accent/30 bg-accent/5 text-accent"
+            title="درصد اطمینان نویسنده"
+          >
+            <span className="text-sm font-bold font-mono">{s.confidence}٪</span>
+            <span className="text-[10px] text-muted">اطمینان</span>
+          </Link>
+          <Link
+            href={`/club/ideas/${s.id}`}
+            className="flex flex-col items-center justify-center min-w-[3.25rem] py-2 px-2.5 rounded-xl border border-border bg-background text-muted group-hover:border-accent/40 group-hover:text-accent transition-colors"
+            title="تأیید"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M12 5v14M5 12l7-7 7 7" />
+            </svg>
+            <span className="text-xs font-bold mt-1 font-mono">{s.voteCount}</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

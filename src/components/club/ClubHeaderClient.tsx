@@ -35,8 +35,8 @@ export function ClubHeaderClient({
           </Link>
 
           <nav className="hidden md:flex items-center gap-4 text-sm text-muted">
-            <Link href="/club#challenges" className="hover:text-foreground transition-colors">
-              چالش‌ها
+            <Link href="/club#ideas" className="hover:text-foreground transition-colors">
+              اندیشه‌ها
             </Link>
             <Link href="/club/debates" className="hover:text-foreground transition-colors">
               مباحثه‌ها
@@ -60,12 +60,12 @@ export function ClubHeaderClient({
 
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
-            href="/club/challenges/new"
+            href="/club/ideas/new"
             className="inline-flex items-center gap-1 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-lg bg-accent text-accent-fg text-xs  font-semibold hover:opacity-90 transition-opacity shadow-xs whitespace-nowrap"
           >
             <Plus size={15} />
-            <span className="hidden sm:inline">دعوت به چالش</span>
-            <span className="sm:hidden">چالش</span>
+            <span className="hidden sm:inline">ثبت اندیشه</span>
+            <span className="sm:hidden">اندیشه</span>
           </Link>
 
           {session ? (
@@ -141,6 +141,13 @@ export function ClubHeaderClient({
               </div>
             )}
 
+            <Link
+              href="/club#ideas"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-md px-3 py-2 text-muted hover:bg-background hover:text-foreground transition-colors"
+            >
+              اندیشه‌ها
+            </Link>
             <Link
               href="/club/debates"
               onClick={() => setIsOpen(false)}

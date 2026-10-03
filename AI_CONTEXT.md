@@ -226,15 +226,15 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 
 | Route | File | Description |
 |---|---|---|
-| `/club` | `src/app/club/page.tsx` | Club home — challenges feed, active debates, recent closed |
-| `/club/challenges` | `src/app/club/challenges/page.tsx` | All challenges |
-| `/club/challenges/new` | `src/app/club/challenges/new/page.tsx` | Create challenge form (client) |
-| `/club/challenges/[id]` | `src/app/club/challenges/[id]/page.tsx` | Challenge detail — responses, accept→debate, voting |
-| `/club/debates` | `src/app/club/debates/page.tsx` | All debates |
+| `/club` | `src/app/club/page.tsx` | Club home — اندیشهها feed (follows + discovery), active debates |
+| `/club/ideas` | `src/app/club/ideas/page.tsx` | Redirects to `/club` |
+| `/club/ideas/new` | `src/app/club/ideas/new/page.tsx` | Publish-idea composer (title, reasoning, confidence, sources, falsifier, tags, open-to-response) |
+| `/club/ideas/[id]` | `src/app/club/ideas/[id]/page.tsx` | Idea detail — version history, author edit, responses (reply/challenge), accept→debate, voting |
+| `/club/debates` | `src/app/club/debates/page.tsx` | All debates + ideas open to a challenge |
 | `/club/debates/[id]` | `src/app/club/debates/[id]/page.tsx` | Single debate with free-form messages, voting |
-| `/club/tags` | `src/app/club/tags/page.tsx` | All tags with challenge counts |
-| `/club/tags/[slug]` | `src/app/club/tags/[slug]/page.tsx` | Challenges filtered by tag |
-| `/club/users/[username]` | `src/app/club/users/[username]/page.tsx` | User profile — bio, challenges, debates, tags, reputation |
+| `/club/tags` | `src/app/club/tags/page.tsx` | All tags with idea counts |
+| `/club/tags/[slug]` | `src/app/club/tags/[slug]/page.tsx` | Ideas filtered by tag |
+| `/club/users/[username]` | `src/app/club/users/[username]/page.tsx` | Thought profile — bio, follow button, track record, ideas, debates, tags |
 | `/club/judge` | `src/app/club/judge/page.tsx` | Judge dashboard for reviewing flagged content |
 | `/club/login` | `src/app/club/(auth)/login/page.tsx` | Login form |
 | `/club/register` | `src/app/club/(auth)/register/page.tsx` | Register form |
@@ -243,10 +243,11 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 
 | File | Purpose |
 |---|---|
-| `src/components/debate/ChallengeCard.tsx` | Challenge list card with votes, response count |
-| `src/components/debate/ResponseCard.tsx` | Response challenge with vote, flag, accept button for author |
-| `src/components/debate/ResponseForm.tsx` | Challenge response composer — files a critique or starts a debate (`allowResponse`) |
-| `src/components/debate/ChallengeComposer.tsx` | New-challenge composer — existing-tag picker + new tag, live char count |
+| `src/components/debate/IdeaCard.tsx` | Idea list card with confidence %, votes, response/debate counts, version badge |
+| `src/components/debate/ResponseCard.tsx` | Reply or structured challenge with vote, flag, and accept→debate for the author |
+| `src/components/debate/ResponseForm.tsx` | Reply/challenge composer (two submit intents) |
+| `src/components/debate/IdeaComposer.tsx` | Publish-idea composer — confidence slider, sources, falsifier, tag picker, open-to-response toggle |
+| `src/components/club/FollowButton.tsx` | One-way follow/unfollow button |
 | `src/components/debate/DebateCard.tsx` | Debate list card with vote + message count |
 | `src/components/debate/DebateHeader.tsx` | Debate detail header with opening challenge/response, vote, flag, moderation cover |
 | `src/components/debate/DebateMessages.tsx` | Messages list with moderation states |
@@ -267,8 +268,8 @@ Backed by a Cloudflare Worker (`workers/api/`) on D1 SQLite. Frontend uses Next.
 | `src/lib/api-client.ts` | Fetches Worker API with auth header |
 | `src/lib/session.ts` | Session cookie management (`debate_session`) |
 | `src/lib/auth-actions.ts` | Register/login/logout server actions |
-| `src/lib/debate-actions.ts` | Challenge/debate CRUD server actions (createChallenge, response, acceptResponse, postMessage, closure) |
-| `src/lib/queries.ts` | Data fetching: challenge lists, challenge detail, debate lists, debate detail, user profile |
+| `src/lib/debate-actions.ts` | Idea/debate/follow server actions (createIdea, updateIdea, respond, acceptResponse, toggleFollow, postMessage, closure) |
+| `src/lib/queries.ts` | Data fetching: idea lists (follows + discovery feed), idea detail, debate lists, debate detail, user thought profile |
 | `src/lib/votes.ts` | Vote toggle server action |
 | `src/lib/moderation.ts` | Flag, resolve, bio-edit, warn-ack server actions |
 | `src/lib/validations.ts` | Zod schemas for all forms |
@@ -282,28 +283,31 @@ Worker runs at `WORKER_API_URL` via `workers/api/`. Uses Hono, D1, sessions.
 | `workers/api/src/index.ts` | App entry, mounts all routes, cron forfeit check |
 | `workers/api/src/lib.ts` | Auth helpers, `getCurrentUser`, `needJudge`, `ensureNotBlocked` |
 | `workers/api/src/routes/auth.ts` | `/api/auth/register`, `/login`, `/session` |
-| `workers/api/src/routes/challenges.ts` | `/api/challenges/...` CRUD, responses, accept→debate |
+| `workers/api/src/routes/ideas.ts` | `/api/ideas/...` CRUD + versions, replies/challenges (`kind`), accept→debate, feed=home |
 | `workers/api/src/routes/debates.ts` | `/api/debates/...` list, detail, message, closure, poll |
-| `workers/api/src/routes/tags.ts` | `/api/tags` list (counts via challenges) and per-tag challenges |
-| `workers/api/src/routes/votes.ts` | `/api/votes/toggle` with rep-awarding logic, types: challenge/challenge_response/debate/message |
-| `workers/api/src/routes/users.ts` | `/api/users/:username` profile (+challenges), `/me` bio edit, warnings ack |
-| `workers/api/src/routes/flags.ts` | `/api/flags` create, list (judge), `/resolve`, types: challenge/challenge_response/debate/message |
+| `workers/api/src/routes/tags.ts` | `/api/tags` list (counts via ideas) and per-tag ideas |
+| `workers/api/src/routes/votes.ts` | `/api/votes/toggle` with rep-awarding logic, types: idea/idea_response/debate/message |
+| `workers/api/src/routes/users.ts` | `/api/users/:username` thought profile (+ideas, trackRecord, follow state), follow/unfollow, `/me` bio edit, warnings ack |
+| `workers/api/src/routes/flags.ts` | `/api/flags` create, list (judge), `/resolve`, types: idea/idea_response/debate/message |
 | `workers/api/src/schema.sql` | Full DDL (fresh installs) |
-| `workers/api/src/seed.sql` | Seed data (users, challenges, responses, debates, messages, votes, flags) |
+| `workers/api/src/seed.sql` | Seed data (users, ideas, versions, responses, debates, messages, follows, votes, flags) |
 | `workers/api/migrations/0001_profiles_moderation.sql` | Migration 1 (profiles + moderation) |
 | `workers/api/migrations/0002_foreign_keys_index.sql` | Migration 2 (FK + indexes) |
 | `workers/api/migrations/0003_debating_status.sql` | Migration 3 — challenges refactor, drops old debate/challenger/turn tables |
+| `workers/api/migrations/0005_ideas_and_follows.sql` | Migration 5 — drops challenge tables, adds ideas/idea_versions/idea_tags/idea_responses/follows, repoints debates |
 
 ### DB Tables
 
 - `users` — id, username, email, password_*, is_trusted, bio, role (member|judge), reputation, rep_locked, blocked_until
 - `sessions`, `tags`
-- `challenges` — id, user_id, username, title, content, moderation_state, created_at
-- `challenge_responses` — id, challenge_id, user_id, content, status (pending|debating), moderation_state, created_at
-- `challenge_tags` — (challenge_id, tag_id) junction
-- `debates` — id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status (in_progress|closed), closure_requested_by, closed_reason (mutual|forfeit), closed_at, moderation_state, timestamps
+- `follows` — (follower_id, followee_id) one-way graph
+- `ideas` — id, user_id, username, title, reasoning, confidence (0-100), sources, falsifier, open_to_response, moderation_state, created_at, updated_at
+- `idea_versions` — full revision history (version 1..n per idea)
+- `idea_tags` — (idea_id, tag_id) junction
+- `idea_responses` — id, idea_id, user_id, kind (reply|challenge), content, status (pending|debating), moderation_state, created_at
+- `debates` — id, idea_id, response_id, creator_id, creator_username, opponent_id, title, status (in_progress|closed), closure_requested_by, closed_reason (mutual|forfeit), closed_at, moderation_state, timestamps
 - `debate_tags`, `debate_messages` (+moderation_state)
-- `votes` — polymorphic: challenge, challenge_response, debate, message
+- `votes` — polymorphic: idea, idea_response, debate, message
 - `flags` — flagger_id, flaggable_type, flaggable_id, reason, details, status, UNIQUE per user+target
 - `mod_actions` — judge_id, target_user_id, user_action (dismiss|warn|temp_block|rep_adjust|rep_lock), content_action (none|cover|remove), note, duration_days, rep_delta, acknowledged
 

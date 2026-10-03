@@ -15,10 +15,12 @@ export default function RegisterForm({
   requireInvite,
   inviteCode,
   inviterUsername,
+  next = "/club",
 }: {
   requireInvite: boolean;
   inviteCode: string | null;
   inviterUsername: string | null;
+  next?: string;
 }) {
   const [regState, regAction, regPending] = useActionState(registerAction, initialRegister);
   const [wlState, wlAction, wlPending] = useActionState(waitlistAction, initialWaitlist);
@@ -51,6 +53,7 @@ export default function RegisterForm({
 
           <form action={regAction} className="flex flex-col gap-4">
             <input type="hidden" name="inviteCode" value={inviteCode} />
+            <input type="hidden" name="next" value={next} />
 
             <div>
               <label className="text-xs font-semibold text-foreground block mb-1.5">ایمیل (مطابق دعوت‌نامه)</label>
@@ -80,7 +83,7 @@ export default function RegisterForm({
 
           <div className="mt-6 pt-5 border-t border-border/60 text-center text-xs text-muted">
             قبلاً ثبت‌نام کرده‌اید؟{" "}
-            <Link href="/club/login" className="text-accent font-semibold hover:underline">
+            <Link href={`/club/login?next=${encodeURIComponent(next)}`} className="text-accent font-semibold hover:underline">
               ورود به حساب
             </Link>
           </div>
@@ -104,12 +107,13 @@ export default function RegisterForm({
             <Users size={13} />
             <span>عضویت آزاد</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه</h1>
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">عضویت در باشگاه</h1>
           <p className="text-xs text-muted mb-6 leading-relaxed">
             عضویت در باشگاه آزاد است. حساب بسازید و در گفتگوهای ساختاریافته شرکت کنید
           </p>
 
           <form action={regAction} className="flex flex-col gap-4">
+            <input type="hidden" name="next" value={next} />
             <div>
               <label className="text-xs font-semibold text-foreground block mb-1.5">ایمیل</label>
               <input name="email" type="email" placeholder="name@example.com" required className={inputClass} />
@@ -138,7 +142,7 @@ export default function RegisterForm({
 
           <div className="mt-6 pt-5 border-t border-border/60 text-center text-xs text-muted">
             قبلاً ثبت‌نام کرده‌اید؟{" "}
-            <Link href="/club/login" className="text-accent font-semibold hover:underline">
+            <Link href={`/club/login?next=${encodeURIComponent(next)}`} className="text-accent font-semibold hover:underline">
               ورود به حساب
             </Link>
           </div>
@@ -161,7 +165,7 @@ export default function RegisterForm({
           <Lock size={13} />
           <span>دسترسی اختصاصی</span>
         </div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">ورود به باشگاه</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-1">عضویت در باشگاه</h1>
         <p className="text-xs text-muted mb-6 leading-relaxed">
           باشگاه یک انجمن دربسته برای گفتگوهای ساختاریافته است. در حال حاضر عضویت تنها با دعوت‌نامه اعضا امکان‌پذیر است
         </p>
@@ -186,6 +190,7 @@ export default function RegisterForm({
           <div className="mt-3 p-3 rounded-xl bg-background border border-border">
             <p className="text-[11px] text-muted mb-2">اگر یکی از اعضا به شما دعوت‌نامه داده، کد را وارد کنید</p>
             <form action={regAction} className="flex flex-col gap-3">
+              <input type="hidden" name="next" value={next} />
               <input
                 name="inviteCode"
                 placeholder="کد دعوت"
@@ -276,7 +281,7 @@ export default function RegisterForm({
 
         <div className="mt-6 pt-5 border-t border-border/60 text-center text-xs text-muted">
           قبلاً ثبت‌نام کرده‌اید؟{" "}
-          <Link href="/club/login" className="text-accent font-semibold hover:underline">
+          <Link href={`/club/login?next=${encodeURIComponent(next)}`} className="text-accent font-semibold hover:underline">
             ورود به حساب
           </Link>
         </div>

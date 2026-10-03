@@ -21,8 +21,9 @@ export function proxy(request: NextRequest) {
   const sessionCookie = request.cookies.get("admin_session");
 
   if (!sessionCookie?.value) {
-    // Redirect to login
+    // Redirect to login, carrying the intended destination so we can return there.
     const loginUrl = new URL(LOGIN_PATH, request.url);
+    loginUrl.searchParams.set("next", pathname);
     return NextResponse.redirect(loginUrl);
   }
 

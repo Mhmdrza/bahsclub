@@ -1,238 +1,244 @@
--- Seed users
--- Passwords are all hashed for 'password123'
+-- Seed: بحث‌کلاب. Passwords are all 'password123'.
 -- Hash: uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc= | Salt: dGVzdHNhbHQxMjM0NTY3OA==
 INSERT OR REPLACE INTO users (id, username, email, password_hash, password_salt, is_trusted, created_at)
-VALUES 
-  (1, 'socrates_teh', 'socrates@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-20 days')),
-  (2, 'ali_rezaei', 'ali@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-18 days')),
-  (3, 'sara_rad', 'sara@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-15 days')),
-  (4, 'mehdi_k', 'mehdi@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-12 days')),
-  (5, 'nima_d', 'nima@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-10 days')),
-  (6, 'yalda_m', 'yalda@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-8 days'));
+VALUES
+  (1, 'socrates_teh', 'socrates@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-120 days')),
+  (2, 'ali_rezaei', 'ali@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-110 days')),
+  (3, 'sara_rad', 'sara@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-100 days')),
+  (4, 'mehdi_k', 'mehdi@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 1, datetime('now', '-90 days')),
+  (5, 'nima_d', 'nima@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-60 days')),
+  (6, 'yalda_m', 'yalda@bahs.club', 'uicuY8CgEPQ56upaAHn/dHc086VphI4b0AM1oUr2UIc=', 'dGVzdHNhbHQxMjM0NTY3OA==', 0, datetime('now', '-40 days'));
 
--- Seed tags
 INSERT OR IGNORE INTO tags (id, name, slug, created_by, created_at)
 VALUES
-  (1, 'فلسفه و اخلاق', 'philosophy-ethics', 1, datetime('now', '-20 days')),
-  (2, 'هوش مصنوعی', 'ai-tech', 1, datetime('now', '-20 days')),
-  (3, 'اقتصاد و جامعه', 'economics-society', 2, datetime('now', '-18 days')),
-  (4, 'مغالطات و منطق', 'fallacies-logic', 3, datetime('now', '-15 days')),
-  (5, 'علم و اپیستمولوژی', 'epistemology-science', 4, datetime('now', '-12 days')),
-  (6, 'آموزش و یادگیری', 'education-learning', 2, datetime('now', '-10 days')),
-  (7, 'سیاست و حکمرانی', 'politics-governance', 1, datetime('now', '-9 days')),
-  (8, 'عدالت اجتماعی', 'social-justice', 2, datetime('now', '-9 days')),
-  (9, 'آزادی بیان', 'free-speech', 3, datetime('now', '-8 days')),
-  (10, 'دین و سکولاریسم', 'religion-secularism', 4, datetime('now', '-8 days')),
-  (11, 'رسانه و اطلاعات نادرست', 'media-misinformation', 2, datetime('now', '-7 days')),
-  (12, 'حریم خصوصی و فناوری', 'tech-privacy', 5, datetime('now', '-7 days')),
-  (13, 'تغییر اقلیم و محیط', 'climate-environment', 3, datetime('now', '-6 days')),
-  (14, 'سلامت و اخلاق', 'health-ethics', 4, datetime('now', '-6 days')),
-  (15, 'روانشناسی و جامعه', 'psychology-society', 6, datetime('now', '-5 days')),
-  (16, 'کار و اشتغال', 'work-labor', 2, datetime('now', '-5 days'));
+  (1, 'فلسفه و اخلاق', 'philosophy-ethics', 1, datetime('now', '-120 days')),
+  (2, 'هوش مصنوعی', 'ai-tech', 1, datetime('now', '-120 days')),
+  (3, 'اقتصاد و جامعه', 'economics-society', 2, datetime('now', '-110 days')),
+  (4, 'مغالطات و منطق', 'fallacies-logic', 3, datetime('now', '-100 days')),
+  (5, 'علم و اپیستمولوژی', 'epistemology-science', 4, datetime('now', '-90 days')),
+  (6, 'آموزش و یادگیری', 'education-learning', 2, datetime('now', '-80 days')),
+  (7, 'رسانه و اطلاعات نادرست', 'media-misinformation', 2, datetime('now', '-70 days')),
+  (8, 'آزادی بیان', 'free-speech', 3, datetime('now', '-60 days'));
 
--- Challenge 1: AI & Consciousness (by socrates_teh)
-INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
+-- ---------- Ideas ----------
+
+-- Idea 1 (Socrates): LLM understanding. Has a revision (confidence drifted down) + a debate.
+INSERT OR IGNORE INTO ideas (id, user_id, username, title, reasoning, confidence, sources, falsifier, open_to_response, created_at, updated_at)
 VALUES (
   1, 1, 'socrates_teh',
-  'آیا مدل‌های زبانی بزرگ (LLM) می‌توانند به «فهم واقعی» یا آگاهی دست یابند؟',
-  'ادعای من این است که ساختار کنونی ترنسفورمرها صرفاً پیش‌بینی آماری کلمه بعدی بر اساس الگوهای متنی است. بدون تجسم فیزیکی (Embodiment)، علیت‌سنجی واقعی و مدلی مستقل از جهان خارج، هیچ درکی از معنا رخ نمی‌دهد و آنچه می‌بینیم شباهت ساختاری به فهم است، نه خود فهم.',
-  datetime('now', '-5 days')
+  'مدل‌های زبانی بزرگ به «فهم» نمی‌رسند، هرچند رفتارشان فهم‌نما است',
+  'ادعای من این است که ترنسفورمرها صرفاً پیش‌بینی آماری توکن بعدی بر پایهٔ الگوهای متنی‌اند. بدون تجسم فیزیکی (Embodiment)، علیت‌سنجی مستقل و مدلی از جهان که از تعامل فعال برآمده باشد، آنچه می‌بینیم شباهت ساختاری به فهم است، نه خود فهم.',
+  65,
+  'جان سرل، «اتاق چینی» (1980)؛ مقالات دربارهٔ تمایز نحو و معناشناسی',
+  'اگر مدلی بدون تعامل فیزیکی صرفاً از متن، توانایی تعمیم علی و آزمون فرضیه در محیط تازه نشان دهد، این ادعا ضعیف می‌شود.',
+  1, datetime('now', '-40 days'), datetime('now', '-20 days')
 );
 
-INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (1, 2), (1, 5);
+INSERT OR IGNORE INTO idea_versions (id, idea_id, version, title, reasoning, confidence, sources, falsifier, created_at)
+VALUES
+  (1, 1, 1,
+   'مدل‌های زبانی بزرگ صرفاً پیش‌بینی آماری‌اند و درکی از معنا ندارند',
+   'ترنسفورمرها الگوهای متنی را بازتولید می‌کنند و هیچ رجوع خارجی به واقعیت ندارند. توانایی زبانی چیزی دربارهٔ فهم نمی‌گوید.',
+   85,
+   'جان سرل، اتاق چینی',
+   '',
+   datetime('now', '-40 days')),
+  (2, 1, 2,
+   'مدل‌های زبانی بزرگ به «فهم» نمی‌رسند، هرچند رفتارشان فهم‌نما است',
+   'ادعای من این است که ترنسفورمرها صرفاً پیش‌بینی آماری توکن بعدی بر پایهٔ الگوهای متنی‌اند. بدون تجسم فیزیکی (Embodiment)، علیت‌سنجی مستقل و مدلی از جهان که از تعامل فعال برآمده باشد، آنچه می‌بینیم شباهت ساختاری به فهم است، نه خود فهم.',
+   65,
+   'جان سرل، «اتاق چینی» (1980)؛ مقالات دربارهٔ تمایز نحو و معناشناسی',
+   'اگر مدلی بدون تعامل فیزیکی صرفاً از متن، توانایی تعمیم علی و آزمون فرضیه در محیط تازه نشان دهد، این ادعا ضعیف می‌شود.',
+   datetime('now', '-20 days'));
 
--- Response 1 on Challenge 1 (by sara_rad) — accepted → spawns Debate 1
-INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
+INSERT OR IGNORE INTO idea_tags (idea_id, tag_id) VALUES (1, 2), (1, 5);
+
+-- Idea 2 (Ali): UBI. Closed debate.
+INSERT OR IGNORE INTO ideas (id, user_id, username, title, reasoning, confidence, sources, falsifier, open_to_response, created_at, updated_at)
 VALUES (
-  1, 1, 3,
-  'فهم یک طیف است نه یک ویژگی صفر و یکی. وقتی یک سیستم قادر به ترکیب مفاهیم جدید، استدلال چندمرحله‌ای و انتقال یادگیری به حوزه‌های نادیده باشد، تفکیک آن از درک انسانی بی‌پایه و ناشی از شهودگرایی بیولوژیکی است.',
-  'debating',
-  datetime('now', '-4 days')
+  2, 2, 'ali_rezaei',
+  'درآمد پایه همگانی پایدارترین پاسخ به بیکاری ساختاری ناشی از اتوماسیون است',
+  'با ورود هوش مصنوعی به مشاغل خدماتی و شناختی، سرعت نابودی مشاغل از خلق مشاغل جدید پیشی می‌گیرد. درآمد پایه، کف معیشتی بدون پیش‌شرط فراهم می‌کند که شوک بازار کار را خنثی و قدرت چانه‌زنی نیروی کار را حفظ می‌کند.',
+  60,
+  'آزمایش‌های پایلوت UBI در فنلاند و کنیا؛ مدل صندوق آلاسکا',
+  'اگر در بازه‌ای کوتاه، نرخ اشتغال جدید از نرخ حذف مشاغل پیشی بگیرد، ضرورت UBI کاهش می‌یابد.',
+  1, datetime('now', '-30 days'), datetime('now', '-30 days')
+);
+INSERT OR IGNORE INTO idea_versions (id, idea_id, version, title, reasoning, confidence, sources, falsifier, created_at)
+VALUES (3, 2, 1,
+  'درآمد پایه همگانی پایدارترین پاسخ به بیکاری ساختاری ناشی از اتوماسیون است',
+  'با ورود هوش مصنوعی به مشاغل خدماتی و شناختی، سرعت نابودی مشاغل از خلق مشاغل جدید پیشی می‌گیرد. درآمد پایه، کف معیشتی بدون پیش‌شرط فراهم می‌کند که شوک بازار کار را خنثی و قدرت چانه‌زنی نیروی کار را حفظ می‌کند.',
+  60,
+  'آزمایش‌های پایلوت UBI در فنلاند و کنیا؛ مدل صندوق آلاسکا',
+  'اگر در بازه‌ای کوتاه، نرخ اشتغال جدید از نرخ حذف مشاغل پیشی بگیرد، ضرورت UBI کاهش می‌یابد.',
+  datetime('now', '-30 days'));
+INSERT OR IGNORE INTO idea_tags (idea_id, tag_id) VALUES (2, 3);
+
+-- Idea 3 (Mehdi): moral relativism. Open with two pending replies.
+INSERT OR IGNORE INTO ideas (id, user_id, username, title, reasoning, confidence, sources, falsifier, open_to_response, created_at, updated_at)
+VALUES (
+  3, 4, 'mehdi_k',
+  'نسبی‌گرایی اخلاقی خودابطال‌گر است، اما نه به آن سادگی که گفته می‌شود',
+  'اگر کسی بگوید «هیچ حقیقت اخلاقی عینی وجود ندارد»، خود این گزاره را به‌عنوان حکمی عام و صادق مطرح می‌کند. با این حال باید میان عینیت‌گرایی متافیزیکی و بن‌بست‌های عملی نسبی‌گرایی تفکیک کرد.',
+  55,
+  '',
+  'اگر بتوان صورت‌بندی‌ای از نسبی‌گرایی ساخت که خودارجاع نباشد، این ادعا رد می‌شود.',
+  1, datetime('now', '-10 days'), datetime('now', '-10 days')
+);
+INSERT OR IGNORE INTO idea_versions (id, idea_id, version, title, reasoning, confidence, sources, falsifier, created_at)
+VALUES (4, 3, 1,
+  'نسبی‌گرایی اخلاقی خودابطال‌گر است، اما نه به آن سادگی که گفته می‌شود',
+  'اگر کسی بگوید «هیچ حقیقت اخلاقی عینی وجود ندارد»، خود این گزاره را به‌عنوان حکمی عام و صادق مطرح می‌کند. با این حال باید میان عینیت‌گرایی متافیزیکی و بن‌بست‌های عملی نسبی‌گرایی تفکیک کرد.',
+  55, '',
+  'اگر بتوان صورت‌بندی‌ای از نسبی‌گرایی ساخت که خودارجاع نباشد، این ادعا رد می‌شود.',
+  datetime('now', '-10 days'));
+INSERT OR IGNORE INTO idea_tags (idea_id, tag_id) VALUES (3, 1), (3, 4);
+
+-- Idea 4 (Sara): education. No responses yet.
+INSERT OR IGNORE INTO ideas (id, user_id, username, title, reasoning, confidence, sources, falsifier, open_to_response, created_at, updated_at)
+VALUES (
+  4, 3, 'sara_rad',
+  'نظام آموزشی نمره‌محور تفکر نقادانه را سرکوب می‌کند، نه پرورش می‌دهد',
+  'ساختار نمره‌محور، استانداردسازی آزمون‌ها و تأکید بر حفظ پاسخ‌های معین به‌جای طرح پرسش‌های اصیل، تفکر انتقادی را فلج می‌کند. بدون بازطراحی حول گفت‌وگو و پژوهش‌محوری، آموزش رسمی بیشتر کارکرد جامعه‌پذیری انفعالی دارد.',
+  70,
+  'کن رابینسون؛ پژوهش‌های سنجش تفکر انتقادی',
+  '',
+  1, datetime('now', '-5 days'), datetime('now', '-5 days')
+);
+INSERT OR IGNORE INTO idea_versions (id, idea_id, version, title, reasoning, confidence, sources, falsifier, created_at)
+VALUES (5, 4, 1,
+  'نظام آموزشی نمره‌محور تفکر نقادانه را سرکوب می‌کند، نه پرورش می‌دهد',
+  'ساختار نمره‌محور، استانداردسازی آزمون‌ها و تأکید بر حفظ پاسخ‌های معین به‌جای طرح پرسش‌های اصیل، تفکر انتقادی را فلج می‌کند. بدون بازطراحی حول گفت‌وگو و پژوهش‌محوری، آموزش رسمی بیشتر کارکرد جامعه‌پذیری انفعالی دارد.',
+  70, 'کن رابینسون؛ پژوهش‌های سنجش تفکر انتقادی', '', datetime('now', '-5 days'));
+INSERT OR IGNORE INTO idea_tags (idea_id, tag_id) VALUES (4, 6), (4, 4);
+
+-- Idea 5 (Nima): scientific realism. Has debate.
+INSERT OR IGNORE INTO ideas (id, user_id, username, title, reasoning, confidence, sources, falsifier, open_to_response, created_at, updated_at)
+VALUES (
+  5, 5, 'nima_d',
+  'نظریه‌های علمی تصویری صادق از ساختار واقعیت می‌دهند، نه صرفاً ابزار پیش‌بینی',
+  'استدلال «عدم معجزه» نشان می‌دهد اگر نظریه‌های علمی موفق به واقعیت اشاره نکنند، موفقیت تجربی چشمگیرشان توضیح‌ناپذیر می‌ماند. پس باید موجودیت‌های غیرقابل‌مشاهدهٔ مفروض را واقعی دانست.',
+  50,
+  'استدلال عدم معجزه (پاتنم)',
+  'نمایش موفقیت پیش‌بینی بدون هیچ ادعای هستی‌شناختی، این استدلال را تضعیف می‌کند.',
+  1, datetime('now', '-7 days'), datetime('now', '-7 days')
+);
+INSERT OR IGNORE INTO idea_versions (id, idea_id, version, title, reasoning, confidence, sources, falsifier, created_at)
+VALUES (6, 5, 1,
+  'نظریه‌های علمی تصویری صادق از ساختار واقعیت می‌دهند، نه صرفاً ابزار پیش‌بینی',
+  'استدلال «عدم معجزه» نشان می‌دهد اگر نظریه‌های علمی موفق به واقعیت اشاره نکنند، موفقیت تجربی چشمگیرشان توضیح‌ناپذیر می‌ماند. پس باید موجودیت‌های غیرقابل‌مشاهدهٔ مفروض را واقعی دانست.',
+  50, 'استدلال عدم معجزه (پاتنم)',
+  'نمایش موفقیت پیش‌بینی بدون هیچ ادعای هستی‌شناختی، این استدلال را تضعیف می‌کند.',
+  datetime('now', '-7 days'));
+INSERT OR IGNORE INTO idea_tags (idea_id, tag_id) VALUES (5, 5), (5, 1);
+
+-- ---------- Responses ----------
+
+-- Structured challenge on Idea 1 (Sara), accepted → Debate 1
+INSERT OR IGNORE INTO idea_responses (id, idea_id, user_id, kind, content, status, created_at)
+VALUES (
+  1, 1, 3, 'challenge',
+  'فهم یک طیف است نه یک ویژگی صفر و یکی. وقتی سیستمی مفاهیم را ترکیب می‌کند، چندمرحله‌ای استدلال می‌کند و یادگیری را به حوزه‌های تازه منتقل می‌کند، تفکیک آن از درک انسانی بی‌پایه و برآمده از شهودگرایی زیست‌شناختی است.',
+  'debating', datetime('now', '-35 days')
 );
 
--- Debate 1 (in_progress): spawned from Challenge 1 + Response 1
-INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
+-- Reply on Idea 2 (Mehdi)
+INSERT OR IGNORE INTO idea_responses (id, idea_id, user_id, kind, content, status, created_at)
+VALUES (
+  2, 2, 4, 'reply',
+  'من با هدف موافقم اما با ابزار مخالف: تضمین اشتغال هدفمند و بازآموزی مهارتی، با هزینهٔ کمتر و بدون تورم، همان اثر را دارد.',
+  'pending', datetime('now', '-28 days')
+);
+
+-- Two pending replies on Idea 3
+INSERT OR IGNORE INTO idea_responses (id, idea_id, user_id, kind, content, status, created_at)
+VALUES
+  (3, 3, 5, 'reply',
+   'نسبی‌گرایی ادعای حقیقت مطلق دربارهٔ جهان نمی‌کند؛ گزاره‌ای تبیینی دربارهٔ ماهیت قراردادهای اجتماعی است. تفکیک نقد درون‌گفتمانی از تحمیل برون‌گفتمانی این بن‌بست را باز می‌کند.',
+   'pending', datetime('now', '-8 days')),
+  (4, 3, 6, 'challenge',
+   'عینیت‌گرایی اخلاقی اغلب پوششی برای هژمونی قدرت‌های غالب بوده است. فهم زمینه‌مند ارزش‌ها به معنای پذیرش ظلم نیست، بلکه به رسمیت شناختن تکثر عقلانیت است.',
+   'pending', datetime('now', '-6 days'));
+
+-- Structured challenge on Idea 5 (Ali), accepted → Debate 2
+INSERT OR IGNORE INTO idea_responses (id, idea_id, user_id, kind, content, status, created_at)
+VALUES (
+  5, 5, 2, 'challenge',
+  'استقرای بدبینانهٔ تاریخی نشان می‌دهد بیشتر نظریه‌های علمی گذشته که به‌شدت موفق بودند، در نهایت باطل شدند. بنابراین ابزارگرایی و ضدواقع‌گرایی ساختاری عقلانی‌تر است.',
+  'debating', datetime('now', '-6 days')
+);
+
+-- ---------- Debates ----------
+
+INSERT OR IGNORE INTO debates (id, idea_id, response_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
 VALUES (
   1, 1, 1,
   1, 'socrates_teh', 3,
-  'آیا مدل‌های زبانی بزرگ (LLM) می‌توانند به «فهم واقعی» یا آگاهی دست یابند؟',
-  'in_progress',
-  datetime('now', '-4 days'),
-  datetime('now', '-2 hours')
+  'مدل‌های زبانی بزرگ به «فهم» نمی‌رسند، هرچند رفتارشان فهم‌نما است',
+  'in_progress', datetime('now', '-35 days'), datetime('now', '-2 hours')
 );
-
 INSERT OR IGNORE INTO debate_tags (debate_id, tag_id) VALUES (1, 2), (1, 5);
-
 INSERT OR IGNORE INTO debate_messages (id, debate_id, user_id, content, created_at)
 VALUES
-  (1, 1, 1, 'مسئله تمایز بین نحو (Syntax) و معناشناسی (Semantics) است، همان‌طور که جان سرل در اتاق چینی نشان داد. دستکاری دقیق نمادها به معنای آگاهی از محتوای نمادها نیست. یک مدل پیش‌بینی توکن صرفاً همبستگی‌های زبانی را بازتولید می‌کند بدون اینکه ارجاع خارجی به واقعیت داشته باشد.', datetime('now', '-4 days')),
-  (2, 1, 3, 'تمثیل اتاق چینی فرض می‌کند که کل سیستم ناآگاه است، اما در سیستم‌های پیچیده، فهم در سطح کل ساختار و بردارهای بازنمایی چندبعدی شکل می‌گیرد. آزمون‌های جدید نشان می‌دهند که مدل‌های زبانی نقشه‌های درونی پیوسته‌ای از جهان و فضا-زمان می‌سازند، نه تطبیق سطحی رشته‌ها.', datetime('now', '-3 days')),
-  (3, 1, 1, 'این نقشه‌های درونی همچنان فاقد مقصودمندی (Intentionality) و تعامل فعال با محیط هستند. بدون امکان خطا و تصحیح در یک بستر زیستی-فیزیکی، این بازنمایی‌ها محتوای واقعی ندارند بلکه فشرده‌سازی کارآمد توزیع داده‌های انسانی هستند.', datetime('now', '-2 days')),
-  (4, 1, 3, 'مقصودمندی در انسان نیز برآمده از فرآیند تکامل و بهینه‌سازی توابع پاداش بقاست. تفاوت در زیرساخت سلولی در برابر سیلیکونی، دلیلی منطقی بر انکار وجود درک و شناخت نیست. اگر رفتاری کارکردی، ابطال‌پذیر و تعمیم‌پذیر باشد، تعریف سنتی ادراک بر آن منطبق است.', datetime('now', '-1 day'));
+  (1, 1, 1, 'مسئله تمایز نحو از معناشناسی است. دستکاری دقیق نمادها به معنای آگاهی از محتوای نمادها نیست.', datetime('now', '-34 days')),
+  (2, 1, 3, 'تمثیل اتاق چینی فرض می‌کند کل سیستم ناآگاه است، اما فهم می‌تواند در سطح ساختار و بازنمایی چندبعدی شکل بگیرد.', datetime('now', '-30 days')),
+  (3, 1, 1, 'این بازنمایی‌ها همچنان فاقد مقصودمندی و تعامل فعال با محیط‌اند؛ فشرده‌سازی کارآمد توزیع داده‌اند، نه فهم.', datetime('now', '-20 days')),
+  (4, 1, 3, 'مقصودمندی انسان هم برآمده از تکامل و بهینه‌سازی پاداش است. تفاوت زیرساخت، دلیل منطقی انکار شناخت نیست.', datetime('now', '-1 day'));
 
--- Challenge 2: UBI (by ali_rezaei)
-INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
+INSERT OR IGNORE INTO debates (id, idea_id, response_id, creator_id, creator_username, opponent_id, title, status, closed_reason, closed_at, created_at, updated_at)
 VALUES (
-  2, 2, 'ali_rezaei',
-  'درآمد پایه همگانی (UBI) پایدارترین راهکار برای مقابله با بیکاری ساختاری ناشی از اتوماسیون است',
-  'با ورود هوش مصنوعی به مشاغل خدماتی و شناختی، سرعت نابودی مشاغل از خلق مشاغل جدید پیشی خواهد گرفت. درآمد پایه همگانی، کف معیشتی بدون پیش‌شرط فراهم می‌کند که شوک بازار کار را خنثی کرده و قدرت چانه‌زنی نیروی کار را حفظ می‌کند.',
-  datetime('now', '-12 days')
+  2, 5, 5,
+  5, 'nima_d', 2,
+  'نظریه‌های علمی تصویری صادق از ساختار واقعیت می‌دهند، نه صرفاً ابزار پیش‌بینی',
+  'closed', 'mutual', datetime('now', '-2 days'), datetime('now', '-6 days'), datetime('now', '-2 days')
 );
-
-INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (2, 3);
-
--- Response 2 on Challenge 2 (by mehdi_k) — accepted → spawns Debate 2
-INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
-VALUES (
-  2, 2, 4,
-  'اجرای UBI به دلیل بار مالیاتی فلج‌کننده موجب تورم مزمن و کاهش انگیزه نوآوری و مشارکت اقتصادی فعال می‌شود. تقویت تضمین اشتغال هدفمند و بازآموزی مهارتی بسیار اثربخش‌تر است.',
-  'debating',
-  datetime('now', '-11 days')
-);
-
--- Debate 2 (closed / mutual): spawned from Challenge 2 + Response 2
-INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, closed_reason, closed_at, created_at, updated_at)
-VALUES (
-  2, 2, 2,
-  2, 'ali_rezaei', 4,
-  'درآمد پایه همگانی (UBI) پایدارترین راهکار برای مقابله با بیکاری ساختاری ناشی از اتوماسیون است',
-  'closed', 'mutual',
-  datetime('now', '-6 days'),
-  datetime('now', '-12 days'),
-  datetime('now', '-6 days')
-);
-
-INSERT OR IGNORE INTO debate_tags (debate_id, tag_id) VALUES (2, 3);
-
+INSERT OR IGNORE INTO debate_tags (debate_id, tag_id) VALUES (2, 5), (2, 1);
 INSERT OR IGNORE INTO debate_messages (id, debate_id, user_id, content, created_at)
 VALUES
-  (5, 2, 2, 'هزینه سرسام‌آور بوروکراسی سیستم‌های رفاهی کنونی بیشتر از توزیع مستقیم پول است. UBI کرامت فردی را بدون تست وسع حفظ می‌کند و اجازه می‌دهد افراد به جای کارهای بیهوده به خلق ارزش واقعی بپردازند.', datetime('now', '-11 days')),
-  (6, 2, 4, 'محاسبات ساده اقتصادی نشان می‌دهد پرداخت یک درآمد شایسته به کل جمعیت به بودجه‌ای معادل بخش بزرگی از تولید ناخالص داخلی نیاز دارد که جز با چاپ پول تورم‌زا یا مالیات سنگین بر بهره‌وری قابل تامین نیست.', datetime('now', '-9 days')),
-  (7, 2, 2, 'منبع تامین می‌تواند مالیات بر ارزش افزوده اتوماسیون و رانت منابع طبیعی (مدل صندوق آلاسکا) باشد، نه مالیات بر درآمد طبقه متوسط. این بازتوزیع رانت فناوری است نه اتلاف منابع.', datetime('now', '-8 days')),
-  (8, 2, 4, 'مالیات بر اتوماسیون انگیزه رشد بهره‌وری کل را سرکوب می‌کند و مانع توسعه فناوری می‌شود. تاریخ نشان داده سیاست‌های مهار تکنولوژی به فقر بیشتر انجامیده‌اند.', datetime('now', '-6 days'));
+  (5, 2, 5, 'واقع‌گرایی ساختاری آنچه در گذر نظریه‌های موفق حفظ می‌شود را به‌درستی جدا می‌کند: ساختار ریاضی و روابط، نه ماهیت صوری نام‌گذاری‌ها.', datetime('now', '-6 days')),
+  (6, 2, 2, 'تغییرات هستی‌شناختی در انقلاب‌های علمی نشان می‌دهد ساختارها بی‌بار تفسیری وجود ندارند؛ ادعای صدق دربارهٔ امر نامشاهده‌پذیر مازاد است.', datetime('now', '-4 days')),
+  (7, 2, 5, 'مازاد بودن یک ادعا آن را باطل نمی‌کند؛ اگر بهترین تبیین موفقیت علم باشد، واقع‌گرایی موجه است.', datetime('now', '-3 days')),
+  (8, 2, 2, 'بهترین تبیین می‌تواند ابزارگرایانه بماند: نظریه‌ها ابزارهای ریاضی موفق‌اند، نه تصویر صادق.', datetime('now', '-2 days'));
 
--- Challenge 3: Moral Relativism (by mehdi_k)
-INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
-VALUES (
-  3, 4, 'mehdi_k',
-  'نسبی‌گرایی اخلاقی منطقاً خودابطال‌گر و در عمل ناممکن است',
-  'اگر کسی ادعا کند «هیچ حقیقت اخلاقی عینی وجود ندارد و همه چیز وابسته به فرهنگ یا فرد است»، خود این گزاره را به عنوان یک حکم عام و صادق مطرح می‌کند. علاوه بر این، در مقام عمل، نسبی‌گرایی هرگونه نقد علیه ظلم‌های ساختاری تاریخی را غیرممکن می‌سازد.',
-  datetime('now', '-2 days')
-);
+-- ---------- Follows ----------
+INSERT OR IGNORE INTO follows (follower_id, followee_id, created_at) VALUES
+  (2, 1, datetime('now', '-30 days')),
+  (3, 1, datetime('now', '-30 days')),
+  (5, 1, datetime('now', '-20 days')),
+  (1, 3, datetime('now', '-25 days')),
+  (4, 1, datetime('now', '-25 days')),
+  (4, 3, datetime('now', '-15 days')),
+  (6, 3, datetime('now', '-12 days')),
+  (1, 2, datetime('now', '-18 days')),
+  (5, 2, datetime('now', '-10 days')),
+  (3, 5, datetime('now', '-8 days'));
 
-INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (3, 1), (3, 4);
-
--- Responses on Challenge 3 (pending — not yet accepted)
-INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
-VALUES
-  (3, 3, 5, 'نسبی‌گرایی ادعای حقیقت مطلق درباره جهان نمی‌کند، بلکه گزاره‌ای تبیینی درباره ماهیت قراردادهای اجتماعی است. تفکیک بین نقد درون‌گفتمانی و تحمیل برون‌گفتمانی این بن‌بست ظاهری را حل می‌کند.', 'pending', datetime('now', '-1 day')),
-  (4, 3, 6, 'عینیت‌گرایی اخلاقی همواره پوششی برای هژمونی قدرت‌های غالب بوده است. فهم زمینه‌مند ارزش‌ها به معنای پذیرش ظلم نیست بلکه به رسمیت شناختن تکثر عقلانیت است.', 'pending', datetime('now', '-12 hours'));
-
--- Challenge 4: Education (by sara_rad) — no responses yet
-INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
-VALUES (
-  4, 3, 'sara_rad',
-  'نظام‌های آموزشی سنتی بیش از آنکه تفکر نقادانه را پرورش دهند، آن را سرکوب می‌کنند',
-  'ساختار نمره‌محور، استانداردسازی آزمون‌ها و تاکید بر حفظ پاسخ‌های معین به جای طرح پرسش‌های اصیل، تفکر انتقادی دانش‌آموزان را فلج می‌کند. بدون بازطراحی ساختار حول گفتگو و پژوهش‌محوری، آموزش رسمی بیشتر کارکرد جامعه‌پذیری انفعالی دارد.',
-  datetime('now', '-1 day')
-);
-
-INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (4, 6), (4, 4);
-
--- Challenge 5: Scientific Realism (by socrates_teh)
-INSERT OR IGNORE INTO challenges (id, user_id, username, title, content, created_at)
-VALUES (
-  5, 1, 'socrates_teh',
-  'نظریه‌های علمی تصویر صادقی از ساختار واقعیت ارایه می‌دهند، نه صرفاً ابزارهای پیش‌بینی',
-  'استدلال عدم معجزه (No Miracles Argument) نشان می‌دهد اگر نظریه‌های علمی موفق به واقعیت اشاره نکنند، موفقیت تجربی چشمگیر آن‌ها معجزه‌ای غیرقابل توضیح خواهد بود. بنابراین باید موجودیت‌های غیرقابل مشاهده مفروض (مانند کوارک‌ها و میدان‌ها) را واقعی دانست.',
-  datetime('now', '-3 days')
-);
-
-INSERT OR IGNORE INTO challenge_tags (challenge_id, tag_id) VALUES (5, 5), (5, 1);
-
--- Response 5 on Challenge 5 (by ali_rezaei) — accepted → spawns Debate 3
-INSERT OR IGNORE INTO challenge_responses (id, challenge_id, user_id, content, status, created_at)
-VALUES (
-  5, 5, 2,
-  'استقرای بدبینانه تاریخی نشان می‌دهد اکثر نظریه‌های علمی گذشته که شدیداً موفق بودند در نهایت باطل شدند (مانند نظریه فلوژیستون یا اتر). بنابراین ابزارگرایی و ضدواقع‌گرایی ساختاری رویکردی عقلانی‌تر است.',
-  'debating',
-  datetime('now', '-3 days')
-);
-
--- Debate 3 (in_progress): spawned from Challenge 5 + Response 5
-INSERT OR IGNORE INTO debates (id, challenge_id, counter_response_id, creator_id, creator_username, opponent_id, title, status, created_at, updated_at)
-VALUES (
-  3, 5, 5,
-  1, 'socrates_teh', 2,
-  'نظریه‌های علمی تصویر صادقی از ساختار واقعیت ارایه می‌دهند، نه صرفاً ابزارهای پیش‌بینی',
-  'in_progress',
-  datetime('now', '-3 days'),
-  datetime('now', '-5 hours')
-);
-
-INSERT OR IGNORE INTO debate_tags (debate_id, tag_id) VALUES (3, 5), (3, 1);
-
-INSERT OR IGNORE INTO debate_messages (id, debate_id, user_id, content, created_at)
-VALUES
-  (9, 3, 1, 'پاسخ به استقرای بدبینانه، واقع‌گرایی ساختاری است؛ آنچه در گذر از نظریه‌های موفق حفظ می‌شود ساختار ریاضی و روابط میان پدیده‌هاست، نه لزوماً ماهیت صوری نام‌گذاری‌ها. هندسه فضا-زمان یا قوانین ماکسول پایدار مانده‌اند.', datetime('now', '-2 days')),
-  (10, 3, 2, 'تغییرات بنیادین هستی‌شناختی در انقلاب‌های علمی نشان می‌دهد ساختارها بدون بار تفسیری وجود ندارند. نظریه‌ها ابزارهای ریاضی موفقی برای نجات پدیدارها هستند و ادعای صدق گزاره‌ای درباره امر نامشاهده‌پذیر غیرضروری و مازاد است.', datetime('now', '-1 day'));
-
--- Seed Votes (challenge, challenge_response, debate, message types)
+-- ---------- Votes ----------
 INSERT OR IGNORE INTO votes (user_id, voteable_type, voteable_id)
 VALUES
-  (1, 'challenge', 1),
-  (2, 'challenge', 1),
-  (4, 'challenge', 1),
-  (5, 'challenge', 1),
-  (6, 'challenge', 1),
-  (1, 'challenge', 2),
-  (3, 'challenge', 2),
-  (5, 'challenge', 2),
-  (2, 'challenge', 3),
-  (3, 'challenge', 3),
-  (1, 'challenge', 4),
-  (4, 'challenge', 4),
-  (3, 'challenge', 5),
-  (4, 'challenge', 5),
-  (5, 'challenge', 5),
-  (1, 'debate', 1),
-  (2, 'debate', 1),
-  (4, 'debate', 1),
-  (5, 'debate', 1),
-  (6, 'debate', 1),
-  (1, 'debate', 2),
-  (3, 'debate', 2),
-  (5, 'debate', 2),
-  (2, 'debate', 3),
-  (3, 'debate', 3),
-  (1, 'message', 2),
-  (2, 'message', 2),
-  (4, 'message', 1),
-  (5, 'message', 1),
-  (6, 'message', 2),
-  (1, 'message', 3),
-  (5, 'message', 3),
-  (2, 'message', 4),
-  (6, 'message', 4),
-  (1, 'message', 5),
-  (3, 'message', 5),
-  (5, 'message', 6),
-  (6, 'message', 6),
-  (3, 'message', 9),
-  (4, 'message', 9),
-  (5, 'message', 10);
+  (1, 'idea', 1), (2, 'idea', 1), (4, 'idea', 1), (5, 'idea', 1), (6, 'idea', 1),
+  (1, 'idea', 2), (3, 'idea', 2), (5, 'idea', 2),
+  (2, 'idea', 3), (3, 'idea', 3),
+  (1, 'idea', 4), (4, 'idea', 4),
+  (3, 'idea', 5), (4, 'idea', 5), (5, 'idea', 5),
+  (1, 'idea_response', 1), (4, 'idea_response', 1), (5, 'idea_response', 1),
+  (2, 'idea_response', 5), (3, 'idea_response', 5),
+  (1, 'debate', 1), (2, 'debate', 1), (4, 'debate', 1), (5, 'debate', 1), (6, 'debate', 1),
+  (1, 'debate', 2), (3, 'debate', 2), (5, 'debate', 2),
+  (2, 'message', 2), (4, 'message', 1), (5, 'message', 1), (6, 'message', 2),
+  (1, 'message', 3), (5, 'message', 3), (2, 'message', 4), (6, 'message', 4);
 
--- Set judge role and bios
+-- ---------- Roles / bios ----------
 UPDATE users SET role='judge' WHERE id=1;
-UPDATE users SET bio='جستجوگر حقیقت، علاقه‌مند به فلسفه و منطق' WHERE id=1;
+UPDATE users SET bio='جستجوگر حقیقت؛ علاقه‌مند به فلسفه ذهن و منطق' WHERE id=1;
 UPDATE users SET bio='پژوهشگر اقتصاد و سیاست‌گذاری عمومی' WHERE id=2;
-UPDATE users SET bio='دانشجوی فلسفه علم، علاقه‌مند به اپیستمولوژی' WHERE id=3;
+UPDATE users SET bio='دانشجوی فلسفه علم؛ علاقه‌مند به اپیستمولوژی' WHERE id=3;
+UPDATE users SET bio='علاقه‌مند به اخلاق و فلسفه اخلاق کاربردی' WHERE id=4;
+UPDATE users SET bio='کارآفرین؛ کنجکاو دربارهٔ فلسفه علم' WHERE id=5;
+UPDATE users SET bio='روان‌شناسی و جامعه' WHERE id=6;
 
--- Sample pending flags for judge page testing
+-- ---------- Sample flags ----------
 INSERT OR IGNORE INTO flags (flagger_id, flaggable_type, flaggable_id, reason, details, created_at)
 VALUES
-  (5, 'message', 4, 'derailing', 'این فریمینگ بحث را از موضوع اصلی منحرف می‌کند', datetime('now', '-1 hour')),
-  (6, 'challenge', 4, 'pressure', 'لحن بیانیه اخلال‌گرانه و فشار روانی ایجاد می‌کند', datetime('now', '-30 minutes'));
-
-DELETE FROM flags WHERE flaggable_type IN ('debate','turn');
-DELETE FROM mod_actions WHERE flaggable_type IN ('debate','turn');
+  (6, 'message', 4, 'derailing', 'این فریمینگ بحث را از موضوع اصلی منحرف می‌کند', datetime('now', '-1 hour')),
+  (5, 'idea', 4, 'pressure', 'لحن قطعی و فشار روانی برای پذیرش ادعا', datetime('now', '-30 minutes'));

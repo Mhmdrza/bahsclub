@@ -1,6 +1,8 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { flagAction } from "@/lib/moderation";
 
 const REASONS: { value: string; label: string }[] = [
@@ -18,16 +20,34 @@ const initialState = { error: "" };
 export function FlagButton({
   flaggableType,
   flaggableId,
-  disabled,
+  canFlag = true,
+  isAuthenticated = true,
 }: {
-  flaggableType: "challenge" | "challenge_response" | "debate" | "message";
+  flaggableType: "idea" | "idea_response" | "debate" | "message";
   flaggableId: number;
-  disabled: boolean;
+  canFlag?: boolean;
+  isAuthenticated?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(flagAction, initialState);
+  const pathname = usePathname();
 
-  if (disabled) return null;
+  if (!isAuthenticated) {
+    return (
+      <Link
+        href={`/club/login?next=${encodeURIComponent(pathname)}`}
+        className="text-muted hover:text-accent transition-colors p-0.5"
+        title="برای گزارش تخلف وارد شوید"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <line x1="4" y1="22" x2="4" y2="15" />
+        </svg>
+      </Link>
+    );
+  }
+
+  if (!canFlag) return null;
 
   if (open) {
     return (

@@ -1,21 +1,22 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { createChallengeAction } from "@/lib/debate-actions";
+import { createIdeaAction } from "@/lib/debate-actions";
 import { Plus } from "lucide-react";
 
 const MAX_TAGS = 5;
 const initialState = { error: "" };
 
-export function ChallengeComposer({
+export function IdeaComposer({
   availableTags,
 }: {
   availableTags: { id: number; name: string; slug: string; count: number }[];
 }) {
-  const [state, action, pending] = useActionState(createChallengeAction, initialState);
+  const [state, action, pending] = useActionState(createIdeaAction, initialState);
   const [selected, setSelected] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
-  const [content, setContent] = useState("");
+  const [reasoning, setReasoning] = useState("");
+  const [confidence, setConfidence] = useState(60);
 
   const toggle = (name: string) => {
     setSelected((cur) =>
@@ -35,10 +36,10 @@ export function ChallengeComposer({
   return (
     <form action={action} className="flex flex-col gap-5">
       <div>
-        <label className="text-xs font-semibold text-foreground block mb-1.5">عنوان چالش</label>
+        <label className="text-xs font-semibold text-foreground block mb-1.5">عنوان اندیشه</label>
         <input
           name="title"
-          placeholder="مثال: آیا هوش مصنوعی خلاقیت اصیل دارد؟"
+          placeholder="مثال: هوش مصنوعی خلاقیت اصیل ندارد"
           required
           maxLength={200}
           className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-xl focus:outline-hidden focus:border-accent transition-colors"
@@ -47,20 +48,66 @@ export function ChallengeComposer({
       </div>
 
       <div>
-        <label className="text-xs font-semibold text-foreground block mb-1.5">موضع و استدلال تو</label>
+        <label className="text-xs font-semibold text-foreground block mb-1.5">استدلال تو</label>
         <textarea
-          name="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="موضعت چیست و چرا؟ دلیلت را روشن بنویس تا گفت‌وگوی خوبی شکل بگیرد..."
+          name="reasoning"
+          value={reasoning}
+          onChange={(e) => setReasoning(e.target.value)}
+          placeholder="به چه دلیل این را باور داری؟ استدلالت را روشن بنویس تا گفت‌وگوی دقیقی شکل بگیرد..."
           required
           rows={6}
           maxLength={5000}
           className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-xl resize-y focus:outline-hidden focus:border-accent transition-colors"
         />
-        <p className={`text-[11px] mt-1.5 ${content.length > 0 && content.length < 50 ? "text-red-500" : "text-muted"}`}>
-          {content.length} / ۵۰۰۰ حرف — حداقل ۵۰ حرف
+        <p className={`text-[11px] mt-1.5 ${reasoning.length > 0 && reasoning.length < 50 ? "text-red-500" : "text-muted"}`}>
+          {reasoning.length} / ۵۰۰۰ حرف — حداقل ۵۰ حرف
         </p>
+      </div>
+
+      <div>
+        <label className="text-xs font-semibold text-foreground block mb-1.5">
+          چقدر مطمئنی؟ <span className="font-mono text-accent">{confidence}٪</span>
+        </label>
+        <input
+          type="range"
+          name="confidence"
+          min={0}
+          max={100}
+          step={5}
+          value={confidence}
+          onChange={(e) => setConfidence(Number(e.target.value))}
+          className="w-full accent-[var(--accent)]"
+        />
+        <p className="text-[11px] text-muted mt-1.5">
+          اطمینان کم، ضعف نیست؛ صداقت است. همین عدد بعداً تغییر ذهن تو را نشان می‌دهد.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">
+            منابع <span className="text-muted font-normal">(اختیاری)</span>
+          </label>
+          <textarea
+            name="sources"
+            rows={2}
+            maxLength={2000}
+            placeholder="کتاب، مقاله یا داده‌ای که پشتت است..."
+            className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-xl resize-y focus:outline-hidden focus:border-accent transition-colors"
+          />
+        </div>
+        <div>
+          <label className="text-xs font-semibold text-foreground block mb-1.5">
+            چه چیزی نظرت را عوض می‌کند؟ <span className="text-muted font-normal">(اختیاری)</span>
+          </label>
+          <textarea
+            name="falsifier"
+            rows={2}
+            maxLength={2000}
+            placeholder="اگر فلان چیز را ببینم، تجدیدنظر می‌کنم..."
+            className="w-full px-3.5 py-2.5 border border-border bg-background text-foreground text-sm rounded-xl resize-y focus:outline-hidden focus:border-accent transition-colors"
+          />
+        </div>
       </div>
 
       <div>
@@ -136,6 +183,16 @@ export function ChallengeComposer({
         )}
       </div>
 
+      <label className="flex items-start gap-2.5 text-xs text-foreground bg-background border border-border rounded-xl p-3 cursor-pointer">
+        <input type="checkbox" name="openToResponse" value="true" defaultChecked className="mt-0.5 accent-[var(--accent)]" />
+        <span>
+          <span className="font-semibold block mb-0.5">پذیرای پاسخ باش</span>
+          <span className="text-muted leading-relaxed">
+            دیگران می‌توانند پاسخ یا چالش ساختاریافته بنویسند. هر زمان می‌توانی از صفحهٔ اندیشه ببندی.
+          </span>
+        </span>
+      </label>
+
       {state?.error && <p className="text-xs text-red-600 dark:text-red-400 font-medium">{state.error}</p>}
 
       <button
@@ -143,7 +200,7 @@ export function ChallengeComposer({
         disabled={pending || selected.length === 0}
         className="w-full py-2.5 text-sm rounded-xl bg-accent text-accent-fg font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity mt-1 shadow-xs cursor-pointer"
       >
-        {pending ? "در حال ثبت..." : "انتشار چالش"}
+        {pending ? "در حال ثبت..." : "ثبت اندیشه"}
       </button>
     </form>
   );

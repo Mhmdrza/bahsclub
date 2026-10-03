@@ -8,11 +8,13 @@ const typeIcons: Record<string, React.ReactNode> = {
   closure_requested: <Flag size={14} />,
   new_response: <Zap size={14} />,
   debate_started: <CheckCircle size={14} />,
+  new_follower: <Zap size={14} />,
 };
 
 function linkFor(n: { referenceType: string; referenceId: number }): string {
   if (n.referenceType === "debate") return `/club/debates/${n.referenceId}`;
-  if (n.referenceType === "challenge") return `/club/challenges/${n.referenceId}`;
+  if (n.referenceType === "idea") return `/club/ideas/${n.referenceId}`;
+  if (n.referenceType === "user") return "#";
   return "#";
 }
 

@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export async function flagAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
-  if (!token) return { error: "نیاز به ورود" };
+  if (!token) return { error: "برای ادامه وارد شوید" };
 
   try {
     await apiFetch("/api/flags", {
@@ -27,7 +27,7 @@ export async function flagAction(prev: unknown, formData: FormData) {
 
 export async function resolveFlagsAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
-  if (!token) return { error: "نیاز به ورود" };
+  if (!token) return { error: "برای ادامه وارد شوید" };
 
   try {
     await apiFetch("/api/flags/resolve", {
@@ -53,7 +53,7 @@ export async function resolveFlagsAction(prev: unknown, formData: FormData) {
 
 export async function updateBioAction(prev: unknown, formData: FormData) {
   const token = await getTokenForAction();
-  if (!token) return { error: "نیاز به ورود" };
+  if (!token) return { error: "برای ادامه وارد شوید" };
 
   const username = formData.get("username") as string;
   try {

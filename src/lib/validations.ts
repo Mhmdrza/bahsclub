@@ -17,14 +17,19 @@ export const loginSchema = z.object({
   password: z.string().min(1, "رمز عبور الزامی است"),
 });
 
-export const createChallengeSchema = z.object({
+export const createIdeaSchema = z.object({
   title: z.string().min(5, "عنوان حداقل ۵ حرف").max(200, "عنوان حداکثر ۲۰۰ حرف"),
-  content: z.string().min(50, "چالش حداقل ۵۰ حرف").max(5000),
+  reasoning: z.string().min(50, "استدلال حداقل ۵۰ حرف").max(5000),
+  confidence: z.number().min(0).max(100),
+  sources: z.string().max(2000).optional(),
+  falsifier: z.string().max(2000).optional(),
   tags: z.array(z.string()).min(1, "حداقل یک برچسب").max(5, "حداکثر ۵ برچسب"),
+  openToResponse: z.boolean().optional(),
 });
 
 export const responseSchema = z.object({
-  content: z.string().min(50, "نقد حداقل ۵۰ حرف").max(5000),
+  content: z.string().min(30, "پاسخ حداقل ۳۰ حرف").max(5000),
+  kind: z.enum(["reply", "challenge"]).optional(),
 });
 
 export const messageSchema = z.object({
@@ -32,7 +37,7 @@ export const messageSchema = z.object({
 });
 
 export const flagSchema = z.object({
-  flaggableType: z.enum(["challenge", "challenge_response", "debate", "message"]),
+  flaggableType: z.enum(["idea", "idea_response", "debate", "message"]),
   flaggableId: z.number(),
   reason: z.enum(["personal_attack", "insulting_question", "derailing", "motive_guessing", "pressure", "spam", "other"]),
   details: z.string().max(500).optional(),

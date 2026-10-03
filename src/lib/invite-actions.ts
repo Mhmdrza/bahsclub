@@ -5,7 +5,7 @@ import { getTokenForAction } from "./session";
 
 export async function createInviteAction(_prev: { error?: string; success?: boolean; code?: string; email?: string }, formData: FormData) {
   const token = await getTokenForAction();
-  if (!token) return { error: "نیاز به ورود" };
+  if (!token) return { error: "برای ادامه وارد شوید" };
 
   const email = formData.get("email") as string;
   if (!email || !email.includes("@")) return { error: "ایمیل نامعتبر" };
@@ -24,7 +24,7 @@ export async function createInviteAction(_prev: { error?: string; success?: bool
 
 export async function getMyInvitesAction() {
   const token = await getTokenForAction();
-  if (!token) return { error: "نیاز به ورود", items: [] };
+  if (!token) return { error: "برای ادامه وارد شوید", items: [] };
 
   try {
     const data = await apiFetch<{ code: string; invited_email: string; used_by: number | null; used_at: string | null; created_at: string }[]>("/api/invites/me", { token });

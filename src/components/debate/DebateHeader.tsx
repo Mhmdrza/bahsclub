@@ -112,11 +112,13 @@ export function DebateHeader({
               voteableId={d.id}
               initialCount={debateVoteCount}
               initialVoted={debateVoted}
+              isAuthenticated={!!session}
             />
             <FlagButton
               flaggableType="debate"
               flaggableId={d.id}
-              disabled={!session || isCreator}
+              canFlag={!isCreator}
+              isAuthenticated={!!session}
             />
           </div>
         </div>

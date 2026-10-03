@@ -4,8 +4,8 @@ import { getTokenForAction } from "./session";
 function mapDebate(d: any) {
   return {
     id: d.id,
-    challengeId: d.challenge_id,
-    counterResponseId: d.counter_response_id,
+    ideaId: d.idea_id ?? d.challenge_id,
+    responseId: d.response_id ?? d.counter_response_id,
     title: d.title,
     status: d.status,
     creatorId: d.creator_id,
@@ -37,8 +37,9 @@ function mapMessage(m: any) {
 function mapResponse(c: any) {
   return {
     id: c.id,
-    challengeId: c.challenge_id,
+    ideaId: c.idea_id,
     userId: c.user_id,
+    kind: c.kind || "reply",
     content: c.content,
     status: c.status,
     moderationState: c.moderation_state || "normal",
@@ -51,18 +52,25 @@ function mapResponse(c: any) {
   };
 }
 
-function mapChallenge(s: any) {
+function mapIdea(s: any) {
   return {
     id: s.id,
     userId: s.user_id,
     username: s.username,
     title: s.title,
-    content: s.content,
+    reasoning: s.reasoning ?? s.content ?? "",
+    confidence: s.confidence ?? 50,
+    sources: s.sources || "",
+    falsifier: s.falsifier || "",
+    openToResponse: s.open_to_response === 1 || s.open_to_response === true,
     moderationState: s.moderation_state || "normal",
     createdAt: s.created_at,
+    updatedAt: s.updated_at,
     voteCount: s.vote_count || 0,
     responseCount: s.response_count || 0,
+    challengeCount: s.challenge_count || 0,
     activeDebateCount: s.active_debate_count || 0,
+    versionCount: s.version_count || 1,
     tags: s.tags || [],
   };
 }
@@ -84,7 +92,7 @@ export async function getDebatesWithVotes(opts?: { tag?: string; status?: string
   const qs = params.toString();
 
   try {
-    const data = await apiFetch<{ items: any[]; pagination: { page: number; limit: number; total: number; hasMore: boolean } }>(`/api/debates${qs ? "?" + qs : ""}`, { token });
+    const data = await apiFetch<{ items: any[]; pagination: Pagination }>(`/api/debates${qs ? "?" + qs : ""}`, { token });
     return {
       debates: (data.items || []).map((d: any) => ({
         debate: mapDebate(d),
@@ -121,23 +129,25 @@ export async function getDebateDetail(debateId: number) {
   }
 }
 
-export async function getChallenges(opts?: { tag?: string; username?: string; page?: number }) {
+export async function getIdeas(opts?: { tag?: string; username?: string; feed?: "home" | "following"; page?: number }) {
   const token = await getTokenForAction();
   const params = new URLSearchParams();
   if (opts?.tag) params.set("tag", opts.tag);
   if (opts?.username) params.set("username", opts.username);
+  if (opts?.feed) params.set("feed", opts.feed);
   if (opts?.page) params.set("page", String(opts.page));
   params.set("limit", "20");
   const qs = params.toString();
 
   try {
-    const data = await apiFetch<{ items: any[]; pagination: Pagination }>(`/api/challenges${qs ? "?" + qs : ""}`, { token });
+    const data = await apiFetch<{ items: any[]; pagination: Pagination; feed?: string }>(`/api/ideas${qs ? "?" + qs : ""}`, { token });
     return {
-      challenges: (data.items || []).map(mapChallenge),
+      ideas: (data.items || []).map(mapIdea),
       pagination: data.pagination || { page: 1, limit: 20, total: 0, hasMore: false },
+      feed: data.feed,
     };
   } catch {
-    return { challenges: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false } };
+    return { ideas: [], pagination: { page: 1, limit: 20, total: 0, hasMore: false }, feed: undefined };
   }
 }
 
@@ -149,27 +159,39 @@ export async function getTags() {
       id: t.id,
       name: t.name,
       slug: t.slug,
-      count: t.challenge_count || 0,
+      count: t.idea_count || 0,
     }));
   } catch {
     return [];
   }
 }
 
-export async function getChallengeDetail(id: number) {
+export async function getIdeaDetail(id: number) {
   const token = await getTokenForAction();
   try {
-    const data = await apiFetch<any>(`/api/challenges/${id}`, { token });
-    if (!data || !data.challenge) return null;
+    const data = await apiFetch<any>(`/api/ideas/${id}`, { token });
+    if (!data || !data.idea) return null;
 
     return {
-      challenge: mapChallenge(data.challenge),
-      creator: data.creator ? { id: data.creator.id, username: data.creator.username } : null,
+      idea: mapIdea(data.idea),
+      creator: data.creator ? { id: data.creator.id, username: data.creator.username, bio: data.creator.bio } : null,
       tags: (data.tags || []).map((t: any) => ({ id: t.id, name: t.name, slug: t.slug })),
+      versions: (data.versions || []).map((v: any) => ({
+        id: v.id,
+        version: v.version,
+        title: v.title,
+        reasoning: v.reasoning,
+        confidence: v.confidence,
+        sources: v.sources,
+        falsifier: v.falsifier,
+        createdAt: v.created_at,
+      })),
       responses: (data.responses || []).map(mapResponse),
       debates: data.debates || [],
-      challengeVoteCount: data.challengeVoteCount || 0,
-      challengeVoted: !!data.challengeVoted,
+      ideaVoteCount: data.voteCount || 0,
+      ideaVoted: !!data.voted,
+      isFollowingAuthor: !!data.isFollowingAuthor,
+      authorFollowerCount: data.authorFollowerCount || 0,
       session: data.user ? { user: data.user } : null,
     };
   } catch {

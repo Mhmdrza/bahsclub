@@ -1,11 +1,11 @@
 import { getDebateDetail } from "@/lib/queries";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { DebateHeader } from "@/components/debate/DebateHeader";
 import { DebateMessages } from "@/components/debate/DebateMessages";
 import { MessageForm } from "@/components/debate/MessageForm";
 import { ClosureRequest } from "@/components/debate/ClosureRequest";
 import { LivePoll } from "@/components/debate/LivePoll";
+import { AuthGate } from "@/components/club/AuthGate";
 
 export default async function DebatePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -76,12 +76,12 @@ export default async function DebatePage({ params }: { params: Promise<{ id: str
       )}
 
       {!session && (
-        <div className="text-center py-6 text-xs text-muted mt-6 border border-dashed border-border rounded-lg bg-surface/50">
-          برای شرکت در این بحث،{" "}
-          <Link href="/club/login" className="text-accent underline font-medium">
-            وارد حساب خود شوید
-          </Link>
-          .
+        <div className="mt-6">
+          <AuthGate
+            next={`/club/debates/${d.id}`}
+            title="برای پیگیری و مشارکت، وارد شو"
+            message="این مباحثه را می‌توانی بخوانی. برای رأی دادن به استدلال‌ها، گزارش تخلف یا پیوستن به مباحثه‌های بعدی، یک ورود کوتاه کافی است."
+          />
         </div>
       )}
     </div>

@@ -22,7 +22,9 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        router.push("/admin");
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get("next");
+        router.push(next && next.startsWith("/admin") ? next : "/admin");
       } else {
         const data = await res.json();
         setError(data.error || "رمز عبور اشتباه است");

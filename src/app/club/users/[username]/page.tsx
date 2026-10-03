@@ -5,8 +5,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { TagBadge } from "@/components/debate/TagBadge";
 import { DebateCard } from "@/components/debate/DebateCard";
+import { FollowButton } from "@/components/club/FollowButton";
 import { EditBioForm } from "./edit-bio-form";
-import { Mail, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 export default async function UserProfilePage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
@@ -15,14 +16,12 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
 
   const isSelf = !!session && session.user.username === username;
   const blocked = profile.blockedUntil && new Date(profile.blockedUntil) > new Date();
-
   const joined = new Intl.DateTimeFormat("fa-IR", { dateStyle: "medium" }).format(new Date(profile.createdAt));
-  const challengesCount = profile.challenges?.length || 0;
-  const debatesCount = profile.pagination?.total ?? (profile.debates?.length || 0);
+  const track = profile.trackRecord || {};
 
   return (
     <div dir="rtl" className="max-w-4xl mx-auto space-y-8">
-      {/* Profile Header Card */}
+      {/* Profile header */}
       <div className="border border-border bg-surface rounded-2xl p-6 sm:p-8 shadow-xs">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-border/60">
           <div className="flex items-center gap-4">
@@ -45,34 +44,25 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
               </div>
               <p className="text-xs text-muted flex items-center gap-2">
                 <span>عضویت از {joined}</span>
+                <span>•</span>
+                <span className="font-mono">{profile.followerCount} دنبال‌کننده</span>
+                <span>•</span>
+                <span className="font-mono">{profile.followingCount} دنبال‌شده</span>
               </p>
-              {isSelf && (
-                <div className="flex items-center gap-2 mt-3 sm:hidden">
-                  <Link
-                    href="/club/invites"
-                    className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border border-border bg-background hover:bg-surface text-muted hover:text-foreground transition-colors"
-                  >
-                    <Mail size={13} />
-                    <span>کدهای دعوت</span>
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
 
-          {/* Quick Stats Grid */}
           <div className="flex items-center gap-3 self-stretch sm:self-auto">
+            {!isSelf && (
+              <FollowButton username={profile.username} initialFollowing={profile.isFollowing} isAuthenticated={!!session} />
+            )}
             <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
-              <span className="block text-lg font-bold text-foreground font-mono">{profile.reputation}</span>
-              <span className="text-[11px] text-muted">اعتبار</span>
+              <span className="block text-lg font-bold text-foreground font-mono">{track.ideas ?? 0}</span>
+              <span className="text-[11px] text-muted">اندیشه</span>
             </div>
             <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
-              <span className="block text-lg font-bold text-foreground font-mono">{debatesCount}</span>
+              <span className="block text-lg font-bold text-foreground font-mono">{track.debates ?? 0}</span>
               <span className="text-[11px] text-muted">مباحثه</span>
-            </div>
-            <div className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl bg-background border border-border">
-              <span className="block text-lg font-bold text-foreground font-mono">{challengesCount}</span>
-              <span className="text-[11px] text-muted">چالش</span>
             </div>
           </div>
         </div>
@@ -83,7 +73,6 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
           </div>
         )}
 
-        {/* Bio Section */}
         <div className="mt-6">
           <h2 className="text-xs font-semibold text-muted mb-2">درباره</h2>
           {isSelf ? (
@@ -96,7 +85,30 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
         </div>
       </div>
 
-      {/* Tags section */}
+      {/* Track record */}
+      <section className="border border-border bg-surface rounded-2xl p-6 shadow-xs">
+        <h2 className="text-sm font-bold text-foreground mb-4">کارنامهٔ فکری</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center">
+          {[
+            { label: "اندیشه", value: track.ideas ?? 0 },
+            { label: "نسخه‌ها", value: track.revisions ?? 0 },
+            { label: "پاسخ‌ها", value: track.replies ?? 0 },
+            { label: "چالش‌ها", value: track.challenges ?? 0 },
+            { label: "مباحثه‌ها", value: track.debates ?? 0 },
+            { label: "بازنگری", value: track.changedMind ?? 0 },
+          ].map((stat) => (
+            <div key={stat.label} className="rounded-xl bg-background border border-border py-3">
+              <span className="block text-lg font-bold text-foreground font-mono">{stat.value}</span>
+              <span className="text-[11px] text-muted">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-[11px] text-muted mt-3 leading-relaxed">
+          «بازنگری» یعنی اندیشه‌ای که نویسنده نسخهٔ تازه‌ای برایش ثبت کرده — یعنی فکرش را دوباره دیده است.
+        </p>
+      </section>
+
+      {/* Tags */}
       {profile.tags && profile.tags.length > 0 && (
         <section className="border border-border bg-surface rounded-2xl p-6 shadow-xs">
           <h2 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
@@ -111,39 +123,39 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
         </section>
       )}
 
-      {/* Challenges section */}
-      {profile.challenges && profile.challenges.length > 0 && (
+      {/* Ideas */}
+      {profile.ideas && profile.ideas.length > 0 && (
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-bold text-foreground flex items-center gap-2">
-              <span>چالش‌ها</span>
-              <span className="text-xs font-normal text-muted font-mono">({profile.challenges.length})</span>
+              <span>اندیشه‌ها</span>
+              <span className="text-xs font-normal text-muted font-mono">({profile.ideas.length})</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {profile.challenges.map((s: any) => (
+            {profile.ideas.map((s: any) => (
               <Link
                 key={s.id}
-                href={`/club/challenges/${s.id}`}
+                href={`/club/ideas/${s.id}`}
                 className="group flex flex-col justify-between border border-border bg-surface rounded-xl p-4 hover:border-accent/40 transition-colors shadow-xs"
               >
                 <div>
-                  <h3 className="font-bold text-sm text-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug">
-                    {s.title}
-                  </h3>
-                  {s.content && (
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h3 className="font-bold text-sm text-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug">
+                      {s.title}
+                    </h3>
+                    <span className="text-[11px] font-mono text-accent shrink-0">{s.confidence ?? 50}٪</span>
+                  </div>
+                  {s.reasoning && (
                     <p className="text-xs text-muted mt-2 line-clamp-2 leading-relaxed">
-                      {s.content}
+                      {s.reasoning}
                     </p>
                   )}
                 </div>
                 <div className="flex items-center gap-3 text-xs text-muted font-mono mt-4 pt-3 border-t border-border/40">
-                  <span className="flex items-center gap-1">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M12 5v14M5 12l7-7 7 7" />
-                    </svg>
-                    {s.vote_count || 0} رأی
-                  </span>
+                  <span>{s.vote_count || 0} تأیید</span>
+                  <span>•</span>
+                  <span>{s.response_count || 0} پاسخ</span>
                   {s.active_debate_count > 0 && (
                     <>
                       <span>•</span>
@@ -157,7 +169,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
         </section>
       )}
 
-      {/* Debates section */}
+      {/* Debates */}
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-bold text-foreground flex items-center gap-2">
@@ -172,7 +184,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                 <span className={`absolute top-4 left-4 z-10 text-[11px] px-2 py-0.5 rounded-md font-medium ${
                   d.creator_id === profile.id ? "bg-accent/10 text-accent border border-accent/20" : "bg-surface border border-border text-muted"
                 }`}>
-                  {d.creator_id === profile.id ? "ایجادکننده" : "هم‌آورد"}
+                  {d.creator_id === profile.id ? "آغازگر" : "طرف مقابل"}
                 </span>
                 <DebateCard
                   debate={{
@@ -198,7 +210,6 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
         )}
       </section>
 
-      {/* Account Settings / Danger zone for self */}
       {isSelf && (
         <section className="border-t border-border/60 pt-8 pb-4 flex justify-end">
           <form action={logoutAction}>

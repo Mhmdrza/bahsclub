@@ -4,6 +4,7 @@ import { toggleVote } from "@/lib/votes";
 import { useCallback, useState } from "react";
 import { FlagButton } from "./FlagButton";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function MessageBlock({
   username,
@@ -35,6 +36,7 @@ export function MessageBlock({
   const [voted, setVoted] = useState(initialVoted);
   const [voteCount, setVoteCount] = useState(initialVoteCount);
   const [revealed, setRevealed] = useState(false);
+  const pathname = usePathname();
 
   const handleVote = useCallback(async () => {
     if (!canVote) return;
@@ -150,34 +152,48 @@ export function MessageBlock({
             } ${alignRight ? "justify-start" : "justify-end"}`}
           >
             {/* Vote button */}
-            <button
-              onClick={canVote ? handleVote : undefined}
-              className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono transition-colors ${
-                voted
-                  ? "bg-accent text-accent-fg font-bold"
-                  : "bg-background/80 hover:bg-background text-muted border border-border/60"
-              } ${canVote ? "cursor-pointer" : "cursor-default opacity-80"}`}
-              title={canVote ? "رأی به این استدلال" : undefined}
-              disabled={!canVote}
-            >
-              <svg
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill={voted ? "currentColor" : "none"}
-                stroke="currentColor"
-                strokeWidth="2.5"
+            {session ? (
+              <button
+                onClick={canVote ? handleVote : undefined}
+                className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono transition-colors ${
+                  voted
+                    ? "bg-accent text-accent-fg font-bold"
+                    : "bg-background/80 hover:bg-background text-muted border border-border/60"
+                } ${canVote ? "cursor-pointer" : "cursor-default opacity-80"}`}
+                title={canVote ? "رأی به این استدلال" : undefined}
+                disabled={!canVote}
               >
-                <path d="M12 5v14M5 12l7-7 7 7" />
-              </svg>
-              <span>{voteCount}</span>
-            </button>
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill={voted ? "currentColor" : "none"}
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path d="M12 5v14M5 12l7-7 7 7" />
+                </svg>
+                <span>{voteCount}</span>
+              </button>
+            ) : (
+              <Link
+                href={`/club/login?next=${encodeURIComponent(pathname)}`}
+                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono transition-colors bg-background/80 hover:bg-background text-muted border border-border/60"
+                title="برای رأی دادن وارد شوید"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M12 5v14M5 12l7-7 7 7" />
+                </svg>
+                <span>{voteCount}</span>
+              </Link>
+            )}
 
             {/* Flag button */}
             <FlagButton
               flaggableType="message"
               flaggableId={voteableId}
-              disabled={!session}
+              canFlag
+              isAuthenticated={!!session}
             />
           </div>
         </div>

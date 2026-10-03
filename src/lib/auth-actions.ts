@@ -5,6 +5,12 @@ import { setSessionCookie, clearSessionCookie } from "./session";
 import { redirect } from "next/navigation";
 import { registerSchema, loginSchema, waitlistSchema } from "./validations";
 
+// Where to send the user after auth. Only same-site relative paths are allowed.
+function safeNext(formData: FormData): string {
+  const next = (formData.get("next") as string | null) || "";
+  return next.startsWith("/") && !next.startsWith("//") ? next : "/club";
+}
+
 export async function registerAction(prev: unknown, formData: FormData) {
   const raw = {
     username: formData.get("username") as string,
@@ -21,7 +27,7 @@ export async function registerAction(prev: unknown, formData: FormData) {
   } catch (e: any) {
     return { error: e.message };
   }
-  redirect("/club");
+  redirect(safeNext(formData));
 }
 
 export async function waitlistAction(_prev: { error?: string; success?: boolean }, formData: FormData) {
@@ -48,7 +54,7 @@ export async function loginAction(prev: unknown, formData: FormData) {
   } catch {
     return { error: "نام کاربری یا رمز عبور اشتباه است" };
   }
-  redirect("/club");
+  redirect(safeNext(formData));
 }
 
 export async function logoutAction() {

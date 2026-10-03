@@ -9,9 +9,9 @@ tags.get("/", async (c) => {
   const [{ total }] = (await c.env.DB.prepare("SELECT COUNT(DISTINCT t.id) as total FROM tags t").all<{ total: number }>()).results || [{ total: 0 }];
 
   const { results } = await c.env.DB.prepare(`
-    SELECT t.*, COUNT(DISTINCT st.challenge_id) as challenge_count
-    FROM tags t LEFT JOIN challenge_tags st ON t.id = st.tag_id
-    GROUP BY t.id ORDER BY challenge_count DESC LIMIT ? OFFSET ?
+    SELECT t.*, COUNT(DISTINCT it.idea_id) as idea_count
+    FROM tags t LEFT JOIN idea_tags it ON t.id = it.tag_id
+    GROUP BY t.id ORDER BY idea_count DESC LIMIT ? OFFSET ?
   `).bind(pg.limit, pg.offset).all();
 
   return paginatedResponse(results || [], pg.page, pg.limit, total);
@@ -25,16 +25,16 @@ tags.get("/:slug", async (c) => {
   const pg = getPagination(c.req.query());
 
   const [{ total }] = (await c.env.DB.prepare(
-    "SELECT COUNT(*) as total FROM challenges s JOIN challenge_tags st ON s.id = st.challenge_id WHERE st.tag_id = ? AND s.moderation_state != 'removed'"
+    "SELECT COUNT(*) as total FROM ideas i JOIN idea_tags it ON i.id = it.idea_id WHERE it.tag_id = ? AND i.moderation_state != 'removed'"
   ).bind(tag.id).all<{ total: number }>()).results || [{ total: 0 }];
 
   const { results } = await c.env.DB.prepare(`
-    SELECT s.*,
-      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'challenge' AND voteable_id = s.id) as vote_count,
-      (SELECT COUNT(*) FROM challenge_responses WHERE challenge_id = s.id) as response_count
-    FROM challenges s
-    JOIN challenge_tags st ON s.id = st.challenge_id
-    WHERE st.tag_id = ? AND s.moderation_state != 'removed'
+    SELECT i.*,
+      (SELECT COUNT(*) FROM votes WHERE voteable_type = 'idea' AND voteable_id = i.id) as vote_count,
+      (SELECT COUNT(*) FROM idea_responses WHERE idea_id = i.id) as response_count
+    FROM ideas i
+    JOIN idea_tags it ON i.id = it.idea_id
+    WHERE it.tag_id = ? AND i.moderation_state != 'removed'
     ORDER BY vote_count DESC
     LIMIT ? OFFSET ?
   `).bind(tag.id, pg.limit, pg.offset).all();
