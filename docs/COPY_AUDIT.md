@@ -170,7 +170,6 @@ Replace with: `بررسی`, `گفت‌وگو`, `نزدیک شدن به حقیق�
 |---|---|---|
 | `src/app/layout.tsx` | inherited brand | verify after site.yaml |
 | `src/app/articles/category|tag` | `بحث‌کلاب` in descriptions | brand |
-| `AI_CONTEXT.md:191` | stale hero quote, counts, page count 3 | refresh after refactor |
 | `docs/EDITORIAL_VOICE.md` §1 | fight-club metaphor now superseded by triangle | add `docs/BRAND_SPINE.md`; mark §1 superseded, keep P-U-I + C-P-R-O + tone |
 
 ---
@@ -218,7 +217,7 @@ Order matters: rename brand first (safe), then lexicon, then hand-rewrite the pa
 4. Rewrite §4 pages (session-format, about, club-rules §10, faq) to reality.
 5. Rewrite homepage + HeroSection (single on-spine hero).
 6. Reconcile club UI + VoteButton semantics.
-7. Regenerate manifest; run `pnpm content:validate`; refresh `AI_CONTEXT.md`.
+7. Regenerate manifest; run `pnpm content:validate`.
 
 ---
 
@@ -232,7 +231,7 @@ Problem it solves: 55 articles are a pile, not a path. A stranger asks "where do
 
 | rung | failure mode it fixes | cost outside the club |
 |---|---|---|
-| پایه — ایستادن و وضوح | you cannot hear or state what the other actually claims; conflict turns into mutual misunderstanding | family fights that repeat for years, meetings that solve nothing |
+| پایه — مقدماتی | you cannot hear or state what the other actually claims; conflict turns into mutual misunderstanding | family fights that repeat for years, meetings that solve nothing |
 | پلهٔ ۲ — تشخیص تاکتیک | you get derailed, pressured, or manipulated; you lose the thread under noise | ads, political spin, pressure selling, social-media pile-ons |
 | قدرت کلام — ذهن و میدان معنا | someone else controls the frame/narrative; you argue inside their terms | reading the news, negotiation, deciding what to trust |
 
