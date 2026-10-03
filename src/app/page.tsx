@@ -9,6 +9,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
+import { BrandTriangle } from "@/components/BrandTriangle";
 import { getArticleBySlug, getSiteConfig } from "@/lib/content";
 import { LADDER } from "@/lib/ladder";
 import { pageMetadata } from "@/lib/seo";
@@ -142,6 +143,38 @@ export default function HomePage() {
         </div>
       </section>
 
+       {/* 4. Why: the spine triangle + mission line */}
+      <section className="mb-20 sm:mb-24">
+        <div className="mb-8 text-center">
+          <p className="eyebrow eyebrow-centered mb-2">فلسفه و ارزش‌های ما</p>
+          <h2 className="text-3xl font-extrabold">مثلث بحث‌کلاب: فروتنی، آزادی، دعوت</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted">
+            تئوری بدون گفت‌وگو خام می‌ماند و گفت‌وگو بدون تئوری به آشفتگی می‌رسد.
+          </p>
+        </div>
+
+        <div className="grid items-center gap-8 rounded-2xl border border-border bg-surface p-6 sm:p-8 lg:grid-cols-2">
+          <BrandTriangle />
+          <div>
+            <ul className="space-y-3 text-sm leading-relaxed text-muted">
+              {WHY.map((w) => (
+                <li key={w} className="flex items-start gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold/70" />
+                  <span>{w}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/mission"
+              className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
+            >
+              خواندن مأموریت ما
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 3. Start here: the unified loop (Training to Ring) */}
       <section id="start" className="mb-20 scroll-mt-24 sm:mb-24">
         <div className="mb-8 text-center">
@@ -201,35 +234,9 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* 4. Why: one line of mission */}
-      <section className="mb-20 sm:mb-24">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8">
-          <div>
-            <p className="eyebrow mb-1">فلسفه و ارزش‌های ما</p>
-            <h3 className="text-lg font-bold">
-              تئوری بدون گفت‌وگو خام می‌ماند و گفت‌وگو بدون تئوری به آشفتگی می‌رسد
-            </h3>
-            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
-              {WHY.map((w) => (
-                <li key={w} className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold/70" />
-                  <span>{w}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Link
-            href="/mission"
-            className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
-          >
-            خواندن مأموریت ما
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
 
       {/* 5. Dual CTA: Study Hall + Club */}
-      <section className="border-t border-border pt-12 text-center sm:pt-16">
+      {/* <section className="border-t border-border pt-12 text-center sm:pt-16">
         <p className="eyebrow eyebrow-centered mb-3">آغاز مسیر</p>
         <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">
           در تالار آموزش یاد بگیر، در باشگاه تجربه کن
@@ -259,7 +266,7 @@ export default function HomePage() {
           تمام گفت‌وگوها بر پایهٔ فروتنی، آزادی اندیشه و با احترام کامل به استقلال
           نظر برگزار می‌شوند.
         </p>
-      </section>
+      </section> */}
     </div>
   );
 }
